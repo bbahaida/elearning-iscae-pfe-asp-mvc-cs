@@ -49,7 +49,7 @@ CREATE TABLE Specialites(
 CREATE TABLE Etudiants(
 	EtudiantId   INT IDENTITY (1,1) NOT NULL ,
 	Nom          VARCHAR (100) NOT NULL ,
-	Matricule    VARCHAR (100) NOT NULL ,
+	Matricule    VARCHAR (100) NOT NULL UNIQUE,
 	Login        VARCHAR (50) NOT NULL UNIQUE,
 	Password     VARCHAR (255) NOT NULL ,
 	Telephone    VARCHAR (25) NOT NULL UNIQUE,

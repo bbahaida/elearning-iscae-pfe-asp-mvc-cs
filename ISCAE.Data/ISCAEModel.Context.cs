@@ -13,10 +13,10 @@ namespace ISCAE.Data
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class IscaeEntities : DbContext
+    public partial class IscaeDBEntities : DbContext
     {
-        public IscaeEntities()
-            : base("name=IscaeEntities")
+        public IscaeDBEntities()
+            : base("name=IscaeDBEntities")
         {
         }
     

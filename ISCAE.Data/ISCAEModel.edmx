@@ -766,7 +766,7 @@
           <End Role="Professeurs" Type="Self.Professeur" Multiplicity="*" />
           <End Role="Specialites" Type="Self.Specialite" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="IscaeEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="IscaeDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Administrateurs" EntityType="Self.Administrateur" />
           <EntitySet Name="Annonces" EntityType="Self.Annonce" />
           <EntitySet Name="DocumentNonOfficiels" EntityType="Self.DocumentNonOfficiel" />
@@ -845,7 +845,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="IscaeModelStoreContainer" CdmEntityContainer="IscaeEntities">
+        <EntityContainerMapping StorageEntityContainer="IscaeModelStoreContainer" CdmEntityContainer="IscaeDBEntities">
           <EntitySetMapping Name="Administrateurs">
             <EntityTypeMapping TypeName="IscaeModel.Administrateur">
               <MappingFragment StoreEntitySet="Administrateurs">
