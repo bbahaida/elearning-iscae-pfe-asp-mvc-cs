@@ -1,0 +1,1028 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="IscaeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Administrateurs">
+          <Key>
+            <PropertyRef Name="AdministrateurId" />
+          </Key>
+          <Property Name="AdministrateurId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Login" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Telephone" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="isActive" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Annonces">
+          <Key>
+            <PropertyRef Name="AnnonceId" />
+          </Key>
+          <Property Name="AnnonceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Titre" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Contenu" Type="text" Nullable="false" />
+          <Property Name="DateAjout" Type="datetime" Nullable="false" />
+          <Property Name="AdministrateurId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DocumentNonOfficiels">
+          <Key>
+            <PropertyRef Name="DocumentNonOfficielId" />
+          </Key>
+          <Property Name="DocumentNonOfficielId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Titre" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Emplacement" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="25" />
+          <Property Name="isValid" Type="tinyint" Nullable="false" />
+          <Property Name="ModuleId" Type="int" Nullable="false" />
+          <Property Name="DateAjoutNonOfficiel" Type="datetime" Nullable="false" />
+          <Property Name="EtudiantId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DocumentOfficiels">
+          <Key>
+            <PropertyRef Name="DocumentOfficielId" />
+          </Key>
+          <Property Name="DocumentOfficielId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Titre" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Emplacement" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="25" />
+          <Property Name="DateAjoutOfficiel" Type="datetime" Nullable="false" />
+          <Property Name="ProfesseurId" Type="int" Nullable="false" />
+          <Property Name="ModuleId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Etudiants">
+          <Key>
+            <PropertyRef Name="EtudiantId" />
+          </Key>
+          <Property Name="EtudiantId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Matricule" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Login" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Telephone" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="isActive" Type="tinyint" Nullable="false" />
+          <Property Name="Niveau" Type="tinyint" Nullable="false" />
+          <Property Name="SpecialiteId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Messages">
+          <Key>
+            <PropertyRef Name="MessageId" />
+          </Key>
+          <Property Name="MessageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Titre" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Contenu" Type="text" Nullable="false" />
+          <Property Name="DateEnvoiMessage" Type="datetime" Nullable="false" />
+          <Property Name="ProfesseurId" Type="int" Nullable="false" />
+          <Property Name="Niveau" Type="tinyint" Nullable="false" />
+          <Property Name="SpecialiteId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Modules">
+          <Key>
+            <PropertyRef Name="ModuleId" />
+          </Key>
+          <Property Name="ModuleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Designation" Type="varchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProfesseurModules">
+          <Key>
+            <PropertyRef Name="ProfesseurId" />
+            <PropertyRef Name="ModuleId" />
+          </Key>
+          <Property Name="ProfesseurId" Type="int" Nullable="false" />
+          <Property Name="ModuleId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Professeurs">
+          <Key>
+            <PropertyRef Name="ProfesseurId" />
+          </Key>
+          <Property Name="ProfesseurId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Login" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Telephone" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="isActive" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProfesseurSpecialites">
+          <Key>
+            <PropertyRef Name="ProfesseurId" />
+            <PropertyRef Name="SpecialiteId" />
+          </Key>
+          <Property Name="ProfesseurId" Type="int" Nullable="false" />
+          <Property Name="SpecialiteId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Questions">
+          <Key>
+            <PropertyRef Name="QuestionId" />
+          </Key>
+          <Property Name="QuestionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Contenu" Type="text" Nullable="false" />
+          <Property Name="Titre" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="DateQuestion" Type="datetime" Nullable="false" />
+          <Property Name="EtudiantId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Reponses">
+          <Key>
+            <PropertyRef Name="ReponseId" />
+          </Key>
+          <Property Name="ReponseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Contenu" Type="text" Nullable="false" />
+          <Property Name="DateReponse" Type="datetime" Nullable="false" />
+          <Property Name="QuestionId" Type="int" Nullable="false" />
+          <Property Name="EtudiantId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SpecialiteModules">
+          <Key>
+            <PropertyRef Name="SpecialiteId" />
+            <PropertyRef Name="ModuleId" />
+          </Key>
+          <Property Name="Niveau" Type="tinyint" Nullable="false" />
+          <Property Name="SpecialiteId" Type="int" Nullable="false" />
+          <Property Name="ModuleId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Specialites">
+          <Key>
+            <PropertyRef Name="SpecialiteId" />
+          </Key>
+          <Property Name="SpecialiteId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Designation" Type="varchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Annonces_AdministrateurId">
+          <End Role="Administrateurs" Type="Self.Administrateurs" Multiplicity="1" />
+          <End Role="Annonces" Type="Self.Annonces" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Administrateurs">
+              <PropertyRef Name="AdministrateurId" />
+            </Principal>
+            <Dependent Role="Annonces">
+              <PropertyRef Name="AdministrateurId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DocumentNonOfficiels_EtudiantId">
+          <End Role="Etudiants" Type="Self.Etudiants" Multiplicity="1" />
+          <End Role="DocumentNonOfficiels" Type="Self.DocumentNonOfficiels" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Etudiants">
+              <PropertyRef Name="EtudiantId" />
+            </Principal>
+            <Dependent Role="DocumentNonOfficiels">
+              <PropertyRef Name="EtudiantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DocumentNonOfficiels_ModuleId">
+          <End Role="Modules" Type="Self.Modules" Multiplicity="1" />
+          <End Role="DocumentNonOfficiels" Type="Self.DocumentNonOfficiels" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modules">
+              <PropertyRef Name="ModuleId" />
+            </Principal>
+            <Dependent Role="DocumentNonOfficiels">
+              <PropertyRef Name="ModuleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DocumentOfficiels_ModuleId">
+          <End Role="Modules" Type="Self.Modules" Multiplicity="1" />
+          <End Role="DocumentOfficiels" Type="Self.DocumentOfficiels" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modules">
+              <PropertyRef Name="ModuleId" />
+            </Principal>
+            <Dependent Role="DocumentOfficiels">
+              <PropertyRef Name="ModuleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DocumentOfficiels_ProfesseurId">
+          <End Role="Professeurs" Type="Self.Professeurs" Multiplicity="1" />
+          <End Role="DocumentOfficiels" Type="Self.DocumentOfficiels" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Professeurs">
+              <PropertyRef Name="ProfesseurId" />
+            </Principal>
+            <Dependent Role="DocumentOfficiels">
+              <PropertyRef Name="ProfesseurId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Etudiants_SpecialiteId">
+          <End Role="Specialites" Type="Self.Specialites" Multiplicity="1" />
+          <End Role="Etudiants" Type="Self.Etudiants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Specialites">
+              <PropertyRef Name="SpecialiteId" />
+            </Principal>
+            <Dependent Role="Etudiants">
+              <PropertyRef Name="SpecialiteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Messages_ProfesseurId">
+          <End Role="Professeurs" Type="Self.Professeurs" Multiplicity="1" />
+          <End Role="Messages" Type="Self.Messages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Professeurs">
+              <PropertyRef Name="ProfesseurId" />
+            </Principal>
+            <Dependent Role="Messages">
+              <PropertyRef Name="ProfesseurId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Messages_SpecialiteId">
+          <End Role="Specialites" Type="Self.Specialites" Multiplicity="1" />
+          <End Role="Messages" Type="Self.Messages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Specialites">
+              <PropertyRef Name="SpecialiteId" />
+            </Principal>
+            <Dependent Role="Messages">
+              <PropertyRef Name="SpecialiteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfesseurModules_ModuleId">
+          <End Role="Modules" Type="Self.Modules" Multiplicity="1" />
+          <End Role="ProfesseurModules" Type="Self.ProfesseurModules" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modules">
+              <PropertyRef Name="ModuleId" />
+            </Principal>
+            <Dependent Role="ProfesseurModules">
+              <PropertyRef Name="ModuleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfesseurModules_ProfesseurId">
+          <End Role="Professeurs" Type="Self.Professeurs" Multiplicity="1" />
+          <End Role="ProfesseurModules" Type="Self.ProfesseurModules" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Professeurs">
+              <PropertyRef Name="ProfesseurId" />
+            </Principal>
+            <Dependent Role="ProfesseurModules">
+              <PropertyRef Name="ProfesseurId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfesseurSpecialites_ProfesseurId">
+          <End Role="Professeurs" Type="Self.Professeurs" Multiplicity="1" />
+          <End Role="ProfesseurSpecialites" Type="Self.ProfesseurSpecialites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Professeurs">
+              <PropertyRef Name="ProfesseurId" />
+            </Principal>
+            <Dependent Role="ProfesseurSpecialites">
+              <PropertyRef Name="ProfesseurId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfesseurSpecialites_SpecialiteId">
+          <End Role="Specialites" Type="Self.Specialites" Multiplicity="1" />
+          <End Role="ProfesseurSpecialites" Type="Self.ProfesseurSpecialites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Specialites">
+              <PropertyRef Name="SpecialiteId" />
+            </Principal>
+            <Dependent Role="ProfesseurSpecialites">
+              <PropertyRef Name="SpecialiteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Questions_EtudiantId">
+          <End Role="Etudiants" Type="Self.Etudiants" Multiplicity="1" />
+          <End Role="Questions" Type="Self.Questions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Etudiants">
+              <PropertyRef Name="EtudiantId" />
+            </Principal>
+            <Dependent Role="Questions">
+              <PropertyRef Name="EtudiantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reponses_EtudiantId">
+          <End Role="Etudiants" Type="Self.Etudiants" Multiplicity="1" />
+          <End Role="Reponses" Type="Self.Reponses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Etudiants">
+              <PropertyRef Name="EtudiantId" />
+            </Principal>
+            <Dependent Role="Reponses">
+              <PropertyRef Name="EtudiantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reponses_QuestionId">
+          <End Role="Questions" Type="Self.Questions" Multiplicity="1" />
+          <End Role="Reponses" Type="Self.Reponses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Questions">
+              <PropertyRef Name="QuestionId" />
+            </Principal>
+            <Dependent Role="Reponses">
+              <PropertyRef Name="QuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SpecialiteModules_ModuleId">
+          <End Role="Modules" Type="Self.Modules" Multiplicity="1" />
+          <End Role="SpecialiteModules" Type="Self.SpecialiteModules" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modules">
+              <PropertyRef Name="ModuleId" />
+            </Principal>
+            <Dependent Role="SpecialiteModules">
+              <PropertyRef Name="ModuleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SpecialiteModules_SpecialiteId">
+          <End Role="Specialites" Type="Self.Specialites" Multiplicity="1" />
+          <End Role="SpecialiteModules" Type="Self.SpecialiteModules" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Specialites">
+              <PropertyRef Name="SpecialiteId" />
+            </Principal>
+            <Dependent Role="SpecialiteModules">
+              <PropertyRef Name="SpecialiteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="IscaeModelStoreContainer">
+          <EntitySet Name="Administrateurs" EntityType="Self.Administrateurs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Annonces" EntityType="Self.Annonces" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DocumentNonOfficiels" EntityType="Self.DocumentNonOfficiels" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DocumentOfficiels" EntityType="Self.DocumentOfficiels" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Etudiants" EntityType="Self.Etudiants" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Messages" EntityType="Self.Messages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Modules" EntityType="Self.Modules" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProfesseurModules" EntityType="Self.ProfesseurModules" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Professeurs" EntityType="Self.Professeurs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProfesseurSpecialites" EntityType="Self.ProfesseurSpecialites" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Questions" EntityType="Self.Questions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reponses" EntityType="Self.Reponses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SpecialiteModules" EntityType="Self.SpecialiteModules" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Specialites" EntityType="Self.Specialites" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Annonces_AdministrateurId" Association="Self.FK_Annonces_AdministrateurId">
+            <End Role="Administrateurs" EntitySet="Administrateurs" />
+            <End Role="Annonces" EntitySet="Annonces" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DocumentNonOfficiels_EtudiantId" Association="Self.FK_DocumentNonOfficiels_EtudiantId">
+            <End Role="Etudiants" EntitySet="Etudiants" />
+            <End Role="DocumentNonOfficiels" EntitySet="DocumentNonOfficiels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DocumentNonOfficiels_ModuleId" Association="Self.FK_DocumentNonOfficiels_ModuleId">
+            <End Role="Modules" EntitySet="Modules" />
+            <End Role="DocumentNonOfficiels" EntitySet="DocumentNonOfficiels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DocumentOfficiels_ModuleId" Association="Self.FK_DocumentOfficiels_ModuleId">
+            <End Role="Modules" EntitySet="Modules" />
+            <End Role="DocumentOfficiels" EntitySet="DocumentOfficiels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DocumentOfficiels_ProfesseurId" Association="Self.FK_DocumentOfficiels_ProfesseurId">
+            <End Role="Professeurs" EntitySet="Professeurs" />
+            <End Role="DocumentOfficiels" EntitySet="DocumentOfficiels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Etudiants_SpecialiteId" Association="Self.FK_Etudiants_SpecialiteId">
+            <End Role="Specialites" EntitySet="Specialites" />
+            <End Role="Etudiants" EntitySet="Etudiants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Messages_ProfesseurId" Association="Self.FK_Messages_ProfesseurId">
+            <End Role="Professeurs" EntitySet="Professeurs" />
+            <End Role="Messages" EntitySet="Messages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Messages_SpecialiteId" Association="Self.FK_Messages_SpecialiteId">
+            <End Role="Specialites" EntitySet="Specialites" />
+            <End Role="Messages" EntitySet="Messages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfesseurModules_ModuleId" Association="Self.FK_ProfesseurModules_ModuleId">
+            <End Role="Modules" EntitySet="Modules" />
+            <End Role="ProfesseurModules" EntitySet="ProfesseurModules" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfesseurModules_ProfesseurId" Association="Self.FK_ProfesseurModules_ProfesseurId">
+            <End Role="Professeurs" EntitySet="Professeurs" />
+            <End Role="ProfesseurModules" EntitySet="ProfesseurModules" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfesseurSpecialites_ProfesseurId" Association="Self.FK_ProfesseurSpecialites_ProfesseurId">
+            <End Role="Professeurs" EntitySet="Professeurs" />
+            <End Role="ProfesseurSpecialites" EntitySet="ProfesseurSpecialites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfesseurSpecialites_SpecialiteId" Association="Self.FK_ProfesseurSpecialites_SpecialiteId">
+            <End Role="Specialites" EntitySet="Specialites" />
+            <End Role="ProfesseurSpecialites" EntitySet="ProfesseurSpecialites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Questions_EtudiantId" Association="Self.FK_Questions_EtudiantId">
+            <End Role="Etudiants" EntitySet="Etudiants" />
+            <End Role="Questions" EntitySet="Questions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reponses_EtudiantId" Association="Self.FK_Reponses_EtudiantId">
+            <End Role="Etudiants" EntitySet="Etudiants" />
+            <End Role="Reponses" EntitySet="Reponses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reponses_QuestionId" Association="Self.FK_Reponses_QuestionId">
+            <End Role="Questions" EntitySet="Questions" />
+            <End Role="Reponses" EntitySet="Reponses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SpecialiteModules_ModuleId" Association="Self.FK_SpecialiteModules_ModuleId">
+            <End Role="Modules" EntitySet="Modules" />
+            <End Role="SpecialiteModules" EntitySet="SpecialiteModules" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SpecialiteModules_SpecialiteId" Association="Self.FK_SpecialiteModules_SpecialiteId">
+            <End Role="Specialites" EntitySet="Specialites" />
+            <End Role="SpecialiteModules" EntitySet="SpecialiteModules" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="IscaeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Administrateur">
+          <Key>
+            <PropertyRef Name="AdministrateurId" />
+          </Key>
+          <Property Name="AdministrateurId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telephone" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="isActive" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Annonces" Relationship="Self.FK_Annonces_AdministrateurId" FromRole="Administrateurs" ToRole="Annonces" />
+        </EntityType>
+        <EntityType Name="Annonce">
+          <Key>
+            <PropertyRef Name="AnnonceId" />
+          </Key>
+          <Property Name="AnnonceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Titre" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Contenu" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateAjout" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AdministrateurId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Administrateur" Relationship="Self.FK_Annonces_AdministrateurId" FromRole="Annonces" ToRole="Administrateurs" />
+        </EntityType>
+        <EntityType Name="DocumentNonOfficiel">
+          <Key>
+            <PropertyRef Name="DocumentNonOfficielId" />
+          </Key>
+          <Property Name="DocumentNonOfficielId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Titre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Emplacement" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="isValid" Type="Byte" Nullable="false" />
+          <Property Name="ModuleId" Type="Int32" Nullable="false" />
+          <Property Name="DateAjoutNonOfficiel" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EtudiantId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Etudiant" Relationship="Self.FK_DocumentNonOfficiels_EtudiantId" FromRole="DocumentNonOfficiels" ToRole="Etudiants" />
+          <NavigationProperty Name="Module" Relationship="Self.FK_DocumentNonOfficiels_ModuleId" FromRole="DocumentNonOfficiels" ToRole="Modules" />
+        </EntityType>
+        <EntityType Name="DocumentOfficiel">
+          <Key>
+            <PropertyRef Name="DocumentOfficielId" />
+          </Key>
+          <Property Name="DocumentOfficielId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Titre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Emplacement" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="DateAjoutOfficiel" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ProfesseurId" Type="Int32" Nullable="false" />
+          <Property Name="ModuleId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Module" Relationship="Self.FK_DocumentOfficiels_ModuleId" FromRole="DocumentOfficiels" ToRole="Modules" />
+          <NavigationProperty Name="Professeur" Relationship="Self.FK_DocumentOfficiels_ProfesseurId" FromRole="DocumentOfficiels" ToRole="Professeurs" />
+        </EntityType>
+        <EntityType Name="Etudiant">
+          <Key>
+            <PropertyRef Name="EtudiantId" />
+          </Key>
+          <Property Name="EtudiantId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Matricule" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telephone" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="isActive" Type="Byte" Nullable="false" />
+          <Property Name="Niveau" Type="Byte" Nullable="false" />
+          <Property Name="SpecialiteId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DocumentNonOfficiels" Relationship="Self.FK_DocumentNonOfficiels_EtudiantId" FromRole="Etudiants" ToRole="DocumentNonOfficiels" />
+          <NavigationProperty Name="Specialite" Relationship="Self.FK_Etudiants_SpecialiteId" FromRole="Etudiants" ToRole="Specialites" />
+          <NavigationProperty Name="Questions" Relationship="Self.FK_Questions_EtudiantId" FromRole="Etudiants" ToRole="Questions" />
+          <NavigationProperty Name="Reponses" Relationship="Self.FK_Reponses_EtudiantId" FromRole="Etudiants" ToRole="Reponses" />
+        </EntityType>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="MessageId" />
+          </Key>
+          <Property Name="MessageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Titre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Contenu" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateEnvoiMessage" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ProfesseurId" Type="Int32" Nullable="false" />
+          <Property Name="Niveau" Type="Byte" Nullable="false" />
+          <Property Name="SpecialiteId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Professeur" Relationship="Self.FK_Messages_ProfesseurId" FromRole="Messages" ToRole="Professeurs" />
+          <NavigationProperty Name="Specialite" Relationship="Self.FK_Messages_SpecialiteId" FromRole="Messages" ToRole="Specialites" />
+        </EntityType>
+        <EntityType Name="Module">
+          <Key>
+            <PropertyRef Name="ModuleId" />
+          </Key>
+          <Property Name="ModuleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Designation" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="DocumentNonOfficiels" Relationship="Self.FK_DocumentNonOfficiels_ModuleId" FromRole="Modules" ToRole="DocumentNonOfficiels" />
+          <NavigationProperty Name="DocumentOfficiels" Relationship="Self.FK_DocumentOfficiels_ModuleId" FromRole="Modules" ToRole="DocumentOfficiels" />
+          <NavigationProperty Name="SpecialiteModules" Relationship="Self.FK_SpecialiteModules_ModuleId" FromRole="Modules" ToRole="SpecialiteModules" />
+          <NavigationProperty Name="Professeurs" Relationship="Self.ProfesseurModules" FromRole="Modules" ToRole="Professeurs" />
+        </EntityType>
+        <EntityType Name="Professeur">
+          <Key>
+            <PropertyRef Name="ProfesseurId" />
+          </Key>
+          <Property Name="ProfesseurId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telephone" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="isActive" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="DocumentOfficiels" Relationship="Self.FK_DocumentOfficiels_ProfesseurId" FromRole="Professeurs" ToRole="DocumentOfficiels" />
+          <NavigationProperty Name="Messages" Relationship="Self.FK_Messages_ProfesseurId" FromRole="Professeurs" ToRole="Messages" />
+          <NavigationProperty Name="Modules" Relationship="Self.ProfesseurModules" FromRole="Professeurs" ToRole="Modules" />
+          <NavigationProperty Name="Specialites" Relationship="Self.ProfesseurSpecialites" FromRole="Professeurs" ToRole="Specialites" />
+        </EntityType>
+        <EntityType Name="Question">
+          <Key>
+            <PropertyRef Name="QuestionId" />
+          </Key>
+          <Property Name="QuestionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Contenu" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Titre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateQuestion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EtudiantId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Etudiant" Relationship="Self.FK_Questions_EtudiantId" FromRole="Questions" ToRole="Etudiants" />
+          <NavigationProperty Name="Reponses" Relationship="Self.FK_Reponses_QuestionId" FromRole="Questions" ToRole="Reponses" />
+        </EntityType>
+        <EntityType Name="Repons">
+          <Key>
+            <PropertyRef Name="ReponseId" />
+          </Key>
+          <Property Name="ReponseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Contenu" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateReponse" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="QuestionId" Type="Int32" Nullable="false" />
+          <Property Name="EtudiantId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Etudiant" Relationship="Self.FK_Reponses_EtudiantId" FromRole="Reponses" ToRole="Etudiants" />
+          <NavigationProperty Name="Question" Relationship="Self.FK_Reponses_QuestionId" FromRole="Reponses" ToRole="Questions" />
+        </EntityType>
+        <EntityType Name="SpecialiteModule">
+          <Key>
+            <PropertyRef Name="SpecialiteId" />
+            <PropertyRef Name="ModuleId" />
+          </Key>
+          <Property Name="Niveau" Type="Byte" Nullable="false" />
+          <Property Name="SpecialiteId" Type="Int32" Nullable="false" />
+          <Property Name="ModuleId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Module" Relationship="Self.FK_SpecialiteModules_ModuleId" FromRole="SpecialiteModules" ToRole="Modules" />
+          <NavigationProperty Name="Specialite" Relationship="Self.FK_SpecialiteModules_SpecialiteId" FromRole="SpecialiteModules" ToRole="Specialites" />
+        </EntityType>
+        <EntityType Name="Specialite">
+          <Key>
+            <PropertyRef Name="SpecialiteId" />
+          </Key>
+          <Property Name="SpecialiteId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Designation" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Etudiants" Relationship="Self.FK_Etudiants_SpecialiteId" FromRole="Specialites" ToRole="Etudiants" />
+          <NavigationProperty Name="Messages" Relationship="Self.FK_Messages_SpecialiteId" FromRole="Specialites" ToRole="Messages" />
+          <NavigationProperty Name="SpecialiteModules" Relationship="Self.FK_SpecialiteModules_SpecialiteId" FromRole="Specialites" ToRole="SpecialiteModules" />
+          <NavigationProperty Name="Professeurs" Relationship="Self.ProfesseurSpecialites" FromRole="Specialites" ToRole="Professeurs" />
+        </EntityType>
+        <Association Name="FK_Annonces_AdministrateurId">
+          <End Role="Administrateurs" Type="Self.Administrateur" Multiplicity="1" />
+          <End Role="Annonces" Type="Self.Annonce" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Administrateurs">
+              <PropertyRef Name="AdministrateurId" />
+            </Principal>
+            <Dependent Role="Annonces">
+              <PropertyRef Name="AdministrateurId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DocumentNonOfficiels_EtudiantId">
+          <End Role="Etudiants" Type="Self.Etudiant" Multiplicity="1" />
+          <End Role="DocumentNonOfficiels" Type="Self.DocumentNonOfficiel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Etudiants">
+              <PropertyRef Name="EtudiantId" />
+            </Principal>
+            <Dependent Role="DocumentNonOfficiels">
+              <PropertyRef Name="EtudiantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DocumentNonOfficiels_ModuleId">
+          <End Role="Modules" Type="Self.Module" Multiplicity="1" />
+          <End Role="DocumentNonOfficiels" Type="Self.DocumentNonOfficiel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modules">
+              <PropertyRef Name="ModuleId" />
+            </Principal>
+            <Dependent Role="DocumentNonOfficiels">
+              <PropertyRef Name="ModuleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DocumentOfficiels_ModuleId">
+          <End Role="Modules" Type="Self.Module" Multiplicity="1" />
+          <End Role="DocumentOfficiels" Type="Self.DocumentOfficiel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modules">
+              <PropertyRef Name="ModuleId" />
+            </Principal>
+            <Dependent Role="DocumentOfficiels">
+              <PropertyRef Name="ModuleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DocumentOfficiels_ProfesseurId">
+          <End Role="Professeurs" Type="Self.Professeur" Multiplicity="1" />
+          <End Role="DocumentOfficiels" Type="Self.DocumentOfficiel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Professeurs">
+              <PropertyRef Name="ProfesseurId" />
+            </Principal>
+            <Dependent Role="DocumentOfficiels">
+              <PropertyRef Name="ProfesseurId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Etudiants_SpecialiteId">
+          <End Role="Specialites" Type="Self.Specialite" Multiplicity="1" />
+          <End Role="Etudiants" Type="Self.Etudiant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Specialites">
+              <PropertyRef Name="SpecialiteId" />
+            </Principal>
+            <Dependent Role="Etudiants">
+              <PropertyRef Name="SpecialiteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Questions_EtudiantId">
+          <End Role="Etudiants" Type="Self.Etudiant" Multiplicity="1" />
+          <End Role="Questions" Type="Self.Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Etudiants">
+              <PropertyRef Name="EtudiantId" />
+            </Principal>
+            <Dependent Role="Questions">
+              <PropertyRef Name="EtudiantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reponses_EtudiantId">
+          <End Role="Etudiants" Type="Self.Etudiant" Multiplicity="1" />
+          <End Role="Reponses" Type="Self.Repons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Etudiants">
+              <PropertyRef Name="EtudiantId" />
+            </Principal>
+            <Dependent Role="Reponses">
+              <PropertyRef Name="EtudiantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Messages_ProfesseurId">
+          <End Role="Professeurs" Type="Self.Professeur" Multiplicity="1" />
+          <End Role="Messages" Type="Self.Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Professeurs">
+              <PropertyRef Name="ProfesseurId" />
+            </Principal>
+            <Dependent Role="Messages">
+              <PropertyRef Name="ProfesseurId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Messages_SpecialiteId">
+          <End Role="Specialites" Type="Self.Specialite" Multiplicity="1" />
+          <End Role="Messages" Type="Self.Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Specialites">
+              <PropertyRef Name="SpecialiteId" />
+            </Principal>
+            <Dependent Role="Messages">
+              <PropertyRef Name="SpecialiteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SpecialiteModules_ModuleId">
+          <End Role="Modules" Type="Self.Module" Multiplicity="1" />
+          <End Role="SpecialiteModules" Type="Self.SpecialiteModule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modules">
+              <PropertyRef Name="ModuleId" />
+            </Principal>
+            <Dependent Role="SpecialiteModules">
+              <PropertyRef Name="ModuleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reponses_QuestionId">
+          <End Role="Questions" Type="Self.Question" Multiplicity="1" />
+          <End Role="Reponses" Type="Self.Repons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Questions">
+              <PropertyRef Name="QuestionId" />
+            </Principal>
+            <Dependent Role="Reponses">
+              <PropertyRef Name="QuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SpecialiteModules_SpecialiteId">
+          <End Role="Specialites" Type="Self.Specialite" Multiplicity="1" />
+          <End Role="SpecialiteModules" Type="Self.SpecialiteModule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Specialites">
+              <PropertyRef Name="SpecialiteId" />
+            </Principal>
+            <Dependent Role="SpecialiteModules">
+              <PropertyRef Name="SpecialiteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProfesseurModules">
+          <End Role="Modules" Type="Self.Module" Multiplicity="*" />
+          <End Role="Professeurs" Type="Self.Professeur" Multiplicity="*" />
+        </Association>
+        <Association Name="ProfesseurSpecialites">
+          <End Role="Professeurs" Type="Self.Professeur" Multiplicity="*" />
+          <End Role="Specialites" Type="Self.Specialite" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="IscaeEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Administrateurs" EntityType="Self.Administrateur" />
+          <EntitySet Name="Annonces" EntityType="Self.Annonce" />
+          <EntitySet Name="DocumentNonOfficiels" EntityType="Self.DocumentNonOfficiel" />
+          <EntitySet Name="DocumentOfficiels" EntityType="Self.DocumentOfficiel" />
+          <EntitySet Name="Etudiants" EntityType="Self.Etudiant" />
+          <EntitySet Name="Messages" EntityType="Self.Message" />
+          <EntitySet Name="Modules" EntityType="Self.Module" />
+          <EntitySet Name="Professeurs" EntityType="Self.Professeur" />
+          <EntitySet Name="Questions" EntityType="Self.Question" />
+          <EntitySet Name="Reponses" EntityType="Self.Repons" />
+          <EntitySet Name="SpecialiteModules" EntityType="Self.SpecialiteModule" />
+          <EntitySet Name="Specialites" EntityType="Self.Specialite" />
+          <AssociationSet Name="FK_Annonces_AdministrateurId" Association="Self.FK_Annonces_AdministrateurId">
+            <End Role="Administrateurs" EntitySet="Administrateurs" />
+            <End Role="Annonces" EntitySet="Annonces" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DocumentNonOfficiels_EtudiantId" Association="Self.FK_DocumentNonOfficiels_EtudiantId">
+            <End Role="Etudiants" EntitySet="Etudiants" />
+            <End Role="DocumentNonOfficiels" EntitySet="DocumentNonOfficiels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DocumentNonOfficiels_ModuleId" Association="Self.FK_DocumentNonOfficiels_ModuleId">
+            <End Role="Modules" EntitySet="Modules" />
+            <End Role="DocumentNonOfficiels" EntitySet="DocumentNonOfficiels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DocumentOfficiels_ModuleId" Association="Self.FK_DocumentOfficiels_ModuleId">
+            <End Role="Modules" EntitySet="Modules" />
+            <End Role="DocumentOfficiels" EntitySet="DocumentOfficiels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DocumentOfficiels_ProfesseurId" Association="Self.FK_DocumentOfficiels_ProfesseurId">
+            <End Role="Professeurs" EntitySet="Professeurs" />
+            <End Role="DocumentOfficiels" EntitySet="DocumentOfficiels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Etudiants_SpecialiteId" Association="Self.FK_Etudiants_SpecialiteId">
+            <End Role="Specialites" EntitySet="Specialites" />
+            <End Role="Etudiants" EntitySet="Etudiants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Questions_EtudiantId" Association="Self.FK_Questions_EtudiantId">
+            <End Role="Etudiants" EntitySet="Etudiants" />
+            <End Role="Questions" EntitySet="Questions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reponses_EtudiantId" Association="Self.FK_Reponses_EtudiantId">
+            <End Role="Etudiants" EntitySet="Etudiants" />
+            <End Role="Reponses" EntitySet="Reponses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Messages_ProfesseurId" Association="Self.FK_Messages_ProfesseurId">
+            <End Role="Professeurs" EntitySet="Professeurs" />
+            <End Role="Messages" EntitySet="Messages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Messages_SpecialiteId" Association="Self.FK_Messages_SpecialiteId">
+            <End Role="Specialites" EntitySet="Specialites" />
+            <End Role="Messages" EntitySet="Messages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SpecialiteModules_ModuleId" Association="Self.FK_SpecialiteModules_ModuleId">
+            <End Role="Modules" EntitySet="Modules" />
+            <End Role="SpecialiteModules" EntitySet="SpecialiteModules" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reponses_QuestionId" Association="Self.FK_Reponses_QuestionId">
+            <End Role="Questions" EntitySet="Questions" />
+            <End Role="Reponses" EntitySet="Reponses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SpecialiteModules_SpecialiteId" Association="Self.FK_SpecialiteModules_SpecialiteId">
+            <End Role="Specialites" EntitySet="Specialites" />
+            <End Role="SpecialiteModules" EntitySet="SpecialiteModules" />
+          </AssociationSet>
+          <AssociationSet Name="ProfesseurModules" Association="Self.ProfesseurModules">
+            <End Role="Modules" EntitySet="Modules" />
+            <End Role="Professeurs" EntitySet="Professeurs" />
+          </AssociationSet>
+          <AssociationSet Name="ProfesseurSpecialites" Association="Self.ProfesseurSpecialites">
+            <End Role="Professeurs" EntitySet="Professeurs" />
+            <End Role="Specialites" EntitySet="Specialites" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="IscaeModelStoreContainer" CdmEntityContainer="IscaeEntities">
+          <EntitySetMapping Name="Administrateurs">
+            <EntityTypeMapping TypeName="IscaeModel.Administrateur">
+              <MappingFragment StoreEntitySet="Administrateurs">
+                <ScalarProperty Name="AdministrateurId" ColumnName="AdministrateurId" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Annonces">
+            <EntityTypeMapping TypeName="IscaeModel.Annonce">
+              <MappingFragment StoreEntitySet="Annonces">
+                <ScalarProperty Name="AnnonceId" ColumnName="AnnonceId" />
+                <ScalarProperty Name="Titre" ColumnName="Titre" />
+                <ScalarProperty Name="Contenu" ColumnName="Contenu" />
+                <ScalarProperty Name="DateAjout" ColumnName="DateAjout" />
+                <ScalarProperty Name="AdministrateurId" ColumnName="AdministrateurId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DocumentNonOfficiels">
+            <EntityTypeMapping TypeName="IscaeModel.DocumentNonOfficiel">
+              <MappingFragment StoreEntitySet="DocumentNonOfficiels">
+                <ScalarProperty Name="DocumentNonOfficielId" ColumnName="DocumentNonOfficielId" />
+                <ScalarProperty Name="Titre" ColumnName="Titre" />
+                <ScalarProperty Name="Emplacement" ColumnName="Emplacement" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="isValid" ColumnName="isValid" />
+                <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+                <ScalarProperty Name="DateAjoutNonOfficiel" ColumnName="DateAjoutNonOfficiel" />
+                <ScalarProperty Name="EtudiantId" ColumnName="EtudiantId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DocumentOfficiels">
+            <EntityTypeMapping TypeName="IscaeModel.DocumentOfficiel">
+              <MappingFragment StoreEntitySet="DocumentOfficiels">
+                <ScalarProperty Name="DocumentOfficielId" ColumnName="DocumentOfficielId" />
+                <ScalarProperty Name="Titre" ColumnName="Titre" />
+                <ScalarProperty Name="Emplacement" ColumnName="Emplacement" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="DateAjoutOfficiel" ColumnName="DateAjoutOfficiel" />
+                <ScalarProperty Name="ProfesseurId" ColumnName="ProfesseurId" />
+                <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Etudiants">
+            <EntityTypeMapping TypeName="IscaeModel.Etudiant">
+              <MappingFragment StoreEntitySet="Etudiants">
+                <ScalarProperty Name="EtudiantId" ColumnName="EtudiantId" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Matricule" ColumnName="Matricule" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="Niveau" ColumnName="Niveau" />
+                <ScalarProperty Name="SpecialiteId" ColumnName="SpecialiteId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Messages">
+            <EntityTypeMapping TypeName="IscaeModel.Message">
+              <MappingFragment StoreEntitySet="Messages">
+                <ScalarProperty Name="MessageId" ColumnName="MessageId" />
+                <ScalarProperty Name="Titre" ColumnName="Titre" />
+                <ScalarProperty Name="Contenu" ColumnName="Contenu" />
+                <ScalarProperty Name="DateEnvoiMessage" ColumnName="DateEnvoiMessage" />
+                <ScalarProperty Name="ProfesseurId" ColumnName="ProfesseurId" />
+                <ScalarProperty Name="Niveau" ColumnName="Niveau" />
+                <ScalarProperty Name="SpecialiteId" ColumnName="SpecialiteId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Modules">
+            <EntityTypeMapping TypeName="IscaeModel.Module">
+              <MappingFragment StoreEntitySet="Modules">
+                <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+                <ScalarProperty Name="Designation" ColumnName="Designation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Professeurs">
+            <EntityTypeMapping TypeName="IscaeModel.Professeur">
+              <MappingFragment StoreEntitySet="Professeurs">
+                <ScalarProperty Name="ProfesseurId" ColumnName="ProfesseurId" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Questions">
+            <EntityTypeMapping TypeName="IscaeModel.Question">
+              <MappingFragment StoreEntitySet="Questions">
+                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+                <ScalarProperty Name="Contenu" ColumnName="Contenu" />
+                <ScalarProperty Name="Titre" ColumnName="Titre" />
+                <ScalarProperty Name="DateQuestion" ColumnName="DateQuestion" />
+                <ScalarProperty Name="EtudiantId" ColumnName="EtudiantId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reponses">
+            <EntityTypeMapping TypeName="IscaeModel.Repons">
+              <MappingFragment StoreEntitySet="Reponses">
+                <ScalarProperty Name="ReponseId" ColumnName="ReponseId" />
+                <ScalarProperty Name="Contenu" ColumnName="Contenu" />
+                <ScalarProperty Name="DateReponse" ColumnName="DateReponse" />
+                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+                <ScalarProperty Name="EtudiantId" ColumnName="EtudiantId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SpecialiteModules">
+            <EntityTypeMapping TypeName="IscaeModel.SpecialiteModule">
+              <MappingFragment StoreEntitySet="SpecialiteModules">
+                <ScalarProperty Name="Niveau" ColumnName="Niveau" />
+                <ScalarProperty Name="SpecialiteId" ColumnName="SpecialiteId" />
+                <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Specialites">
+            <EntityTypeMapping TypeName="IscaeModel.Specialite">
+              <MappingFragment StoreEntitySet="Specialites">
+                <ScalarProperty Name="SpecialiteId" ColumnName="SpecialiteId" />
+                <ScalarProperty Name="Designation" ColumnName="Designation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="ProfesseurModules" TypeName="IscaeModel.ProfesseurModules" StoreEntitySet="ProfesseurModules">
+            <EndProperty Name="Modules">
+              <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+            </EndProperty>
+            <EndProperty Name="Professeurs">
+              <ScalarProperty Name="ProfesseurId" ColumnName="ProfesseurId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="ProfesseurSpecialites" TypeName="IscaeModel.ProfesseurSpecialites" StoreEntitySet="ProfesseurSpecialites">
+            <EndProperty Name="Professeurs">
+              <ScalarProperty Name="ProfesseurId" ColumnName="ProfesseurId" />
+            </EndProperty>
+            <EndProperty Name="Specialites">
+              <ScalarProperty Name="SpecialiteId" ColumnName="SpecialiteId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

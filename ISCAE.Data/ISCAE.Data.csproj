@@ -41,6 +41,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,14 +51,89 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Administrateur.cs">
+      <DependentUpon>ISCAEModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Annonce.cs">
+      <DependentUpon>ISCAEModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DocumentNonOfficiel.cs">
+      <DependentUpon>ISCAEModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DocumentOfficiel.cs">
+      <DependentUpon>ISCAEModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Etudiant.cs">
+      <DependentUpon>ISCAEModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ISCAEModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ISCAEModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ISCAEModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ISCAEModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ISCAEModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ISCAEModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Message.cs">
+      <DependentUpon>ISCAEModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Module.cs">
+      <DependentUpon>ISCAEModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Professeur.cs">
+      <DependentUpon>ISCAEModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Question.cs">
+      <DependentUpon>ISCAEModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repons.cs">
+      <DependentUpon>ISCAEModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repositories\IRepository.cs" />
+    <Compile Include="Repositories\Repository.cs" />
+    <Compile Include="Specialite.cs">
+      <DependentUpon>ISCAEModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SpecialiteModule.cs">
+      <DependentUpon>ISCAEModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <EntityDeploy Include="ISCAEModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ISCAEModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="ISCAEModel.edmx.diagram">
+      <DependentUpon>ISCAEModel.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Ressources\DATA\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ISCAEModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ISCAEModel.edmx</DependentUpon>
+      <LastGenOutput>ISCAEModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="ISCAEModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ISCAEModel.edmx</DependentUpon>
+      <LastGenOutput>ISCAEModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
