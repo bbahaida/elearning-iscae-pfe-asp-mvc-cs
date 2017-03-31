@@ -160,9 +160,10 @@ CREATE TABLE Annonces(
 -- Table: ProfesseurModules
 ------------------------------------------------------------*/
 CREATE TABLE ProfesseurModules(
-	ProfesseurId INT  NOT NULL ,
-	ModuleId     INT  NOT NULL ,
-	CONSTRAINT prk_constraint_ProfesseurModules PRIMARY KEY NONCLUSTERED (ProfesseurId,ModuleId)
+	ProfesseurModuleId INT IDENTITY (1,1) NOT NULL ,
+	ProfesseurId       INT  NOT NULL ,
+	ModuleId           INT  NOT NULL ,
+	CONSTRAINT prk_constraint_ProfesseurModules PRIMARY KEY NONCLUSTERED (ProfesseurModuleId,ProfesseurId,ModuleId)
 );
 
 
@@ -170,9 +171,10 @@ CREATE TABLE ProfesseurModules(
 -- Table: ProfesseurSpecialites
 ------------------------------------------------------------*/
 CREATE TABLE ProfesseurSpecialites(
-	ProfesseurId INT  NOT NULL ,
-	SpecialiteId INT  NOT NULL ,
-	CONSTRAINT prk_constraint_ProfesseurSpecialites PRIMARY KEY NONCLUSTERED (ProfesseurId,SpecialiteId)
+	ProfesseurSpecialiteId INT IDENTITY (1,1) NOT NULL ,
+	ProfesseurId           INT  NOT NULL ,
+	SpecialiteId           INT  NOT NULL ,
+	CONSTRAINT prk_constraint_ProfesseurSpecialites PRIMARY KEY NONCLUSTERED (ProfesseurSpecialiteId,ProfesseurId,SpecialiteId)
 );
 
 

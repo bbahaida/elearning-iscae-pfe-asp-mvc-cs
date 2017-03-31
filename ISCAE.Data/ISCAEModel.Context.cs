@@ -13,10 +13,10 @@ namespace ISCAE.Data
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class IscaeDBEntities : DbContext
+    public partial class IscaeEntities : DbContext
     {
-        public IscaeDBEntities()
-            : base("name=IscaeDBEntities")
+        public IscaeEntities()
+            : base("name=IscaeEntities")
         {
         }
     
@@ -32,7 +32,9 @@ namespace ISCAE.Data
         public virtual DbSet<Etudiant> Etudiants { get; set; }
         public virtual DbSet<Message> Messages { get; set; }
         public virtual DbSet<Module> Modules { get; set; }
+        public virtual DbSet<ProfesseurModule> ProfesseurModules { get; set; }
         public virtual DbSet<Professeur> Professeurs { get; set; }
+        public virtual DbSet<ProfesseurSpecialite> ProfesseurSpecialites { get; set; }
         public virtual DbSet<Question> Questions { get; set; }
         public virtual DbSet<Repons> Reponses { get; set; }
         public virtual DbSet<SpecialiteModule> SpecialiteModules { get; set; }

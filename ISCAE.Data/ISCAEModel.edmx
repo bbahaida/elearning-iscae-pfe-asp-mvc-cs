@@ -88,9 +88,11 @@
         </EntityType>
         <EntityType Name="ProfesseurModules">
           <Key>
+            <PropertyRef Name="ProfesseurModuleId" />
             <PropertyRef Name="ProfesseurId" />
             <PropertyRef Name="ModuleId" />
           </Key>
+          <Property Name="ProfesseurModuleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ProfesseurId" Type="int" Nullable="false" />
           <Property Name="ModuleId" Type="int" Nullable="false" />
         </EntityType>
@@ -108,9 +110,11 @@
         </EntityType>
         <EntityType Name="ProfesseurSpecialites">
           <Key>
+            <PropertyRef Name="ProfesseurSpecialiteId" />
             <PropertyRef Name="ProfesseurId" />
             <PropertyRef Name="SpecialiteId" />
           </Key>
+          <Property Name="ProfesseurSpecialiteId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ProfesseurId" Type="int" Nullable="false" />
           <Property Name="SpecialiteId" Type="int" Nullable="false" />
         </EntityType>
@@ -537,8 +541,20 @@
           <Property Name="Designation" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="DocumentNonOfficiels" Relationship="Self.FK_DocumentNonOfficiels_ModuleId" FromRole="Modules" ToRole="DocumentNonOfficiels" />
           <NavigationProperty Name="DocumentOfficiels" Relationship="Self.FK_DocumentOfficiels_ModuleId" FromRole="Modules" ToRole="DocumentOfficiels" />
+          <NavigationProperty Name="ProfesseurModules" Relationship="Self.FK_ProfesseurModules_ModuleId" FromRole="Modules" ToRole="ProfesseurModules" />
           <NavigationProperty Name="SpecialiteModules" Relationship="Self.FK_SpecialiteModules_ModuleId" FromRole="Modules" ToRole="SpecialiteModules" />
-          <NavigationProperty Name="Professeurs" Relationship="Self.ProfesseurModules" FromRole="Modules" ToRole="Professeurs" />
+        </EntityType>
+        <EntityType Name="ProfesseurModule">
+          <Key>
+            <PropertyRef Name="ProfesseurModuleId" />
+            <PropertyRef Name="ProfesseurId" />
+            <PropertyRef Name="ModuleId" />
+          </Key>
+          <Property Name="ProfesseurModuleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProfesseurId" Type="Int32" Nullable="false" />
+          <Property Name="ModuleId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Module" Relationship="Self.FK_ProfesseurModules_ModuleId" FromRole="ProfesseurModules" ToRole="Modules" />
+          <NavigationProperty Name="Professeur" Relationship="Self.FK_ProfesseurModules_ProfesseurId" FromRole="ProfesseurModules" ToRole="Professeurs" />
         </EntityType>
         <EntityType Name="Professeur">
           <Key>
@@ -553,8 +569,20 @@
           <Property Name="isActive" Type="Byte" Nullable="false" />
           <NavigationProperty Name="DocumentOfficiels" Relationship="Self.FK_DocumentOfficiels_ProfesseurId" FromRole="Professeurs" ToRole="DocumentOfficiels" />
           <NavigationProperty Name="Messages" Relationship="Self.FK_Messages_ProfesseurId" FromRole="Professeurs" ToRole="Messages" />
-          <NavigationProperty Name="Modules" Relationship="Self.ProfesseurModules" FromRole="Professeurs" ToRole="Modules" />
-          <NavigationProperty Name="Specialites" Relationship="Self.ProfesseurSpecialites" FromRole="Professeurs" ToRole="Specialites" />
+          <NavigationProperty Name="ProfesseurModules" Relationship="Self.FK_ProfesseurModules_ProfesseurId" FromRole="Professeurs" ToRole="ProfesseurModules" />
+          <NavigationProperty Name="ProfesseurSpecialites" Relationship="Self.FK_ProfesseurSpecialites_ProfesseurId" FromRole="Professeurs" ToRole="ProfesseurSpecialites" />
+        </EntityType>
+        <EntityType Name="ProfesseurSpecialite">
+          <Key>
+            <PropertyRef Name="ProfesseurSpecialiteId" />
+            <PropertyRef Name="ProfesseurId" />
+            <PropertyRef Name="SpecialiteId" />
+          </Key>
+          <Property Name="ProfesseurSpecialiteId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProfesseurId" Type="Int32" Nullable="false" />
+          <Property Name="SpecialiteId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Professeur" Relationship="Self.FK_ProfesseurSpecialites_ProfesseurId" FromRole="ProfesseurSpecialites" ToRole="Professeurs" />
+          <NavigationProperty Name="Specialite" Relationship="Self.FK_ProfesseurSpecialites_SpecialiteId" FromRole="ProfesseurSpecialites" ToRole="Specialites" />
         </EntityType>
         <EntityType Name="Question">
           <Key>
@@ -599,8 +627,8 @@
           <Property Name="Designation" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Etudiants" Relationship="Self.FK_Etudiants_SpecialiteId" FromRole="Specialites" ToRole="Etudiants" />
           <NavigationProperty Name="Messages" Relationship="Self.FK_Messages_SpecialiteId" FromRole="Specialites" ToRole="Messages" />
+          <NavigationProperty Name="ProfesseurSpecialites" Relationship="Self.FK_ProfesseurSpecialites_SpecialiteId" FromRole="Specialites" ToRole="ProfesseurSpecialites" />
           <NavigationProperty Name="SpecialiteModules" Relationship="Self.FK_SpecialiteModules_SpecialiteId" FromRole="Specialites" ToRole="SpecialiteModules" />
-          <NavigationProperty Name="Professeurs" Relationship="Self.ProfesseurSpecialites" FromRole="Specialites" ToRole="Professeurs" />
         </EntityType>
         <Association Name="FK_Annonces_AdministrateurId">
           <End Role="Administrateurs" Type="Self.Administrateur" Multiplicity="1" />
@@ -722,6 +750,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ProfesseurModules_ModuleId">
+          <End Role="Modules" Type="Self.Module" Multiplicity="1" />
+          <End Role="ProfesseurModules" Type="Self.ProfesseurModule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modules">
+              <PropertyRef Name="ModuleId" />
+            </Principal>
+            <Dependent Role="ProfesseurModules">
+              <PropertyRef Name="ModuleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SpecialiteModules_ModuleId">
           <End Role="Modules" Type="Self.Module" Multiplicity="1" />
           <End Role="SpecialiteModules" Type="Self.SpecialiteModule" Multiplicity="*" />
@@ -731,6 +771,42 @@
             </Principal>
             <Dependent Role="SpecialiteModules">
               <PropertyRef Name="ModuleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfesseurModules_ProfesseurId">
+          <End Role="Professeurs" Type="Self.Professeur" Multiplicity="1" />
+          <End Role="ProfesseurModules" Type="Self.ProfesseurModule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Professeurs">
+              <PropertyRef Name="ProfesseurId" />
+            </Principal>
+            <Dependent Role="ProfesseurModules">
+              <PropertyRef Name="ProfesseurId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfesseurSpecialites_ProfesseurId">
+          <End Role="Professeurs" Type="Self.Professeur" Multiplicity="1" />
+          <End Role="ProfesseurSpecialites" Type="Self.ProfesseurSpecialite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Professeurs">
+              <PropertyRef Name="ProfesseurId" />
+            </Principal>
+            <Dependent Role="ProfesseurSpecialites">
+              <PropertyRef Name="ProfesseurId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfesseurSpecialites_SpecialiteId">
+          <End Role="Specialites" Type="Self.Specialite" Multiplicity="1" />
+          <End Role="ProfesseurSpecialites" Type="Self.ProfesseurSpecialite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Specialites">
+              <PropertyRef Name="SpecialiteId" />
+            </Principal>
+            <Dependent Role="ProfesseurSpecialites">
+              <PropertyRef Name="SpecialiteId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -758,15 +834,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="ProfesseurModules">
-          <End Role="Modules" Type="Self.Module" Multiplicity="*" />
-          <End Role="Professeurs" Type="Self.Professeur" Multiplicity="*" />
-        </Association>
-        <Association Name="ProfesseurSpecialites">
-          <End Role="Professeurs" Type="Self.Professeur" Multiplicity="*" />
-          <End Role="Specialites" Type="Self.Specialite" Multiplicity="*" />
-        </Association>
-        <EntityContainer Name="IscaeDBEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="IscaeEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Administrateurs" EntityType="Self.Administrateur" />
           <EntitySet Name="Annonces" EntityType="Self.Annonce" />
           <EntitySet Name="DocumentNonOfficiels" EntityType="Self.DocumentNonOfficiel" />
@@ -774,7 +842,9 @@
           <EntitySet Name="Etudiants" EntityType="Self.Etudiant" />
           <EntitySet Name="Messages" EntityType="Self.Message" />
           <EntitySet Name="Modules" EntityType="Self.Module" />
+          <EntitySet Name="ProfesseurModules" EntityType="Self.ProfesseurModule" />
           <EntitySet Name="Professeurs" EntityType="Self.Professeur" />
+          <EntitySet Name="ProfesseurSpecialites" EntityType="Self.ProfesseurSpecialite" />
           <EntitySet Name="Questions" EntityType="Self.Question" />
           <EntitySet Name="Reponses" EntityType="Self.Repons" />
           <EntitySet Name="SpecialiteModules" EntityType="Self.SpecialiteModule" />
@@ -819,9 +889,25 @@
             <End Role="Specialites" EntitySet="Specialites" />
             <End Role="Messages" EntitySet="Messages" />
           </AssociationSet>
+          <AssociationSet Name="FK_ProfesseurModules_ModuleId" Association="Self.FK_ProfesseurModules_ModuleId">
+            <End Role="Modules" EntitySet="Modules" />
+            <End Role="ProfesseurModules" EntitySet="ProfesseurModules" />
+          </AssociationSet>
           <AssociationSet Name="FK_SpecialiteModules_ModuleId" Association="Self.FK_SpecialiteModules_ModuleId">
             <End Role="Modules" EntitySet="Modules" />
             <End Role="SpecialiteModules" EntitySet="SpecialiteModules" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfesseurModules_ProfesseurId" Association="Self.FK_ProfesseurModules_ProfesseurId">
+            <End Role="Professeurs" EntitySet="Professeurs" />
+            <End Role="ProfesseurModules" EntitySet="ProfesseurModules" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfesseurSpecialites_ProfesseurId" Association="Self.FK_ProfesseurSpecialites_ProfesseurId">
+            <End Role="Professeurs" EntitySet="Professeurs" />
+            <End Role="ProfesseurSpecialites" EntitySet="ProfesseurSpecialites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfesseurSpecialites_SpecialiteId" Association="Self.FK_ProfesseurSpecialites_SpecialiteId">
+            <End Role="Specialites" EntitySet="Specialites" />
+            <End Role="ProfesseurSpecialites" EntitySet="ProfesseurSpecialites" />
           </AssociationSet>
           <AssociationSet Name="FK_Reponses_QuestionId" Association="Self.FK_Reponses_QuestionId">
             <End Role="Questions" EntitySet="Questions" />
@@ -831,21 +917,13 @@
             <End Role="Specialites" EntitySet="Specialites" />
             <End Role="SpecialiteModules" EntitySet="SpecialiteModules" />
           </AssociationSet>
-          <AssociationSet Name="ProfesseurModules" Association="Self.ProfesseurModules">
-            <End Role="Modules" EntitySet="Modules" />
-            <End Role="Professeurs" EntitySet="Professeurs" />
-          </AssociationSet>
-          <AssociationSet Name="ProfesseurSpecialites" Association="Self.ProfesseurSpecialites">
-            <End Role="Professeurs" EntitySet="Professeurs" />
-            <End Role="Specialites" EntitySet="Specialites" />
-          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="IscaeModelStoreContainer" CdmEntityContainer="IscaeDBEntities">
+        <EntityContainerMapping StorageEntityContainer="IscaeModelStoreContainer" CdmEntityContainer="IscaeEntities">
           <EntitySetMapping Name="Administrateurs">
             <EntityTypeMapping TypeName="IscaeModel.Administrateur">
               <MappingFragment StoreEntitySet="Administrateurs">
@@ -934,6 +1012,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ProfesseurModules">
+            <EntityTypeMapping TypeName="IscaeModel.ProfesseurModule">
+              <MappingFragment StoreEntitySet="ProfesseurModules">
+                <ScalarProperty Name="ProfesseurModuleId" ColumnName="ProfesseurModuleId" />
+                <ScalarProperty Name="ProfesseurId" ColumnName="ProfesseurId" />
+                <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Professeurs">
             <EntityTypeMapping TypeName="IscaeModel.Professeur">
               <MappingFragment StoreEntitySet="Professeurs">
@@ -944,6 +1031,15 @@
                 <ScalarProperty Name="Telephone" ColumnName="Telephone" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProfesseurSpecialites">
+            <EntityTypeMapping TypeName="IscaeModel.ProfesseurSpecialite">
+              <MappingFragment StoreEntitySet="ProfesseurSpecialites">
+                <ScalarProperty Name="ProfesseurSpecialiteId" ColumnName="ProfesseurSpecialiteId" />
+                <ScalarProperty Name="ProfesseurId" ColumnName="ProfesseurId" />
+                <ScalarProperty Name="SpecialiteId" ColumnName="SpecialiteId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -986,22 +1082,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="ProfesseurModules" TypeName="IscaeModel.ProfesseurModules" StoreEntitySet="ProfesseurModules">
-            <EndProperty Name="Modules">
-              <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
-            </EndProperty>
-            <EndProperty Name="Professeurs">
-              <ScalarProperty Name="ProfesseurId" ColumnName="ProfesseurId" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="ProfesseurSpecialites" TypeName="IscaeModel.ProfesseurSpecialites" StoreEntitySet="ProfesseurSpecialites">
-            <EndProperty Name="Professeurs">
-              <ScalarProperty Name="ProfesseurId" ColumnName="ProfesseurId" />
-            </EndProperty>
-            <EndProperty Name="Specialites">
-              <ScalarProperty Name="SpecialiteId" ColumnName="SpecialiteId" />
-            </EndProperty>
-          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

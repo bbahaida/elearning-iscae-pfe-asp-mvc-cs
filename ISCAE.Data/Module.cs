@@ -19,8 +19,8 @@ namespace ISCAE.Data
         {
             this.DocumentNonOfficiels = new HashSet<DocumentNonOfficiel>();
             this.DocumentOfficiels = new HashSet<DocumentOfficiel>();
+            this.ProfesseurModules = new HashSet<ProfesseurModule>();
             this.SpecialiteModules = new HashSet<SpecialiteModule>();
-            this.Professeurs = new HashSet<Professeur>();
         }
     
         public int ModuleId { get; set; }
@@ -31,8 +31,8 @@ namespace ISCAE.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DocumentOfficiel> DocumentOfficiels { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SpecialiteModule> SpecialiteModules { get; set; }
+        public virtual ICollection<ProfesseurModule> ProfesseurModules { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Professeur> Professeurs { get; set; }
+        public virtual ICollection<SpecialiteModule> SpecialiteModules { get; set; }
     }
 }
