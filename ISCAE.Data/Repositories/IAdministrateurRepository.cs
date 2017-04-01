@@ -10,8 +10,8 @@ namespace ISCAE.Data.Repositories
     {
         Administrateur GetUserByAuth(string login, string password);
         Administrateur GetUserByLogin(string login);
-        Administrateur GetUserByEmail(string login);
-        Administrateur GetUserByTelephone(string login);
+        Administrateur GetUserByEmail(string email);
+        Administrateur GetUserByTelephone(string telephone);
         IEnumerable<Administrateur> GetActiveUsers();
         IEnumerable<Administrateur> GetNonActiveUsers();
 

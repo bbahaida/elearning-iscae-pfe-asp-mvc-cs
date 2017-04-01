@@ -104,6 +104,11 @@
     <Compile Include="Repons.cs">
       <DependentUpon>ISCAEModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Repositories\AdministrateurRepository.cs" />
+    <Compile Include="Repositories\AnnonceRepository.cs" />
+    <Compile Include="Repositories\DocumentNonOfficielRepository.cs" />
+    <Compile Include="Repositories\DocumentOfficielRepository.cs" />
+    <Compile Include="Repositories\EtudiantRepository.cs" />
     <Compile Include="Repositories\IAdministrateurRepository.cs" />
     <Compile Include="Repositories\IAnnonceRepository.cs" />
     <Compile Include="Repositories\IDocumentNonOfficielRepository.cs" />
@@ -119,7 +124,16 @@
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\ISpecialiteModuleRepository.cs" />
     <Compile Include="Repositories\ISpecialiteRepository.cs" />
+    <Compile Include="Repositories\MessageRepository.cs" />
+    <Compile Include="Repositories\ModuleRepository.cs" />
+    <Compile Include="Repositories\ProfesseurModuleRepository.cs" />
+    <Compile Include="Repositories\ProfesseurRepository.cs" />
+    <Compile Include="Repositories\ProfesseurSpecialiteRepository.cs" />
+    <Compile Include="Repositories\QuestionRepository.cs" />
+    <Compile Include="Repositories\ReponseRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
+    <Compile Include="Repositories\SpecialiteModuleRepository.cs" />
+    <Compile Include="Repositories\SpecialiteRepository.cs" />
     <Compile Include="Specialite.cs">
       <DependentUpon>ISCAEModel.tt</DependentUpon>
     </Compile>
