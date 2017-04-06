@@ -23,7 +23,7 @@ namespace ISCAE.Data.Repositories
             _context.Set<TEntity>().Add(entity);
         }
 
-        public void Delete(TEntity entity)
+       public void Delete(TEntity entity)
         {
             _context.Set<TEntity>().Remove(entity);
         }
