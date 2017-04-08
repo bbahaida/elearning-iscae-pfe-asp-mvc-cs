@@ -1,42 +1,56 @@
 ﻿using ISCAE.Data.Repositories;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ISCAE.Business.Services
 {
     public class CommonService<TEntity> : ICommonService<TEntity> where TEntity : class
     {
         private IRepository<TEntity> _repository;
+        //log4net.ILog logger = Log4NetHelper.GetLogger(typeof(TEntity));
         public CommonService(IRepository<TEntity> repository)
         {
             _repository = repository;
         }
-        public void Add(TEntity entity)
+        public TEntity Add(TEntity entity)
         {
             if(entity != null)
             {
-                _repository.Add(entity);
+                entity =  _repository.Add(entity);
+                if(entity != null)
+                {
+                    return entity;
+                }
             }
+            return null;
         }
 
-        public void Delete(TEntity entity)
+        public TEntity Delete(TEntity entity)
         {
             if (entity != null)
             {
-                _repository.Delete(entity);
+                entity = _repository.Delete(entity);
+                if (entity == null)
+                {
+                    //logger.Info("Delete from database");
+                    return null;
+                }
             }
+            return entity;
         }
 
-        public void Edit(TEntity entity)
+        public TEntity Edit(TEntity entity)
         {
             if (entity != null)
             {
-                _repository.Edit(entity);
+                entity = _repository.Edit(entity);
+                if (entity != null)
+                {
+                    return entity;
+                }
             }
+            return null;
         }
 
         public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
@@ -56,11 +70,6 @@ namespace ISCAE.Business.Services
         public IEnumerable<TEntity> GetAll()
         {
             return _repository.GetAll();
-        }
-
-        public void Save()
-        {
-            _repository.Save();
         }
     }
 }

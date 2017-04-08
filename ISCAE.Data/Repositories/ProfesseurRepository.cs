@@ -11,32 +11,80 @@ namespace ISCAE.Data.Repositories
     {
         public IEnumerable<Professeur> GetActiveUsers()
         {
-            return Context.Set<Professeur>().Where(o => o.isActive == 1).AsEnumerable();
+            try
+            {
+                return Context.Set<Professeur>().Where(o => o.isActive == 1).AsEnumerable();
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e.Message);
+                return null;
+            }
         }
 
         public IEnumerable<Professeur> GetNonActiveUsers()
         {
-            return Context.Set<Professeur>().Where(o => o.isActive == 0).AsEnumerable();
+            try
+            {
+                return Context.Set<Professeur>().Where(o => o.isActive == 0).AsEnumerable();
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e.Message);
+                return null;
+            }
         }
 
         public Professeur GetUserByAuth(string login, string password)
         {
-            return Context.Set<Professeur>().FirstOrDefault(o => o.Login.Equals(login) && o.Password.Equals(password));
+            try
+            {
+                return Context.Set<Professeur>().FirstOrDefault(o => o.Login.Equals(login) && o.Password.Equals(password));
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e.Message);
+                return null;
+            }
         }
 
         public Professeur GetUserByEmail(string email)
         {
-            return Context.Set<Professeur>().FirstOrDefault(o => o.Email.Equals(email));
+            try
+            {
+                return Context.Set<Professeur>().FirstOrDefault(o => o.Email.Equals(email));
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e.Message);
+                return null;
+            }
         }
 
         public Professeur GetUserByLogin(string login)
         {
-            return Context.Set<Professeur>().FirstOrDefault(o => o.Login.Equals(login));
+            try
+            {
+                return Context.Set<Professeur>().FirstOrDefault(o => o.Login.Equals(login));
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e.Message);
+                return null;
+            }
         }
 
         public Professeur GetUserByTelephone(string telephone)
         {
-            return Context.Set<Professeur>().FirstOrDefault(o => o.Telephone.Equals(telephone));
+            try
+            {
+                return Context.Set<Professeur>().FirstOrDefault(o => o.Telephone.Equals(telephone));
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e.Message);
+                return null;
+            }
         }
     }
 }

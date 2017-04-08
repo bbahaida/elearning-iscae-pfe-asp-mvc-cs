@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ISCAE.Data.Repositories
 {
@@ -10,32 +8,83 @@ namespace ISCAE.Data.Repositories
     {
         public IEnumerable<Administrateur> GetActiveUsers()
         {
-            return Context.Set<Administrateur>().Where(o => o.isActive == 1).AsEnumerable();
+            try
+            {
+                return Context.Set<Administrateur>().Where(o => o.isActive == 1).AsEnumerable();
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e.Message);
+                return null;
+            }
         }
 
         public IEnumerable<Administrateur> GetNonActiveUsers()
         {
-            return Context.Set<Administrateur>().Where(o => o.isActive == 0).AsEnumerable();
+            try
+            {
+                return Context.Set<Administrateur>().Where(o => o.isActive == 0).AsEnumerable();
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e.Message);
+                return null;
+            }
         }
 
         public Administrateur GetUserByAuth(string login, string password)
         {
-            return Context.Set<Administrateur>().FirstOrDefault(o => o.Login.Equals(login) && o.Password.Equals(password));
+            try
+            {
+                return Context.Set<Administrateur>().FirstOrDefault(o => o.Login.Equals(login) && o.Password.Equals(password));
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e.Message);
+                return null;
+            }
+            
         }
 
         public Administrateur GetUserByEmail(string email)
         {
-            return Context.Set<Administrateur>().FirstOrDefault(o => o.Email.Equals(email) );
+            try
+            {
+                return Context.Set<Administrateur>().FirstOrDefault(o => o.Email.Equals(email) );
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e.Message);
+                return null;
+            }
+            
         }
 
         public Administrateur GetUserByLogin(string login)
         {
-            return Context.Set<Administrateur>().FirstOrDefault(o => o.Login.Equals(login));
+            try
+            {
+                return Context.Set<Administrateur>().FirstOrDefault(o => o.Login.Equals(login));
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e.Message);
+                return null;
+            }
         }
 
         public Administrateur GetUserByTelephone(string telephone)
         {
-            return Context.Set<Administrateur>().FirstOrDefault(o => o.Telephone.Equals(telephone));
+            try
+            {
+                return Context.Set<Administrateur>().FirstOrDefault(o => o.Telephone.Equals(telephone));
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e.Message);
+                return null;
+            }
+            
         }
     }
 }

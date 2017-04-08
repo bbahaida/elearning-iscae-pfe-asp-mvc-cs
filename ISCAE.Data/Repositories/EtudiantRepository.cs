@@ -1,56 +1,127 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ISCAE.Data.Repositories
 {
     public class EtudiantRepository : Repository<IscaeEntities, Etudiant>, IEtudiantRepository
     {
+        
         public IEnumerable<Etudiant> GetEtudiantsByNiveau(int Niveau, int pageIndex, int pageSize)
         {
-            return Context.Set<Etudiant>().Where(o => o.Niveau == Niveau).OrderBy(o => o.Matricule).Skip((pageIndex - 1) * pageSize).Take(pageSize);
+            try
+            {
+                return Context.Set<Etudiant>().Where(o => o.Niveau == Niveau).OrderBy(o => o.Matricule).Skip((pageIndex - 1) * pageSize).Take(pageSize);
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e.Message);
+                return null;
+            }
         }
 
         public IEnumerable<Etudiant> GetEtudiantsBySpecialite(int SpecialiteId, int pageIndex, int pageSize, int Niveau)
         {
-            return Context.Set<Etudiant>().Where(o => o.SpecialiteId == SpecialiteId && o.Niveau == Niveau).OrderBy(o => o.Matricule).Skip((pageIndex - 1) * pageSize).Take(pageSize);
+            try
+            {
+                return Context.Set<Etudiant>().Where(o => o.SpecialiteId == SpecialiteId && o.Niveau == Niveau).OrderBy(o => o.Matricule).Skip((pageIndex - 1) * pageSize).Take(pageSize);
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e.Message);
+                return null;
+            }
         }
 
         public IEnumerable<Etudiant> GetActiveUsers()
         {
-            return Context.Set<Etudiant>().Where(o => o.isActive == 1).AsEnumerable();
+            try
+            {
+                return Context.Set<Etudiant>().Where(o => o.isActive == 1).AsEnumerable();
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e.Message);
+                return null;
+            }
         }
 
         public IEnumerable<Etudiant> GetNonActiveUsers()
         {
-            return Context.Set<Etudiant>().Where(o => o.isActive == 0).AsEnumerable();
+            try
+            {
+                return Context.Set<Etudiant>().Where(o => o.isActive == 0).AsEnumerable();
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e.Message);
+                return null;
+            }
         }
 
         public Etudiant GetUserByAuth(string login, string password)
         {
-            return Context.Set<Etudiant>().FirstOrDefault(o => o.Login.Equals(login) && o.Password.Equals(password));
+            try
+            {
+                return Context.Set<Etudiant>().FirstOrDefault(o => o.Login.Equals(login) && o.Password.Equals(password));
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e.Message);
+                return null;
+            }
         }
 
         public Etudiant GetUserByEmail(string email)
         {
-            return Context.Set<Etudiant>().FirstOrDefault(o => o.Email.Equals(email));
+            try
+            {
+                return Context.Set<Etudiant>().FirstOrDefault(o => o.Email.Equals(email));
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e.Message);
+                return null;
+            }
         }
 
         public Etudiant GetUserByLogin(string login)
         {
-            return Context.Set<Etudiant>().FirstOrDefault(o => o.Login.Equals(login));
+            try
+            {
+                return Context.Set<Etudiant>().FirstOrDefault(o => o.Login.Equals(login));
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e.Message);
+                return null;
+            }
         }
 
         public Etudiant GetUserByTelephone(string telephone)
         {
-            return Context.Set<Etudiant>().FirstOrDefault(o => o.Telephone.Equals(telephone));
+            try
+            {
+                return Context.Set<Etudiant>().FirstOrDefault(o => o.Telephone.Equals(telephone));
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e.Message);
+                return null;
+            }
         }
 
         public Etudiant GetUserByMatricule(string matricule)
         {
-            return Context.Set<Etudiant>().FirstOrDefault(o => o.Matricule.Equals(matricule));
+            try
+            {
+                return Context.Set<Etudiant>().FirstOrDefault(o => o.Matricule.Equals(matricule));
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e.Message);
+                return null;
+            }
         }
     }
 }

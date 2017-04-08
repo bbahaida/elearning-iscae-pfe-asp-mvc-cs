@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ISCAE.Data.Repositories
 {
@@ -10,7 +8,15 @@ namespace ISCAE.Data.Repositories
     {
         public IEnumerable<Annonce> GetAnnoncesByAdministrateur(int AdministrateurId, int pageIndex, int pageSize)
         {
-            return Context.Set<Annonce>().Where(o => o.AdministrateurId == AdministrateurId).OrderByDescending(o => o.AnnonceId).Skip((pageIndex - 1) * pageSize).Take(pageSize);
+            try
+            {
+                return Context.Set<Annonce>().Where(o => o.AdministrateurId == AdministrateurId).OrderByDescending(o => o.AnnonceId).Skip((pageIndex - 1) * pageSize).Take(pageSize);
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e.Message);
+                return null;
+            }
         }
     }
 }
