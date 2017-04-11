@@ -4,21 +4,22 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="c2b6decd42e9489c8caad2d7551f79df" Name="Diagram1">
-        <EntityTypeShape EntityType="IscaeModel.Administrateur" Width="1.5" PointX="9.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="IscaeModel.Annonce" Width="1.5" PointX="12" PointY="7" IsExpanded="true" />
-        <EntityTypeShape EntityType="IscaeModel.DocumentNonOfficiel" Width="1.5" PointX="5.25" PointY="8.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="IscaeModel.DocumentOfficiel" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="IscaeModel.Etudiant" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
-        <EntityTypeShape EntityType="IscaeModel.Message" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="IscaeModel.Module" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="IscaeModel.ProfesseurModule" Width="1.5" PointX="9" PointY="3.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="IscaeModel.Professeur" Width="1.5" PointX="0.75" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="IscaeModel.ProfesseurSpecialite" Width="1.5" PointX="3" PointY="12.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="IscaeModel.Question" Width="1.5" PointX="5.25" PointY="12.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="IscaeModel.Repons" Width="1.5" PointX="7.5" PointY="10.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="IscaeModel.SpecialiteModule" Width="1.5" PointX="6" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="IscaeModel.Specialite" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+      <Diagram DiagramId="9e13fc62be4d4f2fadbd974b98815a3b" Name="Diagram1">
+        <EntityTypeShape EntityType="IscaeModel.Administrateur" Width="1.5" PointX="8.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="IscaeModel.Annonce" Width="1.5" PointX="11" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="IscaeModel.DocumentNonOfficiel" Width="1.5" PointX="5.25" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="IscaeModel.DocumentOfficiel" Width="1.5" PointX="9" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="IscaeModel.Etudiant" Width="1.5" PointX="3" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="IscaeModel.Message" Width="1.5" PointX="6" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="IscaeModel.Module" Width="1.5" PointX="3" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="IscaeModel.Notification" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="IscaeModel.ProfesseurModule" Width="1.5" PointX="10" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="IscaeModel.Professeur" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IscaeModel.ProfesseurSpecialite" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="IscaeModel.Question" Width="1.5" PointX="5.25" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="IscaeModel.Repons" Width="1.5" PointX="7.5" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IscaeModel.SpecialiteModule" Width="1.5" PointX="3" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="IscaeModel.Specialite" Width="1.5" PointX="0.75" PointY="9.375" IsExpanded="true" />
         <AssociationConnector Association="IscaeModel.FK_Annonces_AdministrateurId" ManuallyRouted="false" />
         <AssociationConnector Association="IscaeModel.FK_DocumentNonOfficiels_EtudiantId" ManuallyRouted="false" />
         <AssociationConnector Association="IscaeModel.FK_DocumentNonOfficiels_ModuleId" ManuallyRouted="false" />

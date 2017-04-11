@@ -16,6 +16,7 @@
           <Property Name="Telephone" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="Email" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="isActive" Type="tinyint" Nullable="false" />
+          <Property Name="NNI" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Annonces">
           <Key>
@@ -64,6 +65,7 @@
           <Property Name="Telephone" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="Email" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="isActive" Type="tinyint" Nullable="false" />
+          <Property Name="NNI" Type="int" Nullable="false" />
           <Property Name="Niveau" Type="tinyint" Nullable="false" />
           <Property Name="SpecialiteId" Type="int" Nullable="false" />
         </EntityType>
@@ -86,6 +88,18 @@
           <Property Name="ModuleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Designation" Type="varchar" MaxLength="25" Nullable="false" />
         </EntityType>
+        <EntityType Name="Notifications">
+          <Key>
+            <PropertyRef Name="NotificationId" />
+          </Key>
+          <Property Name="NotificationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ActorId" Type="int" Nullable="false" />
+          <Property Name="TargetId" Type="int" Nullable="false" />
+          <Property Name="Message" Type="text" Nullable="false" />
+          <Property Name="NotificationStatus" Type="tinyint" Nullable="false" />
+          <Property Name="TableName" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="RecordId" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="ProfesseurModules">
           <Key>
             <PropertyRef Name="ProfesseurModuleId" />
@@ -107,6 +121,7 @@
           <Property Name="Telephone" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="Email" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="isActive" Type="tinyint" Nullable="false" />
+          <Property Name="NNI" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ProfesseurSpecialites">
           <Key>
@@ -366,6 +381,7 @@
           <EntitySet Name="Etudiants" EntityType="Self.Etudiants" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Messages" EntityType="Self.Messages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Modules" EntityType="Self.Modules" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Notifications" EntityType="Self.Notifications" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProfesseurModules" EntityType="Self.ProfesseurModules" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Professeurs" EntityType="Self.Professeurs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProfesseurSpecialites" EntityType="Self.ProfesseurSpecialites" Schema="dbo" store:Type="Tables" />
@@ -458,6 +474,7 @@
           <Property Name="Telephone" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="isActive" Type="Byte" Nullable="false" />
+          <Property Name="NNI" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Annonces" Relationship="Self.FK_Annonces_AdministrateurId" FromRole="Administrateurs" ToRole="Annonces" />
         </EntityType>
         <EntityType Name="Annonce">
@@ -512,6 +529,7 @@
           <Property Name="Telephone" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="isActive" Type="Byte" Nullable="false" />
+          <Property Name="NNI" Type="Int32" Nullable="false" />
           <Property Name="Niveau" Type="Byte" Nullable="false" />
           <Property Name="SpecialiteId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="DocumentNonOfficiels" Relationship="Self.FK_DocumentNonOfficiels_EtudiantId" FromRole="Etudiants" ToRole="DocumentNonOfficiels" />
@@ -544,6 +562,18 @@
           <NavigationProperty Name="ProfesseurModules" Relationship="Self.FK_ProfesseurModules_ModuleId" FromRole="Modules" ToRole="ProfesseurModules" />
           <NavigationProperty Name="SpecialiteModules" Relationship="Self.FK_SpecialiteModules_ModuleId" FromRole="Modules" ToRole="SpecialiteModules" />
         </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="NotificationId" />
+          </Key>
+          <Property Name="NotificationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ActorId" Type="Int32" Nullable="false" />
+          <Property Name="TargetId" Type="Int32" Nullable="false" />
+          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NotificationStatus" Type="Byte" Nullable="false" />
+          <Property Name="TableName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RecordId" Type="Int32" Nullable="false" />
+        </EntityType>
         <EntityType Name="ProfesseurModule">
           <Key>
             <PropertyRef Name="ProfesseurModuleId" />
@@ -567,6 +597,7 @@
           <Property Name="Telephone" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="isActive" Type="Byte" Nullable="false" />
+          <Property Name="NNI" Type="Int32" Nullable="false" />
           <NavigationProperty Name="DocumentOfficiels" Relationship="Self.FK_DocumentOfficiels_ProfesseurId" FromRole="Professeurs" ToRole="DocumentOfficiels" />
           <NavigationProperty Name="Messages" Relationship="Self.FK_Messages_ProfesseurId" FromRole="Professeurs" ToRole="Messages" />
           <NavigationProperty Name="ProfesseurModules" Relationship="Self.FK_ProfesseurModules_ProfesseurId" FromRole="Professeurs" ToRole="ProfesseurModules" />
@@ -842,6 +873,7 @@
           <EntitySet Name="Etudiants" EntityType="Self.Etudiant" />
           <EntitySet Name="Messages" EntityType="Self.Message" />
           <EntitySet Name="Modules" EntityType="Self.Module" />
+          <EntitySet Name="Notifications" EntityType="Self.Notification" />
           <EntitySet Name="ProfesseurModules" EntityType="Self.ProfesseurModule" />
           <EntitySet Name="Professeurs" EntityType="Self.Professeur" />
           <EntitySet Name="ProfesseurSpecialites" EntityType="Self.ProfesseurSpecialite" />
@@ -934,6 +966,7 @@
                 <ScalarProperty Name="Telephone" ColumnName="Telephone" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="NNI" ColumnName="NNI" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -986,6 +1019,7 @@
                 <ScalarProperty Name="Telephone" ColumnName="Telephone" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="NNI" ColumnName="NNI" />
                 <ScalarProperty Name="Niveau" ColumnName="Niveau" />
                 <ScalarProperty Name="SpecialiteId" ColumnName="SpecialiteId" />
               </MappingFragment>
@@ -1012,6 +1046,19 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Notifications">
+            <EntityTypeMapping TypeName="IscaeModel.Notification">
+              <MappingFragment StoreEntitySet="Notifications">
+                <ScalarProperty Name="NotificationId" ColumnName="NotificationId" />
+                <ScalarProperty Name="ActorId" ColumnName="ActorId" />
+                <ScalarProperty Name="TargetId" ColumnName="TargetId" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="NotificationStatus" ColumnName="NotificationStatus" />
+                <ScalarProperty Name="TableName" ColumnName="TableName" />
+                <ScalarProperty Name="RecordId" ColumnName="RecordId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="ProfesseurModules">
             <EntityTypeMapping TypeName="IscaeModel.ProfesseurModule">
               <MappingFragment StoreEntitySet="ProfesseurModules">
@@ -1031,6 +1078,7 @@
                 <ScalarProperty Name="Telephone" ColumnName="Telephone" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="NNI" ColumnName="NNI" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

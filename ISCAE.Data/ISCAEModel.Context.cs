@@ -32,6 +32,7 @@ namespace ISCAE.Data
         public virtual DbSet<Etudiant> Etudiants { get; set; }
         public virtual DbSet<Message> Messages { get; set; }
         public virtual DbSet<Module> Modules { get; set; }
+        public virtual DbSet<Notification> Notifications { get; set; }
         public virtual DbSet<ProfesseurModule> ProfesseurModules { get; set; }
         public virtual DbSet<Professeur> Professeurs { get; set; }
         public virtual DbSet<ProfesseurSpecialite> ProfesseurSpecialites { get; set; }
