@@ -73,6 +73,19 @@ namespace ISCAE.Data.Repositories
             }
         }
 
+        public Administrateur GetUserByNNI(int NNI)
+        {
+            try
+            {
+                return Context.Set<Administrateur>().FirstOrDefault(o => o.NNI == NNI);
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e.Message);
+                return null;
+            }
+        }
+
         public Administrateur GetUserByTelephone(string telephone)
         {
             try

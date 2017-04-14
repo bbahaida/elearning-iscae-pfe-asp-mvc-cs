@@ -10,7 +10,15 @@ namespace ISCAE.Data.Repositories
     {
         public IEnumerable<Question> GetQuestionsByEtudiant(int EtudiantId, int pageIndex, int pageSize)
         {
-            return Context.Set<Question>().Where(o => o.EtudiantId == EtudiantId).OrderByDescending(o=>o.QuestionId).Skip((pageIndex - 1) * pageSize).Take(pageSize);
+            try
+            {
+                return Context.Set<Question>().Where(o => o.EtudiantId == EtudiantId).OrderByDescending(o => o.QuestionId).Skip((pageIndex - 1) * pageSize).Take(pageSize);
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e.Message);
+                return null;
+            }
         }
     }
 }

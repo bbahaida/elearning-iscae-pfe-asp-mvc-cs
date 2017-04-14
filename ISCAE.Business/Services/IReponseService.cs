@@ -10,5 +10,6 @@ namespace ISCAE.Business.Services
 {
     public interface IReponseService : ICommonService<Repons>
     {
+        IEnumerable<Repons> GetReponsesByQuestion(int QuestionId, int pageIndex, int pageSize);
     }
 }

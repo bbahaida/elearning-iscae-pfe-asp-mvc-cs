@@ -1,9 +1,5 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace ISCAE.Data.Repositories
 {
     public interface IAdministrateurRepository : IRepository<Administrateur>
@@ -12,6 +8,7 @@ namespace ISCAE.Data.Repositories
         Administrateur GetUserByLogin(string login);
         Administrateur GetUserByEmail(string email);
         Administrateur GetUserByTelephone(string telephone);
+        Administrateur GetUserByNNI(int NNI);
         IEnumerable<Administrateur> GetActiveUsers();
         IEnumerable<Administrateur> GetNonActiveUsers();
 

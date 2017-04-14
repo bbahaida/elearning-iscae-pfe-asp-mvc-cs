@@ -9,6 +9,7 @@ namespace ISCAE.Business.Services
 {
     public interface IProfesseurSpecialiteService : ICommonService<ProfesseurSpecialite>
     {
-        IEnumerable<SpecialiteModule> GetSpecialiteModuleByNiveau(int specialiteId ,int Niveau);
+        IEnumerable<ProfesseurSpecialite> GetSpecialitesByProfesseur(int ProfesseurId);
+        IEnumerable<ProfesseurSpecialite> GetProfesseursBySpecialite(int SpecialiteId);
     }
 }

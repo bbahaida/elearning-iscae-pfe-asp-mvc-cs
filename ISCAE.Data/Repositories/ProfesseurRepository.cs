@@ -74,6 +74,19 @@ namespace ISCAE.Data.Repositories
             }
         }
 
+        public Professeur GetUserByNNI(int NNI)
+        {
+            try
+            {
+                return Context.Set<Professeur>().FirstOrDefault(o => o.NNI == NNI);
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e.Message);
+                return null;
+            }
+        }
+
         public Professeur GetUserByTelephone(string telephone)
         {
             try

@@ -10,12 +10,28 @@ namespace ISCAE.Data.Repositories
     {
         public IEnumerable<Message> GetMessagesByProfesseur(int ProfesseurId, int pageIndex, int pageSize)
         {
-            return Context.Set<Message>().Where(o => o.ProfesseurId == ProfesseurId).OrderByDescending(o=>o.MessageId).Skip((pageIndex-1)*pageSize).Take(pageSize).AsEnumerable();
+            try
+            {
+                return Context.Set<Message>().Where(o => o.ProfesseurId == ProfesseurId).OrderByDescending(o => o.MessageId).Skip((pageIndex - 1) * pageSize).Take(pageSize).AsEnumerable();
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e.Message);
+                return null;
+            }
         }
 
         public IEnumerable<Message> GetMessagesByProfesseurAndSpecialite(int ProfesseurId, int SpecialiteId, int Niveau, int pageIndex, int pageSize)
         {
-            return Context.Set<Message>().Where(o => o.ProfesseurId == ProfesseurId && o.SpecialiteId == SpecialiteId && o.Niveau == Niveau).OrderByDescending(o => o.MessageId).Skip((pageIndex - 1) * pageSize).Take(pageSize).AsEnumerable();
+            try
+            {
+                return Context.Set<Message>().Where(o => o.ProfesseurId == ProfesseurId && o.SpecialiteId == SpecialiteId && o.Niveau == Niveau).OrderByDescending(o => o.MessageId).Skip((pageIndex - 1) * pageSize).Take(pageSize).AsEnumerable();
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e.Message);
+                return null;
+            }
         }
     }
 }

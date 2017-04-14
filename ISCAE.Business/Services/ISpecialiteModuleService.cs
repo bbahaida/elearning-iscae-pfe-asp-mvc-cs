@@ -1,13 +1,11 @@
-﻿using System;
+﻿using ISCAE.Data;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ISCAE.Business.Services
 {
-    class ISpecialiteModuleService
+    public interface ISpecialiteModuleService : ICommonService<SpecialiteModule>
     {
-
+        IEnumerable<SpecialiteModule> GetSpecialiteModulesByNiveau(int SpecialiteId, int Niveau);
     }
 }

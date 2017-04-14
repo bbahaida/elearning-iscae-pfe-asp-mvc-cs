@@ -9,6 +9,5 @@ namespace ISCAE.Data.Repositories
     public interface INotificationRepository : IRepository<Notification>
     {
         IEnumerable<Notification> GetUnreadNotifications(int TargetId);
-        void TroncateNotifications();
     }
 }

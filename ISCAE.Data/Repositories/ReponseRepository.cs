@@ -10,7 +10,15 @@ namespace ISCAE.Data.Repositories
     {
         public IEnumerable<Repons> GetReponsesByQuestion(int QuestionId, int pageIndex, int pageSize)
         {
-            return Context.Set<Repons>().Where(o => o.QuestionId == QuestionId).OrderBy(o => o.QuestionId).Skip((pageIndex - 1) * pageSize).Take(pageSize).AsEnumerable();
+            try
+            {
+                return Context.Set<Repons>().Where(o => o.QuestionId == QuestionId).OrderBy(o => o.QuestionId).Skip((pageIndex - 1) * pageSize).Take(pageSize).AsEnumerable();
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e.Message);
+                return null;
+            }
         }
     }
 }

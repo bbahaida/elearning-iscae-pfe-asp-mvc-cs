@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace ISCAE.Business.Services
 {
-    public interface ISpecialiteService : ICommonService<Specialite>
+    public interface INotificationService : ICommonService<Notification>
     {
-        
+        IEnumerable<Notification> GetUnreadNotifications(int TargetId);
+        void TroncateNotifications();
     }
 }

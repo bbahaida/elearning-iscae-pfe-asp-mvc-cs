@@ -10,12 +10,28 @@ namespace ISCAE.Data.Repositories
     {
         public IEnumerable<ProfesseurModule> GetModulesByProfesseur(int ProfesseurId)
         {
-            return Context.Set<ProfesseurModule>().Where(o => o.ProfesseurId == ProfesseurId).AsEnumerable();
+            try
+            {
+                return Context.Set<ProfesseurModule>().Where(o => o.ProfesseurId == ProfesseurId).AsEnumerable();
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e.Message);
+                return null;
+            }
         }
 
         public IEnumerable<ProfesseurModule> GetProfesseursByModule(int ModuleId)
         {
-            return Context.Set<ProfesseurModule>().Where(o => o.ModuleId == ModuleId).AsEnumerable();
+            try
+            {
+                return Context.Set<ProfesseurModule>().Where(o => o.ModuleId == ModuleId).AsEnumerable();
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e.Message);
+                return null;
+            }
         }
     }
 }

@@ -1,9 +1,5 @@
 ﻿using ISCAE.Data;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ISCAE.Data.Repositories;
 
 namespace ISCAE.Business.Services
@@ -18,32 +14,47 @@ namespace ISCAE.Business.Services
 
         public IEnumerable<Administrateur> GetActiveUsers()
         {
-            throw new NotImplementedException();
+            return _administrateurRepository.GetActiveUsers();
         }
 
         public IEnumerable<Administrateur> GetNonActiveUsers()
         {
-            throw new NotImplementedException();
+            return _administrateurRepository.GetNonActiveUsers();
         }
 
         public Administrateur GetUserByAuth(string login, string password)
         {
-            throw new NotImplementedException();
+            if (login.Equals("") || password.Equals(""))
+                return null;
+            return _administrateurRepository.GetUserByAuth(login, password);
         }
 
         public Administrateur GetUserByEmail(string email)
         {
-            throw new NotImplementedException();
+            if (email.Equals(""))
+                return null;
+            return _administrateurRepository.GetUserByEmail(email);
         }
 
         public Administrateur GetUserByLogin(string login)
         {
-            throw new NotImplementedException();
+            if (login.Equals(""))
+                return null;
+            return _administrateurRepository.GetUserByLogin(login);
+        }
+
+        public Administrateur GetUserByNNI(int NNI)
+        {
+            if (NNI < 1)
+                return null;
+            return _administrateurRepository.GetUserByNNI(NNI);
         }
 
         public Administrateur GetUserByTelephone(string telephone)
         {
-            throw new NotImplementedException();
+            if (telephone.Equals(""))
+                return null;
+            return _administrateurRepository.GetUserByTelephone(telephone);
         }
     }
 }

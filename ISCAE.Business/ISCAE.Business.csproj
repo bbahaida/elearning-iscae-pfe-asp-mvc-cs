@@ -58,6 +58,9 @@
     <Compile Include="Services\AdministrateurService.cs" />
     <Compile Include="Services\AnnonceService.cs" />
     <Compile Include="Services\CommonService.cs" />
+    <Compile Include="Services\DocumentNonOfficieService.cs" />
+    <Compile Include="Services\DocumentOfficieService.cs" />
+    <Compile Include="Services\EtudiantService.cs" />
     <Compile Include="Services\IAdministrateurService.cs" />
     <Compile Include="Services\IAnnonceService.cs" />
     <Compile Include="Services\ICommonService.cs" />
@@ -66,6 +69,7 @@
     <Compile Include="Services\IEtudiantService.cs" />
     <Compile Include="Services\IMessageService.cs" />
     <Compile Include="Services\IModuleService.cs" />
+    <Compile Include="Services\INotificationService.cs" />
     <Compile Include="Services\IProfesseurModuleService.cs" />
     <Compile Include="Services\IProfesseurService.cs" />
     <Compile Include="Services\IProfesseurSpecialiteService.cs" />
@@ -73,6 +77,16 @@
     <Compile Include="Services\IReponseService.cs" />
     <Compile Include="Services\ISpecialiteModuleService.cs" />
     <Compile Include="Services\ISpecialiteService.cs" />
+    <Compile Include="Services\MessageService.cs" />
+    <Compile Include="Services\ModuleService.cs" />
+    <Compile Include="Services\NotificationService.cs" />
+    <Compile Include="Services\ProfesseurModuleService.cs" />
+    <Compile Include="Services\ProfesseurService.cs" />
+    <Compile Include="Services\ProfesseurSpecialiteService.cs" />
+    <Compile Include="Services\QuestionService.cs" />
+    <Compile Include="Services\ReponseService.cs" />
+    <Compile Include="Services\SpecialiteModuleService.cs" />
+    <Compile Include="Services\SpecialiteService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

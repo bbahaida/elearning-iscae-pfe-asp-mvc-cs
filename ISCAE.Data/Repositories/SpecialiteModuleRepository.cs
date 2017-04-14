@@ -10,7 +10,15 @@ namespace ISCAE.Data.Repositories
     {
         public IEnumerable<SpecialiteModule> GetSpecialiteModulesByNiveau(int SpecialiteId, int Niveau)
         {
-            return Context.Set<SpecialiteModule>().Where(o => o.SpecialiteId == SpecialiteId && o.Niveau == Niveau).AsEnumerable();
+            try
+            {
+                return Context.Set<SpecialiteModule>().Where(o => o.SpecialiteId == SpecialiteId && o.Niveau == Niveau).AsEnumerable();
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e.Message);
+                return null;
+            }
         }
     }
 }
