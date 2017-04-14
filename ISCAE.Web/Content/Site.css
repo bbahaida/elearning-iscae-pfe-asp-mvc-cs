@@ -1,17 +1,85 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿@import url(//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800);
+@import url(//fonts.googleapis.com/css?family=Passion+One:400,700,900);
+body{
+    font:bold 13px 'Open Sans',"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+.logo{
+    margin-top:-10px;
+    margin-left: 110px;
+}
+a {
+  color: #018001;
+  text-decoration: none;
 }
 
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+a:hover,
+a:focus {
+  color: #018001;
+  cursor:pointer;
+}
+.login{
+    padding-top:-45px;
+    margin-left: 885px;
+    color: #018001;
+}
+.navbar{
+    margin-top:-43px;
+}
+.footer-basic-centered{
+	background-color: #034206;
+	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
+	box-sizing: border-box;
+	width: 100%;
+	text-align: center;
+	font:18px 'Open Sans',"Helvetica Neue",Helvetica,Arial,sans-serif;
+
+	padding: 45px;
+	margin-top: 80px;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+.footer-basic-centered .footer-company-name{
+	color:  #fff;
+	font-size: 14px;
+	margin: 0;
+}
+
+.footer-basic-centered .footer-links{
+	list-style: none;
+	color:  #ddd;
+	padding: 35px 0 23px;
+	margin: 0;
+}
+
+.footer-basic-centered .footer-links a{
+	display:inline-block;
+	text-decoration: none;
+	color: inherit;
+}
+.footer-basic-centered .footer-links a:hover{
+	font:bold 18px 'Open Sans',"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+/* If you don't want the footer to be responsive, remove these media queries */
+
+@media (max-width: 600px) {
+
+	.footer-basic-centered{
+		padding: 35px;
+	}
+
+	.footer-basic-centered .footer-company-motto{
+		font-size: 18px;
+	}
+
+	.footer-basic-centered .footer-company-name{
+		font-size: 12px;
+	}
+
+	.footer-basic-centered .footer-links{
+		font-size: 14px;
+		padding: 25px 0 20px;
+	}
+
+	.footer-basic-centered .footer-links a{
+		line-height: 1.8;
+	}
 }

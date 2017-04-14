@@ -66,12 +66,16 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="AdministrateurTests.cs" />
+    <Compile Include="AdministrateurServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ISCAE.Business\ISCAE.Business.csproj">
+      <Project>{67e82a79-1326-4b0e-ac1f-6ee55acaeb3f}</Project>
+      <Name>ISCAE.Business</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ISCAE.Data\ISCAE.Data.csproj">
       <Project>{477067f5-ebab-4c99-b27e-edbc932138c4}</Project>
       <Name>ISCAE.Data</Name>

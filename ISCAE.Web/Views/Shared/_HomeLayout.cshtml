@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div>
+        <img class="logo" src="~/Content/img/logo.png" alt="Logo" />
+        <span class="login"><a>Login</a><span><b>|</b></span><a>Register</a></span>
+    </div>
+    
+    
+        <div class="container">
+            <div class="navbar navbar-inverse">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("ISCAE", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>@Html.ActionLink("Accueil", "Index", "Home", new { area = "" }, null)</li>
+                        <li>@Html.ActionLink("Formations", "Index", "Help", new { area = "" }, null)</li>
+                        <li>@Html.ActionLink("Professeurs", "Index", "Help", new { area = "" }, null)</li>
+                        <li>@Html.ActionLink("Etudiants", "Index", "Help", new { area = "" }, null)</li>
+                        <li>@Html.ActionLink("Avis", "Index", "Help", new { area = "" }, null)</li>
+                        <li>@Html.ActionLink("Contact", "Index", "Help", new { area = "" }, null)</li>
+                    </ul>
+                </div>
+            </div>
+    </div>
+    <div class="container-fluid">
+        @RenderBody()
+        <hr />
+        <footer class="footer-basic-centered">
+            
+            <p class="footer-links">
+                <a href="#">A Propos</a>
+                ·
+                <a href="#">Mot du directeur</a>
+                ·
+                <a href="#">Partenaires</a>
+                ·
+                <a href="#">Notre offre</a>
+                ·
+                <a href="#">Contact</a>
+            </p>
+            <p class="footer-company-name">ISCAE Mauritanie &copy; @DateTime.Now.Year</p>
+        </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
