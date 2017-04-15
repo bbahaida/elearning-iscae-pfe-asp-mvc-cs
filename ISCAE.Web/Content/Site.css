@@ -2,38 +2,45 @@
 @import url(//fonts.googleapis.com/css?family=Passion+One:400,700,900);
 body{
     font:bold 13px 'Open Sans',"Helvetica Neue",Helvetica,Arial,sans-serif;
-}
-.logo{
-    margin-top:-10px;
-    margin-left: 110px;
-}
-a {
-  color: #018001;
-  text-decoration: none;
-}
-
-a:hover,
-a:focus {
-  color: #018001;
-  cursor:pointer;
+    min-height: 75rem;
 }
 .login{
-    padding-top:-45px;
-    margin-left: 885px;
-    color: #018001;
+    color: rgb(24, 141, 12);
+    cursor:pointer;
+    padding-top:20px;
 }
-.navbar{
-    margin-top:-43px;
+.nav-link{
+    padding: 20px;
+}
+/* Carousel base class */
+.carousel {
+  margin-bottom: 4rem;
+}
+/* Since positioning the image, we need to help out the caption */
+.carousel-caption {
+  z-index: 10;
+  bottom: 3rem;
+}
+
+/* Declare heights because of positioning of img element */
+.carousel-item {
+  height: 32rem;
+  background-color: #777;
+}
+.carousel-item > img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  height: 32rem;
 }
 .footer-basic-centered{
 	background-color: #034206;
 	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
 	box-sizing: border-box;
-	width: 100%;
 	text-align: center;
 	font:18px 'Open Sans',"Helvetica Neue",Helvetica,Arial,sans-serif;
-
-	padding: 45px;
+	padding: 50px;
 	margin-top: 80px;
 }
 
@@ -59,27 +66,3 @@ a:focus {
 	font:bold 18px 'Open Sans',"Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 /* If you don't want the footer to be responsive, remove these media queries */
-
-@media (max-width: 600px) {
-
-	.footer-basic-centered{
-		padding: 35px;
-	}
-
-	.footer-basic-centered .footer-company-motto{
-		font-size: 18px;
-	}
-
-	.footer-basic-centered .footer-company-name{
-		font-size: 12px;
-	}
-
-	.footer-basic-centered .footer-links{
-		font-size: 14px;
-		padding: 25px 0 20px;
-	}
-
-	.footer-basic-centered .footer-links a{
-		line-height: 1.8;
-	}
-}

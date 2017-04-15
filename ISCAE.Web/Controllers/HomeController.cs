@@ -13,5 +13,9 @@ namespace ISCAE.Web.Controllers
         {
             return View();
         }
+        public ActionResult Directeur()
+        {
+            return View();
+        }
     }
 }
