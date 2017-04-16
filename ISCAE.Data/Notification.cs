@@ -21,5 +21,6 @@ namespace ISCAE.Data
         public byte NotificationStatus { get; set; }
         public string TableName { get; set; }
         public int RecordId { get; set; }
+        public System.DateTime DateNotification { get; set; }
     }
 }

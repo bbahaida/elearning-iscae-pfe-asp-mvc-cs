@@ -30,7 +30,8 @@ namespace ISCAE.Data
         public string Telephone { get; set; }
         public string Email { get; set; }
         public byte isActive { get; set; }
-        public int NNI { get; set; }
+        public string NNI { get; set; }
+        public string ProfilePath { get; set; }
         public byte Niveau { get; set; }
         public int SpecialiteId { get; set; }
     

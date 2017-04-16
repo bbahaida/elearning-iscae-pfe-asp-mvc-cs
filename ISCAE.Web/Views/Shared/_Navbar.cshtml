@@ -1,0 +1,45 @@
+﻿
+<div class="container-fluid">
+        <nav class="navbar navbar-toggleable-sm navbar-light bg-success mb-4">
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a href='@Url.Action("Index", "Home")' class="navbar-brand"><span id="logo-first">IS</span><span  id="logo-second">CAE</span></a>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">@Html.ActionLink("Accueil", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Formations", "Index", "Help", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Professeurs", "Index", "Help", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Etudiants", "Index", "Help", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Avis", "Index", "Help", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Contact", "Index", "Help", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li class="navbar-toggler-right nav-item dropdown">
+                        <a id="dropdownLogin" data-toggle="dropdown" class="nav-link dropdown-toggle">Login</a>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <li class="dropdown-item">
+                                <form class="form" role="form">
+                                    <div class="form-group">
+                                        <input name="email" placeholder="Email" class="form-control form-control-sm" type="email" required="">
+                                    </div>
+                                    <div class="form-group">
+                                        <input name="password" placeholder="Password" class="form-control form-control-sm" type="password" required="">
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-success btn-block">Login</button>
+                                    </div>
+                                    <div class="form-group text-xs-center">
+                                        <small><a href="#">Forgot password?</a></small>
+                                    </div>
+                                    <div class="form-group text-xs-center">
+                                        <small><a href="#">Nouveau Compte?</a></small>
+                                    </div>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+            </div>
+
+        </nav>
+    </div>

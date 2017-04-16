@@ -9,27 +9,7 @@
 </head>
 <body>
     
-    <div class="container-fluid">
-        <div class="row">
-            <span class="offset-sm-10 col-sm-2 login"><a id="login">Login</a><span><b>|</b></span><a id="register">Register</a></span>
-        </div>
-        <nav class="navbar navbar-toggleable-md navbar-light bg-faded mb-4">
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <a href='@Url.Action("Index", "Home")' class="navbar-brand"><img src="~/Content/img/logo.png" alt="Logo"/></a>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">@Html.ActionLink("Accueil", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li class="nav-item">@Html.ActionLink("Formations", "Index", "Help", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li class="nav-item">@Html.ActionLink("Professeurs", "Index", "Help", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li class="nav-item">@Html.ActionLink("Etudiants", "Index", "Help", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li class="nav-item">@Html.ActionLink("Avis", "Index", "Help", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li class="nav-item">@Html.ActionLink("Contact", "Index", "Help", new { area = "" }, new { @class = "nav-link" })</li>
-                </ul>
-            </div>
-        </nav>
-    </div>
+    @Html.Partial("_Navbar");
     <div class="container-fluid">
         @RenderBody()
     </div>

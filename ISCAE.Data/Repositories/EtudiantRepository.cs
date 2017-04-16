@@ -124,11 +124,11 @@ namespace ISCAE.Data.Repositories
             }
         }
 
-        public Etudiant GetUserByNNI(int NNI)
+        public Etudiant GetUserByNNI(string NNI)
         {
             try
             {
-                return Context.Set<Etudiant>().FirstOrDefault(o => o.NNI == NNI);
+                return Context.Set<Etudiant>().FirstOrDefault(o => o.NNI.Equals(NNI));
             }
             catch (Exception e)
             {

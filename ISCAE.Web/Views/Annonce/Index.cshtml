@@ -1,0 +1,95 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_EtudiantLayout.cshtml";
+}
+
+<div class="row">
+    <!-- Left col -->
+    <div class="col-md-6">
+        <div class="box box-success">
+            <div class="box-header with-border">
+                <h3 class="box-title">Avis</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <div class="table-responsive">
+                    <table class="table no-margin">
+                        <thead>
+                            <tr>
+                                <th>Titre</th>
+                                <th>Module</th>
+                                <th>Ajouter par</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Call of Duty IV</td>
+                                <td><span class="label label-success">Shipped</span></td>
+                                <td>
+                                    <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Samsung Smart TV</td>
+                                <td><span class="label label-warning">Pending</span></td>
+                                <td>
+                                    <div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.table-responsive -->
+            </div>
+            <!-- /.box-body -->
+        </div>
+    </div>
+    <div class="col-md-6">
+        <!--Annonces-->
+        <div class="box box-success">
+            <div class="box-header with-border">
+                <h3 class="box-title">Resultats</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- /.box-header -->
+
+            <div class="box-footer no-padding">
+                <ul class="nav nav-pills nav-stacked">
+                    <li>
+                        <a href="#">
+                            Brahim Baheida
+                            <span class="pull-right text-green">12</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            Mohamed Alem
+                            <span class="pull-right text-green">9</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            Moctar Ely
+                            <span class="pull-right text-green">6</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.footer -->
+        </div>
+        <!-- /.box -->
+    </div>
+    <!-- /.col -->
+</div>
+<!-- /.row -->

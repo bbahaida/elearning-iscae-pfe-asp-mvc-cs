@@ -144,6 +144,9 @@
     <Compile Include="Repositories\Repository.cs" />
     <Compile Include="Repositories\SpecialiteModuleRepository.cs" />
     <Compile Include="Repositories\SpecialiteRepository.cs" />
+    <Compile Include="Resultat.cs">
+      <DependentUpon>IscaeModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Specialite.cs">
       <DependentUpon>IscaeModel.tt</DependentUpon>
     </Compile>

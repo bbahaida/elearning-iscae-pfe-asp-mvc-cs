@@ -20,6 +20,7 @@ namespace ISCAE.Data
             this.Etudiants = new HashSet<Etudiant>();
             this.Messages = new HashSet<Message>();
             this.ProfesseurSpecialites = new HashSet<ProfesseurSpecialite>();
+            this.Resultats = new HashSet<Resultat>();
             this.SpecialiteModules = new HashSet<SpecialiteModule>();
         }
     
@@ -32,6 +33,8 @@ namespace ISCAE.Data
         public virtual ICollection<Message> Messages { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProfesseurSpecialite> ProfesseurSpecialites { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Resultat> Resultats { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SpecialiteModule> SpecialiteModules { get; set; }
     }

@@ -4,23 +4,25 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="9e13fc62be4d4f2fadbd974b98815a3b" Name="Diagram1">
-        <EntityTypeShape EntityType="IscaeModel.Administrateur" Width="1.5" PointX="8.75" PointY="2.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="IscaeModel.Annonce" Width="1.5" PointX="11" PointY="2.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="IscaeModel.DocumentNonOfficiel" Width="1.5" PointX="5.25" PointY="9" IsExpanded="true" />
-        <EntityTypeShape EntityType="IscaeModel.DocumentOfficiel" Width="1.5" PointX="9" PointY="6.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="IscaeModel.Etudiant" Width="1.5" PointX="3" PointY="8.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="IscaeModel.Message" Width="1.5" PointX="6" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="IscaeModel.Module" Width="1.5" PointX="3" PointY="16.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="IscaeModel.Notification" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="IscaeModel.ProfesseurModule" Width="1.5" PointX="10" PointY="10.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="IscaeModel.Professeur" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="IscaeModel.ProfesseurSpecialite" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="IscaeModel.Question" Width="1.5" PointX="5.25" PointY="12.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="IscaeModel.Repons" Width="1.5" PointX="7.5" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="IscaeModel.SpecialiteModule" Width="1.5" PointX="3" PointY="13.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="IscaeModel.Specialite" Width="1.5" PointX="0.75" PointY="9.375" IsExpanded="true" />
+      <Diagram DiagramId="5ec744737f8d47b493feaf15265980a5" Name="Diagram1">
+        <EntityTypeShape EntityType="IscaeModel.Administrateur" Width="1.5" PointX="0.75" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="IscaeModel.Annonce" Width="1.5" PointX="3" PointY="21.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="IscaeModel.DocumentNonOfficiel" Width="1.5" PointX="5.25" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="IscaeModel.DocumentOfficiel" Width="1.5" PointX="9" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IscaeModel.Etudiant" Width="1.5" PointX="3" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="IscaeModel.Message" Width="1.5" PointX="6" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="IscaeModel.Module" Width="1.5" PointX="3" PointY="18.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="IscaeModel.Notification" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IscaeModel.ProfesseurModule" Width="1.5" PointX="10" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="IscaeModel.Professeur" Width="1.5" PointX="3.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="IscaeModel.ProfesseurSpecialite" Width="1.5" PointX="3" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="IscaeModel.Question" Width="1.5" PointX="5.25" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="IscaeModel.Repons" Width="1.5" PointX="7.5" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="IscaeModel.Resultat" Width="1.5" PointX="3" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="IscaeModel.SpecialiteModule" Width="1.5" PointX="8" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="IscaeModel.Specialite" Width="1.5" PointX="0.75" PointY="9.75" IsExpanded="true" />
         <AssociationConnector Association="IscaeModel.FK_Annonces_AdministrateurId" ManuallyRouted="false" />
+        <AssociationConnector Association="IscaeModel.FK_Resultats_AdministrateurId" ManuallyRouted="false" />
         <AssociationConnector Association="IscaeModel.FK_DocumentNonOfficiels_EtudiantId" ManuallyRouted="false" />
         <AssociationConnector Association="IscaeModel.FK_DocumentNonOfficiels_ModuleId" ManuallyRouted="false" />
         <AssociationConnector Association="IscaeModel.FK_DocumentOfficiels_ModuleId" ManuallyRouted="false" />
@@ -36,6 +38,7 @@
         <AssociationConnector Association="IscaeModel.FK_ProfesseurSpecialites_ProfesseurId" ManuallyRouted="false" />
         <AssociationConnector Association="IscaeModel.FK_ProfesseurSpecialites_SpecialiteId" ManuallyRouted="false" />
         <AssociationConnector Association="IscaeModel.FK_Reponses_QuestionId" ManuallyRouted="false" />
+        <AssociationConnector Association="IscaeModel.FK_Resultats_SpecialiteId" ManuallyRouted="false" />
         <AssociationConnector Association="IscaeModel.FK_SpecialiteModules_SpecialiteId" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>

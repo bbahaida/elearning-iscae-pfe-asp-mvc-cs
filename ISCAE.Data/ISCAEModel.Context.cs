@@ -38,6 +38,7 @@ namespace ISCAE.Data
         public virtual DbSet<ProfesseurSpecialite> ProfesseurSpecialites { get; set; }
         public virtual DbSet<Question> Questions { get; set; }
         public virtual DbSet<Repons> Reponses { get; set; }
+        public virtual DbSet<Resultat> Resultats { get; set; }
         public virtual DbSet<SpecialiteModule> SpecialiteModules { get; set; }
         public virtual DbSet<Specialite> Specialites { get; set; }
     }
