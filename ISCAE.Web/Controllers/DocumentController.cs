@@ -11,6 +11,20 @@ namespace ISCAE.Web.Controllers
 {
     public class DocumentController : Controller
     {
+        private IDocumentNonOfficielService _documentNonOfficielService;
+        private IDocumentOfficielService _documentOfficielService;
+        private ISpecialiteModuleService _specialiteModuleService;
+        private IModuleService _moduleService;
+        private IEtudiantService _etudiantService;
+        public DocumentController(IDocumentNonOfficielService documentNonOfficielService, IDocumentOfficielService documentOfficielService,
+            ISpecialiteModuleService specialiteModuleService, IModuleService moduleService, IEtudiantService etudiantService)
+        {
+            _documentNonOfficielService = documentNonOfficielService;
+            _documentOfficielService = documentOfficielService;
+            _specialiteModuleService = specialiteModuleService;
+            _moduleService = moduleService;
+            _etudiantService = etudiantService;
+        }
 
         // GET: Document
         public ActionResult Index()
@@ -24,10 +38,16 @@ namespace ISCAE.Web.Controllers
         public ActionResult NonOfficiel()
         {
             
-            IDocumentNonOfficielService _service = new DocumentNonOfficielService(new DocumentNonOfficielRepository(), new EtudiantRepository(), new ModuleRepository());
-            IEtudiantService _etudiantService = new EtudiantService(new EtudiantRepository(), new SpecialiteRepository());
-            List<DocumentNonOfficiel> documents = _service.GetNonValidDocument(1,10).ToList();
-            
+            List<DocumentNonOfficiel> documents = _documentNonOfficielService.GetNonValidDocument(1,10).ToList();
+            var data = _specialiteModuleService.GetSpecialiteModulesByNiveau(((Etudiant)Session["user"]).SpecialiteId, ((Etudiant)Session["user"]).Niveau);
+            List<Module> modules = new List<Module>();
+            foreach (SpecialiteModule sm in data)
+            {
+                modules.Add(_moduleService.Get(sm.ModuleId));
+            }
+            ViewBag.Modules = modules;
+            ViewBag.ModuleService = _moduleService;
+            ViewBag.EtudiantService = _etudiantService;
             return View(documents);
         }
         public ActionResult Add()
@@ -36,13 +56,12 @@ namespace ISCAE.Web.Controllers
             if(user is Etudiant)
             {
                 
-                ISpecialiteModuleService _service = new SpecialiteModuleService(new SpecialiteModuleRepository(),new SpecialiteRepository());
-                IModuleService _moduleservice = new ModuleService(new ModuleRepository());
-                var data = _service.GetSpecialiteModulesByNiveau(((Etudiant)user).SpecialiteId, ((Etudiant)user).Niveau);
+                
+                var data = _specialiteModuleService.GetSpecialiteModulesByNiveau(((Etudiant)user).SpecialiteId, ((Etudiant)user).Niveau);
                 List<Module> modules = new List<Module>();
                 foreach (SpecialiteModule sm in data)
                 {
-                    modules.Add(_moduleservice.Get(sm.ModuleId));
+                    modules.Add(_moduleService.Get(sm.ModuleId));
                 }
                 return View("AddEtudiant",modules);
             }
@@ -84,8 +103,7 @@ namespace ISCAE.Web.Controllers
                     EtudiantId = ((Etudiant)Session["user"]).EtudiantId
 
                 };
-                IDocumentNonOfficielService _service = new DocumentNonOfficielService(new DocumentNonOfficielRepository(), new EtudiantRepository(), new ModuleRepository());
-                documentNonOfficiel = _service.Add(documentNonOfficiel);
+                documentNonOfficiel = _documentNonOfficielService.Add(documentNonOfficiel);
                 if(documentNonOfficiel != null)
                     document.SaveAs(path);
             }
@@ -93,8 +111,7 @@ namespace ISCAE.Web.Controllers
         }
         public FileResult Download(int documentId)
         {
-            IDocumentNonOfficielService _service = new DocumentNonOfficielService(new DocumentNonOfficielRepository(), new EtudiantRepository(), new ModuleRepository());
-            DocumentNonOfficiel document = _service.Get(documentId);
+            DocumentNonOfficiel document = _documentNonOfficielService.Get(documentId);
             return File(AppDomain.CurrentDomain.BaseDirectory+"/Resources/Documents/"+document.Titre+"."+document.Type, System.Net.Mime.MediaTypeNames.Application.Octet,document.Titre+"."+document.Type);
         }
     

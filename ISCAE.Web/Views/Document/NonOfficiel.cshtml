@@ -1,12 +1,12 @@
 ﻿@model List<ISCAE.Data.DocumentNonOfficiel>
 @using ISCAE.Business.Services
-@using ISCAE.Data.Repositories
+@using ISCAE.Data
 @{
     ViewBag.Title = "Document > Non Officiel";
     Layout = "~/Views/Shared/_EtudiantLayout.cshtml";
-    IModuleService _moduleService = new ModuleService(new ModuleRepository());
-    IEtudiantService _etudiantService = new EtudiantService(new EtudiantRepository(),new SpecialiteRepository());
-    
+    IModuleService _moduleService = (IModuleService)ViewBag.ModuleService;
+    IEtudiantService _etudiantService = (IEtudiantService)ViewBag.EtudiantService;
+    List<Module> modules = ViewBag.Modules;
 }
 
 <div class="row">
@@ -61,7 +61,45 @@
             </div>
             <!-- /.box-body -->
         </div>
-        
+        <div class="box box-success">
+            <div class="box-header with-border">
+                <h3 class="box-title">Ajouter un nouveau</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            @using (Html.BeginForm("AddEtudiant", "Document", FormMethod.Post, new { enctype = "multipart/form-data", @id = "add-document" }))
+            {
+                <div class="box-body">
+
+                    <div class="form-group">
+                        <label for="document">Document</label>
+                        <input type="file" id="document" name="document">
+                        <p class="help-block"></p>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Module</label>
+                        <select class="form-control" id="modules" name="module">
+                            @{
+                                foreach (Module m in modules)
+                                {
+                                    <option value="@m.ModuleId">@m.Designation</option>
+                                }
+                            }
+                        </select>
+                    </div>
+
+                </div>
+                <!-- /.box-body -->
+                                <div class="box-footer">
+                                    <button type="submit" class="btn btn-success">Submit</button>
+                                </div>
+                                }
+        </div>
     </div>
     <div class="col-md-4">
         <!--Annonces-->

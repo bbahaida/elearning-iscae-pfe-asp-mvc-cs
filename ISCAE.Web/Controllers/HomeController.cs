@@ -11,6 +11,12 @@ namespace ISCAE.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private IEtudiantService _etudiantService;
+
+        public HomeController(IEtudiantService etudiantService)
+        {
+            _etudiantService = etudiantService;
+        }
         // GET: Home
         public ActionResult Index()
         {
@@ -26,15 +32,14 @@ namespace ISCAE.Web.Controllers
         [HttpPost]
         public ActionResult Login(string login, string password)
         {
-            IEtudiantService _service = new EtudiantService(new EtudiantRepository(), new SpecialiteRepository());
-            var user = _service.GetUserByAuth(login,password);
+            var user = _etudiantService.GetUserByAuth(login,password);
             if(user != null)
             {
                 Session["user"] = user;
                 return RedirectToAction("Index", "Etudiant");
             }
 
-            return null;
+            return View("Index");
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace ISCAE.Data.Repositories
 {
-    class AnnonceRepository : Repository<IscaeEntities, Annonce>, IAnnonceRepository
+    public class AnnonceRepository : Repository<IscaeEntities, Annonce>, IAnnonceRepository
     {
         public IEnumerable<Annonce> GetAnnoncesByAdministrateur(int AdministrateurId, int pageIndex, int pageSize)
         {
