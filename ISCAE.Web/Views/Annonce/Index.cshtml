@@ -1,7 +1,10 @@
-﻿
+﻿@using ISCAE.Data
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_EtudiantLayout.cshtml";
+    List<Annonce> Avis = (List<Annonce>)ViewBag.Avis;
+    List<Resultat> Resultats = (List<Resultat>)ViewBag.Resultats;
+    List<Specialite> Specialites = (List<Specialite>)ViewBag.Specialites;
 }
 
 <div class="row">
@@ -17,42 +20,36 @@
                 </div>
             </div>
             <!-- /.box-header -->
-            <div class="box-body">
-                <div class="table-responsive">
-                    <table class="table no-margin">
-                        <thead>
-                            <tr>
-                                <th>Titre</th>
-                                <th>Module</th>
-                                <th>Ajouter par</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Call of Duty IV</td>
-                                <td><span class="label label-success">Shipped</span></td>
-                                <td>
-                                    <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Samsung Smart TV</td>
-                                <td><span class="label label-warning">Pending</span></td>
-                                <td>
-                                    <div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div>
-                                </td>
-                            </tr>
 
-                        </tbody>
-                    </table>
-                </div>
-                <!-- /.table-responsive -->
+            <div class="box-footer no-padding">
+                <ul class="nav nav-pills nav-stacked">
+                    @{
+                        if (Avis.Count > 0)
+                        {
+                            foreach (Annonce annonce in Avis)
+                            {
+                                <li>
+                                    <a href='@Url.Action("","")'>
+                                        @annonce.Titre
+                                    </a>
+                                </li>
+                            }
+                        }
+                        else
+                        {
+                            <li>
+                                <a href="#">Pas des Avis</a>
+                            </li>
+                        }
+                    }
+
+                </ul>
             </div>
-            <!-- /.box-body -->
+            <!-- /.footer -->
         </div>
+        <!-- /.box -->
     </div>
     <div class="col-md-6">
-        <!--Annonces-->
         <div class="box box-success">
             <div class="box-header with-border">
                 <h3 class="box-title">Resultats</h3>
@@ -66,24 +63,29 @@
 
             <div class="box-footer no-padding">
                 <ul class="nav nav-pills nav-stacked">
-                    <li>
-                        <a href="#">
-                            Brahim Baheida
-                            <span class="pull-right text-green">12</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            Mohamed Alem
-                            <span class="pull-right text-green">9</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            Moctar Ely
-                            <span class="pull-right text-green">6</span>
-                        </a>
-                    </li>
+                    @{
+                        if (Resultats.Count > 0)
+                        {
+                            foreach (Resultat resultat in Resultats)
+                            {
+                                <li>
+                                    <a href='@Url.Action("","")'>
+                                        @resultat.Semestre
+                                        
+                                    </a>
+                                    <span class="label label-success pull-right">@Specialites.Find(o=>o.SpecialiteId == resultat.SpecialiteId).Designation</span>
+                                </li>
+                            }
+                        }
+                        else
+                        {
+                            <li>
+                                <a href="#">Pas des Resultats</a>
+                                
+                            </li>
+                        }
+                    }
+
                 </ul>
             </div>
             <!-- /.footer -->

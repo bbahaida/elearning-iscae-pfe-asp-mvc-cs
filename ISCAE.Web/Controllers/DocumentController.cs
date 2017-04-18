@@ -7,8 +7,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.IO;
+using ISCAE.Web.Filters;
+
 namespace ISCAE.Web.Controllers
 {
+    [SessionFilter]
     public class DocumentController : Controller
     {
         private IDocumentNonOfficielService _documentNonOfficielService;
@@ -33,7 +36,18 @@ namespace ISCAE.Web.Controllers
         }
         public ActionResult Officiel()
         {
-            return View();
+            
+            List<DocumentOfficiel> documents = _documentOfficielService.GetAll().OrderBy(o=>o.DocumentOfficielId).Take(10).ToList();
+            var data = _specialiteModuleService.GetSpecialiteModulesByNiveau(((Etudiant)Session["user"]).SpecialiteId, ((Etudiant)Session["user"]).Niveau);
+            List<Module> modules = new List<Module>();
+            foreach (SpecialiteModule sm in data)
+            {
+                modules.Add(_moduleService.Get(sm.ModuleId));
+            }
+            ViewBag.Modules = modules;
+            ViewBag.ModuleService = _moduleService;
+            ViewBag.Professeurs = _etudiantService;
+            return View(documents);
         }
         public ActionResult NonOfficiel()
         {

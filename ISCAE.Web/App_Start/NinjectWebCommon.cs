@@ -62,6 +62,7 @@ namespace ISCAE.Web.App_Start
                 kernel.Bind<IProfesseurSpecialiteRepository>().To<ProfesseurSpecialiteRepository>();
                 kernel.Bind<IQuestionRepository>().To<QuestionRepository>();
                 kernel.Bind<IReponseRepository>().To<ReponseRepository>();
+                kernel.Bind<IResultatRepository>().To<ResultatRepository>();
                 kernel.Bind<ISpecialiteModuleRepository>().To<SpecialiteModuleRepository>();
                 kernel.Bind<ISpecialiteRepository>().To<SpecialiteRepository>();
 
@@ -79,6 +80,7 @@ namespace ISCAE.Web.App_Start
                 kernel.Bind<IProfesseurSpecialiteService>().To<ProfesseurSpecialiteService>();
                 kernel.Bind<IQuestionService>().To<QuestionService>();
                 kernel.Bind<IReponseService>().To<ReponseService>();
+                kernel.Bind<IResultatService>().To<ResultatService>();
                 kernel.Bind<ISpecialiteModuleService>().To<SpecialiteModuleService>();
                 kernel.Bind<ISpecialiteService>().To<SpecialiteService>();
 

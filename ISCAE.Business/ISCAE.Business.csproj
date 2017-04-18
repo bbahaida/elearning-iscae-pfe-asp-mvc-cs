@@ -75,6 +75,7 @@
     <Compile Include="Services\IProfesseurSpecialiteService.cs" />
     <Compile Include="Services\IQuestionService.cs" />
     <Compile Include="Services\IReponseService.cs" />
+    <Compile Include="Services\IResultatService.cs" />
     <Compile Include="Services\ISpecialiteModuleService.cs" />
     <Compile Include="Services\ISpecialiteService.cs" />
     <Compile Include="Services\MessageService.cs" />
@@ -85,6 +86,7 @@
     <Compile Include="Services\ProfesseurSpecialiteService.cs" />
     <Compile Include="Services\QuestionService.cs" />
     <Compile Include="Services\ReponseService.cs" />
+    <Compile Include="Services\ResultatService.cs" />
     <Compile Include="Services\SpecialiteModuleService.cs" />
     <Compile Include="Services\SpecialiteService.cs" />
   </ItemGroup>

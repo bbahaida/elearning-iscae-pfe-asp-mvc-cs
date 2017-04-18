@@ -131,6 +131,7 @@
     <Compile Include="Repositories\IQuestionRepository.cs" />
     <Compile Include="Repositories\IReponseRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
+    <Compile Include="Repositories\IResultatRepository.cs" />
     <Compile Include="Repositories\ISpecialiteModuleRepository.cs" />
     <Compile Include="Repositories\ISpecialiteRepository.cs" />
     <Compile Include="Repositories\MessageRepository.cs" />
@@ -142,6 +143,7 @@
     <Compile Include="Repositories\QuestionRepository.cs" />
     <Compile Include="Repositories\ReponseRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
+    <Compile Include="Repositories\ResultatRepository.cs" />
     <Compile Include="Repositories\SpecialiteModuleRepository.cs" />
     <Compile Include="Repositories\SpecialiteRepository.cs" />
     <Compile Include="Resultat.cs">

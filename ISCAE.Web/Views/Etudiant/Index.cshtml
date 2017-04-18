@@ -194,7 +194,7 @@
                                                 <a href="javascript:void(0)" class="product-title">
                                                     
                                                     @message.Titre
-                                                    <span class="label label- pull-right">@professeurs.FirstOrDefault(o=>o.Value.ProfesseurId == message.ProfesseurId).Key.Designation</span>
+                                                    <span class="label label-success pull-right">@professeurs.FirstOrDefault(o=>o.Value.ProfesseurId == message.ProfesseurId).Key.Designation</span>
                                                 </a>
                                                 <span class="product-description">
                                                     @professeurs.Values.FirstOrDefault(o => o.ProfesseurId == message.ProfesseurId).Nom

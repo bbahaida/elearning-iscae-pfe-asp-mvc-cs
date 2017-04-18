@@ -46,5 +46,9 @@ namespace ISCAE.Web.Controllers
 
             return View("Index");
         }
+        public new RedirectToRouteResult RedirectToAction(string action, string controller)
+        {
+            return base.RedirectToAction(action, controller);
+        }
     }
 }

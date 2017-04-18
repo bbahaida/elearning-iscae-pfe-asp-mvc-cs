@@ -240,6 +240,7 @@
     <Compile Include="Controllers\FormationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MessageController.cs" />
+    <Compile Include="Filters\SessionFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -380,6 +381,7 @@
     <Content Include="Views\Formation\Economie.cshtml" />
     <Content Include="Views\Document\Add.cshtml" />
     <Content Include="Views\Document\AddEtudiant.cshtml" />
+    <Content Include="Views\Annonce\Avis.cshtml" />
     <None Include="Views\Shared\_EtudiantLayout.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
