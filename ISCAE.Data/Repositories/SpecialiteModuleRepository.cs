@@ -12,7 +12,7 @@ namespace ISCAE.Data.Repositories
         {
             try
             {
-                return Context.Set<SpecialiteModule>().Where(o => o.SpecialiteId == SpecialiteId && o.Niveau == Niveau).AsEnumerable();
+                return Context.Set<SpecialiteModule>().Where(o => o.SpecialiteId == SpecialiteId && o.Niveau == Niveau);
             }
             catch (Exception e)
             {

@@ -20,7 +20,7 @@ namespace ISCAE.Business.Services
             _moduleRepository = moduleRepository;
         }
 
-        public IEnumerable<ProfesseurModule> GetModylesByProfesseur(int ProfesseurId)
+        public IEnumerable<ProfesseurModule> GetModulesByProfesseur(int ProfesseurId)
         {
             if (ProfesseurId < 1 || _professeurRepository.Get(ProfesseurId) == null)
                 return null;

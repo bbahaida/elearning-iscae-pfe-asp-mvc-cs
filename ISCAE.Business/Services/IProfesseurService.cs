@@ -15,5 +15,6 @@ namespace ISCAE.Business.Services
         Professeur GetUserByTelephone(string telephone);
         IEnumerable<Professeur> GetActiveUsers();
         IEnumerable<Professeur> GetNonActiveUsers();
+        Dictionary<Module, Professeur> GetProfesseursBySpecialiteAndNiveau(int SpecialiteId, int Niveau);
     }
 }

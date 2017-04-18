@@ -335,6 +335,9 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Profiles\mloud.png" />
+    <Content Include="Resources\Profiles\amou.png" />
+    <Content Include="Resources\Profiles\s3dbouh.png" />
     <Content Include="Resources\Profiles\mouin.png" />
     <Content Include="Resources\Profiles\bbahieda.jpg" />
     <Content Include="Scripts\app.js" />

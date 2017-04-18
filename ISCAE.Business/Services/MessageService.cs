@@ -33,5 +33,12 @@ namespace ISCAE.Business.Services
                 return null;
             return _messageRepository.GetMessagesByProfesseurAndSpecialite(ProfesseurId,SpecialiteId,Niveau, pageIndex, pageSize);
         }
+
+        public IEnumerable<Message> GetMessagesBySpecialiteAndNiveau(int SpecialiteId, int Niveau, int pageIndex, int pageSize)
+        {
+            if (SpecialiteId <= 0 || _specialiteRepository.Get(SpecialiteId) == null || Niveau < 1 || Niveau > 3 || pageIndex <= 0 || pageSize <= 0)
+                return null;
+            return _messageRepository.GetMessagesBySpecialiteAndNiveau(SpecialiteId, Niveau, pageIndex, pageSize);
+        }
     }
 }

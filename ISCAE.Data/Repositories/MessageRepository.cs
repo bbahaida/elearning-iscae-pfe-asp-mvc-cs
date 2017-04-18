@@ -33,5 +33,18 @@ namespace ISCAE.Data.Repositories
                 return null;
             }
         }
+
+        public IEnumerable<Message> GetMessagesBySpecialiteAndNiveau(int SpecialiteId, int Niveau, int pageIndex, int pageSize)
+        {
+            try
+            {
+                return Context.Set<Message>().Where(o => o.SpecialiteId == SpecialiteId && o.Niveau == Niveau).OrderByDescending(o => o.MessageId).Skip((pageIndex - 1) * pageSize).Take(pageSize).AsEnumerable();
+            }
+            catch (Exception e)
+            {
+                //Logger.Error(e.Message);
+                return null;
+            }
+        }
     }
 }

@@ -91,7 +91,7 @@ namespace ISCAE.Web.Controllers
                 }
                 var titre = Path.GetFileNameWithoutExtension(document.FileName);
                 
-                var path = Path.Combine(Server.MapPath("~/Resources/Documents"),Path.GetFileName(document.FileName));
+                var path = "~/Resources/Documents/"+Path.GetFileName(document.FileName);
                 DocumentNonOfficiel documentNonOfficiel = new DocumentNonOfficiel
                 {
                     Titre = titre,
@@ -105,14 +105,14 @@ namespace ISCAE.Web.Controllers
                 };
                 documentNonOfficiel = _documentNonOfficielService.Add(documentNonOfficiel);
                 if(documentNonOfficiel != null)
-                    document.SaveAs(path);
+                    document.SaveAs(Path.Combine(Server.MapPath("~/Resources/Documents"), Path.GetFileName(document.FileName)));
             }
             return RedirectToAction("NonOfficiel","Document");
         }
         public FileResult Download(int documentId)
         {
             DocumentNonOfficiel document = _documentNonOfficielService.Get(documentId);
-            return File(AppDomain.CurrentDomain.BaseDirectory+"/Resources/Documents/"+document.Titre+"."+document.Type, System.Net.Mime.MediaTypeNames.Application.Octet,document.Titre+"."+document.Type);
+            return File(Server.MapPath(document.Emplacement), System.Net.Mime.MediaTypeNames.Application.Octet,document.Titre+"."+document.Type);
         }
     
     }

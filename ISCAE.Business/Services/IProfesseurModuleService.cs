@@ -10,7 +10,7 @@ namespace ISCAE.Business.Services
     public interface IProfesseurModuleService :ICommonService<ProfesseurModule>
     {
        
-        IEnumerable<ProfesseurModule> GetModylesByProfesseur(int ProfesseurId);
+        IEnumerable<ProfesseurModule> GetModulesByProfesseur(int ProfesseurId);
 
         IEnumerable<ProfesseurModule> GetProfesseursByModule(int ModuleId);
 

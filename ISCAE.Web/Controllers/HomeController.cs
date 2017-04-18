@@ -1,6 +1,5 @@
 ﻿using ISCAE.Business.Services;
 using ISCAE.Data;
-using ISCAE.Data.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +11,11 @@ namespace ISCAE.Web.Controllers
     public class HomeController : Controller
     {
         private IEtudiantService _etudiantService;
-
-        public HomeController(IEtudiantService etudiantService)
+        private INotificationService _notificationService;
+        public HomeController(IEtudiantService etudiantService, INotificationService notificationService)
         {
             _etudiantService = etudiantService;
+            _notificationService = notificationService;
         }
         // GET: Home
         public ActionResult Index()
@@ -36,6 +36,11 @@ namespace ISCAE.Web.Controllers
             if(user != null)
             {
                 Session["user"] = user;
+                // Notifications
+                List<Notification> notifications = _notificationService.GetUnreadNotifications(user.EtudiantId).ToList();
+                int notificationCount = notifications.Count();
+                Session["notifications"] = notifications;
+                Session["notificationCount"] = notificationCount;
                 return RedirectToAction("Index", "Etudiant");
             }
 
