@@ -182,6 +182,7 @@
     <Folder Include="Content\less\" />
     <Folder Include="Content\scss\" />
     <Folder Include="Models\" />
+    <Folder Include="Resources\Documents\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -219,6 +220,7 @@
     <Compile Include="Controllers\AnnonceController.cs" />
     <Compile Include="Controllers\DocumentController.cs" />
     <Compile Include="Controllers\EtudiantController.cs" />
+    <Compile Include="Controllers\FormationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -316,6 +318,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Profiles\bbahieda.jpg" />
     <Content Include="Scripts\app.js" />
     <Content Include="Scripts\app.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -349,6 +352,13 @@
     <Content Include="Views\Document\NonOfficiel.cshtml" />
     <Content Include="Views\Annonce\Index.cshtml" />
     <Content Include="Views\Message\Index.cshtml" />
+    <Content Include="Views\Formation\Index.cshtml" />
+    <Content Include="Views\Formation\Gestion.cshtml" />
+    <Content Include="Views\Formation\CLMT.cshtml" />
+    <Content Include="Views\Formation\Informatique.cshtml" />
+    <Content Include="Views\Formation\Economie.cshtml" />
+    <Content Include="Views\Document\Add.cshtml" />
+    <Content Include="Views\Document\AddEtudiant.cshtml" />
     <None Include="Views\Shared\_EtudiantLayout.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

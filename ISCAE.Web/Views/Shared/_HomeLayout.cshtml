@@ -1,40 +1,74 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>ISCAE | @ViewBag.Title</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>ISCAE</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     @Styles.Render("~/Content/home")
     @Scripts.Render("~/bundles/modernizr")
-</head>
-<body>
-    
-    @Html.Partial("_Navbar");
-    <div class="container-fluid">
-        @RenderBody()
-    </div>
-    <div class="container-fluid">
-        <div class="row">
-            <hr />
-            <footer class="col-sm-12 footer-basic-centered">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
 
-                <p class="footer-links">
-                    <a href="#">A Propos</a>
-                    ·
-                    <a href='@Url.Action("Directeur","Home")'>Mot du directeur</a>
-                    ·
-                    <a href="#">Partenaires</a>
-                    ·
-                    <a href="#">Notre offre</a>
-                    ·
-                    <a href="#">Contact</a>
-                </p>
-                <p class="footer-company-name">ISCAE Mauritanie &copy; @DateTime.Now.Year</p>
-                @Scripts.Render("~/bundles/jquery")
-                @Scripts.Render("~/bundles/bootstrap")
-                @RenderSection("scripts", required: false)
-            </footer>
+</head>
+<body class="hold-transition skin-green layout-top-nav">
+    <div class="wrapper">
+        @Html.Partial("_Navbar")
+        <div class="content-wrapper">
+            <div class="container">
+                <!-- Main content -->
+                <section class="content">
+                    @RenderBody()
+                </section>
+                <!-- /.content -->
+            </div>
+            <!-- /.container -->
         </div>
+        
+        <!-- /.content-wrapper -->
+        <footer class="main-footer">
+            <div class="container">
+                <strong>Copyright &copy; @DateTime.Now.Year ISCAE.</strong> All rights
+                reserved.
+            </div>
+            <!-- /.container -->
+        </footer>
     </div>
+    <!-- ./wrapper -->
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    @*<script type="text/javascript">
+        $(function () {
+            $("#login_form").on("submit", function (e) {
+                e.preventDefault();
+                $("#loading").addClass("fa fa-refresh fa-spin");
+                $("#connecter-btn").addClass("disabled");
+                $.ajax({
+                    url: this.action,
+                    type: this.method,
+                    data: { 'login' : $("#username").val(), 'password' : $("#password").val() },
+                    success: function (data) {
+                        $("#loading").removeClass("fa fa-refresh fa-spin");
+                        $("#loading").text = "Success";
+                        $("#connecter-btn").removeClass("disabled");
+                    },
+                    error: function () {
+                        $("#loading").removeClass("fa fa-refresh fa-spin");
+                        $("#loading").text = "Error";
+                        $("#connecter-btn").removeClass("disabled");
+                    }
+                    
+                });
+            });
+        });
+
+    </script>*@
+    
 </body>
 </html>

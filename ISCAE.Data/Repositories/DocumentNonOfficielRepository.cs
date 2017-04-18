@@ -15,7 +15,7 @@ namespace ISCAE.Data.Repositories
             }
             catch (Exception e)
             {
-                Logger.Error(e.Message);
+                //Logger.Error(e.Message);
                 return null;
             }
         }
@@ -28,7 +28,7 @@ namespace ISCAE.Data.Repositories
             }
             catch (Exception e)
             {
-                Logger.Error(e.Message);
+                //Logger.Error(e.Message);
                 return null;
             }
             
@@ -42,7 +42,20 @@ namespace ISCAE.Data.Repositories
             }
             catch (Exception e)
             {
-                Logger.Error(e.Message);
+                //Logger.Error(e.Message);
+                return null;
+            }
+        }
+
+        public IEnumerable<DocumentNonOfficiel> GetValidDocument(int pageIndex, int pageSize)
+        {
+            try
+            {
+                return Context.Set<DocumentNonOfficiel>().Where(o => o.isValid == 1).OrderByDescending(o => o.DocumentNonOfficielId).Skip((pageIndex - 1) * pageSize).Take(pageSize);
+            }
+            catch (Exception e)
+            {
+                //Logger.Error(e.Message);
                 return null;
             }
         }

@@ -13,7 +13,6 @@ namespace ISCAE.Business.Services
         Administrateur GetUserByLogin(string login);
         Administrateur GetUserByEmail(string email);
         Administrateur GetUserByTelephone(string telephone);
-        Administrateur GetUserByNNI(int NNI);
         IEnumerable<Administrateur> GetActiveUsers();
         IEnumerable<Administrateur> GetNonActiveUsers();
     }

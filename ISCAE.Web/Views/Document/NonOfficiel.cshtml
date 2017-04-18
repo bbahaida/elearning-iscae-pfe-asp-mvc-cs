@@ -1,7 +1,12 @@
-﻿
+﻿@model List<ISCAE.Data.DocumentNonOfficiel>
+@using ISCAE.Business.Services
+@using ISCAE.Data.Repositories
 @{
     ViewBag.Title = "Document > Non Officiel";
     Layout = "~/Views/Shared/_EtudiantLayout.cshtml";
+    IModuleService _moduleService = new ModuleService(new ModuleRepository());
+    IEtudiantService _etudiantService = new EtudiantService(new EtudiantRepository(),new SpecialiteRepository());
+    
 }
 
 <div class="row">
@@ -24,25 +29,31 @@
                             <tr>
                                 <th>Titre</th>
                                 <th>Module</th>
+                                <th>type</th>
                                 <th>Ajouter par</th>
+                                <th>Telechargement</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Call of Duty IV</td>
-                                <td><span class="label label-success">Shipped</span></td>
-                                <td>
-                                    <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Samsung Smart TV</td>
-                                <td><span class="label label-warning">Pending</span></td>
-                                <td>
-                                    <div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div>
-                                </td>
-                            </tr>
-
+                            @{
+                                if (Model.Count() > 0)
+                                {
+                                    foreach (ISCAE.Data.DocumentNonOfficiel document in Model)
+                                    {
+                                        <tr>
+                                            <td>@document.Titre</td>
+                                            <td><span class="label label-success">@_moduleService.Get(document.ModuleId).Designation</span></td>
+                                            <td>@document.Type</td>
+                                            <td>@_etudiantService.Get(document.EtudiantId).Nom</td>
+                                            <td><a href="@Url.Action("Download","Document",new { documentId = document.DocumentNonOfficielId })"><span class="fa fa-arrow-down"></span></a></td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr><td colspan="5">Pas de donnees</td></tr>
+                                }
+                            }
                         </tbody>
                     </table>
                 </div>
@@ -50,6 +61,7 @@
             </div>
             <!-- /.box-body -->
         </div>
+        
     </div>
     <div class="col-md-4">
         <!--Annonces-->

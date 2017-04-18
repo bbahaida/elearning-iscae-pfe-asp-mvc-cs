@@ -40,7 +40,7 @@ namespace ISCAE.Business.Services
 
         public Etudiant GetUserByAuth(string login, string password)
         {
-            if (login.Equals("") || password.Equals(""))
+            if (login.Equals("") || password.Equals("") || login == null || password == null)
                 return null;
             return _etudiantRepository.GetUserByAuth(login, password);
         }
@@ -66,9 +66,9 @@ namespace ISCAE.Business.Services
             return _etudiantRepository.GetUserByMatricule(matricule);
         }
 
-        public Etudiant GetUserByNNI(int NNI)
+        public Etudiant GetUserByNNI(string NNI)
         {
-            if (NNI < 1)
+            if (NNI.Equals(""))
                 return null;
             return _etudiantRepository.GetUserByNNI(NNI);
         }

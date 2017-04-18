@@ -43,13 +43,6 @@ namespace ISCAE.Business.Services
             return _administrateurRepository.GetUserByLogin(login);
         }
 
-        public Administrateur GetUserByNNI(int NNI)
-        {
-            if (NNI < 1)
-                return null;
-            return _administrateurRepository.GetUserByNNI(NNI);
-        }
-
         public Administrateur GetUserByTelephone(string telephone)
         {
             if (telephone.Equals(""))

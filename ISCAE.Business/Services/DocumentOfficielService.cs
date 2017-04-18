@@ -8,12 +8,12 @@ using ISCAE.Data.Repositories;
 
 namespace ISCAE.Business.Services
 {
-    public class DocumentOfficieService : CommonService<DocumentOfficiel>, IDocumentOfficieService
+    public class DocumentOfficielService : CommonService<DocumentOfficiel>, IDocumentOfficielService
     {
         private IDocumentOfficielRepository _documentOfficielRepository;
         private IProfesseurRepository _professeurRepository;
         private IModuleRepository _moduleRepository;
-        public DocumentOfficieService(IDocumentOfficielRepository repository, IProfesseurRepository professeurRepository, IModuleRepository moduleRepository) : base(repository)
+        public DocumentOfficielService(IDocumentOfficielRepository repository, IProfesseurRepository professeurRepository, IModuleRepository moduleRepository) : base(repository)
         {
             _documentOfficielRepository = repository;
             _professeurRepository = professeurRepository;

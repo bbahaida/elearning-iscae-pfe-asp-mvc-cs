@@ -8,7 +8,7 @@ using System.Linq.Expressions;
 
 namespace ISCAE.Business.Services
 {
-    public interface IDocumentOfficieService :ICommonService<DocumentOfficiel>
+    public interface IDocumentOfficielService :ICommonService<DocumentOfficiel>
     {
         IEnumerable<DocumentOfficiel> GetDocumentByUser(int ProfesseurId, int pageIndex, int pageSize);
         IEnumerable<DocumentOfficiel> GetDocumentByModule(int ModuleId, int pageIndex, int pageSize);

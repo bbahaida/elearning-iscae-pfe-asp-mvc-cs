@@ -14,7 +14,7 @@ namespace ISCAE.Data.Repositories
             }
             catch (Exception e)
             {
-                Logger.Error(e.Message);
+                //Logger.Error(e.Message);
                 return null;
             }
         }
@@ -27,7 +27,7 @@ namespace ISCAE.Data.Repositories
             }
             catch (Exception e)
             {
-                Logger.Error(e.Message);
+                //Logger.Error(e.Message);
                 return null;
             }
         }
@@ -40,7 +40,7 @@ namespace ISCAE.Data.Repositories
             }
             catch (Exception e)
             {
-                Logger.Error(e.Message);
+                //Logger.Error(e.Message);
                 return null;
             }
             
@@ -54,7 +54,7 @@ namespace ISCAE.Data.Repositories
             }
             catch (Exception e)
             {
-                Logger.Error(e.Message);
+                //Logger.Error(e.Message);
                 return null;
             }
             
@@ -68,7 +68,7 @@ namespace ISCAE.Data.Repositories
             }
             catch (Exception e)
             {
-                Logger.Error(e.Message);
+                //Logger.Error(e.Message);
                 return null;
             }
         }
@@ -81,7 +81,7 @@ namespace ISCAE.Data.Repositories
             }
             catch (Exception e)
             {
-                Logger.Error(e.Message);
+                //Logger.Error(e.Message);
                 return null;
             }
             

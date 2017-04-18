@@ -36,7 +36,11 @@ namespace ISCAE.Web
                       "~/Content/bootstrap.css"));
 
             bundles.Add(new StyleBundle("~/Content/home").Include(
-                      "~/Content/bootstrap.css",
+                      "~/Content/bootstrap.min.css",
+                      "~/Content/css/font-awesome.min.css",
+                      //ionIcons,
+                      "~/Content/AdminLTE.min.css",
+                      "~/Content/skins/_all-skins.min.css",
                       "~/Content/site.css"));
 
             //var fontAwesome = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css";

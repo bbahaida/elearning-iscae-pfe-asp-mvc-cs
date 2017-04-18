@@ -8,12 +8,12 @@ using ISCAE.Data.Repositories;
 
 namespace ISCAE.Business.Services
 {
-    public class DocumentNonOfficieService : CommonService<DocumentNonOfficiel>, IDocumentNonOfficieService
+    public class DocumentNonOfficielService : CommonService<DocumentNonOfficiel>, IDocumentNonOfficielService
     {
         private IDocumentNonOfficielRepository _documentNonOfficielRepository;
         private IEtudiantRepository _etudiantRepository;
         private IModuleRepository _moduleRepository;
-        public DocumentNonOfficieService(IDocumentNonOfficielRepository repository, IEtudiantRepository etudiantRepository, IModuleRepository moduleRepository) : base(repository)
+        public DocumentNonOfficielService(IDocumentNonOfficielRepository repository, IEtudiantRepository etudiantRepository, IModuleRepository moduleRepository) : base(repository)
         {
             _documentNonOfficielRepository = repository;
             _etudiantRepository = etudiantRepository;
@@ -39,6 +39,13 @@ namespace ISCAE.Business.Services
             if (pageIndex < 1 || pageSize < 1)
                 return null;
             return _documentNonOfficielRepository.GetNonValidDocument(pageIndex,pageSize);
+        }
+
+        public IEnumerable<DocumentNonOfficiel> GetValidDocument(int pageIndex, int pageSize)
+        {
+            if (pageIndex < 1 || pageSize < 1)
+                return null;
+            return _documentNonOfficielRepository.GetValidDocument(pageIndex, pageSize);
         }
     }
 }

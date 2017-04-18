@@ -13,7 +13,7 @@ namespace ISCAE.Data.Repositories
         Etudiant GetUserByMatricule(string matricule);
         Etudiant GetUserByEmail(string email);
         Etudiant GetUserByTelephone(string telephone);
-        Etudiant GetUserByNNI(int NNI);
+        Etudiant GetUserByNNI(string NNI);
         IEnumerable<Etudiant> GetActiveUsers();
         IEnumerable<Etudiant> GetNonActiveUsers();
         IEnumerable<Etudiant> GetEtudiantsBySpecialite(int SpecialiteId, int pageIndex, int pageSize, int Niveau);

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ISCAE.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,9 +10,13 @@ namespace ISCAE.Web.Controllers
     public class EtudiantController : Controller
     {
         // GET: Etudiant
+
         public ActionResult Index()
         {
-            return View();
+            if (Session["user"] == null)
+                RedirectToAction("Index","Home");
+            Etudiant user = (Etudiant)Session["user"];
+            return View(user);
         }
     }
 }
