@@ -24,6 +24,7 @@ namespace ISCAE.Web
             bundles.Add(new ScriptBundle("~/bundles/user").Include(
                       "~/Scripts/bootstrap.min.js",
                       "~/Scripts/fastclick.js",
+                      "~/Scripts/respond.js",
                       "~/Scripts/app.min.js",
                       "~/Scripts/jquery.sparkline.min.js",
                       "~/Content/datatables/jquery.dataTables.min.js",

@@ -11,16 +11,7 @@
             <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li><a href='@Url.Action("Index","Home")'>Accueil</a></li>
-
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Formations <span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href='@Url.Action("Gestion","Formation")'>Gestion</a></li>
-                            <li><a href='@Url.Action("CLMT","Formation")'>CLMT</a></li>
-                            <li><a href='@Url.Action("Informatique","Formation")'>Informatique</a></li>
-                            <li><a href='@Url.Action("Economie","Formation")'>Economie</a></li>
-                        </ul>
-                    </li>
+                    <li><a href='@Url.Action("Formations","Home")'>Formations</a></li>
                     <li><a href='@Url.Action("Professeurs","Home")'>Professeurs</a></li>
                     <li><a href='@Url.Action("Etudiants","Home")'>Etudiants</a></li>
                     <li><a href='@Url.Action("Avis","Home")'>Avis</a></li>

@@ -12,10 +12,17 @@ namespace ISCAE.Web.Controllers
     {
         private IEtudiantService _etudiantService;
         private INotificationService _notificationService;
-        public HomeController(IEtudiantService etudiantService, INotificationService notificationService)
+        private ISpecialiteService _specialiteService;
+        private IProfesseurService _professeurService;
+        private IProfesseurSpecialiteService _professeurSpecialiteService;
+        public HomeController(IEtudiantService etudiantService, INotificationService notificationService,
+                ISpecialiteService specialiteService, IProfesseurService professeurService, IProfesseurSpecialiteService professeurSpecialiteService)
         {
             _etudiantService = etudiantService;
             _notificationService = notificationService;
+            _specialiteService = specialiteService;
+            _professeurService = professeurService;
+            _professeurSpecialiteService = professeurSpecialiteService;
         }
         // GET: Home
         public ActionResult Index()
@@ -41,14 +48,29 @@ namespace ISCAE.Web.Controllers
                 int notificationCount = notifications.Count();
                 Session["notifications"] = notifications;
                 Session["notificationCount"] = notificationCount;
+                Session["specialite"] = _specialiteService.Get(user.SpecialiteId).Designation;
                 return RedirectToAction("Index", "Etudiant");
             }
 
             return View("Index");
         }
-        public new RedirectToRouteResult RedirectToAction(string action, string controller)
+        public ActionResult Avis()
         {
-            return base.RedirectToAction(action, controller);
+            return View();
+        }
+        public ActionResult Formations()
+        {
+            return View();
+        }
+        public ActionResult Etudiants()
+        {
+            return View();
+        }
+        public ActionResult Professeurs()
+        {
+            ViewBag.Professeurs = _professeurService.GetActiveUsers().ToList();
+            ViewBag.Specialites = _specialiteService.GetAll().ToList();
+            return View(_professeurSpecialiteService.GetAll());
         }
     }
 }

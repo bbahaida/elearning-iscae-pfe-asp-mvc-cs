@@ -48,7 +48,7 @@
                                                 </a>
                                                 <span class="product-description">
                                                     @etudiants.Find(o=> o.EtudiantId == question.EtudiantId).Nom
-                                                    <span class="label label-warning pull-right">@question.DateQuestion</span>
+                                                    <span class="label label-warning pull-right">@String.Format("{0:dd-MM-yyyy} à {0:H:mm}",question.DateQuestion)</span>
                                                 </span>
                                             </div>
                                         </li>

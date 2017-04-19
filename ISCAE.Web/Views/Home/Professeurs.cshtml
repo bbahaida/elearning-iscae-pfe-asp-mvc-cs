@@ -1,0 +1,50 @@
+﻿@model IEnumerable<ISCAE.Data.ProfesseurSpecialite>
+@{
+    ViewBag.Title = "Professeurs";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+    List<ISCAE.Data.Professeur> Professeurs = (List<ISCAE.Data.Professeur>)ViewBag.Professeurs;
+    List<ISCAE.Data.Specialite> Specialites = (List<ISCAE.Data.Specialite>)ViewBag.Specialites;
+}
+@{ 
+    foreach (ISCAE.Data.Specialite specialite in Specialites)
+    {
+
+    }
+}
+<div class="row">
+    <!-- Left col -->
+    <div class="col-md-4">
+        <div class="box box-success">
+            <div class="box-header with-border">
+                <h3 class="box-title">Professeurs</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- /.box-header -->
+
+            <div class="box-footer no-padding">
+                <ul class="nav nav-pills nav-stacked">
+                    @{
+                        if (Model.Count() > 0)
+                        {
+                            foreach (ISCAE.Data.ProfesseurSpecialite professeur in Model)
+                            {
+                                <li>
+                                    <a href="javascript:void(0)">
+                                        @professeur.Professeur.Nom @professeur.Specialite.Designation
+                                    </a>
+                                </li>
+                            }
+                        }
+                    }
+                    
+                </ul>
+            </div>
+            <!-- /.footer -->
+        </div>
+        <!-- /.box -->
+    </div>
+</div>

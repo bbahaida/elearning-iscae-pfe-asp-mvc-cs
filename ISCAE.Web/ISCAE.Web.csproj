@@ -237,7 +237,6 @@
     <Compile Include="Controllers\AnnonceController.cs" />
     <Compile Include="Controllers\DocumentController.cs" />
     <Compile Include="Controllers\EtudiantController.cs" />
-    <Compile Include="Controllers\FormationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Filters\SessionFilter.cs" />
@@ -374,14 +373,12 @@
     <Content Include="Views\Document\NonOfficiel.cshtml" />
     <Content Include="Views\Annonce\Index.cshtml" />
     <Content Include="Views\Message\Index.cshtml" />
-    <Content Include="Views\Formation\Index.cshtml" />
-    <Content Include="Views\Formation\Gestion.cshtml" />
-    <Content Include="Views\Formation\CLMT.cshtml" />
-    <Content Include="Views\Formation\Informatique.cshtml" />
-    <Content Include="Views\Formation\Economie.cshtml" />
     <Content Include="Views\Document\Add.cshtml" />
     <Content Include="Views\Document\AddEtudiant.cshtml" />
     <Content Include="Views\Annonce\Avis.cshtml" />
+    <Content Include="Views\Home\Avis.cshtml" />
+    <Content Include="Views\Home\Formations.cshtml" />
+    <Content Include="Views\Home\Professeurs.cshtml" />
     <None Include="Views\Shared\_EtudiantLayout.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
