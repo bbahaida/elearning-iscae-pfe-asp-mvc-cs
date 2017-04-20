@@ -46,7 +46,14 @@ namespace ISCAE.Web.Controllers
             var admin = _administrateurService.GetUserByAuth(login, password);
             if(admin != null)
             {
-                // Admin
+                Session["user"] = admin;
+                // Notifications
+                List<Notification> notifications = _notificationService.GetUnreadNotifications(admin.AdministrateurId).ToList();
+                int notificationCount = notifications.Count();
+                Session["notifications"] = notifications;
+                Session["notificationCount"] = notificationCount;
+             
+                return RedirectToAction("index","Administrateur");
             }
             else
             {

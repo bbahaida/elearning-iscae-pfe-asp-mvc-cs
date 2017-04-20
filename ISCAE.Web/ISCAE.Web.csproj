@@ -235,6 +235,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\AdministrateurController.cs" />
     <Compile Include="Controllers\AnnonceController.cs" />
     <Compile Include="Controllers\DiscussionController.cs" />
     <Compile Include="Controllers\DocumentController.cs" />
@@ -396,6 +397,8 @@
     <Content Include="Views\Message\MessageEtudiant.cshtml" />
     <Content Include="Views\Message\Boites.cshtml" />
     <Content Include="Views\Message\ReadEtudiant.cshtml" />
+    <Content Include="Views\Shared\_AdministrateurLayout .cshtml" />
+    <Content Include="Views\Administrateur\index.cshtml" />
     <None Include="Views\Shared\_EtudiantLayout.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
