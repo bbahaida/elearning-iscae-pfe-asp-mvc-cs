@@ -17,7 +17,7 @@ namespace ISCAE.Business.Services
         Etudiant GetUserByNNI(string NNI);
         IEnumerable<Etudiant> GetActiveUsers();
         IEnumerable<Etudiant> GetNonActiveUsers();
-        IEnumerable<Etudiant> GetEtudiantsBySpecialite(int SpecialiteId, int pageIndex, int pageSize, int Niveau);
-        IEnumerable<Etudiant> GetEtudiantsByNiveau(int Niveau, int pageIndex, int pageSize);
+        IEnumerable<Etudiant> GetEtudiantsBySpecialite(int SpecialiteId, int Niveau);
+        IEnumerable<Etudiant> GetEtudiantsByNiveau(int Niveau);
     }
 }

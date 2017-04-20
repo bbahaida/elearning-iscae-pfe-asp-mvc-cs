@@ -7,11 +7,11 @@ namespace ISCAE.Data.Repositories
     public class EtudiantRepository : Repository<IscaeEntities, Etudiant>, IEtudiantRepository
     {
         
-        public IEnumerable<Etudiant> GetEtudiantsByNiveau(int Niveau, int pageIndex, int pageSize)
+        public IEnumerable<Etudiant> GetEtudiantsByNiveau(int Niveau)
         {
             try
             {
-                return Context.Set<Etudiant>().Where(o => o.Niveau == Niveau).OrderBy(o => o.Matricule).Skip((pageIndex - 1) * pageSize).Take(pageSize);
+                return Context.Set<Etudiant>().Where(o => o.Niveau == Niveau).OrderBy(o => o.Matricule);
             }
             catch (Exception e)
             {
@@ -20,11 +20,11 @@ namespace ISCAE.Data.Repositories
             }
         }
 
-        public IEnumerable<Etudiant> GetEtudiantsBySpecialite(int SpecialiteId, int pageIndex, int pageSize, int Niveau)
+        public IEnumerable<Etudiant> GetEtudiantsBySpecialite(int SpecialiteId, int Niveau)
         {
             try
             {
-                return Context.Set<Etudiant>().Where(o => o.SpecialiteId == SpecialiteId && o.Niveau == Niveau).OrderBy(o => o.Matricule).Skip((pageIndex - 1) * pageSize).Take(pageSize);
+                return Context.Set<Etudiant>().Where(o => o.SpecialiteId == SpecialiteId && o.Niveau == Niveau).OrderBy(o => o.Matricule);
             }
             catch (Exception e)
             {

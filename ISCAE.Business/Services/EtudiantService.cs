@@ -19,18 +19,18 @@ namespace ISCAE.Business.Services
             return _etudiantRepository.GetActiveUsers();
         }
 
-        public IEnumerable<Etudiant> GetEtudiantsByNiveau(int Niveau, int pageIndex, int pageSize)
+        public IEnumerable<Etudiant> GetEtudiantsByNiveau(int Niveau)
         {
-            if (Niveau <= 0 || Niveau > 3 || pageIndex <= 0 || pageSize <= 0)
+            if (Niveau <= 0 || Niveau > 3)
                 return null;
-            return _etudiantRepository.GetEtudiantsByNiveau(Niveau,pageIndex,pageSize);
+            return _etudiantRepository.GetEtudiantsByNiveau(Niveau);
         }
 
-        public IEnumerable<Etudiant> GetEtudiantsBySpecialite(int SpecialiteId, int pageIndex, int pageSize, int Niveau)
+        public IEnumerable<Etudiant> GetEtudiantsBySpecialite(int SpecialiteId, int Niveau)
         {
-            if (SpecialiteId<=0 || _specialiteRepository.Get(SpecialiteId) == null || Niveau <= 0 || Niveau > 3 || pageIndex <= 0 || pageSize <= 0)
+            if (SpecialiteId<=0 || _specialiteRepository.Get(SpecialiteId) == null || Niveau <= 0 || Niveau > 3)
                 return null;
-            return _etudiantRepository.GetEtudiantsBySpecialite(SpecialiteId, pageIndex, pageSize,Niveau);
+            return _etudiantRepository.GetEtudiantsBySpecialite(SpecialiteId, Niveau);
         }
 
         public IEnumerable<Etudiant> GetNonActiveUsers()

@@ -1,5 +1,6 @@
 ﻿using ISCAE.Business.Services;
 using ISCAE.Data;
+using ISCAE.Web.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +16,12 @@ namespace ISCAE.Web.Controllers
         private ISpecialiteService _specialiteService;
         private IProfesseurService _professeurService;
         private IProfesseurSpecialiteService _professeurSpecialiteService;
+        private IAdministrateurService _administrateurService;
         public HomeController(IEtudiantService etudiantService, INotificationService notificationService,
-                ISpecialiteService specialiteService, IProfesseurService professeurService, IProfesseurSpecialiteService professeurSpecialiteService)
+                ISpecialiteService specialiteService, IProfesseurService professeurService, 
+                IAdministrateurService administrateurService, IProfesseurSpecialiteService professeurSpecialiteService)
         {
+            _administrateurService = administrateurService;
             _etudiantService = etudiantService;
             _notificationService = notificationService;
             _specialiteService = specialiteService;
@@ -39,18 +43,40 @@ namespace ISCAE.Web.Controllers
         [HttpPost]
         public ActionResult Login(string login, string password)
         {
-            var user = _etudiantService.GetUserByAuth(login,password);
-            if(user != null)
+            var admin = _administrateurService.GetUserByAuth(login, password);
+            if(admin != null)
             {
-                Session["user"] = user;
-                // Notifications
-                List<Notification> notifications = _notificationService.GetUnreadNotifications(user.EtudiantId).ToList();
-                int notificationCount = notifications.Count();
-                Session["notifications"] = notifications;
-                Session["notificationCount"] = notificationCount;
-                Session["specialite"] = _specialiteService.Get(user.SpecialiteId).Designation;
-                return RedirectToAction("Index", "Etudiant");
+                // Admin
             }
+            else
+            {
+                var prof = _professeurService.GetUserByAuth(login, password);
+                if(prof != null)
+                {
+                    Session["user"] = prof;
+                    // Notifications
+                    List<Notification> notifications = _notificationService.GetUnreadNotifications(prof.ProfesseurId).ToList();
+                    int notificationCount = notifications.Count();
+                    Session["notifications"] = notifications;
+                    Session["notificationCount"] = notificationCount;
+                    return RedirectToAction("Index", "Professeur");
+                }
+                else
+                {
+                    var etudiant = _etudiantService.GetUserByAuth(login,password);
+                    if (etudiant != null)
+                    {
+                        Session["user"] = etudiant;
+                        List<Notification> notifications = _notificationService.GetUnreadNotifications(etudiant.EtudiantId).ToList();
+                        int notificationCount = notifications.Count();
+                        Session["notifications"] = notifications;
+                        Session["notificationCount"] = notificationCount;
+                        Session["specialite"] = _specialiteService.Get(etudiant.SpecialiteId).Designation;
+                        return RedirectToAction("Index", "Etudiant");
+                    }
+                }
+            }
+            
 
             return View("Index");
         }
@@ -71,6 +97,12 @@ namespace ISCAE.Web.Controllers
             ViewBag.Professeurs = _professeurService.GetActiveUsers().ToList();
             ViewBag.Specialites = _specialiteService.GetAll().ToList();
             return View(_professeurSpecialiteService.GetAll());
+        }
+        [SessionFilter()]
+        public ActionResult Logout()
+        {
+            Session.Clear();
+            return RedirectToAction("Index","Home");
         }
     }
 }

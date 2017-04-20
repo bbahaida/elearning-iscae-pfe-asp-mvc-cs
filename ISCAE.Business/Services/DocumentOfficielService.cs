@@ -20,17 +20,21 @@ namespace ISCAE.Business.Services
             _moduleRepository = moduleRepository;
         }
 
-        public IEnumerable<DocumentOfficiel> GetDocumentByModule(int ModuleId, int pageIndex, int pageSize)
+        public IEnumerable<DocumentOfficiel> GetDocumentsByModule(int ModuleId, int pageIndex, int pageSize)
         {
-            if (ModuleId < 1 || _moduleRepository.Get(ModuleId) == null || pageIndex < 1 || pageSize < 1)
+            if (ModuleId < 1 || _moduleRepository.Get(ModuleId) == null || pageIndex < 0 || pageSize < 0)
                 return null;
+            if (pageIndex == 0 && pageSize == 0)
+                return _documentOfficielRepository.GetAll().Where(o => o.ModuleId == ModuleId);
             return _documentOfficielRepository.GetDocumentByModule(ModuleId, pageIndex, pageSize);
         }
 
-        public IEnumerable<DocumentOfficiel> GetDocumentByUser(int ProfesseurId, int pageIndex, int pageSize)
+        public IEnumerable<DocumentOfficiel> GetDocumentsByUser(int ProfesseurId, int pageIndex, int pageSize)
         {
             if (ProfesseurId < 1 || _professeurRepository.Get(ProfesseurId) == null || pageIndex < 1 || pageSize < 1)
                 return null;
+            if (pageIndex == 0 && pageSize == 0)
+                return _documentOfficielRepository.GetAll().Where(o => o.ProfesseurId == ProfesseurId);
             return _documentOfficielRepository.GetDocumentByUser(ProfesseurId, pageIndex, pageSize);
         }
     }

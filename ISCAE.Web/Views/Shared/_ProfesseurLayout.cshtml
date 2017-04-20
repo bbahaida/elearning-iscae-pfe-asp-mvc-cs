@@ -1,9 +1,9 @@
 ﻿@using ISCAE.Data;
 @{
-    Etudiant user = ((Etudiant)Session["user"]);
+    Professeur user = ((Professeur)Session["user"]);
     List<Notification> notifications = (List<Notification>)Session["notifications"];
     int notificationCount = (int)Session["notificationCount"];
-    int messageCount = (int)Session["messageCount"];
+  
  }
 <!DOCTYPE html>
 <html>
@@ -23,11 +23,11 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 </head>
-<body class="hold-transition skin-green-light sidebar-mini">
+<body class="hold-transition skin-green sidebar-mini">
     <div class="wrapper">
         <header class="main-header">
             <!-- Logo -->
-            <a href='@Url.Action("Index","Home")' class="logo">
+            <a href='@Url.Action("Index","Professeur")' class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini">ISCAE</span>
                 <!-- logo for regular state and mobile devices -->
@@ -124,7 +124,7 @@
                     <li class="user-header">
                         <img src="@Url.Content(user.ProfilePath)" class="img-circle" alt="User Image">
                         <p>
-                            @user.Nom - @Session["specialite"]
+                           Professeur @user.Nom 
                         </p>
                     </li>
 
@@ -205,9 +205,6 @@
                     <li>
                         <a href='@Url.Action("Index","Message")'>
                             <i class="fa fa-envelope"></i> <span>Messages</span>
-                            <span class="pull-right-container">
-                                <small class="label pull-right bg-red">@messageCount</small>
-                            </span>
                         </a>
                     </li>
                 </ul>

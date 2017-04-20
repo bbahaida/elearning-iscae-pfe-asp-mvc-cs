@@ -1,6 +1,5 @@
 ﻿using ISCAE.Business.Services;
 using ISCAE.Data;
-using ISCAE.Data.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,14 +18,21 @@ namespace ISCAE.Web.Controllers
         private ISpecialiteModuleService _specialiteModuleService;
         private IModuleService _moduleService;
         private IEtudiantService _etudiantService;
+        private IProfesseurSpecialiteService _professeurSpecialiteService;
+        private ISpecialiteService _specialiteService;
+        private IProfesseurService _professeurService;
         public DocumentController(IDocumentNonOfficielService documentNonOfficielService, IDocumentOfficielService documentOfficielService,
-            ISpecialiteModuleService specialiteModuleService, IModuleService moduleService, IEtudiantService etudiantService)
+            ISpecialiteModuleService specialiteModuleService, IModuleService moduleService, IEtudiantService etudiantService,
+            IProfesseurSpecialiteService professeurSpecialiteService, ISpecialiteService specialiteService, IProfesseurService professeurService)
         {
             _documentNonOfficielService = documentNonOfficielService;
             _documentOfficielService = documentOfficielService;
             _specialiteModuleService = specialiteModuleService;
             _moduleService = moduleService;
             _etudiantService = etudiantService;
+            _professeurSpecialiteService = professeurSpecialiteService;
+            _specialiteService = specialiteService;
+            _professeurService = professeurService;
         }
 
         // GET: Document
@@ -36,18 +42,39 @@ namespace ISCAE.Web.Controllers
         }
         public ActionResult Officiel()
         {
-            
-            List<DocumentOfficiel> documents = _documentOfficielService.GetAll().OrderBy(o=>o.DocumentOfficielId).Take(10).ToList();
-            var data = _specialiteModuleService.GetSpecialiteModulesByNiveau(((Etudiant)Session["user"]).SpecialiteId, ((Etudiant)Session["user"]).Niveau);
-            List<Module> modules = new List<Module>();
-            foreach (SpecialiteModule sm in data)
+            if(Session["user"] is Etudiant)
             {
-                modules.Add(_moduleService.Get(sm.ModuleId));
+                List<DocumentOfficiel> documents = _documentOfficielService.GetAll().OrderBy(o => o.DocumentOfficielId).Take(10).ToList();
+                var data = _specialiteModuleService.GetSpecialiteModulesByNiveau(((Etudiant)Session["user"]).SpecialiteId, ((Etudiant)Session["user"]).Niveau);
+                List<Module> modules = new List<Module>();
+                foreach (SpecialiteModule sm in data)
+                {
+                    modules.Add(_moduleService.Get(sm.ModuleId));
+                }
+                ViewBag.Modules = modules;
+                ViewBag.ModuleService = _moduleService;
+                ViewBag.Professeurs = _etudiantService;
+                return View(documents);
+                
             }
-            ViewBag.Modules = modules;
-            ViewBag.ModuleService = _moduleService;
-            ViewBag.Professeurs = _etudiantService;
-            return View(documents);
+            else if (Session["user"] is Professeur)
+            {
+                var user = (Professeur)Session["user"];
+                List<ProfesseurSpecialite> ps = _professeurSpecialiteService.GetSpecialitesByProfesseur(user.ProfesseurId).ToList();
+                List<Specialite> sp = new List<Specialite>();
+                foreach (ProfesseurSpecialite s in ps)
+                {
+                    sp.Add(_specialiteService.Get(s.SpecialiteId));
+                }
+                List<DocumentOfficiel> documents = _documentOfficielService.GetDocumentsByUser(user.ProfesseurId,0,0).ToList();
+                return View(documents);
+            }
+            else 
+            {
+                
+            }
+
+            return null;
         }
         public ActionResult NonOfficiel()
         {
@@ -60,8 +87,7 @@ namespace ISCAE.Web.Controllers
                 modules.Add(_moduleService.Get(sm.ModuleId));
             }
             ViewBag.Modules = modules;
-            ViewBag.ModuleService = _moduleService;
-            ViewBag.EtudiantService = _etudiantService;
+            ViewBag.Etudiants = _etudiantService.GetEtudiantsBySpecialite(((Etudiant)Session["user"]).SpecialiteId, ((Etudiant)Session["user"]).Niveau).ToList();
             return View(documents);
         }
         public ActionResult Add()

@@ -10,8 +10,8 @@ namespace ISCAE.Business.Services
 {
     public interface IDocumentOfficielService :ICommonService<DocumentOfficiel>
     {
-        IEnumerable<DocumentOfficiel> GetDocumentByUser(int ProfesseurId, int pageIndex, int pageSize);
-        IEnumerable<DocumentOfficiel> GetDocumentByModule(int ModuleId, int pageIndex, int pageSize);
+        IEnumerable<DocumentOfficiel> GetDocumentsByUser(int ProfesseurId, int pageIndex, int pageSize);
+        IEnumerable<DocumentOfficiel> GetDocumentsByModule(int ModuleId, int pageIndex, int pageSize);
 
     }
 }

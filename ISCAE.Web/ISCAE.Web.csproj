@@ -239,6 +239,7 @@
     <Compile Include="Controllers\EtudiantController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MessageController.cs" />
+    <Compile Include="Controllers\ProfesseurController.cs" />
     <Compile Include="Filters\SessionFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -379,6 +380,9 @@
     <Content Include="Views\Home\Avis.cshtml" />
     <Content Include="Views\Home\Formations.cshtml" />
     <Content Include="Views\Home\Professeurs.cshtml" />
+    <Content Include="Views\Shared\_ProfesseurLayout.cshtml" />
+    <Content Include="Views\Professeur\Index.cshtml" />
+    <Content Include="Views\Document\NonOfficielEtudiant.cshtml" />
     <None Include="Views\Shared\_EtudiantLayout.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
