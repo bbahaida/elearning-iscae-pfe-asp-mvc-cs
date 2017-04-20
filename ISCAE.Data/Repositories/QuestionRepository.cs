@@ -20,5 +20,18 @@ namespace ISCAE.Data.Repositories
                 return null;
             }
         }
+
+        public IEnumerable<Question> GetQuestionsBySpecialite(int SpecialiteId, int Niveau)
+        {
+            try
+            {
+                return Context.Set<Question>().Where(o => o.Etudiant.SpecialiteId == SpecialiteId && o.Etudiant.Niveau == Niveau).OrderByDescending(o => o.QuestionId);
+            }
+            catch (Exception e)
+            {
+                //Logger.Error(e.Message);
+                return null;
+            }
+        }
     }
 }

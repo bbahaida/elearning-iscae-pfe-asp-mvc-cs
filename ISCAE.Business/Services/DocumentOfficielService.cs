@@ -31,7 +31,7 @@ namespace ISCAE.Business.Services
 
         public IEnumerable<DocumentOfficiel> GetDocumentsByUser(int ProfesseurId, int pageIndex, int pageSize)
         {
-            if (ProfesseurId < 1 || _professeurRepository.Get(ProfesseurId) == null || pageIndex < 1 || pageSize < 1)
+            if (ProfesseurId < 1 || _professeurRepository.Get(ProfesseurId) == null || pageIndex < 0 || pageSize < 0)
                 return null;
             if (pageIndex == 0 && pageSize == 0)
                 return _documentOfficielRepository.GetAll().Where(o => o.ProfesseurId == ProfesseurId);

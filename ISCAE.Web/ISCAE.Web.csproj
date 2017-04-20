@@ -199,6 +199,7 @@
     <Folder Include="Content\scss\" />
     <Folder Include="Models\" />
     <Folder Include="Resources\Documents\" />
+    <Folder Include="Views\Emploi\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -235,11 +236,15 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AnnonceController.cs" />
+    <Compile Include="Controllers\DiscussionController.cs" />
     <Compile Include="Controllers\DocumentController.cs" />
+    <Compile Include="Controllers\EmploiController.cs" />
     <Compile Include="Controllers\EtudiantController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\ProfesseurController.cs" />
+    <Compile Include="Filters\AdministrateurFilter.cs" />
+    <Compile Include="Filters\EtudiantFilter.cs" />
     <Compile Include="Filters\SessionFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -383,6 +388,14 @@
     <Content Include="Views\Shared\_ProfesseurLayout.cshtml" />
     <Content Include="Views\Professeur\Index.cshtml" />
     <Content Include="Views\Document\NonOfficielEtudiant.cshtml" />
+    <Content Include="Views\Document\NonOfficielProfesseur.cshtml" />
+    <Content Include="Views\Document\OfficielProfesseur.cshtml" />
+    <Content Include="Views\Document\OfficielEtudiant.cshtml" />
+    <Content Include="Views\Discussion\Index.cshtml" />
+    <Content Include="Views\Discussion\Discussion.cshtml" />
+    <Content Include="Views\Message\MessageEtudiant.cshtml" />
+    <Content Include="Views\Message\Boites.cshtml" />
+    <Content Include="Views\Message\ReadEtudiant.cshtml" />
     <None Include="Views\Shared\_EtudiantLayout.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

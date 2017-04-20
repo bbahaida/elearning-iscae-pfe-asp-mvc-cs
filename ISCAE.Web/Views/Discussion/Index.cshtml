@@ -1,0 +1,96 @@
+﻿@model List<Question>
+@using ISCAE.Data
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_EtudiantLayout.cshtml";
+    List<Etudiant> etudiants =  ViewBag.etudiants;
+}
+
+
+<div class="row">
+    <!-- left column -->
+    <div class="col-md-8">
+        <!-- general form elements -->
+        <div class="box box-success">
+            <div class="box-header with-border">
+                <h3 class="box-title">Ajouter un nouveau</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            @using (Html.BeginForm("Add", "Discussion", FormMethod.Post, new { @id = "add-question" }))
+            {
+                <div class="box-body">
+
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="titre" name="titre" placeholder="Titre"/>
+                        <p class="help-block"></p>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" rows="3" id="contenu" name="contenu" placeholder="Votre Question"></textarea>
+                    </div>
+
+                </div>
+                <!-- /.box-body -->
+                                <div class="box-footer">
+                                    <button type="submit" class="btn btn-success">Ajouter</button>
+                                </div>
+                                }
+        </div>
+        <!-- /.box -->
+        <div class="box box-success">
+            <div class="box-header with-border">
+                <h3 class="box-title">Discussions</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <ul class="products-list product-list-in-box">
+                    @{
+                        if (Model.Count > 0)
+                        {
+                            foreach (Question question in Model)
+                            {
+                                <li class="item">
+                                    <div class="product-img">
+                                        <img src="@Url.Content(etudiants.Find(o=>o.EtudiantId == question.EtudiantId).ProfilePath)" alt="Product Image">
+                                    </div>
+                                    <div class="product-info">
+                                        <a href="@Url.Action("Discussion","Discussion",new { id = question.QuestionId})" class="product-title">
+                                            @question.Titre
+
+                                        </a>
+                                        <span class="product-description">
+                                            @etudiants.Find(o => o.EtudiantId == question.EtudiantId).Nom
+                                            <span class="label label-warning pull-right">@String.Format("{0:dd-MM-yyyy} à {0:H:mm}", question.DateQuestion)</span>
+                                        </span>
+                                    </div>
+                                </li>
+                            <!-- /.item -->
+                            }
+                        }
+                        else
+                        {
+                            <li>Pas de discussion</li>
+                        }
+                    }
+
+                </ul>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer text-center">
+                <a href="javascript:void(0)" class="uppercase text-green">Afficher tous</a>
+            </div>
+            <!-- /.box-footer -->
+        </div>
+        <!-- /.box -->
+    </div>
+</div>

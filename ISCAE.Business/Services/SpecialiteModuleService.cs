@@ -24,5 +24,12 @@ namespace ISCAE.Business.Services
                 return null;
             return _specialiteModuleRepository.GetSpecialiteModulesByNiveau(SpecialiteId,Niveau);
         }
+
+        public IEnumerable<SpecialiteModule> GetSpecialiteModulesBySpecialite(int SpecialiteId)
+        {
+            if (SpecialiteId < 1 || _specialiteRepository.Get(SpecialiteId) == null)
+                return null;
+            return _specialiteModuleRepository.GetSpecialiteModulesBySpecialite(SpecialiteId);
+        }
     }
 }

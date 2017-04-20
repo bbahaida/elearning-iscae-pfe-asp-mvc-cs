@@ -20,5 +20,18 @@ namespace ISCAE.Data.Repositories
                 return null;
             }
         }
+
+        public IEnumerable<SpecialiteModule> GetSpecialiteModulesBySpecialite(int SpecialiteId)
+        {
+            try
+            {
+                return Context.Set<SpecialiteModule>().Where(o => o.SpecialiteId == SpecialiteId);
+            }
+            catch (Exception e)
+            {
+                //Logger.Error(e.Message);
+                return null;
+            }
+        }
     }
 }

@@ -9,5 +9,6 @@ namespace ISCAE.Data.Repositories
     public interface ISpecialiteModuleRepository : IRepository<SpecialiteModule>
     {
         IEnumerable<SpecialiteModule> GetSpecialiteModulesByNiveau(int SpecialiteId, int Niveau);
+        IEnumerable<SpecialiteModule> GetSpecialiteModulesBySpecialite(int SpecialiteId);
     }
 }

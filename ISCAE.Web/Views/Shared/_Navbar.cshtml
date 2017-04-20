@@ -16,23 +16,23 @@
                     <li><a href='@Url.Action("Etudiants","Home")'>Etudiants</a></li>
                     <li><a href='@Url.Action("Avis","Home")'>Avis</a></li>
                     <li id="login" class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Login <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-user"></span> Login <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
                             @using (Html.BeginForm("Login", "Home", FormMethod.Post, new { @id = "login_form" }))
                             {
                                 <li>
-                                    <div class="form-group">
+                                    <div class="col-xs-pull-1 col-xs-push-1 col-xs-10 form-group">
                                         <input type="text" class="form-control" id="username" name="login" placeholder="Username">
                                     </div>
                                 </li>
                                 <li>
-                                    <div class="form-group">
+                                    <div class="col-xs-pull-1 col-xs-push-1 col-xs-10 form-group">
                                         <input type="password" class="form-control" id="password" name="password" placeholder="Mot de passe">
                                     </div>
                                 </li>
                                 <li>
-                                    <div class="checkbox">
-                                        <label>
+                                    <div class="col-xs-pull-1 col-xs-push-1 col-xs-10 checkbox">
+                                        <label style="color:white">
                                             <input type="checkbox"> Remember me
                                         </label>
                                     </div>
@@ -42,11 +42,11 @@
                                     <li>
                                         <div class="row">
                                             <div class="col-xs-push-1 col-xs-3">
-                                                <a href="#" class="btn btn-success btn-flat">Registre</a>
+                                                <button href="#" class="btn btn-default btn-flat">Registre</button>
                                             </div>
-                                            <div class="pull-right col-xs-offset-4 col-xs-pull-1 col-xs-3">
+                                            <div class="pull-right col-xs-offset-3 col-xs-pull-2 col-xs-3">
                                                 <i class="" id="loading"></i>
-                                                <input type="submit" id="connecter-btn" class="btn btn-success btn-flat" value="Connecter" />
+                                                <input type="submit" id="connecter-btn" class="btn btn-default btn-flat" value="Connecter" />
                                             </div>
                                         </div>
                                     </li>
@@ -72,7 +72,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
 
                             <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                            <span class="hidden-xs">Login</span>
+                            <span class="hidden-xs"><span class="fa fa-user"></span> Login</span>
                         </a>
                        
                             <ul class="dropdown-menu">

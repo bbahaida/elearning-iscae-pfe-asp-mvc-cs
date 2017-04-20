@@ -1,7 +1,16 @@
 ﻿@using ISCAE.Data
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_EtudiantLayout.cshtml";
+    if(Session["user"] is Etudiant)
+    {
+        Layout = "~/Views/Shared/_EtudiantLayout.cshtml";
+    }
+    else if (Session["user"] is Professeur)
+    {
+        Layout = "~/Views/Shared/_ProfesseurLayout.cshtml";
+    }
+
+
     List<Annonce> Avis = (List<Annonce>)ViewBag.Avis;
     List<Resultat> Resultats = (List<Resultat>)ViewBag.Resultats;
     List<Specialite> Specialites = (List<Specialite>)ViewBag.Specialites;

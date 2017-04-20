@@ -121,6 +121,7 @@
     <Compile Include="Repositories\IAnnonceRepository.cs" />
     <Compile Include="Repositories\IDocumentNonOfficielRepository.cs" />
     <Compile Include="Repositories\IDocumentOfficielRepository.cs" />
+    <Compile Include="Repositories\IEmploiRepository.cs" />
     <Compile Include="Repositories\IEtudiantRepository.cs" />
     <Compile Include="Repositories\IMessageRepository.cs" />
     <Compile Include="Repositories\IModuleRepository.cs" />
@@ -174,6 +175,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Emplois.xml" />
     <Content Include="IscaeModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>IscaeModel.edmx</DependentUpon>

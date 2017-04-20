@@ -12,10 +12,13 @@ namespace ISCAE.Business.Services
     {
         private IQuestionRepository _questionRepository;
         private IEtudiantRepository _etudiantRepository;
-        public QuestionService(IQuestionRepository repository, IEtudiantRepository etudiantRepository) : base(repository)
+        private ISpecialiteRepository _specialiteRepository;
+        public QuestionService(IQuestionRepository repository, IEtudiantRepository etudiantRepository,
+            ISpecialiteRepository specialiteRepository) : base(repository)
         {
             _questionRepository = repository;
             _etudiantRepository = etudiantRepository;
+            _specialiteRepository = specialiteRepository;
         }
 
         public IEnumerable<Question> GetQuestionsByEtudiant(int EtudiantId, int pageIndex, int pageSize)
@@ -23,6 +26,13 @@ namespace ISCAE.Business.Services
             if (EtudiantId <= 0 || _etudiantRepository.Get(EtudiantId) == null || pageIndex <= 0 || pageSize <= 0)
                 return null;
             return _questionRepository.GetQuestionsByEtudiant(EtudiantId,pageIndex,pageSize);
+        }
+
+        public IEnumerable<Question> GetQuestionsBySpecialite(int SpecialiteId, int Niveau)
+        {
+            if (SpecialiteId <= 0 || _specialiteRepository.Get(SpecialiteId) == null || Niveau < 1 || Niveau > 3)
+                return null;
+            return _questionRepository.GetQuestionsBySpecialite(SpecialiteId,Niveau);
         }
     }
 }

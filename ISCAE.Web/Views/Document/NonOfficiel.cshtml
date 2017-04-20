@@ -1,14 +1,17 @@
-﻿@model List<ISCAE.Data.DocumentNonOfficiel>
+﻿@model List<DocumentNonOfficiel>
 @using ISCAE.Data
 @{
     ViewBag.Title = "Document > Non Officiel";
-    Layout = "~/Views/Shared/_EtudiantLayout.cshtml";
+
+
     if(Session["user"] is Etudiant)
     {
-        Html.Partial("NonOfficielEtudiant");
+        Layout = "~/Views/Shared/_EtudiantLayout.cshtml";
+        @Html.Partial("NonOfficielEtudiant", Model);
     }
     else if (Session["user"] is Professeur)
     {
-        Html.Partial("NonOfficielProfesseur");
+        Layout = "~/Views/Shared/_ProfesseurLayout.cshtml";
+        @Html.Partial("NonOfficielProfesseur", Model);
     }
 }

@@ -1,0 +1,80 @@
+﻿@model Question
+    @using ISCAE.Data
+@{
+    ViewBag.Title = "Discussion";
+    Etudiant user = (Etudiant)Session["user"];
+    Layout = "~/Views/Shared/_EtudiantLayout.cshtml";
+    List<Etudiant> etudiants = ViewBag.etudiants;
+    List<Repons> reponses = ViewBag.reponses;
+}
+<div class="row">
+    <div class="col-md-10 col-md-pull-1 col-md-push-1">
+        <!-- Box Comment -->
+        <div class="box box-widget">
+            <div class="box-header with-border">
+                <div class="user-block">
+                    <img class="img-circle" src="@Url.Content(etudiants.Find(o=>o.EtudiantId == Model.EtudiantId).ProfilePath)" alt="User Image">
+                    <span class="username"><a href="#">@etudiants.Find(o => o.EtudiantId == Model.EtudiantId).Nom</a></span>
+                    <span class="description">@String.Format("{0:dd-MM-yyyy} à {0:H:mm}", Model.DateQuestion)</span>
+                </div>
+                <!-- /.user-block -->
+                
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <!-- post text -->
+                <p>
+                    @Model.Contenu
+                </p>
+                <!-- Attachment -->
+                
+                <!-- /.attachment-block -->
+                
+                <span class="pull-right text-muted">@reponses.Count Reponses</span>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer box-comments">
+                @{
+                    foreach (Repons reponse in reponses)
+                    {
+                        <div class="box-comment">
+                            <!-- User image -->
+                            <img class="img-circle img-sm" src="@Url.Content(etudiants.Find(o=>o.EtudiantId == reponse.EtudiantId).ProfilePath)" alt="User Image">
+                            <div class="comment-text">
+                                <span class="username">
+                                    @etudiants.Find(o=>o.EtudiantId == reponse.EtudiantId).Nom
+                                    <span class="text-muted pull-right">@String.Format("{0:dd-MM-yyyy} à {0:H:mm}", reponse.DateReponse)</span>
+                                </span><!-- /.username -->
+                                @reponse.Contenu
+                            </div>
+                            <!-- /.comment-text -->
+                        </div>
+                <!-- /.box-comment -->
+                    }
+                }
+                
+            </div>
+            <!-- /.box-footer -->
+            <div class="box-footer">
+                @using (Html.BeginForm("AddReponse", "Discussion", FormMethod.Post, new { @id = "form-reponse", @role = "form" }))
+                {
+                    <div style="display:none">
+                        <input type="hidden" name="id" value="@Model.QuestionId" />
+                    </div>
+                    <img class="img-responsive img-circle img-sm" src="@Url.Content(user.ProfilePath)" alt="Alt Text">
+                    <!-- .img-push is used to add margin to elements next to floating images -->
+                    
+                    <div class="img-push">
+                        <input type="text" class="form-control input-sm" name="reponse" placeholder="Tepez votre reponse">
+                    </div>
+                    
+                }
+                
+            </div>
+            <!-- /.box-footer -->
+        </div>
+        <!-- /.box -->
+    </div>
+    <!-- /.col -->
+</div>
+<!-- /.row -->
