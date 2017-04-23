@@ -8,5 +8,6 @@ namespace ISCAE.Business.Services
     {
         IEnumerable<SpecialiteModule> GetSpecialiteModulesByNiveau(int SpecialiteId, int Niveau);
         IEnumerable<SpecialiteModule> GetSpecialiteModulesBySpecialite(int SpecialiteId);
+        int GetNiveauBySpecialiteAndModule(int SpecialiteId, int ModuleId);
     }
 }

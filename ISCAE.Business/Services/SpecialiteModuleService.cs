@@ -18,6 +18,18 @@ namespace ISCAE.Business.Services
             _specialiteRepository = specialiteRepository;
         }
 
+        public int GetNiveauBySpecialiteAndModule(int SpecialiteId, int ModuleId)
+        {
+            int Niveau = 0;
+            var module = _specialiteModuleRepository.GetSpecialiteModulesByModule(ModuleId).ToList().Find(o=>o.SpecialiteId == SpecialiteId);
+
+            if (module != null)
+            {
+                Niveau = module.Niveau;
+            }
+            return Niveau;
+        }
+
         public IEnumerable<SpecialiteModule> GetSpecialiteModulesByNiveau(int SpecialiteId, int Niveau)
         {
             if (SpecialiteId < 1 || Niveau < 1 || Niveau > 3 || _specialiteRepository.Get(SpecialiteId) == null)

@@ -10,5 +10,6 @@ namespace ISCAE.Data.Repositories
     {
         IEnumerable<SpecialiteModule> GetSpecialiteModulesByNiveau(int SpecialiteId, int Niveau);
         IEnumerable<SpecialiteModule> GetSpecialiteModulesBySpecialite(int SpecialiteId);
+        IEnumerable<SpecialiteModule> GetSpecialiteModulesByModule(int ModuleId);
     }
 }

@@ -39,6 +39,7 @@ namespace ISCAE.Business.Services
             if (SpecialiteId < 1 || Niveau < 1 || Niveau > 3)
                 return null;
             Dictionary<Module,Professeur> profs = new Dictionary<Module, Professeur>();
+            
             List<SpecialiteModule> sm = _specialiteModuleRepository.GetSpecialiteModulesByNiveau(SpecialiteId, Niveau).ToList();
             List<ProfesseurSpecialite> ps = _professeurSpecialiteRepository.GetProfesseursBySpecialite(SpecialiteId).ToList();
             List<ProfesseurModule> pm = _professeurModuleRepository.GetAll().ToList();

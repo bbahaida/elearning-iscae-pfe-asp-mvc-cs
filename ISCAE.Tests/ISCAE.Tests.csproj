@@ -82,6 +82,7 @@
     <Compile Include="AdministrateurServiceTests.cs" />
     <Compile Include="EtudiantServiceTests.cs" />
     <Compile Include="ProfesseurServiceTests.cs" />
+    <Compile Include="SpecialiteModuleTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -15,3 +15,36 @@
         @Html.Partial("NonOfficielProfesseur", Model);
     }
 }
+
+@section scripts{
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $("#form-pagination").submit(function () { return false;});
+            $("#previous").click(function () {
+                calculePage("previous");
+                //$("form").submit();
+            });
+            $("#next").click(function () {
+                calculePage("next");
+                //$("form").submit();
+            });
+        });
+        function calculePage(type) {
+            var pageIndex = parseInt($("#pageIndex").val());
+            if (type == "previous") {
+                pageIndex--;
+            }
+            else if(type == "next"){
+                pageIndex++;
+            }
+            else {
+                alert("Error in pagination");
+                return;
+            }
+            $("#pageIndex").val(pageIndex);
+        }
+        
+
+    </script>
+    }

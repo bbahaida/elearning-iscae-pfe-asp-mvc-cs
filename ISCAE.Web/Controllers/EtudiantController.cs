@@ -10,6 +10,7 @@ using System.Web.Mvc;
 namespace ISCAE.Web.Controllers
 {
     [SessionFilter()]
+    [EtudiantFilter()]
     public class EtudiantController : Controller
     {
         private IEtudiantService _etudiantService;
@@ -81,6 +82,38 @@ namespace ISCAE.Web.Controllers
             ViewBag.modules = modules;
             ViewBag.professeurs = _professeurService.GetProfesseursBySpecialiteAndNiveau(user.SpecialiteId,user.Niveau);
             ViewBag.etudiants = _etudiantService.Find(o=>o.SpecialiteId==user.SpecialiteId && o.Niveau == user.Niveau).ToList();
+            return View(user);
+        }
+        public ActionResult UserProfile()
+        {
+            
+            return View((Etudiant)Session["user"]);
+        }
+        [HttpPost]
+        public ActionResult UserProfile(string email, string telephone)
+        {
+            Etudiant user = (Etudiant)Session["user"];
+            if (email == null || email.Equals(""))
+            {
+                return View(user);
+            }
+            
+            user.Email = email;
+            user.Telephone = telephone;
+            user = _etudiantService.Edit(user);
+            if(user == null)
+            {
+                user = (Etudiant)Session["user"];
+                return View(user);
+            }
+            Session["user"] = user;
+            return View(user);
+        }
+        [HttpPost]
+        public ActionResult Avatar(HttpPostedFileBase image)
+        {
+            Etudiant user = (Etudiant)Session["user"];
+            
             return View(user);
         }
     }

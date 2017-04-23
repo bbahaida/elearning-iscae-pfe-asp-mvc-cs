@@ -43,71 +43,59 @@
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
     <!-- Notifications: style can be found in dropdown.less -->
-   
-            <li class="dropdown notifications-menu">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <i class="fa fa-bell-o"></i>
-                    <span class="label label-warning">@notificationCount</span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li class="header">Vous avez @notificationCount notifications</li>
-                    <li>
-                        <!-- inner menu: contains the actual data -->
-                        <ul class="menu">
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-warning text-yellow"></i> Very long description here that may not fit into the
-                                    page and may cause design problems
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-users text-red"></i> 5 new members joined
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-shopping-cart text-green"></i> 25 sales made
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-user text-red"></i> You changed your username
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="footer"><a href="#">View all</a></li>
-                </ul>
-            </li>
+           @{
+               if (notificationCount > 0)
+               {
+                <li class="dropdown notifications-menu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-bell-o"></i>
+                        <span class="label label-warning">@notificationCount</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="header">Vous avez @notificationCount notifications</li>
+                        <li>
+                            <!-- inner menu: contains the actual data -->
+                            <ul class="menu">
+                                @{
+                                    foreach (Notification n in notifications)
+                                    {
+                                        <li>
+                                            <a href="@Url.Action("Notifications", "Notification", new { id = n.NotificationId})">
+                                                <i class="fa fa-star text-aqua"></i> @n.Message
+                                            </a>
+                                        </li>
+                                    }
+                                }
+                               
+                            </ul>
+                        </li>
+                        <li class="footer"><a href="#">Afficher Tous</a></li>
+                    </ul>
+                </li>
 
-       
-            <li class="dropdown notifications-menu">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <i class="fa fa-bell-o"></i>
-                    
-                </a>
-                <ul class="dropdown-menu">
-                    <li class="header">Pas de notifications</li>
-                    <li>
-                        <!-- inner menu: contains the actual data -->
-                        <ul class="menu">
-                            <li>
-                                
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="footer"><a href="#">View all</a></li>
-                </ul>
-            </li>
+               }
+               else
+               {
+                <li class="dropdown notifications-menu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-bell-o"></i>
+
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="header">Pas de notifications</li>
+                        <li>
+                            <!-- inner menu: contains the actual data -->
+                            <ul class="menu">
+                                <li>
+
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="footer"><a href="#">View all</a></li>
+                    </ul>
+                </li>
+               }
         }
-    }
-
 
                     <!-- User Account: style can be found in dropdown.less -->
             <li class="dropdown user user-menu">
@@ -169,7 +157,7 @@
                 <ul class="sidebar-menu">
                     <li class="header">MAIN NAVIGATION</li>
                     <li class="active">
-                        <a href='@Url.Action("Index","Etudiant")'>
+                        <a href='@Url.Action("Index","Administrateur")'>
                             <i class="fa fa-home"></i> <span>Accueil</span>
                         </a>
                     </li>
@@ -183,7 +171,17 @@
                         </a>
                         <ul class="treeview-menu">
                             <li><a href='@Url.Action("Officiel","Document")'><i class="fa fa-circle-o"></i>Ajouter par profs</a></li>
-                            <li><a href='@Url.Action("NonOfficiel","Document")'><i class="fa fa-circle-o"></i> Ajouter par etudiant</a></li>
+                            <li><a href='@Url.Action("NonOfficiel","Document")'>
+                                <i class="fa fa-circle-o"></i> Ajouter par etudiant
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a href="@Url.Action("","")"><i class="fa fa-circle-o"></i> Documents Valide</a></li>
+                                    <li><a href="@Url.Action("","")"><i class="fa fa-circle-o"></i> Documents Invalide</a></li>
+                                </ul>
+                            </li>
                         </ul>
                     </li>
                     <li>
@@ -196,13 +194,21 @@
                     <li>
                         <a href='@Url.Action("Index","Annonce")'>
                             <i class="fa fa-flash"></i> <span>Annonces</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
                         </a>
+                        <ul class="treeview-menu">
+                            <li><a href="@Url.Action("","")"><i class="fa fa-circle-o"></i> Afficher tous</a></li>
+                            <li><a href="@Url.Action("","")"><i class="fa fa-circle-o"></i> Ajouter un avis</a></li>
+                            <li><a href="@Url.Action("","")"><i class="fa fa-circle-o"></i> Ajouter un resultat</a></li>
+                        </ul>
                     </li>
                     <li>
                         <a href='@Url.Action("Index","Message")'>
                             <i class="fa fa-envelope"></i> <span>Messages</span>
                             <span class="pull-right-container">
-                                <small class="label pull-right bg-red">@messageCount</small>
+                                
                             </span>
                         </a>
                     </li>

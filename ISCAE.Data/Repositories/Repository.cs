@@ -9,12 +9,19 @@ namespace ISCAE.Data.Repositories
 {
     public class Repository<DB,TEntity> : IRepository<TEntity> where TEntity : class where DB : DbContext,new()
     {
-        private DB _context = new DB();
+        private DB _context;
         //private log4net.ILog _logger = Log4NetHelper.GetLogger(typeof(TEntity));
         //public log4net.ILog Logger { get { return null; } }
         public DB Context
         {
-            get { return _context; }
+            get
+            {
+                if (_context == null)
+                {
+                    _context = new DB();
+                }
+                return _context;
+            }
             set { _context = value; }
         }
 
@@ -22,8 +29,8 @@ namespace ISCAE.Data.Repositories
         {
             try
             {
-                _context.Set<TEntity>().Add(entity);
-                _context.SaveChanges();
+                Context.Set<TEntity>().Add(entity);
+                Context.SaveChanges();
                 return entity;
             }
             catch (Exception e)
@@ -38,8 +45,8 @@ namespace ISCAE.Data.Repositories
         {
             try
             {
-                _context.Set<TEntity>().Remove(entity);
-                _context.SaveChanges();
+                Context.Set<TEntity>().Remove(entity);
+                Context.SaveChanges();
                 return null;
             }
             catch (Exception e)
@@ -54,8 +61,8 @@ namespace ISCAE.Data.Repositories
         {
             try
             {
-                _context.Entry(entity).State = EntityState.Modified;
-                _context.SaveChanges();
+                Context.Entry(entity).State = EntityState.Modified;
+                Context.SaveChanges();
                 return entity;
             }
             catch (Exception e)
@@ -70,7 +77,7 @@ namespace ISCAE.Data.Repositories
         {
             try
             {
-                return _context.Set<TEntity>().Where(predicate).AsEnumerable();
+                return Context.Set<TEntity>().Where(predicate).AsEnumerable();
             }
             catch (Exception e)
             {
@@ -84,7 +91,7 @@ namespace ISCAE.Data.Repositories
         {
             try
             {
-                return _context.Set<TEntity>().Find(id);
+                return Context.Set<TEntity>().Find(id);
             }
             catch (Exception e)
             {
@@ -98,7 +105,7 @@ namespace ISCAE.Data.Repositories
         {
             try
             {
-                return _context.Set<TEntity>().AsEnumerable();
+                return Context.Set<TEntity>().AsEnumerable();
             }
             catch (Exception e)
             {

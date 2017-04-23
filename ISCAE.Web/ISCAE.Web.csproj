@@ -240,6 +240,7 @@
     <Compile Include="Controllers\DiscussionController.cs" />
     <Compile Include="Controllers\DocumentController.cs" />
     <Compile Include="Controllers\EmploiController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\EtudiantController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MessageController.cs" />
@@ -397,8 +398,11 @@
     <Content Include="Views\Message\MessageEtudiant.cshtml" />
     <Content Include="Views\Message\Boites.cshtml" />
     <Content Include="Views\Message\ReadEtudiant.cshtml" />
-    <Content Include="Views\Shared\_AdministrateurLayout .cshtml" />
+    <Content Include="Views\Shared\_AdministrateurLayout.cshtml" />
     <Content Include="Views\Administrateur\index.cshtml" />
+    <Content Include="Views\Error\Session404.cshtml" />
+    <Content Include="Views\Message\MessageProfesseur.cshtml" />
+    <Content Include="Views\Etudiant\UserProfile.cshtml" />
     <None Include="Views\Shared\_EtudiantLayout.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

@@ -1,0 +1,63 @@
+﻿@using ISCAE.Data
+@{ 
+    List<Specialite> specialites = ViewBag.specialites;
+    Dictionary<int,int> niveauBySpecialite = ViewBag.niveauBySpecialite;
+}
+<div class="row">
+    <!-- left column -->
+    <div class="col-md-8">
+        <!-- general form elements -->
+        <div class="box box-success">
+            <div class="box-header with-border">
+                <h3 class="box-title">Ajouter un nouveau</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            @using (Html.BeginForm("Add", "Discussion", FormMethod.Post, new { @id = "add-question" }))
+            {
+                <div class="box-body">
+                    <div class="form-group">
+                        <select name="specialite" class="form-control" id="specialiteProfesseurMessage">
+                            <option value="">Specialite</option>
+                            @{ 
+                                foreach (Specialite specialite in specialites)
+                                {
+                                    <option value="@specialite.SpecialiteId">@specialite.Designation</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <div class="checkbox">
+                        <input type="checkbox" id="messageProfesseurCheckboxfirst" name="first"/> 1
+                    </div>
+                    <div class="checkbox">
+                        <input type="checkbox" name="second" id="messageProfesseurCheckboxsecond" /> 2
+                    </div>
+                    <div class="checkbox">
+                        <input type="checkbox" name="third" id="messageProfesseurCheckboxthird" /> 3
+                    </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="titre" name="titre" placeholder="Titre" />
+                        <p class="help-block"></p>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" rows="3" id="contenu" name="contenu" placeholder="Votre Question"></textarea>
+                    </div>
+
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer">
+                    <button type="submit" class="btn btn-success">Ajouter</button>
+                </div>
+            }
+        </div>
+        <!-- /.box -->
+    </div>
+</div>

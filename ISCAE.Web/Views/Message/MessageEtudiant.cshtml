@@ -50,7 +50,7 @@
                                 <tr>
                                     <td class="mailbox-name"><a href="@Url.Action("Boites", "Message", new { id = message.MessageId })">@professeurs.Values.First(o => o.ProfesseurId == message.ProfesseurId).Nom</a></td>
                                     <td class="mailbox-subject">
-                                        <b>@message.Titre</b> - @message.Contenu.Substring(0, 40) ...
+                                        <b>@message.Titre</b> - @message.Contenu.Substring(0, 20) ...
                                     </td>
                                     <td class="mailbox-attachment"></td>
                                     <td class="mailbox-date">@String.Format("{0:dd-MM-yyyy} à {0:H:mm}", message.DateEnvoiMessage)</td>

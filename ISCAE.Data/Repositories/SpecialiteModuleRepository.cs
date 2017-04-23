@@ -8,6 +8,19 @@ namespace ISCAE.Data.Repositories
 {
     public class SpecialiteModuleRepository : Repository<IscaeEntities, SpecialiteModule>, ISpecialiteModuleRepository
     {
+        public IEnumerable<SpecialiteModule> GetSpecialiteModulesByModule(int ModuleId)
+        {
+            try
+            {
+                return Context.Set<SpecialiteModule>().Where(o => o.ModuleId == ModuleId);
+            }
+            catch (Exception e)
+            {
+                //Logger.Error(e.Message);
+                return null;
+            }
+        }
+
         public IEnumerable<SpecialiteModule> GetSpecialiteModulesByNiveau(int SpecialiteId, int Niveau)
         {
             try

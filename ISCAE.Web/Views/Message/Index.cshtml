@@ -6,9 +6,21 @@
     {
         Layout = "~/Views/Shared/_EtudiantLayout.cshtml";
         @Html.Partial("MessageEtudiant", Model);
-    }else if (Session["user"] is Professeur)
+    }
+    else if (Session["user"] is Professeur)
     {
         Layout = "~/Views/Shared/_ProfesseurLayout.cshtml";
+        @Html.Partial("MessageProfesseur", Model);
+        Dictionary<int, int> niveauBySpecialite = ViewBag.niveauBySpecialite;
     }
-    
+
+}
+@section scripts{
+<script type="text/javascript">
+    $("#specialiteProfesseurMessage").change(function () {
+        var sID = $("#specialiteProfesseurMessage").val();
+        
+        $("#messageProfesseurCheckboxfirst").attr("disabled", true);
+    });
+</script>
 }

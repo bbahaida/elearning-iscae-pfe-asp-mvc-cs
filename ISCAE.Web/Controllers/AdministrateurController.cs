@@ -7,9 +7,11 @@ using System.Web.Mvc;
 
 namespace ISCAE.Web.Controllers
 {
+    [SessionFilter()]
+    [AdministrateurFilter()]
     public class AdministrateurController : Controller
     {
-        [SessionFilter()]
+        
         // GET: Administrateur
         public ActionResult Index()
         {

@@ -74,17 +74,27 @@ namespace ISCAE.Web.Controllers
 
             return null;
         }
-        public ActionResult NonOfficiel()
+        public ActionResult NonOfficiel(int? pageIndex, int? pageSize)
         {
+            if (pageIndex == null)
+            {
+                pageIndex = 1;
+            }
+            if (pageSize == null)
+            {
+                pageSize = 1;
+            }
             if (Session["user"] is Etudiant)
             {
-                List<DocumentNonOfficiel> documents = _documentNonOfficielService.GetValidDocument(1, 10).ToList();
+                List<DocumentNonOfficiel> documents = _documentNonOfficielService.GetNonValidDocument((int)pageIndex, (int)pageSize).ToList();
                 var data = _specialiteModuleService.GetSpecialiteModulesByNiveau(((Etudiant)Session["user"]).SpecialiteId, ((Etudiant)Session["user"]).Niveau);
                 List<Module> modules = new List<Module>();
                 foreach (SpecialiteModule sm in data)
                 {
                     modules.Add(_moduleService.Get(sm.ModuleId));
                 }
+                ViewBag.maxPage = (int)Math.Ceiling((decimal)_documentNonOfficielService.GetAll().Where(o=>o.isValid == 0).Count()/(decimal)pageSize);
+                ViewBag.pageIndex = (int)pageIndex;
                 ViewBag.Modules = modules;
                 ViewBag.Etudiants = _etudiantService.GetEtudiantsBySpecialite(((Etudiant)Session["user"]).SpecialiteId, ((Etudiant)Session["user"]).Niveau).ToList();
                 return View(documents);

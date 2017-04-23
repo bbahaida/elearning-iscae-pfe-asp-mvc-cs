@@ -63,7 +63,7 @@ namespace ISCAE.Data.Repositories
         {
             try
             {
-                return Context.Set<Etudiant>().FirstOrDefault(o => o.Login.Equals(login) && o.Password.Equals(password));
+                return Context.Set<Etudiant>().FirstOrDefault(o => o.Login.Equals(login) && o.Password.Equals(password) && o.isActive == 1);
             }
             catch (Exception e)
             {
