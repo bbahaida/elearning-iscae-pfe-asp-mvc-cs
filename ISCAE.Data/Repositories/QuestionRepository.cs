@@ -21,11 +21,11 @@ namespace ISCAE.Data.Repositories
             }
         }
 
-        public IEnumerable<Question> GetQuestionsBySpecialite(int SpecialiteId, int Niveau)
+        public IEnumerable<Question> GetQuestionsBySpecialite(int SpecialiteId, int Niveau, int pageIndex, int pageSize)
         {
             try
             {
-                return Context.Set<Question>().Where(o => o.Etudiant.SpecialiteId == SpecialiteId && o.Etudiant.Niveau == Niveau).OrderByDescending(o => o.QuestionId);
+                return Context.Set<Question>().Where(o => o.Etudiant.SpecialiteId == SpecialiteId && o.Etudiant.Niveau == Niveau).OrderByDescending(o => o.QuestionId).Skip((pageIndex - 1) * pageSize).Take(pageSize);
             }
             catch (Exception e)
             {

@@ -41,11 +41,26 @@ namespace ISCAE.Business.Services
             return _documentNonOfficielRepository.GetNonValidDocument(pageIndex,pageSize);
         }
 
+        public Dictionary<Etudiant, int> GetTopUsers(int SpecialiteId, int Niveau)
+        {
+            Dictionary<Etudiant, int> list = new Dictionary<Etudiant, int>();
+            List<Etudiant> etudiants = _etudiantRepository.GetEtudiantsBySpecialite(SpecialiteId,Niveau).ToList();
+            foreach (Etudiant e in etudiants)
+            {
+                int count = _documentNonOfficielRepository.GetAll().Where(o=>o.EtudiantId == e.EtudiantId).Count();
+                if(count > 0)
+                    list.Add(e, count);
+            }
+            return list.OrderByDescending(o => o.Value).Take(3).ToDictionary(pair => pair.Key, pair => pair.Value);
+        }
+
         public IEnumerable<DocumentNonOfficiel> GetValidDocument(int pageIndex, int pageSize)
         {
             if (pageIndex < 1 || pageSize < 1)
                 return null;
             return _documentNonOfficielRepository.GetValidDocument(pageIndex, pageSize);
         }
+
+        
     }
 }

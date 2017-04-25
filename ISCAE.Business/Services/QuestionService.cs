@@ -27,12 +27,17 @@ namespace ISCAE.Business.Services
                 return null;
             return _questionRepository.GetQuestionsByEtudiant(EtudiantId,pageIndex,pageSize);
         }
-
-        public IEnumerable<Question> GetQuestionsBySpecialite(int SpecialiteId, int Niveau)
+        public int CountQuestionsBySpecialite(int SpecialiteId, int Niveau)
         {
             if (SpecialiteId <= 0 || _specialiteRepository.Get(SpecialiteId) == null || Niveau < 1 || Niveau > 3)
+                return 0;
+            return _questionRepository.GetAll().Where(o=>o.Etudiant.SpecialiteId == SpecialiteId && o.Etudiant.Niveau == Niveau).Count();
+        }
+        public IEnumerable<Question> GetQuestionsBySpecialite(int SpecialiteId, int Niveau, int pageIndex, int pageSize)
+        {
+            if (SpecialiteId <= 0 || _specialiteRepository.Get(SpecialiteId) == null || Niveau < 1 || Niveau > 3 || pageIndex < 1 || pageSize < 1)
                 return null;
-            return _questionRepository.GetQuestionsBySpecialite(SpecialiteId,Niveau);
+            return _questionRepository.GetQuestionsBySpecialite(SpecialiteId,Niveau,pageIndex,pageSize);
         }
     }
 }

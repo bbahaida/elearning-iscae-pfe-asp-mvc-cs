@@ -4,6 +4,8 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_EtudiantLayout.cshtml";
     List<Etudiant> etudiants =  ViewBag.etudiants;
+    int pageIndex = ViewBag.pageIndex;
+    int maxPage = ViewBag.maxPage;
 }
 
 
@@ -86,11 +88,75 @@
                 </ul>
             </div>
             <!-- /.box-body -->
-            <div class="box-footer text-center">
-                <a href="javascript:void(0)" class="uppercase text-green">Afficher tous</a>
+            <div class="box-footer">
+                <div class="pull-right">
+                    @using (Html.BeginForm("NonOfficiel", "Document", FormMethod.Get, new { @id = "form-pagination" }))
+                    {
+                        <input type="hidden" id="pageIndex" name="pageIndex" value="@pageIndex" />
+                        <div class="">
+                            <button id="previous" type="submit" @((Model.Count()) == 0 || pageIndex == 1 ? "disabled" : "" ) class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
+                            @{
+                                if (maxPage > 0)
+                                {
+                                    for (int i = 1; i <= maxPage; i++)
+                                    {
+                                        if (i == pageIndex)
+                                        {
+                                            <i><b>@i</b></i>
+                                        }
+                                        else
+                                        {
+                                            <i>@i</i>
+                                        }
+                                    }
+                                }
+
+
+                            }
+                            <button id="next" type="submit" @((Model.Count()) == 0 || pageIndex == maxPage ? "disabled" : "" ) class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
+                        </div>
+                                }
+
+
+                    <!-- /.btn-group -->
+                </div>
             </div>
             <!-- /.box-footer -->
         </div>
         <!-- /.box -->
     </div>
 </div>
+
+@section scripts{
+    <script type="text/javascript">
+
+        //$(document).ready(function () {
+
+        //});
+        $("#form-pagination").submit(function () { return false; });
+        $("#previous").click(function () {
+            calculePage("previous");
+            window.location.replace($("#form-pagination").attr("action") + "?pageIndex=" + parseInt($("#pageIndex").val()));
+        });
+        $("#next").click(function () {
+            calculePage("next");
+            window.location.replace($("#form-pagination").attr("action") + "?pageIndex=" + parseInt($("#pageIndex").val()));
+        });
+        function calculePage(moveType) {
+            var pageIndex = parseInt($("#pageIndex").val());
+            if (moveType == "previous") {
+                pageIndex--;
+            }
+            else if (moveType == "next") {
+                pageIndex++;
+            }
+            else {
+                alert("Error in pagination");
+                return;
+            }
+            $("#pageIndex").val(pageIndex);
+        }
+
+
+    </script>
+}

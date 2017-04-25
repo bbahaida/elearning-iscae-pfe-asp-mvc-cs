@@ -12,6 +12,6 @@ namespace ISCAE.Business.Services
     {
         IEnumerable<DocumentOfficiel> GetDocumentsByUser(int ProfesseurId, int pageIndex, int pageSize);
         IEnumerable<DocumentOfficiel> GetDocumentsByModule(int ModuleId, int pageIndex, int pageSize);
-
+        Dictionary<Professeur, int> GetTopUsers(List<Professeur> profs);
     }
 }

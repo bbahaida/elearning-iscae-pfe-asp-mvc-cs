@@ -1,8 +1,8 @@
 ﻿@model List<Message>
 @using ISCAE.Data
 @{ 
-    int index = ViewBag.pageIndex;
-    int size = ViewBag.pageSize;
+    int pageIndex = ViewBag.pageIndex;
+    int maxPage = ViewBag.maxPage;
     Dictionary<Module, Professeur> professeurs = ViewBag.professeurs;
 }
 <div class="col-md-9">
@@ -29,12 +29,34 @@
                     }
                 }
                 <div class="pull-right">
+                    @using (Html.BeginForm("Index", "Message", FormMethod.Get, new { @id = "form-pagination" }))
+                    {
+                        <input type="hidden" id="pageIndex" name="pageIndex" value="@pageIndex" />
+                        <div class="">
+                            <button id="previous" type="submit" @((Model.Count()) == 0 || pageIndex == 1 ? "disabled" : "" ) class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
+                            @{
+                                if (maxPage > 0)
+                                {
+                                    for (int i = 1; i <= maxPage; i++)
+                                    {
+                                        if (i == pageIndex)
+                                        {
+                                            <i><b>@i</b></i>
+                                        }
+                                        else
+                                        {
+                                            <i>@i</i>
+                                        }
+                                    }
+                                }
 
-                    1-10/@Model.Count
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
-                        <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
-                    </div>
+
+                            }
+                            <button id="next" type="submit" @((Model.Count()) == 0 || pageIndex == maxPage ? "disabled" : "" ) class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
+                        </div>
+                           }
+
+
                     <!-- /.btn-group -->
                 </div>
                 <!-- /.pull-right -->
@@ -50,7 +72,7 @@
                                 <tr>
                                     <td class="mailbox-name"><a href="@Url.Action("Boites", "Message", new { id = message.MessageId })">@professeurs.Values.First(o => o.ProfesseurId == message.ProfesseurId).Nom</a></td>
                                     <td class="mailbox-subject">
-                                        <b>@message.Titre</b> - @message.Contenu.Substring(0, 20) ...
+                                        <b>@message.Titre</b> - @message.Contenu.Substring(0, (message.Contenu.Length/2)) ...
                                     </td>
                                     <td class="mailbox-attachment"></td>
                                     <td class="mailbox-date">@String.Format("{0:dd-MM-yyyy} à {0:H:mm}", message.DateEnvoiMessage)</td>

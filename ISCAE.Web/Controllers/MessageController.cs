@@ -1,6 +1,7 @@
 ﻿using ISCAE.Business.Services;
 using ISCAE.Data;
 using ISCAE.Web.Filters;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,7 +45,7 @@ namespace ISCAE.Web.Controllers
                 var user = (Etudiant)Session["user"];
                 List<Message> messages = _messageService.GetMessagesBySpecialiteAndNiveau(user.SpecialiteId, user.Niveau, (int)pageIndex, (int)pageSize).ToList();
                 ViewBag.professeurs = _professeurService.GetProfesseursBySpecialiteAndNiveau(user.SpecialiteId, user.Niveau);
-                ViewBag.pageSize = (int)pageSize;
+                ViewBag.maxPage = (int)Math.Ceiling(_messageService.GetAll().Where(o => o.SpecialiteId == user.SpecialiteId && o.Niveau == user.Niveau).Count() / (decimal)pageSize);
                 ViewBag.pageIndex = (int)pageIndex;
                 return View(messages);
             }
@@ -53,11 +54,14 @@ namespace ISCAE.Web.Controllers
                 var user = (Professeur)Session["user"];
                 List<Message> messages = _messageService.GetMessagesByProfesseur(user.ProfesseurId, (int)pageIndex, (int)pageSize).ToList();
                 List<ProfesseurSpecialite> professeurSpecialites = _professeurSpecialiteService.GetSpecialitesByProfesseur(user.ProfesseurId).ToList();
-                Dictionary<int, int> niveauBySpecialite = new Dictionary<int, int>();
+                Dictionary<string, List<int>> niveauBySpecialite = new Dictionary<string, List<int>>();
                 List<Specialite> specialites = new List<Specialite>();
                 List<ProfesseurModule> professeurModules = _professeurModuleService.GetModulesByProfesseur(user.ProfesseurId).ToList();
+
                 foreach (ProfesseurSpecialite p in professeurSpecialites)
                 {
+                    bool uTeach = false;
+                    List<int> niveau = new List<int>();
                     List<SpecialiteModule> sm = _specialiteModuleService.GetSpecialiteModulesBySpecialite(p.SpecialiteId).ToList();
                     specialites.Add(_specialiteService.Get(p.SpecialiteId));
                     foreach (ProfesseurModule m in professeurModules)
@@ -66,14 +70,16 @@ namespace ISCAE.Web.Controllers
                         {
                             if (s.ModuleId == m.ModuleId)
                             {
-                                niveauBySpecialite.Add(p.SpecialiteId, _specialiteModuleService.GetNiveauBySpecialiteAndModule(p.SpecialiteId,s.ModuleId));
+                                uTeach = true;
+                                niveau.Add(_specialiteModuleService.GetNiveauBySpecialiteAndModule(p.SpecialiteId, s.ModuleId));
                             }
                         }
                     }
-                    
+                    if(uTeach)
+                        niveauBySpecialite.Add(p.SpecialiteId.ToString(), niveau);
                 }
                 ViewBag.specialites = specialites;
-                ViewBag.niveauBySpecialite = niveauBySpecialite;
+                ViewBag.niveauBySpecialite = JsonConvert.SerializeObject(niveauBySpecialite, Formatting.Indented);
 
                 return View(messages);
             }
@@ -100,6 +106,48 @@ namespace ISCAE.Web.Controllers
             }
             return null;
             
+        }
+        [HttpPost]
+        public ActionResult Add(int? specialite, int? first, int? second, int? third, string titre, string contenu)
+        {
+            if(_specialiteService.Get((int)specialite) == null || titre.Equals("") || contenu.Equals(""))
+            {
+                return RedirectToAction("Index","Message");
+            }
+            Message message = new Message
+            {
+                SpecialiteId = (int)specialite,
+                Titre = titre,
+                Contenu = contenu,
+                DateEnvoiMessage = DateTime.Now,
+                ProfesseurId = ((Professeur)Session["user"]).ProfesseurId
+            };
+            if (first != null && first == 1)
+            {
+                message.Niveau = 1;
+                if(_messageService.Add(message) == null)
+                {
+                    return RedirectToAction("Index","Message");
+                }
+            }
+            if (second != null && second == 2)
+            {
+                message.Niveau = 2;
+                if (_messageService.Add(message) == null)
+                {
+                    return RedirectToAction("Index", "Message");
+                }
+            }
+            if (third != null && third == 3)
+            {
+                message.Niveau = 3;
+                if (_messageService.Add(message) == null)
+                {
+                    return RedirectToAction("Index", "Message");
+                }
+            }
+            
+            return RedirectToAction("Index", "Message");
         }
     }
 }

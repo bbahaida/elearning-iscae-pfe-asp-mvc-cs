@@ -1,7 +1,8 @@
-﻿@using ISCAE.Data
+﻿@model List<Message>
+@using ISCAE.Data
 @{ 
     List<Specialite> specialites = ViewBag.specialites;
-    Dictionary<int,int> niveauBySpecialite = ViewBag.niveauBySpecialite;
+    string niveauBySpecialite = ViewBag.niveauBySpecialite;
 }
 <div class="row">
     <!-- left column -->
@@ -18,46 +19,110 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            @using (Html.BeginForm("Add", "Discussion", FormMethod.Post, new { @id = "add-question" }))
+            <div class="row">
+                <div class="col-md-pull-1 col-md-push-1 col-md-10">
+                    
+                        @using (Html.BeginForm("Add", "Message", FormMethod.Post, new { @id = "add-message" }))
             {
-                <div class="box-body">
-                    <div class="form-group">
-                        <select name="specialite" class="form-control" id="specialiteProfesseurMessage">
-                            <option value="">Specialite</option>
-                            @{ 
-                                foreach (Specialite specialite in specialites)
-                                {
-                                    <option value="@specialite.SpecialiteId">@specialite.Designation</option>
-                                }
-                            }
-                        </select>
+                      <div class="box-body">
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <select name="specialite" class="form-control" id="specialiteProfesseurMessage">
+                                    <option value="">Specialite</option>
+                                    @{
+                                        foreach (Specialite specialite in specialites)
+                                        {
+                                            <option value="@specialite.SpecialiteId">@specialite.Designation</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            
+
+                            <div class="col-md-2">
+                                <div class="checkbox-inline">
+                                    <label><input type="checkbox" value="1" id="first" disabled name="first"> 1</label>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="checkbox-inline">
+                                    <label><input type="checkbox" value="2" id="second" disabled name="second"> 2</label>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="checkbox-inline">
+                                    <label><input type="checkbox" value="3" id="third" disabled name="third"> 3</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-12">
+                                <input type="text" class="form-control" id="titre" name="titre" placeholder="Titre" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-12">
+                                <textarea class="col-md-12 form-control" rows="3" id="contenu" name="contenu" placeholder="Votre message ..."></textarea>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
                     </div>
-                    <div class="form-group">
-                        <div class="checkbox">
-                        <input type="checkbox" id="messageProfesseurCheckboxfirst" name="first"/> 1
-                    </div>
-                    <div class="checkbox">
-                        <input type="checkbox" name="second" id="messageProfesseurCheckboxsecond" /> 2
-                    </div>
-                    <div class="checkbox">
-                        <input type="checkbox" name="third" id="messageProfesseurCheckboxthird" /> 3
-                    </div>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="titre" name="titre" placeholder="Titre" />
-                        <p class="help-block"></p>
-                    </div>
-                    <div class="form-group">
-                        <textarea class="form-control" rows="3" id="contenu" name="contenu" placeholder="Votre Question"></textarea>
-                    </div>
+                                            <div class="box-footer">
+                                                <button type="submit" class="btn btn-success">Ajouter</button>
+                                            </div>
+                                            }
 
                 </div>
-                <!-- /.box-body -->
-                <div class="box-footer">
-                    <button type="submit" class="btn btn-success">Ajouter</button>
-                </div>
-            }
+            </div>
+            
         </div>
         <!-- /.box -->
     </div>
+    <div class="col-md-4">
+        <!--Annonces-->
+        <div class="box box-success">
+            <div class="box-header with-border">
+                <h3 class="box-title">Vos message</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- /.box-header -->
+
+            <div class="box-footer no-padding">
+                <ul class="nav nav-pills nav-stacked">
+                    @{
+                        if (Model.Count() > 0)
+                        {
+                            foreach (Message m in Model)
+                            {
+                                <li>
+                                    <a href="#">
+                                        @m.Titre
+                                        <span class="pull-right text-green">@specialites.Find(o=>o.SpecialiteId == m.SpecialiteId).Designation</span>
+                                    </a>
+                                </li>
+                            }
+                        }
+                        else
+                        {
+                            <li>
+                                <a href="#">
+                                    Pas de message
+                                    <span class="pull-right text-green"><i class="fa fa-exclamation-triangle"></i></span>
+                                </a>
+                            </li>
+                        }
+
+                    }
+                </ul>
+            </div>
+            <!-- /.footer -->
+        </div>
+        <!-- /.box -->
+    </div>
+    <!-- /.col -->
 </div>

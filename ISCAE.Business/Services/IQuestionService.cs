@@ -10,6 +10,7 @@ namespace ISCAE.Business.Services
     public interface IQuestionService :ICommonService<Question>
     {
         IEnumerable<Question> GetQuestionsByEtudiant(int EtudiantId, int pageIndex, int pageSize);
-        IEnumerable<Question> GetQuestionsBySpecialite(int SpecialiteId, int Niveau);
+        int CountQuestionsBySpecialite(int SpecialiteId, int Niveau);
+        IEnumerable<Question> GetQuestionsBySpecialite(int SpecialiteId, int Niveau, int pageIndex, int pageSize);
     }
 }

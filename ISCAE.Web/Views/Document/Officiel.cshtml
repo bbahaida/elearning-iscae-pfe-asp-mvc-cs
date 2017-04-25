@@ -5,12 +5,45 @@
     if (Session["user"] is Etudiant)
     {
         Layout = "~/Views/Shared/_EtudiantLayout.cshtml";
-        @Html.Partial("OfficielEtudiant");
+        @Html.Partial("OfficielEtudiant", Model);
     }
     if (Session["user"] is Professeur)
     {
         Layout = "~/Views/Shared/_ProfesseurLayout.cshtml";
-        @Html.Partial("OfficielProfesseur");
+        @Html.Partial("OfficielProfesseur",Model);
     }
 
+}
+@section scripts{
+    <script type="text/javascript">
+
+        //$(document).ready(function () {
+
+        //});
+        $("#form-pagination").submit(function () { return false; });
+        $("#previous").click(function () {
+            calculePage("previous");
+            window.location.replace($("#form-pagination").attr("action") + "?pageIndex=" + parseInt($("#pageIndex").val()));
+        });
+        $("#next").click(function () {
+            calculePage("next");
+            window.location.replace($("#form-pagination").attr("action") + "?pageIndex=" + parseInt($("#pageIndex").val()));
+        });
+        function calculePage(moveType) {
+            var pageIndex = parseInt($("#pageIndex").val());
+            if (moveType == "previous") {
+                pageIndex--;
+            }
+            else if (moveType == "next") {
+                pageIndex++;
+            }
+            else {
+                alert("Error in pagination");
+                return;
+            }
+            $("#pageIndex").val(pageIndex);
+        }
+
+
+    </script>
 }

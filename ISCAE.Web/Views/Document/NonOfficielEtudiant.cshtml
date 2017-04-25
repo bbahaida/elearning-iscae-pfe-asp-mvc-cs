@@ -6,6 +6,7 @@
     List<Module> modules = ViewBag.Modules;
     int pageIndex = ViewBag.pageIndex;
     int maxPage = ViewBag.maxPage;
+    Dictionary<Etudiant,int> topUsers = (Dictionary<Etudiant, int>)ViewBag.TopUsers;
 }
 
 
@@ -151,24 +152,30 @@
 
             <div class="box-footer no-padding">
                 <ul class="nav nav-pills nav-stacked">
-                    <li>
-                        <a href="#">
-                            Brahim Baheida
-                            <span class="pull-right text-green">12</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            Mohamed Alem
-                            <span class="pull-right text-green">9</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            Moctar Ely
-                            <span class="pull-right text-green">6</span>
-                        </a>
-                    </li>
+                    @{
+                        if (topUsers.Count > 0)
+                        {
+                            foreach (Etudiant e in topUsers.Keys)
+                            {
+                                <li>
+                                    <a href="#">
+                                        @e.Nom
+                                        <span class="pull-right text-green">@topUsers[e].ToString()</span>
+                                    </a>
+                                </li>
+                            }
+                        }
+                        else
+                        {
+                            <li>
+                                <a href="#">
+                                    Pas de document
+                                    <span class="pull-right text-green"><i class="fa fa-exclamation-triangle"></i></span>
+                                </a>
+                            </li>
+                        }
+
+                    }
                 </ul>
             </div>
             <!-- /.footer -->

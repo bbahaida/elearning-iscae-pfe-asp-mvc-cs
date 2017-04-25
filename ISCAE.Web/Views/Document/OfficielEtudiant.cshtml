@@ -1,6 +1,10 @@
-﻿@using ISCAE.Data
+﻿@model List<DocumentOfficiel>
+@using ISCAE.Data
 @{ 
     Dictionary<Module,Professeur> professeurs = ViewBag.professeurs;
+    int pageIndex = ViewBag.pageIndex;
+    int maxPage = 0;
+    Dictionary<Professeur, int> topUsers = (Dictionary<Professeur, int>)ViewBag.TopUsers;
 }
 <div class="row">
     <!-- Left col -->
@@ -32,12 +36,12 @@
                                     @{
                                         if (Model.Count > 0)
                                         {
-                                            foreach (DocumentNonOfficiel document in Model)
+                                            foreach (DocumentOfficiel document in Model.Where(o=>o.ProfesseurId == @professeurs[m].ProfesseurId))
                                             {
                                                 <tr>
                                                     <td>@document.Titre</td>
                                                     <td>@document.Type</td>
-                                                    <td><a href="@Url.Action("Download","Document",new { documentId = document.DocumentNonOfficielId })"><span class="fa fa-arrow-down"></span></a></td>
+                                                    <td><a href="@Url.Action("Download","Document",new { documentId = document.DocumentOfficielId })"><span class="fa fa-arrow-down"></span></a></td>
                                                 </tr>
                                             }
                                         }
@@ -52,17 +56,53 @@
                         <!-- /.table-responsive -->
                     </div>
                     <!-- /.box-body -->
+                    <div class="box-footer">
+                        <div class="pull-right">
+                            @using (Html.BeginForm("NonOfficiel", "Document", FormMethod.Get, new { @id = "form-pagination" }))
+                            {
+                                <input type="hidden" id="pageIndex" name="pageIndex" value="@pageIndex" />
+                                <div class="">
+                                    <button id="previous" type="submit" @((Model.Count()) == 0 || pageIndex == 1 ? "disabled" : "" ) class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
+                                    @{
+                                        maxPage = (int)Math.Ceiling(Model.Where(o => o.ProfesseurId == @professeurs[m].ProfesseurId).Count()/(decimal)10);
+                                        if (maxPage > 0)
+                                        {
+                                            for (int i = 1; i <= maxPage; i++)
+                                            {
+                                                if (i == pageIndex)
+                                                {
+                                                    <i><b>@i</b></i>
+                                                }
+                                                else
+                                                {
+                                                    <i>@i</i>
+                                                }
+                                            }
+                                        }
+
+
+                                    }
+                                    <button id="next" type="submit" @((Model.Count()) == 0 || pageIndex == maxPage ? "disabled" : "" ) class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
+                                </div>
+                                        }
+
+
+                            <!-- /.btn-group -->
+                        </div>
+                    </div>
+                    <!-- /.box-footer -->
                 </div>
 
                                         }
         }
+
         
     </div>
     <div class="col-md-4">
         <!--Annonces-->
         <div class="box box-success">
             <div class="box-header with-border">
-                <h3 class="box-title">Top Prof</h3>
+                <h3 class="box-title">Top Profs</h3>
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse">
                         <i class="fa fa-minus"></i>
@@ -73,24 +113,30 @@
 
             <div class="box-footer no-padding">
                 <ul class="nav nav-pills nav-stacked">
-                    <li>
-                        <a href="#">
-                            Ethmane
-                            <span class="pull-right text-green">12</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            Saadbouh
-                            <span class="pull-right text-green">9</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            Moctar Salem
-                            <span class="pull-right text-green">6</span>
-                        </a>
-                    </li>
+                    @{
+                        if (topUsers.Count > 0)
+                        {
+                            foreach (Professeur p in topUsers.Keys)
+                            {
+                                <li>
+                                    <a href="#">
+                                        @p.Nom
+                                        <span class="pull-right text-green">@topUsers[p].ToString()</span>
+                                    </a>
+                                </li>
+                            }
+                        }
+                        else
+                        {
+                            <li>
+                                <a href="#">
+                                    Pas de document
+                                    <span class="pull-right text-green"><i class="fa fa-exclamation-triangle"></i></span>
+                                </a>
+                            </li>
+                        }
+
+                    }
                 </ul>
             </div>
             <!-- /.footer -->

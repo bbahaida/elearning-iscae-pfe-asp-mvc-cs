@@ -40,9 +40,9 @@ namespace ISCAE.Web
                       "~/Content/bootstrap.min.css",
                       "~/Content/css/font-awesome.min.css",
                       //ionIcons,
-                      "~/Content/AdminLTE.min.css",
+                      "~/Content/AdminLTE.css",
                       "~/Content/skins/_all-skins.min.css",
-                      "~/Content/site.css"));
+                      "~/Content/Site.css"));
 
             //var fontAwesome = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css";
             //var ionIcons = "https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css";
@@ -52,9 +52,8 @@ namespace ISCAE.Web
                       "~/Content/datatables/dataTables.bootstrap.css",
                       "~/Content/css/font-awesome.min.css",
                       //ionIcons,
-                      "~/Content/AdminLTE.min.css",
-                      "~/Content/skins/_all-skins.min.css"
-                      ));
+                      "~/Content/AdminLTE.css",
+                      "~/Content/skins/_all-skins.min.css"));
         }
     }
 }

@@ -19,23 +19,24 @@
 @section scripts{
     <script type="text/javascript">
 
-        $(document).ready(function () {
-            $("#form-pagination").submit(function () { return false;});
-            $("#previous").click(function () {
-                calculePage("previous");
-                //$("form").submit();
-            });
-            $("#next").click(function () {
-                calculePage("next");
-                //$("form").submit();
-            });
+        //$(document).ready(function () {
+            
+        //});
+        $("#form-pagination").submit(function () { return false; });
+        $("#previous").click(function () {
+            calculePage("previous");
+            window.location.replace($("#form-pagination").attr("action") + "?pageIndex=" + parseInt($("#pageIndex").val()));
         });
-        function calculePage(type) {
+        $("#next").click(function () {
+            calculePage("next");
+            window.location.replace($("#form-pagination").attr("action") + "?pageIndex=" + parseInt($("#pageIndex").val()));
+        });
+        function calculePage(moveType) {
             var pageIndex = parseInt($("#pageIndex").val());
-            if (type == "previous") {
+            if (moveType == "previous") {
                 pageIndex--;
             }
-            else if(type == "next"){
+            else if (moveType == "next") {
                 pageIndex++;
             }
             else {

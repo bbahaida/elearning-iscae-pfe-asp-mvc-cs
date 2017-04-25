@@ -42,15 +42,24 @@ namespace ISCAE.Web.Controllers
         {
             return View();
         }
-        public ActionResult Officiel()
+        public ActionResult Officiel(int? pageIndex, int? pageSize)
         {
-            if(Session["user"] is Etudiant)
+            if (pageIndex == null || pageIndex < 1)
+            {
+                pageIndex = 1;
+            }
+            if (pageSize == null || pageSize < 1)
+            {
+                pageSize = 10;
+            }
+            if (Session["user"] is Etudiant)
             {
                 var user = (Etudiant)Session["user"];
-                List<DocumentOfficiel> documents = _documentOfficielService.GetAll().OrderBy(o => o.DocumentOfficielId).Take(10).ToList();
+                List<DocumentOfficiel> documents = _documentOfficielService.GetAll().OrderByDescending(o => o.DocumentOfficielId).Skip(((int)pageIndex - 1) * (int)pageSize).Take((int)pageSize).ToList();
                 ViewBag.professeurs = _professeurService.GetProfesseursBySpecialiteAndNiveau(user.SpecialiteId,user.Niveau);
+                ViewBag.pageIndex = (int)pageIndex;
+                ViewBag.TopUsers = _documentOfficielService.GetTopUsers(_professeurService.GetProfesseursBySpecialiteAndNiveau(((Etudiant)Session["user"]).SpecialiteId, ((Etudiant)Session["user"]).Niveau).Values.ToList());
                 return View(documents);
-                
             }
             else if (Session["user"] is Professeur)
             {
@@ -62,7 +71,7 @@ namespace ISCAE.Web.Controllers
                     specialites.Add(_specialiteService.Get(s.SpecialiteId));
                 }
                 List<Module> modules = _moduleService.GetAll().ToList();
-                List<DocumentOfficiel> documents = _documentOfficielService.GetDocumentsByUser(user.ProfesseurId,0,0).ToList();
+                List<DocumentOfficiel> documents = _documentOfficielService.GetDocumentsByUser(user.ProfesseurId,(int)pageIndex,(int)pageSize).ToList();
                 ViewBag.modules = modules;
                 ViewBag.specialites = specialites;
                 return View(documents);
@@ -76,13 +85,13 @@ namespace ISCAE.Web.Controllers
         }
         public ActionResult NonOfficiel(int? pageIndex, int? pageSize)
         {
-            if (pageIndex == null)
+            if (pageIndex == null || pageIndex < 1)
             {
                 pageIndex = 1;
             }
-            if (pageSize == null)
+            if (pageSize == null || pageSize < 1)
             {
-                pageSize = 1;
+                pageSize = 10;
             }
             if (Session["user"] is Etudiant)
             {
@@ -96,6 +105,7 @@ namespace ISCAE.Web.Controllers
                 ViewBag.maxPage = (int)Math.Ceiling((decimal)_documentNonOfficielService.GetAll().Where(o=>o.isValid == 0).Count()/(decimal)pageSize);
                 ViewBag.pageIndex = (int)pageIndex;
                 ViewBag.Modules = modules;
+                ViewBag.TopUsers = _documentNonOfficielService.GetTopUsers(((Etudiant)Session["user"]).SpecialiteId, ((Etudiant)Session["user"]).Niveau);
                 ViewBag.Etudiants = _etudiantService.GetEtudiantsBySpecialite(((Etudiant)Session["user"]).SpecialiteId, ((Etudiant)Session["user"]).Niveau).ToList();
                 return View(documents);
 

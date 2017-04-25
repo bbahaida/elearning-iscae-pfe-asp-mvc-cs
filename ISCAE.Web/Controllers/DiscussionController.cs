@@ -22,12 +22,21 @@ namespace ISCAE.Web.Controllers
             _etudiantService = etudiantService;
         }
         // GET: Discussion
-        public ActionResult Index()
+        public ActionResult Index(int? pageIndex, int? pageSize)
         {
+            if (pageIndex == null || pageIndex < 1)
+            {
+                pageIndex = 1;
+            }
+            if (pageSize == null || pageSize < 1)
+            {
+                pageSize = 10;
+            }
             var user = (Etudiant)Session["user"];
             ViewBag.etudiants = _etudiantService.GetEtudiantsBySpecialite(user.SpecialiteId, user.Niveau).ToList();
-            List<Question> questions = _questionService.GetQuestionsBySpecialite(user.SpecialiteId,user.Niveau).OrderByDescending(o=>o.QuestionId).Take(10).ToList();
-            
+            List<Question> questions = _questionService.GetQuestionsBySpecialite(user.SpecialiteId, user.Niveau,(int)pageIndex, (int)pageSize).ToList();
+            ViewBag.maxPage = (int)Math.Ceiling(_questionService.CountQuestionsBySpecialite(user.SpecialiteId, user.Niveau) /(decimal)pageSize);
+            ViewBag.pageIndex = (int)pageIndex;
             return View(questions);
         }
         [HttpPost]

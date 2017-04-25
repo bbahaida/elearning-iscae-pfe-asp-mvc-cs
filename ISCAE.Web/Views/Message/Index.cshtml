@@ -1,8 +1,10 @@
 ﻿@model List<Message>
 @using ISCAE.Data
 @{
-    ViewBag.Title = "Messages";
-    if(Session["user"] is Etudiant)
+
+    string niveauBySpecialite = ViewBag.niveauBySpecialite;
+    ViewBag.Title = "Message";
+    if (Session["user"] is Etudiant)
     {
         Layout = "~/Views/Shared/_EtudiantLayout.cshtml";
         @Html.Partial("MessageEtudiant", Model);
@@ -11,16 +13,72 @@
     {
         Layout = "~/Views/Shared/_ProfesseurLayout.cshtml";
         @Html.Partial("MessageProfesseur", Model);
-        Dictionary<int, int> niveauBySpecialite = ViewBag.niveauBySpecialite;
+        
     }
 
 }
+
 @section scripts{
+<script type="text/javascript">
+
+        //$(document).ready(function () {
+
+        //});
+        $("#form-pagination").submit(function () { return false; });
+        $("#previous").click(function () {
+            calculePage("previous");
+            window.location.replace($("#form-pagination").attr("action") + "?pageIndex=" + parseInt($("#pageIndex").val()));
+        });
+        $("#next").click(function () {
+            calculePage("next");
+            window.location.replace($("#form-pagination").attr("action") + "?pageIndex=" + parseInt($("#pageIndex").val()));
+        });
+        function calculePage(moveType) {
+            var pageIndex = parseInt($("#pageIndex").val());
+            if (moveType == "previous") {
+                pageIndex--;
+            }
+            else if (moveType == "next") {
+                pageIndex++;
+            }
+            else {
+                alert("Error in pagination");
+                return;
+            }
+            $("#pageIndex").val(pageIndex);
+        }
+
+
+</script>
 <script type="text/javascript">
     $("#specialiteProfesseurMessage").change(function () {
         var sID = $("#specialiteProfesseurMessage").val();
-        
-        $("#messageProfesseurCheckboxfirst").attr("disabled", true);
+        if (sID != "") {
+            var id = sID;
+            var list = @(Html.Raw(niveauBySpecialite));
+            $.each(list, function (key) {
+                if(id == key){
+                    for (var i in list[key]) {
+                        if(list[key][i] == 1){
+                            $("#first").attr("disabled", false);
+                        }else if(list[key][i] == 2){
+                            $("#second").attr("disabled", false);
+                        }else if(list[key][i] == 3){
+                            $("#third").attr("disabled", false);
+                        }else{
+                            alert("Something wrong");
+                        }
+                    }
+
+                }
+            });
+        }
+        else {
+            $("#first").attr("disabled", true);
+            $("#second").attr("disabled", true);
+            $("#third").attr("disabled", true);
+        }
+
     });
 </script>
 }

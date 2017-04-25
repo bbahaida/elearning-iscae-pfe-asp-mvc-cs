@@ -42,7 +42,7 @@
                                                 <img src="@Url.Content(etudiants.Find(o=>o.EtudiantId == question.EtudiantId).ProfilePath)" alt="Product Image">
                                             </div>
                                             <div class="product-info">
-                                                <a href="javascript:void(0)" class="product-title">
+                                                <a href="@Url.Action("Discussion","Discussion",new { id = question.QuestionId})" class="product-title">
                                                     @question.Titre
                                                     
                                                 </a>
@@ -191,7 +191,7 @@
                                                 <img src="@Url.Content(professeurs.Values.FirstOrDefault(o=>o.ProfesseurId == message.ProfesseurId).ProfilePath)" alt="Professeur">
                                             </div>
                                             <div class="product-info">
-                                                <a href="javascript:void(0)" class="product-title">
+                                                <a href="@Url.Action("Boites", "Message", new { id = message.MessageId })" class="product-title">
                                                     
                                                     @message.Titre
                                                     <span class="label label-success pull-right">@professeurs.FirstOrDefault(o=>o.Value.ProfesseurId == message.ProfesseurId).Key.Designation</span>
@@ -210,7 +210,7 @@
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer text-center">
-                        <a href="javascript:void(0)" class="uppercase text-green">Afficher tous</a>
+                        <a href="@Url.Action("Index", "Message")" class="uppercase text-green">Afficher tous</a>
                     </div>
                     <!-- /.box-footer -->
                 </div>
