@@ -1,17 +1,17 @@
-﻿@using ISCAE.Data
+﻿@model List<DocumentOfficiel>
+@using ISCAE.Data
 @{ 
     List<Specialite> specialites = ViewBag.specialites;
     List<Module> modules = ViewBag.modules;
+    int pageIndex = ViewBag.pageIndex;
+    int maxPage = ViewBag.maxPage;
 }
 <div class="row">
     <!-- Left col -->
     <div class="col-md-8">
-        @{
-            foreach (Specialite s in specialites)
-            {
                 <div class="box box-success">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Documents - @s.Designation</h3>
+                        <h3 class="box-title">Documents</h3>
                         <div class="box-tools pull-right">
                             <button type="button" class="btn btn-box-tool" data-widget="collapse">
                                 <i class="fa fa-minus"></i>
@@ -24,7 +24,8 @@
                             <table class="table no-margin">
                                 <thead>
                                     <tr>
-                                        <th width="60%">Titre</th>
+                                        <th width="40%">Titre</th>
+                                        <th width="20%">Module</th>
                                         <th width="20%">type</th>
                                         <th width="20%">Telechargement</th>
                                     </tr>
@@ -33,12 +34,13 @@
                                     @{
                                         if (Model.Count > 0)
                                         {
-                                            foreach (DocumentNonOfficiel document in Model)
+                                            foreach (DocumentOfficiel document in Model)
                                             {
                                                 <tr>
                                                     <td>@document.Titre</td>
+                                                    <td>@modules.Find(o=>o.ModuleId == document.ModuleId).Designation</td>
                                                     <td>@document.Type</td>
-                                                    <td><a href="@Url.Action("Download","Document",new { documentId = document.DocumentNonOfficielId })"><span class="fa fa-arrow-down"></span></a></td>
+                                                    <td><a href="@Url.Action("Download","Document",new { documentId = document.DocumentOfficielId })"><span class="fa fa-arrow-down"></span></a></td>
                                                 </tr>
                                             }
                                         }
@@ -53,10 +55,40 @@
                         <!-- /.table-responsive -->
                     </div>
                     <!-- /.box-body -->
-                </div>
-
+                    <div class="box-footer">
+                        <div class="pull-right">
+                            @using (Html.BeginForm("NonOfficiel", "Document", FormMethod.Get, new { @id = "form-pagination" }))
+                            {
+                                <input type="hidden" id="pageIndex" name="pageIndex" value="@pageIndex" />
+                                <div class="">
+                                    <button id="previous" type="submit" @((Model.Count()) == 0 || pageIndex == 1 ? "disabled" : "" ) class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
+                                    @{
+                                        if (maxPage > 0)
+                                        {
+                                            for (int i = 1; i <= maxPage; i++)
+                                            {
+                                                if (i == pageIndex)
+                                                {
+                                                    <i><b>@i</b></i>
+                                                }
+                                                else
+                                                {
+                                                    <i>@i</i>
+                                                }
+                                            }
                                         }
-        }
+
+
+                                    }
+                                    <button id="next" type="submit" @((Model.Count()) == 0 || pageIndex == maxPage ? "disabled" : "" ) class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
+                                </div>
+                                        }
+
+                            <!-- /.btn-group -->
+                        </div>
+                    </div>
+                    <!-- /.box-footer -->
+                </div>
         <div class="box box-success">
             <div class="box-header with-border">
                 <h3 class="box-title">Ajouter un nouveau</h3>
@@ -68,7 +100,7 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            @using (Html.BeginForm("AddEtudiant", "Document", FormMethod.Post, new { enctype = "multipart/form-data", @id = "add-document" }))
+            @using (Html.BeginForm("AddDocument", "Document", FormMethod.Post, new { enctype = "multipart/form-data", @id = "add-document" }))
             {
                 <div class="box-body">
 

@@ -2,6 +2,15 @@
 @using ISCAE.Data
 @{
     ViewBag.Title = "Boites";
-    Layout = "~/Views/Shared/_EtudiantLayout.cshtml";
-    @Html.Partial("ReadEtudiant", Model);
+    if (Session["user"] is Etudiant)
+    {
+        Layout = "~/Views/Shared/_EtudiantLayout.cshtml";
+        @Html.Partial("ReadEtudiant", Model);
+    }
+    else if (Session["user"] is Professeur)
+    {
+        Layout = "~/Views/Shared/_ProfesseurLayout.cshtml";
+        @Html.Partial("ReadProfesseur", Model);
+    }
+
 }

@@ -197,8 +197,14 @@
     <Folder Include="Content\fonts\" />
     <Folder Include="Content\less\" />
     <Folder Include="Content\scss\" />
-    <Folder Include="Models\" />
     <Folder Include="Resources\Documents\" />
+    <Folder Include="Resources\Etudiants\" />
+    <Folder Include="Scripts\iCheck\flat\" />
+    <Folder Include="Scripts\iCheck\futurico\" />
+    <Folder Include="Scripts\iCheck\line\" />
+    <Folder Include="Scripts\iCheck\minimal\" />
+    <Folder Include="Scripts\iCheck\polaris\" />
+    <Folder Include="Scripts\iCheck\square\" />
     <Folder Include="Views\Emploi\" />
   </ItemGroup>
   <ItemGroup>
@@ -247,10 +253,13 @@
     <Compile Include="Controllers\ProfesseurController.cs" />
     <Compile Include="Filters\AdministrateurFilter.cs" />
     <Compile Include="Filters\EtudiantFilter.cs" />
+    <Compile Include="Filters\ProfesseurFilter.cs" />
     <Compile Include="Filters\SessionFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ExcelReader.cs" />
+    <Compile Include="Models\IExcelReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -279,6 +288,9 @@
     <Content Include="Content\img\default-50x50.gif" />
     <Content Include="Content\img\directeur.jpg" />
     <Content Include="Content\img\icons.png" />
+    <Content Include="Content\img\iscae_1.jpg" />
+    <Content Include="Content\img\iscae_2.jpg" />
+    <Content Include="Content\img\iscae_3.jpg" />
     <Content Include="Content\img\logo.png" />
     <Content Include="Content\img\photo1.png" />
     <Content Include="Content\img\photo2.png" />
@@ -345,6 +357,7 @@
     </Content>
     <Content Include="Resources\Profiles\mloud.png" />
     <Content Include="Resources\Profiles\amou.png" />
+    <Content Include="Resources\Profiles\avatar.png" />
     <Content Include="Resources\Profiles\s3dbouh.png" />
     <Content Include="Resources\Profiles\mouin.png" />
     <Content Include="Resources\Profiles\bbahieda.jpg" />
@@ -355,6 +368,9 @@
     <Content Include="Scripts\demo.js" />
     <Content Include="Scripts\fastclick.js" />
     <Content Include="Scripts\fastclick.min.js" />
+    <Content Include="Scripts\iCheck\all.css" />
+    <Content Include="Scripts\iCheck\icheck.js" />
+    <Content Include="Scripts\iCheck\icheck.min.js" />
     <Content Include="Scripts\jquery-2.2.3.min.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
@@ -403,6 +419,11 @@
     <Content Include="Views\Error\Session404.cshtml" />
     <Content Include="Views\Message\MessageProfesseur.cshtml" />
     <Content Include="Views\Etudiant\UserProfile.cshtml" />
+    <Content Include="Views\Etudiant\Modules.cshtml" />
+    <Content Include="Views\Message\ReadProfesseur.cshtml" />
+    <Content Include="Views\Administrateur\AddEtudiants.cshtml" />
+    <Content Include="Views\Administrateur\Etudiants.cshtml" />
+    <Content Include="Views\Home\Register.cshtml" />
     <None Include="Views\Shared\_EtudiantLayout.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -421,6 +442,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_HomeLayout.cshtml" />
     <Content Include="Views\Shared\_EtudiantSlideMenu.cshtml" />
+    <Content Include="Views\Shared\_RegisterLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ISCAE.Business\ISCAE.Business.csproj">
@@ -437,6 +459,35 @@
     <None Include="Project_Readme.html" />
     <Content Include="Views\Home\Directeur.cshtml" />
     <Content Include="Views\Shared\_Navbar.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Excel">
+      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>9</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

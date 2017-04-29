@@ -8,5 +8,6 @@ namespace ISCAE.Data.Repositories
 {
     public interface ISpecialiteRepository : IRepository<Specialite>
     {
+        Specialite GetByDesignation(string designation);
     }
 }

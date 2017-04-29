@@ -66,14 +66,22 @@ namespace ISCAE.Web.Controllers
                 var user = (Professeur)Session["user"];
                 List<ProfesseurSpecialite> professeurSpecialites = _professeurSpecialiteService.GetSpecialitesByProfesseur(user.ProfesseurId).ToList();
                 List<Specialite> specialites = new List<Specialite>();
-                foreach (ProfesseurSpecialite s in professeurSpecialites)
+                List<ProfesseurModule> professeurModules = _professeurModuleService.GetModulesByProfesseur(user.ProfesseurId).ToList();
+                List<Module> modules = new List<Module>();
+                foreach (ProfesseurSpecialite specialite in professeurSpecialites)
                 {
-                    specialites.Add(_specialiteService.Get(s.SpecialiteId));
+                    specialites.Add(_specialiteService.Get(specialite.SpecialiteId));
                 }
-                List<Module> modules = _moduleService.GetAll().ToList();
+                foreach (ProfesseurModule professeurModule in professeurModules)
+                {
+                    modules.Add(_moduleService.Get(professeurModule.ModuleId));
+                }
+
                 List<DocumentOfficiel> documents = _documentOfficielService.GetDocumentsByUser(user.ProfesseurId,(int)pageIndex,(int)pageSize).ToList();
                 ViewBag.modules = modules;
                 ViewBag.specialites = specialites;
+                ViewBag.pageIndex = (int)pageIndex;
+                ViewBag.maxPage = (int)Math.Ceiling(_documentOfficielService.GetAll().Where(o=>o.ProfesseurId == user.ProfesseurId).Count()/(decimal)pageSize);
                 return View(documents);
             }
             else 
@@ -95,14 +103,14 @@ namespace ISCAE.Web.Controllers
             }
             if (Session["user"] is Etudiant)
             {
-                List<DocumentNonOfficiel> documents = _documentNonOfficielService.GetNonValidDocument((int)pageIndex, (int)pageSize).ToList();
+                List<DocumentNonOfficiel> documents = _documentNonOfficielService.GetAll().OrderByDescending(o=>o.DocumentNonOfficielId).Skip(((int)pageIndex -1)*(int)pageSize).Take((int)pageSize).ToList();
                 var data = _specialiteModuleService.GetSpecialiteModulesByNiveau(((Etudiant)Session["user"]).SpecialiteId, ((Etudiant)Session["user"]).Niveau);
                 List<Module> modules = new List<Module>();
                 foreach (SpecialiteModule sm in data)
                 {
                     modules.Add(_moduleService.Get(sm.ModuleId));
                 }
-                ViewBag.maxPage = (int)Math.Ceiling((decimal)_documentNonOfficielService.GetAll().Where(o=>o.isValid == 0).Count()/(decimal)pageSize);
+                ViewBag.maxPage = (int)Math.Ceiling(_documentNonOfficielService.GetAll().Count()/(decimal)pageSize);
                 ViewBag.pageIndex = (int)pageIndex;
                 ViewBag.Modules = modules;
                 ViewBag.TopUsers = _documentNonOfficielService.GetTopUsers(((Etudiant)Session["user"]).SpecialiteId, ((Etudiant)Session["user"]).Niveau);
@@ -119,31 +127,29 @@ namespace ISCAE.Web.Controllers
                 List<Module> modules = _moduleService.GetAll().ToList();
 
                 List<ProfesseurSpecialite> ps = _professeurSpecialiteService.GetSpecialitesByProfesseur(user.ProfesseurId).ToList();
-                
-                
-                var AllDocuments = _documentNonOfficielService.GetAll();
-                var AllEtudiant = _etudiantService.GetAll();
+                List<ProfesseurModule> professeurModules = _professeurModuleService.GetModulesByProfesseur(user.ProfesseurId).ToList();
+                var specialiteWithNiveau = _professeurService.GetSpecialiteWithNiveau(user.ProfesseurId);
 
-                foreach (ProfesseurSpecialite s in ps)
+                foreach (ProfesseurModule module in professeurModules)
                 {
-                    specialites.Add(_specialiteService.Get(s.SpecialiteId));
-                    
-                    foreach(DocumentNonOfficiel dno in AllDocuments)
+                    modules.Add(_moduleService.Get(module.ModuleId));
+                    documents.AddRange(_documentNonOfficielService.GetDocumentByModule(module.ModuleId));
+                }
+                foreach (int specialite in specialiteWithNiveau.Keys)
+                {
+                    specialites.Add(_specialiteService.Get(specialite));
+                    foreach (int niveau in specialiteWithNiveau[specialite])
                     {
-                        if (dno.Etudiant.SpecialiteId == s.SpecialiteId && dno.isValid == 1)
-                            documents.Add(dno);
-                    }
-                    foreach (Etudiant e in AllEtudiant)
-                    {
-                        if (e.SpecialiteId == s.SpecialiteId)
-                            etudiants.Add(e);
+                        etudiants.AddRange(_etudiantService.GetEtudiantsBySpecialite(specialite, niveau).ToList());
                     }
                 }
                 
                 ViewBag.specialites = specialites;
                 ViewBag.etudiants = etudiants;
                 ViewBag.modules = modules;
-                return View(documents);
+                ViewBag.pageIndex = (int)pageIndex;
+                ViewBag.maxPage = (int)Math.Ceiling(documents.Count / (decimal)pageSize);
+                return View(documents.OrderByDescending(o=>o.ModuleId).Skip(((int)pageIndex - 1) * (int)pageSize).Take((int)pageSize).ToList());
             }
             else
             {
@@ -175,7 +181,7 @@ namespace ISCAE.Web.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult AddEtudiant(HttpPostedFileBase document, int module)
+        public ActionResult AddDocument(HttpPostedFileBase document, int module)
         {
             if(document != null && document.ContentLength > 0)
             {
@@ -202,7 +208,6 @@ namespace ISCAE.Web.Controllers
                         Titre = titre,
                         Emplacement = path,
                         Type = type,
-                        isValid = 0,
                         DateAjoutNonOfficiel = DateTime.Now,
                         ModuleId = module,
                         EtudiantId = ((Etudiant)Session["user"]).EtudiantId

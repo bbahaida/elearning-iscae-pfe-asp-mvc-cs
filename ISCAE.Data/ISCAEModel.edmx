@@ -16,6 +16,7 @@
           <Property Name="Telephone" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="Email" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="isActive" Type="tinyint" Nullable="false" />
+          <Property Name="ProfilePath" Type="varchar" MaxLength="255" Nullable="false" />
         </EntityType>
         <EntityType Name="Annonces">
           <Key>
@@ -35,7 +36,6 @@
           <Property Name="Titre" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="Emplacement" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Type" Type="varchar" MaxLength="25" />
-          <Property Name="isValid" Type="tinyint" Nullable="false" />
           <Property Name="ModuleId" Type="int" Nullable="false" />
           <Property Name="DateAjoutNonOfficiel" Type="datetime" Nullable="false" />
           <Property Name="EtudiantId" Type="int" Nullable="false" />
@@ -142,6 +142,7 @@
           <Property Name="Contenu" Type="text" Nullable="false" />
           <Property Name="Titre" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="DateQuestion" Type="datetime" Nullable="false" />
+          <Property Name="Attachment" Type="varchar" MaxLength="255" />
           <Property Name="EtudiantId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Reponses">
@@ -519,6 +520,7 @@
           <Property Name="Telephone" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="isActive" Type="Byte" Nullable="false" />
+          <Property Name="ProfilePath" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Annonces" Relationship="Self.FK_Annonces_AdministrateurId" FromRole="Administrateurs" ToRole="Annonces" />
           <NavigationProperty Name="Resultats" Relationship="Self.FK_Resultats_AdministrateurId" FromRole="Administrateurs" ToRole="Resultats" />
         </EntityType>
@@ -541,7 +543,6 @@
           <Property Name="Titre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Emplacement" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Type" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="isValid" Type="Byte" Nullable="false" />
           <Property Name="ModuleId" Type="Int32" Nullable="false" />
           <Property Name="DateAjoutNonOfficiel" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="EtudiantId" Type="Int32" Nullable="false" />
@@ -670,6 +671,7 @@
           <Property Name="Contenu" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Titre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="DateQuestion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Attachment" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="EtudiantId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Etudiant" Relationship="Self.FK_Questions_EtudiantId" FromRole="Questions" ToRole="Etudiants" />
           <NavigationProperty Name="Reponses" Relationship="Self.FK_Reponses_QuestionId" FromRole="Questions" ToRole="Reponses" />
@@ -1060,6 +1062,7 @@
                 <ScalarProperty Name="Telephone" ColumnName="Telephone" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="ProfilePath" ColumnName="ProfilePath" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1081,7 +1084,6 @@
                 <ScalarProperty Name="Titre" ColumnName="Titre" />
                 <ScalarProperty Name="Emplacement" ColumnName="Emplacement" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="isValid" ColumnName="isValid" />
                 <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
                 <ScalarProperty Name="DateAjoutNonOfficiel" ColumnName="DateAjoutNonOfficiel" />
                 <ScalarProperty Name="EtudiantId" ColumnName="EtudiantId" />
@@ -1193,6 +1195,7 @@
                 <ScalarProperty Name="Contenu" ColumnName="Contenu" />
                 <ScalarProperty Name="Titre" ColumnName="Titre" />
                 <ScalarProperty Name="DateQuestion" ColumnName="DateQuestion" />
+                <ScalarProperty Name="Attachment" ColumnName="Attachment" />
                 <ScalarProperty Name="EtudiantId" ColumnName="EtudiantId" />
               </MappingFragment>
             </EntityTypeMapping>

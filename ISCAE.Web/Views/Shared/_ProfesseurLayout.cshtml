@@ -158,7 +158,7 @@
                 <ul class="sidebar-menu">
                     <li class="header">MAIN NAVIGATION</li>
                     <li class="active">
-                        <a href='@Url.Action("Index","Etudiant")'>
+                        <a href='@Url.Action("Index","Professeur")'>
                             <i class="fa fa-home"></i> <span>Accueil</span>
                         </a>
                     </li>
@@ -171,17 +171,11 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href='@Url.Action("Officiel","Document")'><i class="fa fa-circle-o"></i>Ajouter par profs</a></li>
-                            <li><a href='@Url.Action("NonOfficiel","Document")'><i class="fa fa-circle-o"></i> Ajouter par etudiant</a></li>
+                            <li><a href='@Url.Action("Officiel","Document")'><i class="fa fa-circle-o"></i>Mes documents</a></li>
+                            <li><a href='@Url.Action("NonOfficiel","Document")'><i class="fa fa-circle-o"></i> Ajouter par etudiants</a></li>
                         </ul>
                     </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-comments-o"></i>
-                            <span>Discussions</span>
-                        </a>
-
-                    </li>
+                    
                     <li>
                         <a href='@Url.Action("Index","Annonce")'>
                             <i class="fa fa-flash"></i> <span>Annonces</span>

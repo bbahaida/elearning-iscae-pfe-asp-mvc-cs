@@ -10,5 +10,6 @@ namespace ISCAE.Data.Repositories
     {
         IEnumerable<ProfesseurModule> GetModulesByProfesseur(int ProfesseurId);
         IEnumerable<ProfesseurModule> GetProfesseursByModule(int ModuleId);
+        int GetId(int ProfesseurId, int ModuleId);
     }
 }

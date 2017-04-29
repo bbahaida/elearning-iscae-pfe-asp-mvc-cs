@@ -1,0 +1,173 @@
+﻿@model List<Specialite>
+@using ISCAE.Data
+@{
+    ViewBag.Title = "Etudiants";
+    Layout = "~/Views/Shared/_AdministrateurLayout.cshtml";
+    List<Etudiant> etudiants = ViewBag.etudiants;
+    List<Etudiant> etudiantsBySpecialite = new List<Etudiant>();
+    List<Etudiant> etudiantsBySpecialiteAndNiveau = new List<Etudiant>();
+}
+@{
+    foreach (Specialite specialite in Model)
+    {
+        etudiantsBySpecialite = etudiants.Where(o => o.SpecialiteId == specialite.SpecialiteId).ToList();
+
+        <div class="row">
+            <!-- Left col -->
+            <div class="col-md-4">
+                <div class="box box-success">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">@specialite.Designation - 1</h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="table-responsive">
+                            <table class="table no-margin">
+                                <thead>
+                                    <tr>
+                                        <th>Matricule</th>
+                                        <th>Nom</th>
+                                        <th>Desactiver</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        etudiantsBySpecialiteAndNiveau = etudiantsBySpecialite.Where(o => o.Niveau == 1).ToList();
+
+                                        if (etudiantsBySpecialiteAndNiveau.Count > 0)
+                                        {
+                                            foreach (Etudiant e in etudiantsBySpecialiteAndNiveau)
+                                            {
+                                                <tr>
+                                                    <td>@e.Matricule</td>
+                                                    <td>@e.Nom</td>
+                                                    <td><a href="@Url.Action("Close", "Administrateur", new { id = e.EtudiantId })"><span class="fa fa-close"></span></a></td>
+                                                </tr>
+                                                }
+                                            }
+                                            else
+                                            {
+                                            <tr><td colspan="5">Pas de donnees</td></tr>
+                                            }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.table-responsive -->
+
+                    </div>
+                    <!-- /.box-body -->
+                    
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="box box-success">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">@specialite.Designation - 2</h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="table-responsive">
+                            <table class="table no-margin">
+                                <thead>
+                                    <tr>
+                                        <th>Matricule</th>
+                                        <th>Nom</th>
+                                        <th>Desactiver</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        etudiantsBySpecialiteAndNiveau = etudiantsBySpecialite.Where(o => o.Niveau == 2).ToList();
+
+                                        if (etudiantsBySpecialiteAndNiveau.Count > 0)
+                                        {
+                                            foreach (Etudiant e in etudiantsBySpecialiteAndNiveau)
+                                            {
+                                                <tr>
+                                                    <td>@e.Matricule</td>
+                                                    <td>@e.Nom</td>
+                                                    <td><a href="@Url.Action("Close","Administrateur",new { id=e.EtudiantId })"><span class="fa fa-close"></span></a></td>
+                                                </tr>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <tr><td colspan="5">Pas de donnees</td></tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.table-responsive -->
+
+                    </div>
+                    <!-- /.box-body -->
+
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="box box-success">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">@specialite.Designation - 3</h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="table-responsive">
+                            <table class="table no-margin">
+                                <thead>
+                                    <tr>
+                                        <th>Matricule</th>
+                                        <th>Nom</th>
+                                        <th>Desactiver</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+
+                                        etudiantsBySpecialiteAndNiveau = etudiantsBySpecialite.Where(o => o.Niveau == 3).ToList();
+
+                                        if (etudiantsBySpecialiteAndNiveau.Count > 0)
+                                        {
+                                            foreach (Etudiant e in etudiantsBySpecialiteAndNiveau)
+                                            {
+                                                <tr>
+                                                    <td>@e.Matricule</td>
+                                                    <td>@e.Nom</td>
+                                                    <td><a href="@Url.Action("Close","Administrateur",new { id=e.EtudiantId })"><span class="text-danger fa fa-close"></span></a></td>
+                                                </tr>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <tr><td colspan="5">Pas de donnees</td></tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.table-responsive -->
+
+                    </div>
+                    <!-- /.box-body -->
+
+                </div>
+            </div>
+        </div>
+    }
+}

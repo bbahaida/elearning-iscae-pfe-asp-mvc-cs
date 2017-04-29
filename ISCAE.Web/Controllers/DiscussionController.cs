@@ -3,6 +3,7 @@ using ISCAE.Data;
 using ISCAE.Web.Filters;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -40,12 +41,25 @@ namespace ISCAE.Web.Controllers
             return View(questions);
         }
         [HttpPost]
-        public ActionResult Add(string titre, string contenu)
+        public ActionResult Add(string titre, string contenu, HttpPostedFileBase attachment)
         {
+            string path = "";
+            var extension = Path.GetExtension(attachment.FileName);
+            if (attachment != null && attachment.ContentLength > 0)
+            {
+                if(extension.ToLower().Equals(".png") || extension.ToLower().Equals(".jpg") || extension.ToLower().Equals(".jpeg"))
+                {
+                    attachment.SaveAs(Path.Combine(Server.MapPath("~/Resources/Documents"), Path.GetFileName(attachment.FileName)));
+                    path = "~/Resources/Questions/" + Path.GetFileName(attachment.FileName);
+                }
+                    
+            }
+            
             Question question = new Question
             {
                 Titre = titre,
                 Contenu = contenu,
+                Attachment = path,
                 DateQuestion = DateTime.Now,
                 EtudiantId = ((Etudiant)Session["user"]).EtudiantId
             };

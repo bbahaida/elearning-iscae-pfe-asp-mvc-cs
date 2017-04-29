@@ -20,11 +20,25 @@ namespace ISCAE.Business.Services
             _moduleRepository = moduleRepository;
         }
 
+        public IEnumerable<DocumentNonOfficiel> GetDocumentByModule(int ModuleId)
+        {
+            if (ModuleId < 1 || _moduleRepository.Get(ModuleId) == null)
+                return null;
+            return _documentNonOfficielRepository.GetDocumentByModule(ModuleId);
+        }
+
         public IEnumerable<DocumentNonOfficiel> GetDocumentByModule(int ModuleId, int Niveau, int pageIndex, int pageSize)
         {
             if (ModuleId < 1 || _moduleRepository.Get(ModuleId) ==null || Niveau < 1 || Niveau > 3 || pageIndex < 1 || pageSize < 1)
                 return null;
             return _documentNonOfficielRepository.GetDocumentByModule(ModuleId,Niveau,pageIndex,pageSize);
+        }
+
+        public IEnumerable<DocumentNonOfficiel> GetDocumentByUser(int EtudiantId)
+        {
+            if (EtudiantId < 1 || _etudiantRepository.Get(EtudiantId) == null)
+                return null;
+            return _documentNonOfficielRepository.GetDocumentByUser(EtudiantId);
         }
 
         public IEnumerable<DocumentNonOfficiel> GetDocumentByUser(int EtudiantId, int pageIndex, int pageSize)
@@ -33,13 +47,7 @@ namespace ISCAE.Business.Services
                 return null;
             return _documentNonOfficielRepository.GetDocumentByUser(EtudiantId,pageIndex,pageSize);
         }
-
-        public IEnumerable<DocumentNonOfficiel> GetNonValidDocument(int pageIndex, int pageSize)
-        {
-            if (pageIndex < 1 || pageSize < 1)
-                return null;
-            return _documentNonOfficielRepository.GetNonValidDocument(pageIndex,pageSize);
-        }
+        
 
         public Dictionary<Etudiant, int> GetTopUsers(int SpecialiteId, int Niveau)
         {
@@ -53,13 +61,7 @@ namespace ISCAE.Business.Services
             }
             return list.OrderByDescending(o => o.Value).Take(3).ToDictionary(pair => pair.Key, pair => pair.Value);
         }
-
-        public IEnumerable<DocumentNonOfficiel> GetValidDocument(int pageIndex, int pageSize)
-        {
-            if (pageIndex < 1 || pageSize < 1)
-                return null;
-            return _documentNonOfficielRepository.GetValidDocument(pageIndex, pageSize);
-        }
+        
 
         
     }

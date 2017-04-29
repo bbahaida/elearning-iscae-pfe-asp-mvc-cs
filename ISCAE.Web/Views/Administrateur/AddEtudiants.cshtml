@@ -1,0 +1,51 @@
+﻿@using ISCAE.Data
+@{
+    ViewBag.Title = "AddEtudiants";
+    Layout = "~/Views/Shared/_AdministrateurLayout.cshtml";
+    bool canAdd = DateTime.Now.Month > 8 && DateTime.Now.Month < 12;
+    List<Etudiant> etudiants = ViewBag.etudiants;
+
+}
+
+<div class="row">
+    <!-- left column -->
+    <div class="col-md-8">
+        <!-- general form elements -->
+        <div class="box box-success">
+            <div class="box-header with-border">
+                <h3 class="box-title">Ajouter un nouveau</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            @using (Html.BeginForm("AddEtudiants", "Administrateur", FormMethod.Post, new { enctype = "multipart/form-data", @id = "add-document" }))
+            {
+                <div class="box-body">
+
+                    <div class="form-group">
+                        <label for="document">Etudiants</label>
+                        <input type="file" id="document" name="document">
+                        <p class="help-block">le document doit etre de type excel</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Annee universitaire</label>
+                            <input type="text" disabled class="form-control" value="@(DateTime.Now.Year)-@(DateTime.Now.Year+1)">
+                            <input type="hidden" name="year" value="@(DateTime.Now.Year)-@(DateTime.Now.Year+1)" />
+                    </div>
+
+                </div>
+                <!-- /.box-body -->
+                                <div class="box-footer">
+                                    <button type="submit" @(canAdd?"":"disabled") class="btn btn-success">Submit</button>
+                                </div>
+                                }
+        </div>
+        <!-- /.box -->
+       
+    </div>
+
+</div>

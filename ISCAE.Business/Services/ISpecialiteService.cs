@@ -9,6 +9,6 @@ namespace ISCAE.Business.Services
 {
     public interface ISpecialiteService : ICommonService<Specialite>
     {
-        
+        Specialite GetByDesignation(string designation);
     }
 }

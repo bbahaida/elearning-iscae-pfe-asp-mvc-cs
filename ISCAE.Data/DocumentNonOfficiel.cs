@@ -18,7 +18,6 @@ namespace ISCAE.Data
         public string Titre { get; set; }
         public string Emplacement { get; set; }
         public string Type { get; set; }
-        public byte isValid { get; set; }
         public int ModuleId { get; set; }
         public System.DateTime DateAjoutNonOfficiel { get; set; }
         public int EtudiantId { get; set; }

@@ -24,6 +24,7 @@ namespace ISCAE.Data
         public string Contenu { get; set; }
         public string Titre { get; set; }
         public System.DateTime DateQuestion { get; set; }
+        public string Attachment { get; set; }
         public int EtudiantId { get; set; }
     
         public virtual Etudiant Etudiant { get; set; }

@@ -13,9 +13,7 @@ namespace ISCAE.Tests
         [TestMethod]
         public void Should_GetProfesseursBySpecialiteAndNiveau_Return_Specific_Profs()
         {
-            IProfesseurService sut = new ProfesseurService(new ProfesseurRepository(), new ProfesseurModuleRepository(), new ModuleRepository(),new ProfesseurSpecialiteRepository(), new SpecialiteModuleRepository());
-            Dictionary<Module, Professeur> profs = sut.GetProfesseursBySpecialiteAndNiveau(4,2);
-            Assert.AreEqual(1, profs.Count);
+            
         }
     }
 }

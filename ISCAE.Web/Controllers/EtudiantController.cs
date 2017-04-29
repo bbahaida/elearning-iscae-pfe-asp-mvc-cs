@@ -51,8 +51,13 @@ namespace ISCAE.Web.Controllers
             int notificationCount = notifications.Count();
 
             // Documents
-            List<DocumentNonOfficiel> documents = _documentNonOfficielService.GetNonValidDocument(1, 10).ToList();
-
+            List<DocumentNonOfficiel> documents = new List<DocumentNonOfficiel>();
+            List <SpecialiteModule> pecialiteModules = _specialiteModuleService.GetSpecialiteModulesByNiveau(user.SpecialiteId,user.Niveau).ToList();
+            foreach (SpecialiteModule module in pecialiteModules)
+            {
+                documents.AddRange(_documentNonOfficielService.GetDocumentByModule(module.ModuleId, user.Niveau,1,10));
+            }
+            documents = documents.OrderByDescending(o => o.DocumentNonOfficielId).Take(10).ToList();
             // Messages
             List<Message> messages = _messageService.GetMessagesBySpecialiteAndNiveau(user.SpecialiteId, user.Niveau,1,5).ToList();
             int messageCount = messages.Count();
@@ -113,8 +118,16 @@ namespace ISCAE.Web.Controllers
         public ActionResult Avatar(HttpPostedFileBase image)
         {
             Etudiant user = (Etudiant)Session["user"];
-            
+
             return View(user);
         }
+        public ActionResult Modules()
+        {
+            Etudiant user = (Etudiant)Session["user"];
+            
+            Dictionary<Module, Professeur> model = _professeurService.GetProfesseursBySpecialiteAndNiveau(user.SpecialiteId,user.Niveau);
+            return View(model);
+        }
     }
+
 }

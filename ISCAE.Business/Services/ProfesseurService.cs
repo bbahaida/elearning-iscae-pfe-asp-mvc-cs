@@ -12,15 +12,18 @@ namespace ISCAE.Business.Services
         private IProfesseurModuleRepository _professeurModuleRepository;
         private IProfesseurSpecialiteRepository _professeurSpecialiteRepository;
         private ISpecialiteModuleRepository _specialiteModuleRepository;
+        private ISpecialiteModuleService _specialiteModuleService;
         private IModuleRepository _moduleRepository;
         public ProfesseurService(IProfesseurRepository repository, IProfesseurModuleRepository professeurModuleRepository, IModuleRepository moduleRepository,
-               IProfesseurSpecialiteRepository professeurSpecialiteRepository, ISpecialiteModuleRepository specialiteModuleRepository) : base(repository)
+               IProfesseurSpecialiteRepository professeurSpecialiteRepository, ISpecialiteModuleRepository specialiteModuleRepository,
+               ISpecialiteModuleService specialiteModuleService) : base(repository)
         {
             _professeurRepository = repository;
             _professeurModuleRepository = professeurModuleRepository;
             _professeurSpecialiteRepository = professeurSpecialiteRepository;
             _specialiteModuleRepository = specialiteModuleRepository;
             _moduleRepository = moduleRepository;
+            _specialiteModuleService = specialiteModuleService;
 
         }
 
@@ -89,6 +92,34 @@ namespace ISCAE.Business.Services
             if (telephone.Equals(""))
                 return null;
             return _professeurRepository.GetUserByTelephone(telephone);
+        }
+
+        public Dictionary<int, List<int>> GetSpecialiteWithNiveau(int ProfesseurId)
+        {
+            List<ProfesseurSpecialite> professeurSpecialites = _professeurSpecialiteRepository.GetSpecialitesByProfesseur(ProfesseurId).ToList();
+            Dictionary<int, List<int>> niveauBySpecialite = new Dictionary<int, List<int>>();
+            List<ProfesseurModule> professeurModules = _professeurModuleRepository.GetModulesByProfesseur(ProfesseurId).ToList();
+
+            foreach (ProfesseurSpecialite p in professeurSpecialites)
+            {
+                bool uTeach = false;
+                List<int> niveau = new List<int>();
+                List<SpecialiteModule> sm = _specialiteModuleRepository.GetSpecialiteModulesBySpecialite(p.SpecialiteId).ToList();
+                foreach (ProfesseurModule m in professeurModules)
+                {
+                    foreach (SpecialiteModule s in sm)
+                    {
+                        if (s.ModuleId == m.ModuleId)
+                        {
+                            uTeach = true;
+                            niveau.Add(_specialiteModuleService.GetNiveauBySpecialiteAndModule(p.SpecialiteId, s.ModuleId));
+                        }
+                    }
+                }
+                if (uTeach)
+                    niveauBySpecialite.Add(p.SpecialiteId, niveau);
+            }
+            return niveauBySpecialite;
         }
     }
 }

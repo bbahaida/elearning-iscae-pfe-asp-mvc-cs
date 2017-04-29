@@ -1,0 +1,39 @@
+﻿@model Message
+@using ISCAE.Data
+@{
+    List<Specialite> specialites = ViewBag.specialites;
+}
+<div class="row">
+    <div class="col-md-9">
+        <div class="box box-success">
+            <div class="box-header with-border">
+                <h3 class="box-title">Lire Message</h3>
+
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+                <div class="mailbox-read-info">
+                    <h3>@Model.Titre</h3>
+                    <h5>
+                        Vers : @Model.Niveau@(Model.Niveau > 1 ? "eme" : "er") - @specialites.Find(o=>o.SpecialiteId == Model.SpecialiteId).Designation
+                        <span class="mailbox-read-time pull-right">@String.Format("{0:dd-MM-yyyy} à {0:H:mm}", Model.DateEnvoiMessage)</span>
+                    </h5>
+                </div>
+
+                <!-- /.mailbox-controls -->
+                <div class="mailbox-read-message">
+                    <p>
+                        @Model.Contenu
+                    </p>
+                </div>
+                <!-- /.mailbox-read-message -->
+            </div>
+            <!-- /.box-body -->
+
+
+        </div>
+        <!-- /. box -->
+    </div>
+    <!-- /.col -->
+</div>
+<!-- /.row -->

@@ -10,5 +10,7 @@ namespace ISCAE.Data.Repositories
     {
         IEnumerable<DocumentOfficiel> GetDocumentByUser(int ProfesseurId, int pageIndex, int pageSize);
         IEnumerable<DocumentOfficiel> GetDocumentByModule(int ModuleId, int pageIndex, int pageSize);
+        IEnumerable<DocumentOfficiel> GetDocumentByUser(int ProfesseurId);
+        IEnumerable<DocumentOfficiel> GetDocumentByModule(int ModuleId);
     }
 }

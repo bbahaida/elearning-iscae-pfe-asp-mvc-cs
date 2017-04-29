@@ -16,5 +16,11 @@ namespace ISCAE.Business.Services
             _specialiteRepository = repository;
         }
 
+        public Specialite GetByDesignation(string designation)
+        {
+            if (designation == null || designation.Equals(""))
+                return null;
+            return _specialiteRepository.GetByDesignation(designation);
+        }
     }
 }

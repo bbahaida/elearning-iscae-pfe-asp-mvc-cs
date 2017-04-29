@@ -54,5 +54,21 @@ namespace ISCAE.Business.Services
             }
             return list.OrderByDescending(o => o.Value).Take(3).ToDictionary(pair => pair.Key, pair => pair.Value);
         }
+
+        public IEnumerable<DocumentOfficiel> GetDocumentsByUser(int ProfesseurId)
+        {
+            if (ProfesseurId < 1 || _professeurRepository.Get(ProfesseurId) == null)
+                return null;
+            
+            return _documentOfficielRepository.GetDocumentByUser(ProfesseurId);
+        }
+
+        public IEnumerable<DocumentOfficiel> GetDocumentsByModule(int ModuleId)
+        {
+            if (ModuleId < 1 || _moduleRepository.Get(ModuleId) == null)
+                return null;
+            
+            return _documentOfficielRepository.GetDocumentByModule(ModuleId);
+        }
     }
 }

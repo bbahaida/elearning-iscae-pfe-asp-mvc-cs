@@ -104,6 +104,24 @@ namespace ISCAE.Web.Controllers
                 }
                 return View(message);
             }
+            if (Session["user"] is Professeur)
+            {
+                var user = (Professeur)Session["user"];
+                List<Specialite> specialites = new List<Specialite>();
+                List<ProfesseurSpecialite> ps = _professeurSpecialiteService.GetSpecialitesByProfesseur(user.ProfesseurId).ToList();
+                foreach (ProfesseurSpecialite s in ps)
+                {
+                    specialites.Add(_specialiteService.Get(s.SpecialiteId));
+                }
+                Message message = _messageService.Get((int)id);
+
+                if (message == null)
+                {
+                    return RedirectToAction("Index", "Message");
+                }
+                ViewBag.specialites = specialites;
+                return View(message);
+            }
             return null;
             
         }

@@ -16,5 +16,6 @@ namespace ISCAE.Business.Services
         IEnumerable<Professeur> GetActiveUsers();
         IEnumerable<Professeur> GetNonActiveUsers();
         Dictionary<Module, Professeur> GetProfesseursBySpecialiteAndNiveau(int SpecialiteId, int Niveau);
+        Dictionary<int, List<int>> GetSpecialiteWithNiveau(int ProfesseurId);
     }
 }

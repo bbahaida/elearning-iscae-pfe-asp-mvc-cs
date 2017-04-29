@@ -8,6 +8,20 @@ namespace ISCAE.Data.Repositories
 {
     public class ProfesseurSpecialiteRepository : Repository<IscaeEntities, ProfesseurSpecialite>, IProfesseurSpecialiteRepository
     {
+        public int GetId(int ProfesseurId, int SpecialiteId)
+        {
+            try
+            {
+                int id = Context.Set<ProfesseurSpecialite>().FirstOrDefault(o => o.SpecialiteId == SpecialiteId && o.ProfesseurId == ProfesseurId).ProfesseurSpecialiteId;
+                return id > 0 ? id : 0;
+            }
+            catch (Exception e)
+            {
+                //Logger.Error(e.Message);
+                return 0;
+            }
+        }
+
         public IEnumerable<ProfesseurSpecialite> GetProfesseursBySpecialite(int SpecialiteId)
         {
             try

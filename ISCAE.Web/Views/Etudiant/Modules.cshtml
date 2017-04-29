@@ -1,0 +1,47 @@
+﻿@model Dictionary<Module,Professeur>
+@using ISCAE.Data
+@{
+    ViewBag.Title = "Modules";
+    Layout = "~/Views/Shared/_EtudiantLayout.cshtml";
+}
+
+@{ 
+    for (int i = 0; i < Model.Keys.Count; i += 3)
+    {
+        <div class="row">
+            @{
+                for (int j = 0; j < 3; j++)
+                {
+                    if((i+j) >= Model.Keys.Count)
+                    {
+                        break;
+                    }
+                    <div class="col-md-4">
+                        <!--Annonces-->
+                        <div class="box box-success">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">@Model.Keys.ElementAt(i+j).Designation</h3>
+                                <div class="box-tools pull-right">
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                        <i class="fa fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- /.box-header -->
+
+                            <div class="box-footer no-padding">
+                                <ul class="nav nav-pills nav-stacked">
+                                    <li><a href="#">@Model[@Model.Keys.ElementAt(i + j)].Nom</a></li>
+                                </ul>
+                            </div>
+                            <!-- /.footer -->
+                        </div>
+                        <!-- /.box -->
+                        
+                    </div>
+                    }
+                }
+            </div>
+
+        }
+}

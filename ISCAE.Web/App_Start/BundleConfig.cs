@@ -27,6 +27,7 @@ namespace ISCAE.Web
                       "~/Scripts/respond.js",
                       "~/Scripts/app.min.js",
                       "~/Scripts/jquery.sparkline.min.js",
+                      "~/Scripts/iCheck/icheck.min.js",
                       "~/Content/datatables/jquery.dataTables.min.js",
                       "~/Content/datatables/dataTables.bootstrap.min.js",
                       "~/Scripts/jquery.slimscroll.min.js",
@@ -41,6 +42,7 @@ namespace ISCAE.Web
                       "~/Content/css/font-awesome.min.css",
                       //ionIcons,
                       "~/Content/AdminLTE.css",
+                      "~/Scripts/iCheck/square/green.css",
                       "~/Content/skins/_all-skins.min.css",
                       "~/Content/Site.css"));
 

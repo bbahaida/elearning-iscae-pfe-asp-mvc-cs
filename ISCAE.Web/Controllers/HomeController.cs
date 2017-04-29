@@ -4,6 +4,9 @@ using ISCAE.Web.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -54,7 +57,8 @@ namespace ISCAE.Web.Controllers
                     Password = "admin",
                     Nom = "Administrateur",
                     isActive = 1,
-                    Telephone = "34565656"
+                    Telephone = "34565656",
+                   ProfilePath = "~/Resources/Profiles/amou.png"
 
                 };
             }
@@ -126,6 +130,45 @@ namespace ISCAE.Web.Controllers
         {
             Session.Clear();
             return RedirectToAction("Index","Home");
+        }
+        public ActionResult Register()
+        {
+            ViewBag.error = false;
+            ViewBag.done = false;
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Register(string nni, string matricule, string login, string tel, string email, string password, string repassword)
+        {
+            ViewBag.error = false;
+            ViewBag.done = false;
+            if (nni == null || nni.Equals("") || matricule == null 
+                || matricule.Equals("") || email == null || email.Equals("") 
+                || password == null || password.Equals("") || repassword.Equals("") 
+                || !password.Equals(repassword)
+                )
+            {
+                ViewBag.error = true;
+                return View();
+            }
+            Etudiant etudiant = _etudiantService.GetUserByNNI(nni);
+            if (etudiant.Matricule.ToLower().Equals(matricule.ToLower()))
+            {
+                if (etudiant.isActive == 0 && (etudiant.Password == null || etudiant.Password.Equals("")))
+                {
+                    etudiant.Email = email;
+                    etudiant.Login = login;
+                    etudiant.Password = password;
+                    etudiant.isActive = 1;
+                    etudiant.ProfilePath = "~/Resources/Profiles/avatar.png";
+                    _etudiantService.Edit(etudiant);
+                    ViewBag.done = true;
+                    return View();
+                    
+                }
+            }
+            ViewBag.error = true;
+            return View();
         }
     }
 }

@@ -1,8 +1,222 @@
-﻿
+﻿@model List<DocumentOfficiel>
+@using ISCAE.Data
 @{
-    ViewBag.Title = "Index";
+    Professeur user = (Professeur)Session["user"];
+    ViewBag.Title = "Accueil";
     Layout = "~/Views/Shared/_ProfesseurLayout.cshtml";
+    List<DocumentNonOfficiel> documents = ViewBag.documents;
+    List<Message> messages = ViewBag.messages;
+    List<Annonce> annonces = ViewBag.annonces;
+    List<Module> modules = ViewBag.modules;
+    List<Etudiant> etudiants = ViewBag.etudiants;
+    List<Specialite> specialites = ViewBag.specialites;
+
 }
 
-<h2>Index</h2>
 
+<!-- Main row -->
+<div class="row">
+    <!-- Left col -->
+    <div class="col-md-8">
+        <!-- Discussions -->
+        <div class="box box-success">
+            <div class="box-header with-border">
+                <h3 class="box-title">Mes Documents</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <div class="table-responsive">
+                    <table class="table no-margin">
+                        <thead>
+                            <tr>
+                                <th>Titre</th>
+                                <th>Module</th>
+                                <th>type</th>
+                                <th>Telechargement</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                if (Model.Count() > 0)
+                                {
+                                    foreach (DocumentOfficiel document in Model)
+                                    {
+                                        <tr>
+                                            <td>@document.Titre</td>
+                                            <td><span class="label label-success">@modules.Find(o => o.ModuleId == document.ModuleId).Designation</span></td>
+                                            <td>@document.Type</td>
+                                            <td><a href="@Url.Action("Download","Document",new { documentId = document.DocumentOfficielId })"><span class="fa fa-arrow-down"></span></a></td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr><td colspan="5">Pas de donnees</td></tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.table-responsive -->
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer text-center">
+                <a href="@Url.Action("Officiel","Document")" class="uppercase text-green">Afficher tous</a>
+            </div>
+            <!-- /.box-footer -->
+        </div>
+        <!-- /.box -->
+        <!-- Documents -->
+        <div class="box box-success">
+            <div class="box-header with-border">
+                <h3 class="box-title">Documents</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <div class="table-responsive">
+                    <table class="table no-margin">
+                        <thead>
+                            <tr>
+                                <th>Titre</th>
+                                <th>Module</th>
+                                <th>type</th>
+                                <th>Ajouter par</th>
+                                <th>Telechargement</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                if (documents.Count() > 0)
+                                {
+                                    foreach (DocumentNonOfficiel document in documents)
+                                    {
+                                        <tr>
+                                            <td>@document.Titre</td>
+                                            <td><span class="label label-success">@modules.Find(o => o.ModuleId == document.ModuleId).Designation</span></td>
+                                            <td>@document.Type</td>
+                                            <td>@etudiants.Find(o => o.EtudiantId == document.EtudiantId).Nom</td>
+                                            <td><a href="@Url.Action("Download","Document",new { documentId = document.DocumentNonOfficielId })"><span class="fa fa-arrow-down"></span></a></td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr><td colspan="5">Pas de donnees</td></tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.table-responsive -->
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer clearfix">
+                <a href="@Url.Action("Add","Document")" class="btn btn-sm btn-success btn-flat pull-left">Ajouter</a>
+                <a href="@Url.Action("Index","Document")" class="btn btn-sm btn-default btn-flat pull-right">Afficher tous</a>
+            </div>
+            <!-- /.box-footer -->
+        </div>
+        <!-- /.box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-4">
+        <!--Annonces-->
+        <div class="box box-success">
+            <div class="box-header with-border">
+                <h3 class="box-title">Annonces</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- /.box-header -->
+
+            <div class="box-footer no-padding">
+                <ul class="nav nav-pills nav-stacked">
+                    @{
+                        if (annonces.Count > 0)
+                        {
+                            foreach (Annonce annonce in annonces)
+                            {
+                                <li>
+                                    <a href='@Url.Action("","")'>
+                                        @annonce.Titre
+                                    </a>
+                                </li>
+                            }
+                        }
+                        else
+                        {
+                            <li>
+                                <a href="#">Pas des annonces</a>
+                            </li>
+                        }
+                    }
+
+                </ul>
+            </div>
+            <!-- /.footer -->
+        </div>
+        <!-- /.box -->
+        <!-- Messages -->
+        <div class="box box-success">
+            <div class="box-header with-border">
+                <h3 class="box-title">Messages</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <ul class="products-list product-list-in-box">
+                    @{
+                        if (messages.Count > 0)
+                        {
+                            foreach (Message message in messages)
+                            {
+                                <li class="item">
+                                    <div class="product-img">
+                                        <img src="@Url.Content(user.ProfilePath)" alt="Professeur">
+                                    </div>
+                                    <div class="product-info">
+                                        <a href="@Url.Action("Boites", "Message", new { id = message.MessageId })" class="product-title">
+
+                                            @message.Titre
+                                            <span class="label label-success pull-right">@specialites.Find(o=>o.SpecialiteId == message.SpecialiteId).Designation</span>
+                                        </a>
+                                        <span class="product-description">
+                                            @message.Niveau@(message.Niveau > 1 ? "eme" : "er" ) annee
+                                        </span>
+                                    </div>
+                                </li>
+                                        <!-- /.item -->
+                            }
+                        }
+                    }
+
+                </ul>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer text-center">
+                <a href="@Url.Action("Index", "Message")" class="uppercase text-green">Afficher tous</a>
+            </div>
+            <!-- /.box-footer -->
+        </div>
+        <!-- /.box -->
+    </div>
+    <!-- /.col -->
+</div>
+<!-- /.row -->
