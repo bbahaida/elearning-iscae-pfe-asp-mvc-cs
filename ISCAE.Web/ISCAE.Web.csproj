@@ -199,12 +199,6 @@
     <Folder Include="Content\scss\" />
     <Folder Include="Resources\Documents\" />
     <Folder Include="Resources\Etudiants\" />
-    <Folder Include="Scripts\iCheck\flat\" />
-    <Folder Include="Scripts\iCheck\futurico\" />
-    <Folder Include="Scripts\iCheck\line\" />
-    <Folder Include="Scripts\iCheck\minimal\" />
-    <Folder Include="Scripts\iCheck\polaris\" />
-    <Folder Include="Scripts\iCheck\square\" />
     <Folder Include="Views\Emploi\" />
   </ItemGroup>
   <ItemGroup>
@@ -355,6 +349,10 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Plugins\bootstrap3-wysihtml5.all.js" />
+    <Content Include="Resources\Plugins\bootstrap3-wysihtml5.all.min.js" />
+    <Content Include="Resources\Plugins\bootstrap3-wysihtml5.css" />
+    <Content Include="Resources\Plugins\bootstrap3-wysihtml5.min.css" />
     <Content Include="Resources\Profiles\mloud.png" />
     <Content Include="Resources\Profiles\amou.png" />
     <Content Include="Resources\Profiles\avatar.png" />
@@ -365,12 +363,8 @@
     <Content Include="Scripts\app.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\demo.js" />
     <Content Include="Scripts\fastclick.js" />
     <Content Include="Scripts\fastclick.min.js" />
-    <Content Include="Scripts\iCheck\all.css" />
-    <Content Include="Scripts\iCheck\icheck.js" />
-    <Content Include="Scripts\iCheck\icheck.min.js" />
     <Content Include="Scripts\jquery-2.2.3.min.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
@@ -424,6 +418,8 @@
     <Content Include="Views\Administrateur\AddEtudiants.cshtml" />
     <Content Include="Views\Administrateur\Etudiants.cshtml" />
     <Content Include="Views\Home\Register.cshtml" />
+    <Content Include="Views\Administrateur\AddAvis.cshtml" />
+    <Content Include="Views\Professeur\UserProfile.cshtml" />
     <None Include="Views\Shared\_EtudiantLayout.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

@@ -44,6 +44,7 @@ namespace ISCAE.Web.Controllers
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Login(string login, string password)
         {
             Administrateur admin = null;
@@ -138,6 +139,7 @@ namespace ISCAE.Web.Controllers
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Register(string nni, string matricule, string login, string tel, string email, string password, string repassword)
         {
             ViewBag.error = false;

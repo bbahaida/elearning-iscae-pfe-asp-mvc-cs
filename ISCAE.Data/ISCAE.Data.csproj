@@ -86,6 +86,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IscaeModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="IUnitOfWork.cs" />
     <Compile Include="Log4NetHelper.cs" />
     <Compile Include="Message.cs">
       <DependentUpon>IscaeModel.tt</DependentUpon>
@@ -156,6 +157,7 @@
     <Compile Include="SpecialiteModule.cs">
       <DependentUpon>IscaeModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

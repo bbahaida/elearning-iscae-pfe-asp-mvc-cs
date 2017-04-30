@@ -56,12 +56,14 @@ namespace ISCAE.Data.Repositories
             }
             
         }
-
+        
         public TEntity Edit(TEntity entity)
         {
             try
             {
-                Context.Entry(entity).State = EntityState.Modified;
+                Context.Set<TEntity>().Attach(entity);
+                var entry = Context.Entry(entity);
+                entry.State = EntityState.Modified;
                 Context.SaveChanges();
                 return entity;
             }
@@ -113,6 +115,24 @@ namespace ISCAE.Data.Repositories
                 return null;
             }
             
+        }
+        private bool disposed = false;
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    Context.Dispose();
+                }
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
     }

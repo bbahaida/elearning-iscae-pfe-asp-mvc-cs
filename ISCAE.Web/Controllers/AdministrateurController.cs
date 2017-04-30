@@ -4,6 +4,7 @@ using ISCAE.Web.Filters;
 using ISCAE.Web.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -15,13 +16,18 @@ namespace ISCAE.Web.Controllers
     public class AdministrateurController : Controller
     {
         private IExcelReader _excelReader;
+        private IAdministrateurService _administrateurService;
         private IEtudiantService _etudiantService;
         private ISpecialiteService _specialiteService;
-        public AdministrateurController(IExcelReader excelReader, IEtudiantService etudiantService, ISpecialiteService specialiteService)
+        private IAnnonceService _annonceService;
+        public AdministrateurController(IExcelReader excelReader, IEtudiantService etudiantService,
+            ISpecialiteService specialiteService, IAnnonceService annonceService, IAdministrateurService administrateurService)
         {
+            _administrateurService = administrateurService;
             _etudiantService = etudiantService;
             _excelReader = excelReader;
             _specialiteService = specialiteService;
+            _annonceService = annonceService;
         }
         // GET: Administrateur
         public ActionResult Index()
@@ -60,6 +66,76 @@ namespace ISCAE.Web.Controllers
             e = _etudiantService.Edit(e);
 
             return RedirectToAction("Etudiants","Administrateur");
+        }
+        public ActionResult AddAvis()
+        {
+            return View(_specialiteService.GetAll().ToList());
+        }
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult AddAvis(string titre, string avis)
+        {
+            Administrateur user = (Administrateur)Session["user"];
+            Annonce annonce = new Annonce
+            {
+                Titre = titre,
+                AdministrateurId = user.AdministrateurId,
+                DateAjout = DateTime.Now,
+                Contenu = avis
+            };
+            annonce = _annonceService.Add(annonce);
+            if(annonce == null)
+            {
+                return RedirectToAction("Index", "Administrateur");
+            }
+            return View("Avis");
+        }
+
+        public ActionResult UserProfile()
+        {
+
+            return View((Administrateur)Session["user"]);
+        }
+        [HttpPost]
+        public ActionResult UserProfile(string email, string telephone)
+        {
+            Administrateur user = (Administrateur)Session["user"];
+            if (email == null || email.Equals(""))
+            {
+                return View(user);
+            }
+
+            user.Email = email;
+            user.Telephone = telephone;
+            user = _administrateurService.Edit(user);
+            if (user == null)
+            {
+                user = _administrateurService.Get(user.AdministrateurId);
+                Session["user"] = user;
+                return View(user);
+            }
+            Session["user"] = user;
+            return View(user);
+        }
+        [HttpPost]
+        public ActionResult Avatar(HttpPostedFileBase image)
+        {
+            Administrateur user = (Administrateur)Session["user"];
+            if (image != null && image.ContentLength > 0)
+            {
+                var extension = Path.GetExtension(image.FileName);
+                if (!extension.ToLower().Equals(".jpg") && !extension.ToLower().Equals(".jpeg") && !extension.ToLower().Equals(".png"))
+                {
+                    return RedirectToAction("UserProfile");
+                }
+                var path = "~/Resources/Profiles/" + user.Login.ToLower() + extension.ToLower();
+                user.ProfilePath = path;
+                user = _administrateurService.Edit(user);
+                if (user != null)
+                    image.SaveAs(Path.Combine(Server.MapPath("~/Resources/Profiles"), user.Login.ToLower() + extension.ToLower()));
+            }
+            Session["user"] = _administrateurService.Get(user.AdministrateurId);
+            return RedirectToAction("UserProfile");
         }
     }
 }

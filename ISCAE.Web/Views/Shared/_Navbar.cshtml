@@ -20,6 +20,7 @@
                         <ul class="dropdown-menu" role="menu">
                             @using (Html.BeginForm("Login", "Home", FormMethod.Post, new { @id = "login_form" }))
                             {
+                                @Html.AntiForgeryToken()
                                 <li>
                                     <div class="col-xs-pull-1 col-xs-push-1 col-xs-10 form-group">
                                         <input type="text" class="form-control" id="username" name="login" placeholder="Username">
@@ -79,6 +80,7 @@
                                 <!-- The user image in the menu -->
                             @using (Html.BeginForm("Login", "Home", FormMethod.Post, new { @id = "login_form" }))
                             {
+                                @Html.AntiForgeryToken()
                                 <!-- Menu Body -->
                                 <li style="padding-top:30px" class="user-body">
                                     <div class="row">

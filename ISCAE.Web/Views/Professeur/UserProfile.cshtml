@@ -1,8 +1,8 @@
-﻿@model Etudiant
+﻿@model Professeur
 @using ISCAE.Data
 @{
     ViewBag.Title = "Profile";
-    Layout = "~/Views/Shared/_EtudiantLayout.cshtml";
+    Layout = "~/Views/Shared/_ProfesseurLayout.cshtml";
 }
 <div class="row">
     <div class="col-md-3">
@@ -11,14 +11,10 @@
             <div class="box-body box-profile">
                 <img class="profile-user-img img-responsive img-circle" src="@Url.Content(Model.ProfilePath)" alt="User profile picture">
                 <h3 class="profile-username text-center">@Model.Nom</h3>
-                <p class="text-muted text-center">@Model.Niveau éme @Model.Specialite.Designation</p>
 
                 <ul class="list-group list-group-unbordered">
                     <li class="list-group-item">
                         <b>Nom</b> <a class="pull-right">@Model.Nom</a>
-                    </li>
-                    <li class="list-group-item">
-                        <b>Matricule</b> <a class="pull-right">@Model.Matricule</a>
                     </li>
                     <li class="list-group-item">
                         <b>Telephone</b> <a class="pull-right">@Model.Telephone</a>
@@ -41,7 +37,7 @@
             </ul>
             <div class="tab-content">
                 <div class="active tab-pane" id="settings">
-                    @using (Html.BeginForm("UserProfile", "Etudiant", FormMethod.Post, new { @class = "form-horizontal" }))
+                    @using (Html.BeginForm("UserProfile", "Professeur", FormMethod.Post, new { @class = "form-horizontal" }))
                     {
                         <div class="form-group">
                             <label for="email" class="col-sm-2 control-label">Email</label>
@@ -64,26 +60,26 @@
                 </div>
 
                 <!-- /.tab-pane -->
-                    <div class="tab-pane" id="profile">
-                        @using (Html.BeginForm("Avatar", "Etudiant", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal"  }))
-                        {
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label" for="image">Votre Image</label>
-                                <div class="col-sm-10">
-                                    <input type="file" id="image" name="image">
-                                    <p class="help-block">L'image doit etre .png ou .jpg et ne depasse pas 2Mo</p>
-                                </div>
-                                
+                <div class="tab-pane" id="profile">
+                    @using (Html.BeginForm("Avatar", "Professeur", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+                    {
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="image">Votre Image</label>
+                            <div class="col-sm-10">
+                                <input type="file" id="image" name="image">
+                                <p class="help-block">L'image doit etre .png ou .jpg et ne depasse pas 2Mo</p>
                             </div>
+
+                        </div>
 
                             <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-10">
                                     <button type="submit" class="btn btn-success">Submit</button>
                                 </div>
                             </div>
-                        }
+                    }
                 </div>
-            </div> 
+            </div>
         </div>
     </div>
 </div>

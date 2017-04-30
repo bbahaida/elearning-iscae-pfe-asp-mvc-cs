@@ -1,0 +1,98 @@
+﻿@model List<Specialite>
+@using ISCAE.Data
+@{
+    ViewBag.Title = "Avis";
+    Layout = "~/Views/Shared/_AdministrateurLayout.cshtml";
+    string year = DateTime.Now.Month > 10 ? DateTime.Now.Year+"-"+(DateTime.Now.Year+1) : (DateTime.Now.Year-1) + "-" + DateTime.Now.Year;
+}
+
+<div class="row">
+    <div class="col-md-7">
+        
+            <div class="box box-success">
+                <div class="box-header">
+                    <h3 class="box-title">
+                        Avis
+                    </h3>
+                    
+                    <!-- tools box -->
+                    <div class="pull-right box-tools">
+                        <button type="button" class="btn btn-success btn-sm" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                    <!-- /. tools -->
+                </div>
+                <!-- /.box-header -->
+               @using (Html.BeginForm("AddAvis","Administrateur",FormMethod.Post))
+               {
+                <div class="box-body pad">
+                        <div class="form-group">
+                            <input class="form-control" name="titre" placeholder="Titre"/>
+                        </div>
+                        <textarea class="textarea" name="avis" placeholder="Place some text here" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                </div>
+                <div class="box-footer">
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </div>
+               }
+            </div>
+          
+        
+    </div>
+    <!-- /.col-->
+    <div class="col-md-5">
+        <!-- general form elements -->
+        <div class="box box-success">
+            <div class="box-header with-border">
+                <h3 class="box-title">Ajouter un resultat</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            @using (Html.BeginForm("AddEtudiants", "Administrateur", FormMethod.Post, new { enctype = "multipart/form-data", @id = "add-document" }))
+            {
+                <div class="box-body">
+
+                    <div class="form-group">
+                        <label for="document">Resultats</label>
+                        <input type="file" id="document" name="document">
+                        <p class="help-block">le document doit etre de type pdf</p>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            <select class="form-control" >
+
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" disabled class="form-control" value="@year">
+                            <input type="hidden" name="year" value="@year" />
+                        </div> 
+                    </div>
+
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer">
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </div>
+            }
+        </div>
+        <!-- /.box -->
+
+    </div>
+
+</div>
+<!-- ./row -->
+
+@section scripts{
+    <script>
+        $(".textarea").wysihtml5();
+        
+    </script>
+    }

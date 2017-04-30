@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ISCAE.Data.Repositories
 {
-    public interface IRepository<TEntity> where TEntity : class
+    public interface IRepository<TEntity> : IDisposable where TEntity : class
     {
         TEntity Get(int id);
         IEnumerable<TEntity> GetAll();

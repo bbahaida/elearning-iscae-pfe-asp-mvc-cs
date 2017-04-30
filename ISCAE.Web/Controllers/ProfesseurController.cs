@@ -3,6 +3,7 @@ using ISCAE.Data;
 using ISCAE.Web.Filters;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -89,6 +90,53 @@ namespace ISCAE.Web.Controllers
             ViewBag.modules = modules;
             ViewBag.etudiants = etudiants;
             return View(mesDocuments);
+        }
+
+        public ActionResult UserProfile()
+        {
+
+            return View((Professeur)Session["user"]);
+        }
+        [HttpPost]
+        public ActionResult UserProfile(string email, string telephone)
+        {
+            Professeur user = (Professeur)Session["user"];
+            if (email == null || email.Equals(""))
+            {
+                return View(user);
+            }
+
+            user.Email = email;
+            user.Telephone = telephone;
+            user = _professeurService.Edit(user);
+            if (user == null)
+            {
+                user = _professeurService.Get(((Professeur)Session["user"]).ProfesseurId);
+                Session["user"] = user;
+                return View(user);
+            }
+            Session["user"] = user;
+            return View(user);
+        }
+        [HttpPost]
+        public ActionResult Avatar(HttpPostedFileBase image)
+        {
+            Professeur user = (Professeur)Session["user"];
+            if (image != null && image.ContentLength > 0)
+            {
+                var extension = Path.GetExtension(image.FileName);
+                if (!extension.ToLower().Equals(".jpg") && !extension.ToLower().Equals(".jpeg") && !extension.ToLower().Equals(".png"))
+                {
+                    return RedirectToAction("UserProfile");
+                }
+                var path = "~/Resources/Profiles/" +user.Login.ToLower() + extension.ToLower();
+                user.ProfilePath = path;
+                user = _professeurService.Edit(user);
+                if (user != null)
+                    image.SaveAs(Path.Combine(Server.MapPath("~/Resources/Profiles"), user.Login.ToLower() + extension.ToLower()));
+            }
+            Session["user"] = _professeurService.Get(user.ProfesseurId);
+            return RedirectToAction("UserProfile");
         }
     }
 }

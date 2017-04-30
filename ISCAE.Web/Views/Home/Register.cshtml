@@ -23,6 +23,7 @@
         
         @using (Html.BeginForm("Register", "Home", FormMethod.Post))
         {
+            @Html.AntiForgeryToken()
             <div class="form-group has-feedback">
                 <input type="text" name="nni" class="form-control" placeholder="Numéro national d'identification">
                 <span class="fa fa-address-card form-control-feedback"></span>

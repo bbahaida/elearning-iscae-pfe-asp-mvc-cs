@@ -3,6 +3,7 @@ using ISCAE.Data;
 using ISCAE.Web.Filters;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -108,7 +109,8 @@ namespace ISCAE.Web.Controllers
             user = _etudiantService.Edit(user);
             if(user == null)
             {
-                user = (Etudiant)Session["user"];
+                user = _etudiantService.Get(user.EtudiantId);
+                Session["user"] = user;
                 return View(user);
             }
             Session["user"] = user;
@@ -118,9 +120,23 @@ namespace ISCAE.Web.Controllers
         public ActionResult Avatar(HttpPostedFileBase image)
         {
             Etudiant user = (Etudiant)Session["user"];
-
-            return View(user);
+            if (image != null && image.ContentLength > 0)
+            {
+                var extension = Path.GetExtension(image.FileName);
+                if (!extension.ToLower().Equals(".jpg") && !extension.ToLower().Equals(".jpeg") && !extension.ToLower().Equals(".png"))
+                {
+                    return RedirectToAction("UserProfile");
+                }
+                var path = "~/Resources/Profiles/" + user.Login.ToLower() + extension.ToLower();
+                user.ProfilePath = path;
+                user = _etudiantService.Edit(user);
+                if (user != null)
+                    image.SaveAs(Path.Combine(Server.MapPath("~/Resources/Profiles"), user.Login.ToLower() + extension.ToLower()));
+            }
+            Session["user"] = _etudiantService.Get(((Etudiant)Session["user"]).EtudiantId);
+            return RedirectToAction("UserProfile");
         }
+
         public ActionResult Modules()
         {
             Etudiant user = (Etudiant)Session["user"];

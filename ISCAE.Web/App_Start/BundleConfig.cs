@@ -27,9 +27,7 @@ namespace ISCAE.Web
                       "~/Scripts/respond.js",
                       "~/Scripts/app.min.js",
                       "~/Scripts/jquery.sparkline.min.js",
-                      "~/Scripts/iCheck/icheck.min.js",
-                      "~/Content/datatables/jquery.dataTables.min.js",
-                      "~/Content/datatables/dataTables.bootstrap.min.js",
+                      "~/Resources/Plugins/bootstrap3-wysihtml5.all.min.js",
                       "~/Scripts/jquery.slimscroll.min.js",
                       "~/Scripts/pages/dashboard.js",
                       "~/Scripts/demo.js"));
@@ -42,7 +40,6 @@ namespace ISCAE.Web
                       "~/Content/css/font-awesome.min.css",
                       //ionIcons,
                       "~/Content/AdminLTE.css",
-                      "~/Scripts/iCheck/square/green.css",
                       "~/Content/skins/_all-skins.min.css",
                       "~/Content/Site.css"));
 
@@ -51,8 +48,8 @@ namespace ISCAE.Web
 
             bundles.Add(new StyleBundle("~/Content/user").Include(
                       "~/Content/bootstrap.min.css",
-                      "~/Content/datatables/dataTables.bootstrap.css",
                       "~/Content/css/font-awesome.min.css",
+                      "~/Resources/Plugins/bootstrap3-wysihtml5.min.css",
                       //ionIcons,
                       "~/Content/AdminLTE.css",
                       "~/Content/skins/_all-skins.min.css"));

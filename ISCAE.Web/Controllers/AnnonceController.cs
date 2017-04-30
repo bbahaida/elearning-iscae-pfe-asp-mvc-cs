@@ -1,4 +1,5 @@
 ﻿using ISCAE.Business.Services;
+using ISCAE.Data;
 using ISCAE.Web.Filters;
 using System;
 using System.Collections.Generic;
@@ -28,9 +29,12 @@ namespace ISCAE.Web.Controllers
             ViewBag.Specialites = _specialiteService.GetAll().ToList();
             return View();
         }
-        public ActionResult Avis()
+        public ActionResult Avis(int id)
         {
-            return View();
+            Annonce avis = _annonceService.Get(id);
+            if (avis == null)
+                RedirectToAction("Index");
+            return View(avis);
         }
     }
 }
