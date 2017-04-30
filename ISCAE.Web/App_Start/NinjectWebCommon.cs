@@ -13,6 +13,7 @@ namespace ISCAE.Web.App_Start
     using Data.Repositories;
     using Business.Services;
     using Models;
+    using Data;
 
     public static class NinjectWebCommon 
     {
@@ -50,6 +51,7 @@ namespace ISCAE.Web.App_Start
 
                 // ISCAE Dependencies
                 // ISCAE.Data
+                kernel.Bind<IUnitOfWork>().To<UnitOfWork>();
                 kernel.Bind<IAdministrateurRepository>().To<AdministrateurRepository>();
                 kernel.Bind<IAnnonceRepository>().To<AnnonceRepository>();
                 kernel.Bind<IDocumentNonOfficielRepository>().To<DocumentNonOfficielRepository>();

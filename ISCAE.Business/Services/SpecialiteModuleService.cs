@@ -12,10 +12,10 @@ namespace ISCAE.Business.Services
     {
         private ISpecialiteModuleRepository _specialiteModuleRepository;
         private ISpecialiteRepository _specialiteRepository;
-        public SpecialiteModuleService(ISpecialiteModuleRepository repository, ISpecialiteRepository specialiteRepository) : base(repository)
+        public SpecialiteModuleService(IUnitOfWork unit) : base(unit.SpecialiteModules)
         {
-            _specialiteModuleRepository = repository;
-            _specialiteRepository = specialiteRepository;
+            _specialiteModuleRepository = unit.SpecialiteModules;
+            _specialiteRepository = unit.Specialites;
         }
 
         public int GetNiveauBySpecialiteAndModule(int SpecialiteId, int ModuleId)

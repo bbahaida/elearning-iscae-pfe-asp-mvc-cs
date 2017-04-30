@@ -11,9 +11,9 @@ namespace ISCAE.Business.Services
     public class SpecialiteService : CommonService<Specialite>, ISpecialiteService
     {
         private ISpecialiteRepository _specialiteRepository;
-        public SpecialiteService(ISpecialiteRepository repository) : base(repository)
+        public SpecialiteService(IUnitOfWork unit) : base(unit.Specialites)
         {
-            _specialiteRepository = repository;
+            _specialiteRepository = unit.Specialites;
         }
 
         public Specialite GetByDesignation(string designation)

@@ -12,9 +12,9 @@ namespace ISCAE.Business.Services
     {
         private IReponseRepository _reponseRepository;
         private IQuestionService _questionService;
-        public ReponseService(IReponseRepository repository, IQuestionService questionService) : base(repository)
+        public ReponseService(IUnitOfWork unit , IQuestionService questionService) : base(unit.Reponses)
         {
-            _reponseRepository = repository;
+            _reponseRepository = unit.Reponses;
             _questionService = questionService;
         }
 

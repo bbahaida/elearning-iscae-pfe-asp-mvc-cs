@@ -7,9 +7,9 @@ namespace ISCAE.Business.Services
     public class AdministrateurService : CommonService<Administrateur>, IAdministrateurService
     {
         IAdministrateurRepository _administrateurRepository;
-        public AdministrateurService(IAdministrateurRepository repository) : base(repository)
+        public AdministrateurService(IUnitOfWork unit) : base(unit.Administarteurs)
         {
-            _administrateurRepository = repository;
+            _administrateurRepository = unit.Administarteurs;
         }
 
         public IEnumerable<Administrateur> GetActiveUsers()

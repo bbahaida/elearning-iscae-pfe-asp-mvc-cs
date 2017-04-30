@@ -13,12 +13,11 @@ namespace ISCAE.Business.Services
         private IQuestionRepository _questionRepository;
         private IEtudiantRepository _etudiantRepository;
         private ISpecialiteRepository _specialiteRepository;
-        public QuestionService(IQuestionRepository repository, IEtudiantRepository etudiantRepository,
-            ISpecialiteRepository specialiteRepository) : base(repository)
+        public QuestionService(IUnitOfWork unit) : base(unit.Questions)
         {
-            _questionRepository = repository;
-            _etudiantRepository = etudiantRepository;
-            _specialiteRepository = specialiteRepository;
+            _questionRepository = unit.Questions;
+            _etudiantRepository = unit.Etudiants;
+            _specialiteRepository = unit.Specialites;
         }
 
         public IEnumerable<Question> GetQuestionsByEtudiant(int EtudiantId, int pageIndex, int pageSize)

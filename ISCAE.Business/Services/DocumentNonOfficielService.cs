@@ -13,11 +13,11 @@ namespace ISCAE.Business.Services
         private IDocumentNonOfficielRepository _documentNonOfficielRepository;
         private IEtudiantRepository _etudiantRepository;
         private IModuleRepository _moduleRepository;
-        public DocumentNonOfficielService(IDocumentNonOfficielRepository repository, IEtudiantRepository etudiantRepository, IModuleRepository moduleRepository) : base(repository)
+        public DocumentNonOfficielService(IUnitOfWork unit) : base(unit.DocumentsNonOfficiel)
         {
-            _documentNonOfficielRepository = repository;
-            _etudiantRepository = etudiantRepository;
-            _moduleRepository = moduleRepository;
+            _documentNonOfficielRepository = unit.DocumentsNonOfficiel;
+            _etudiantRepository = unit.Etudiants;
+            _moduleRepository = unit.Modules;
         }
 
         public IEnumerable<DocumentNonOfficiel> GetDocumentByModule(int ModuleId)

@@ -13,11 +13,11 @@ namespace ISCAE.Business.Services
         private IProfesseurModuleRepository _professeurModuleRepository;
         private IProfesseurRepository _professeurRepository;
         private IModuleRepository _moduleRepository;
-        public ProfesseurModuleService(IProfesseurModuleRepository repository, IProfesseurRepository professeurRepository, IModuleRepository moduleRepository) : base(repository)
+        public ProfesseurModuleService(IUnitOfWork unit) : base(unit.ProfesseurModules)
         {
-            _professeurModuleRepository = repository;
-            _professeurRepository = professeurRepository;
-            _moduleRepository = moduleRepository;
+            _professeurModuleRepository = unit.ProfesseurModules;
+            _professeurRepository = unit.Professeurs;
+            _moduleRepository = unit.Modules;
         }
 
         public IEnumerable<ProfesseurModule> GetModulesByProfesseur(int ProfesseurId)

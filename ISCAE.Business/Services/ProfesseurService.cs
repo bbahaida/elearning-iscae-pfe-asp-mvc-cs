@@ -14,15 +14,13 @@ namespace ISCAE.Business.Services
         private ISpecialiteModuleRepository _specialiteModuleRepository;
         private ISpecialiteModuleService _specialiteModuleService;
         private IModuleRepository _moduleRepository;
-        public ProfesseurService(IProfesseurRepository repository, IProfesseurModuleRepository professeurModuleRepository, IModuleRepository moduleRepository,
-               IProfesseurSpecialiteRepository professeurSpecialiteRepository, ISpecialiteModuleRepository specialiteModuleRepository,
-               ISpecialiteModuleService specialiteModuleService) : base(repository)
+        public ProfesseurService(IUnitOfWork unit , ISpecialiteModuleService specialiteModuleService) : base(unit.Professeurs)
         {
-            _professeurRepository = repository;
-            _professeurModuleRepository = professeurModuleRepository;
-            _professeurSpecialiteRepository = professeurSpecialiteRepository;
-            _specialiteModuleRepository = specialiteModuleRepository;
-            _moduleRepository = moduleRepository;
+            _professeurRepository = unit.Professeurs;
+            _professeurModuleRepository = unit.ProfesseurModules;
+            _professeurSpecialiteRepository = unit.ProfesseurSpecialites;
+            _specialiteModuleRepository = unit.SpecialiteModules;
+            _moduleRepository = unit.Modules;
             _specialiteModuleService = specialiteModuleService;
 
         }

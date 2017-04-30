@@ -11,9 +11,9 @@ namespace ISCAE.Business.Services
     public class ModuleService : CommonService<Module>, IModuleService
     {
         private IModuleRepository _moduleRepository;
-        public ModuleService(IModuleRepository repository) : base(repository)
+        public ModuleService(IUnitOfWork unit ) : base(unit.Modules)
         {
-            _moduleRepository = repository;
+            _moduleRepository = unit.Modules;
         }
     }
 }

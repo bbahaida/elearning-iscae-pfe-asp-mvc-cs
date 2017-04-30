@@ -12,9 +12,9 @@ namespace ISCAE.Business.Services
     {
 
         private IResultatRepository _resultatRepository;
-        public ResultatService(IResultatRepository repository) : base(repository)
+        public ResultatService(IUnitOfWork unit) : base(unit.Resultats)
         {
-            _resultatRepository = repository;
+            _resultatRepository = unit.Resultats;
         }
 
         public IEnumerable<Resultat> GetResultatByAnnee(string Annee)

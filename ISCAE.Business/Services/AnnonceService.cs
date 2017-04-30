@@ -12,10 +12,10 @@ namespace ISCAE.Business.Services
     {
         IAnnonceRepository _annonceRepository;
         IAdministrateurRepository _administrateurRepository;
-        public AnnonceService(IAnnonceRepository repository,IAdministrateurRepository administrateurRepository) : base(repository)
+        public AnnonceService(IUnitOfWork unit) : base(unit.Annonces)
         {
-            _annonceRepository = repository;
-            _administrateurRepository = administrateurRepository;
+            _annonceRepository = unit.Annonces;
+            _administrateurRepository = unit.Administarteurs;
         }
         public IEnumerable<Annonce> GetAnnoncesByAdministrateur(int AdministrateurId, int pageIndex, int pageSize)
         {

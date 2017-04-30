@@ -8,10 +8,10 @@ namespace ISCAE.Business.Services
     {
         private IEtudiantRepository _etudiantRepository;
         private ISpecialiteRepository _specialiteRepository;
-        public EtudiantService(IEtudiantRepository repository, ISpecialiteRepository specialiteRepository) : base(repository)
+        public EtudiantService(IUnitOfWork unit) : base(unit.Etudiants)
         {
-            _etudiantRepository = repository;
-            _specialiteRepository = specialiteRepository;
+            _etudiantRepository = unit.Etudiants;
+            _specialiteRepository = unit.Specialites;
         }
 
         public IEnumerable<Etudiant> GetActiveUsers()

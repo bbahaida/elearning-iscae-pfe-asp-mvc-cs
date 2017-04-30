@@ -14,13 +14,12 @@ namespace ISCAE.Business.Services
         private IProfesseurRepository _professeurRepository;
         private IModuleRepository _moduleRepository;
         private ISpecialiteRepository _specialiteRepository;
-        public DocumentOfficielService(IDocumentOfficielRepository repository, IProfesseurRepository professeurRepository,
-            IModuleRepository moduleRepository, ISpecialiteRepository specialiteRepository) : base(repository)
+        public DocumentOfficielService(IUnitOfWork unit) : base(unit.DocumentsOfficiel)
         {
-            _documentOfficielRepository = repository;
-            _professeurRepository = professeurRepository;
-            _moduleRepository = moduleRepository;
-            _specialiteRepository = specialiteRepository; 
+            _documentOfficielRepository = unit.DocumentsOfficiel;
+            _professeurRepository = unit.Professeurs;
+            _moduleRepository = unit.Modules;
+            _specialiteRepository = unit.Specialites; 
         }
 
         public IEnumerable<DocumentOfficiel> GetDocumentsByModule(int ModuleId, int pageIndex, int pageSize)

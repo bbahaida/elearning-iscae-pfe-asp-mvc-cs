@@ -13,11 +13,11 @@ namespace ISCAE.Business.Services
         private IMessageRepository _messageRepository;
         private IProfesseurRepository _professeurRepository;
         private ISpecialiteRepository _specialiteRepository;
-        public MessageService(IMessageRepository repository, IProfesseurRepository professeurRepository, ISpecialiteRepository specialiteRepository) : base(repository)
+        public MessageService(IUnitOfWork unit) : base(unit.Messages)
         {
-            _messageRepository = repository;
-            _professeurRepository = professeurRepository;
-            _specialiteRepository = specialiteRepository;
+            _messageRepository = unit.Messages;
+            _professeurRepository = unit.Professeurs;
+            _specialiteRepository = unit.Specialites;
         }
 
         public IEnumerable<Message> GetMessagesByProfesseur(int ProfesseurId, int pageIndex, int pageSize)

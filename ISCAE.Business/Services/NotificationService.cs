@@ -11,9 +11,9 @@ namespace ISCAE.Business.Services
     public class NotificationService : CommonService<Notification>, INotificationService
     {
         private INotificationRepository _notificationRepository;
-        public NotificationService(INotificationRepository repository) : base(repository)
+        public NotificationService(IUnitOfWork unit) : base(unit.Notifications)
         {
-            _notificationRepository = repository;
+            _notificationRepository = unit.Notifications;
         }
 
         public IEnumerable<Notification> GetUnreadNotifications(int TargetId)
