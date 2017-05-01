@@ -14,6 +14,8 @@ namespace ISCAE.Web.Controllers
     [EtudiantFilter()]
     public class EtudiantController : Controller
     {
+        #region Dependencies
+
         private IEtudiantService _etudiantService;
         private IDocumentNonOfficielService _documentNonOfficielService;
         private IDocumentOfficielService _documentOfficielService;
@@ -41,8 +43,10 @@ namespace ISCAE.Web.Controllers
             _professeurService = professeurService;
             _specialiteModuleService = specialiteModuleService;
         }
-        // GET: Etudiant
+        #endregion Dependencies
 
+        // GET: Etudiant
+        #region Index
         public ActionResult Index()
         {
             
@@ -90,6 +94,9 @@ namespace ISCAE.Web.Controllers
             ViewBag.etudiants = _etudiantService.Find(o=>o.SpecialiteId==user.SpecialiteId && o.Niveau == user.Niveau).ToList();
             return View(user);
         }
+        #endregion Index
+
+        #region Profile
         public ActionResult UserProfile()
         {
             
@@ -109,7 +116,7 @@ namespace ISCAE.Web.Controllers
             user = _etudiantService.Edit(user);
             if(user == null)
             {
-                user = _etudiantService.Get(user.EtudiantId);
+                user = _etudiantService.Get(((Etudiant)Session["user"]).EtudiantId);
                 Session["user"] = user;
                 return View(user);
             }
@@ -136,7 +143,21 @@ namespace ISCAE.Web.Controllers
             Session["user"] = _etudiantService.Get(((Etudiant)Session["user"]).EtudiantId);
             return RedirectToAction("UserProfile");
         }
+        [HttpPost]
+        public ActionResult ChangePassword(string oldpass, string newpass, string renewpass)
+        {
+            Etudiant user = (Etudiant)Session["user"];
+            if (!user.Password.Equals(oldpass) || !renewpass.Equals(newpass))
+            {
+                return RedirectToAction("UserProfile");
+            }
+            user.Password = newpass;
+            user = _etudiantService.Edit(user);
+            return RedirectToAction("UserProfile");
+        }
+        #endregion Profile
 
+        #region Module
         public ActionResult Modules()
         {
             Etudiant user = (Etudiant)Session["user"];
@@ -144,6 +165,7 @@ namespace ISCAE.Web.Controllers
             Dictionary<Module, Professeur> model = _professeurService.GetProfesseursBySpecialiteAndNiveau(user.SpecialiteId,user.Niveau);
             return View(model);
         }
+        #endregion Module
     }
 
 }

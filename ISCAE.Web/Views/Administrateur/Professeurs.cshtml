@@ -1,0 +1,150 @@
+﻿@model List<Professeur>
+@using ISCAE.Data
+@{
+    ViewBag.Title = "Professeurs";
+    Layout = "~/Views/Shared/_AdministrateurLayout.cshtml";
+}
+    @{
+        for(int i = 0; i < Model.Count; i+=3)
+        {
+            <div class="row">
+                
+                <div class="col-md-4">
+                    <div class="box box-success">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">@Model.ElementAt(i).Nom</h3>
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <div class="table-responsive">
+                                <table class="table no-margin">
+                                    <thead>
+                                        <tr>
+                                            <th>Modules</th>
+                                            <th>Supprimer</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            foreach (ProfesseurModule m in Model.ElementAt(i).ProfesseurModules)
+                                            {
+                                                <tr>
+                                                    <td>@m.Module.Designation</td>
+                                                    <td><a href="@Url.Action("DeleteModule", "Administrateur", new { id = m.ProfesseurModuleId})"><span class="fa fa-close"></span></a></td>
+                                                </tr>
+                                            }
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.table-responsive -->
+
+                        </div>
+                        <!-- /.box-body -->
+
+                    </div>
+                </div>
+                @{
+                    if (i +1 >= Model.Count)
+                    {
+                        break;
+                    }
+                }
+                <div class="col-md-4">
+                    <div class="box box-success">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">@Model.ElementAt(i+1).Nom</h3>
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <div class="table-responsive">
+                                <table class="table no-margin">
+                                    <thead>
+                                        <tr>
+                                            <th>Modules</th>
+                                            <th>Supprimer</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            foreach (ProfesseurModule m in Model.ElementAt(i+1).ProfesseurModules)
+                                            {
+                                                <tr>
+                                                    <td>@m.Module.Designation</td>
+                                                    <td><a href="@Url.Action("DeleteModule", "Administrateur", new { id = m.ProfesseurModuleId})"><span class="fa fa-close"></span></a></td>
+                                                </tr>
+                                            }
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.table-responsive -->
+
+                        </div>
+                        <!-- /.box-body -->
+
+                    </div>
+                </div>
+                @{
+                    if (i + 2 >= Model.Count)
+                    {
+                        break;
+                    }
+                }
+                <div class="col-md-4">
+                    <div class="box box-success">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">@Model.ElementAt(i+2).Nom</h3>
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <div class="table-responsive">
+                                <table class="table no-margin">
+                                    <thead>
+                                        <tr>
+                                            <th>Modules</th>
+                                            <th>Supprimer</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            foreach (ProfesseurModule m in Model.ElementAt(i+2).ProfesseurModules)
+                                            {
+                                                <tr>
+                                                    <td>@m.Module.Designation</td>
+                                                    <td><a href="@Url.Action("DeleteModule", "Administrateur", new { id = m.ProfesseurModuleId})"><span class="fa fa-close"></span></a></td>
+                                                </tr>
+                                            }
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.table-responsive -->
+
+                        </div>
+                        <!-- /.box-body -->
+
+                    </div>
+                </div>
+            </div>
+            
+                                        }
+    }

@@ -15,25 +15,46 @@ namespace ISCAE.Web.Controllers
     [AdministrateurFilter()]
     public class AdministrateurController : Controller
     {
+        #region Dependencies
+
         private IExcelReader _excelReader;
         private IAdministrateurService _administrateurService;
         private IEtudiantService _etudiantService;
+        private IProfesseurService _professeurService;
         private ISpecialiteService _specialiteService;
         private IAnnonceService _annonceService;
+        private IResultatService _resultatService;
+        private IModuleService _moduleService;
+        private IProfesseurSpecialiteService _professeurSpecialiteService;
+        private IProfesseurModuleService _professeurModuleService;
         public AdministrateurController(IExcelReader excelReader, IEtudiantService etudiantService,
-            ISpecialiteService specialiteService, IAnnonceService annonceService, IAdministrateurService administrateurService)
+            ISpecialiteService specialiteService, IAnnonceService annonceService, IProfesseurService professeurService,
+            IAdministrateurService administrateurService, IResultatService resultatService, IProfesseurModuleService professeurModuleService,
+            IModuleService moduleService, IProfesseurSpecialiteService professeurSpecialiteService)
         {
             _administrateurService = administrateurService;
             _etudiantService = etudiantService;
+            _professeurService = professeurService;
             _excelReader = excelReader;
             _specialiteService = specialiteService;
             _annonceService = annonceService;
+            _resultatService = resultatService;
+            _moduleService = moduleService;
+            _professeurSpecialiteService = professeurSpecialiteService;
+            _professeurModuleService = professeurModuleService;
         }
+        #endregion Dependencies
+
+        #region Index
         // GET: Administrateur
         public ActionResult Index()
         {
             return View();
         }
+        #endregion Index
+
+        #region Etudiant
+
         public ActionResult AddEtudiants()
         {
             return View();
@@ -59,7 +80,7 @@ namespace ISCAE.Web.Controllers
             ViewBag.etudiants = _etudiantService.GetAll().Where(o=>o.isActive == 1).ToList();
             return View(_specialiteService.GetAll().ToList());
         }
-        public ActionResult Close(int id)
+        public ActionResult CloseEtudiant(int id)
         {
             Etudiant e = _etudiantService.Get(id);
             e.isActive = 0;
@@ -67,6 +88,9 @@ namespace ISCAE.Web.Controllers
 
             return RedirectToAction("Etudiants","Administrateur");
         }
+        #endregion Etudiant
+
+        #region Annonces
         public ActionResult AddAvis()
         {
             return View(_specialiteService.GetAll().ToList());
@@ -88,9 +112,41 @@ namespace ISCAE.Web.Controllers
             {
                 return RedirectToAction("Index", "Administrateur");
             }
-            return View("Avis");
+            return RedirectToAction("Index","Annonce");
+        }
+        [HttpPost]
+        public ActionResult AddResultats(HttpPostedFileBase resultat, int specialite, string semester, string year)
+        {
+            Administrateur user = (Administrateur)Session["user"];
+            if (resultat != null && resultat.ContentLength > 0)
+            {
+                var extension = Path.GetExtension(resultat.FileName);
+                if (!extension.ToLower().Equals(".pdf"))
+                {
+                    return RedirectToAction("UserProfile");
+                }
+                var path = "~/Resources/Resultats/" + "Resultats_" + _specialiteService.Get(specialite).Designation + "_" + semester + "_" + year.Substring(0, 4) + "_" + year.Substring(5, 4) + extension.ToLower();
+                Resultat result = new Resultat
+                {
+                    AdministrateurId = user.AdministrateurId,
+                    Annee = year,
+                    Path = path,
+                    Semestre = byte.Parse(semester.Last().ToString()),
+                    SpecialiteId = specialite
+                };
+                result = _resultatService.Add(result);
+                if (result != null)
+                {
+                    resultat.SaveAs(Path.Combine(Server.MapPath("~/Resources/Resultats"), "Resultats_" + _specialiteService.Get(specialite).Designation + "_" + semester + "_" + year.Substring(0, 4) + "_" + year.Substring(5, 4) + extension.ToLower()));
+                    return RedirectToAction("Index", "Annonce");
+                }
+            }
+            return RedirectToAction("AddAvis", "Administrateur");
         }
 
+        #endregion Annonces
+
+        #region Profile
         public ActionResult UserProfile()
         {
 
@@ -137,5 +193,85 @@ namespace ISCAE.Web.Controllers
             Session["user"] = _administrateurService.Get(user.AdministrateurId);
             return RedirectToAction("UserProfile");
         }
+        [HttpPost]
+        public ActionResult ChangePassword(string oldpass, string newpass, string renewpass)
+        {
+            Administrateur user = (Administrateur)Session["user"];
+            if (!user.Password.Equals(oldpass) || !renewpass.Equals(newpass))
+            {
+                return RedirectToAction("UserProfile");
+            }
+            user.Password = newpass;
+            user = _administrateurService.Edit(user);
+            return RedirectToAction("UserProfile");
+        }
+        #endregion Profile
+
+        #region Professeur
+        public ActionResult Professeurs()
+        {
+            return View(_professeurService.GetAll().Where(o => o.isActive == 1).OrderBy(o=>o.Nom).ToList());
+        }
+        public ActionResult AddProfesseur()
+        {
+            ViewBag.specialites = _specialiteService.GetAll().ToList();
+            ViewBag.professeurs = _professeurService.GetAll().Where(o=>o.isActive == 1).OrderBy(o=>o.Nom).ToList();
+            ViewBag.modules = _moduleService.GetAll().ToList();
+            return View();
+        }
+        [HttpPost]
+        public ActionResult AddProfesseur(string nom, string email, string login,string password, string tel, string nni)
+        {
+            if (nom == null || nom.Equals("") || email == null || email.Equals("") || login == null || login.Equals("")
+                || password == null || password.Equals("") || nni == null || nni.Equals("") 
+                || _professeurService.GetUserByLogin(login) != null || _professeurService.GetUserByEmail(email) != null
+                || _professeurService.GetUserByTelephone(tel) != null)
+            {
+                return RedirectToAction("AddProfesseur","Administrateur");
+            }
+            
+            Professeur prof = new Professeur
+            {
+                isActive = 1,
+                Email = email,
+                Login = login,
+                Nom = nom,
+                ProfilePath = "~/Resources/Profiles/avatar.png",
+                Password = password,
+                Telephone = tel
+            };
+            prof = _professeurService.Add(prof);
+            if(prof == null)
+                return RedirectToAction("AddProfesseur", "Administrateur");
+            return RedirectToAction("Professeurs","Administrateur");
+        }
+        [HttpPost]
+        public ActionResult AddProfesseurSpecialite(int professeur, int specialite)
+        {
+            ProfesseurSpecialite profs = new ProfesseurSpecialite
+            {
+                ProfesseurId = professeur,
+                SpecialiteId = specialite
+            };
+            profs = _professeurSpecialiteService.Add(profs);
+            if(profs == null)
+                return RedirectToAction("AddProfesseur", "Administrateur");
+            return RedirectToAction("Professeurs", "Administrateur");
+        }
+        [HttpPost]
+        public ActionResult AddProfesseurModule(int professeur, int module)
+        {
+            ProfesseurModule profs = new ProfesseurModule
+            {
+                ProfesseurId = professeur,
+                ModuleId = module
+            };
+            profs = _professeurModuleService.Add(profs);
+            if (profs == null)
+                return RedirectToAction("AddProfesseur", "Administrateur");
+            return RedirectToAction("Professeurs", "Administrateur");
+        }
+
+        #endregion Professeur
     }
 }

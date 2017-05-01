@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ISCAE.Business.Services;
 using ISCAE.Data.Repositories;
 using FakeItEasy;
+using ISCAE.Data;
 
 namespace ISCAE.Tests
 {
@@ -18,7 +19,7 @@ namespace ISCAE.Tests
                 EtudiantId = 1
             });
             var specialiteRepositoryMock = A.Fake<ISpecialiteRepository>();
-            IEtudiantService sut = new EtudiantService(new EtudiantRepository(),new SpecialiteRepository());
+            IEtudiantService sut = new EtudiantService(new UnitOfWork());
             var id = sut.GetUserByAuth("bbahieda","Br@h!m0304").EtudiantId;
             
             Assert.AreEqual(1, id);

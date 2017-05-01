@@ -10,7 +10,7 @@
         <div class="box box-success">
             <div class="box-body box-profile">
                 <img class="profile-user-img img-responsive img-circle" src="@Url.Content(Model.ProfilePath)" alt="User profile picture">
-                <h3 class="profile-username text-center">@Model.Nom</h3>
+                <h3 class="profile-username text-center">@Model.Login</h3>
                 <p class="text-muted text-center">@Model.Niveau éme @Model.Specialite.Designation</p>
 
                 <ul class="list-group list-group-unbordered">
@@ -36,8 +36,9 @@
     <div class="col-md-9">
         <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
-                <li class="active"><a href="#settings" data-toggle="tab">Settings</a></li>
-                <li><a href="#profile" data-toggle="tab">Changer Votre Image</a></li>
+                <li class="active"><a href="#settings" data-toggle="tab">Generales</a></li>
+                <li><a href="#profile" data-toggle="tab">Changer votre Image</a></li>
+                <li><a href="#password" data-toggle="tab">Changer votre mot de passe</a></li>
             </ul>
             <div class="tab-content">
                 <div class="active tab-pane" id="settings">
@@ -82,6 +83,37 @@
                                 </div>
                             </div>
                         }
+                </div>
+                <div class="tab-pane" id="password">
+                    @using (Html.BeginForm("ChangePassword", "Etudiant", FormMethod.Post, new { @class = "form-horizontal" }))
+                    {
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="oldpass">Ancien </label>
+                            <div class="col-sm-10">
+                                <input type="password" class="form-control" id="oldpass" name="oldpass">
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="newpass">Nouveau </label>
+                            <div class="col-sm-10">
+                                <input type="password" class="form-control" id="newpass" name="newpass">
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="renewpass">Confirme </label>
+                            <div class="col-sm-10">
+                                <input type="password" class="form-control" id="renewpass" name="renewpass">
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-success">Submit</button>
+                            </div>
+                        </div>
+                    }
                 </div>
             </div> 
         </div>

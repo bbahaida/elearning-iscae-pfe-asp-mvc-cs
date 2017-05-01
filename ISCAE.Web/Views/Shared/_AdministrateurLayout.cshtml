@@ -115,7 +115,7 @@
                     <!-- Menu Footer-->
                     <li class="user-footer">
                         <div class="pull-left">
-                            <a href="#" class="btn btn-default btn-flat">Profile</a>
+                            <a href="@Url.Action("UserProfile","Administrateur")" class="btn btn-default btn-flat">Profile</a>
                         </div>
                         <div class="pull-right">
                             <a href="@Url.Action("Logout","Home")" class="btn btn-default btn-flat">Logout</a>
@@ -155,11 +155,23 @@
                 <!-- /.search form -->
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu">
-                    <li class="header">MAIN NAVIGATION</li>
+                    <li class="header">MENU PRINCIPALE</li>
                     <li class="active">
                         <a href='@Url.Action("Index","Administrateur")'>
                             <i class="fa fa-home"></i> <span>Accueil</span>
                         </a>
+                    </li>
+                    <li>
+                        <a>
+                            <i class="fa fa-suitcase"></i> <span>Professeurs</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="@Url.Action("Professeurs","Administrateur")"><i class="fa fa-circle-o"></i> Afficher tous</a></li>
+                            <li><a href="@Url.Action("AddProfesseur","Administrateur")"><i class="fa fa-plus-circle"></i> Ajouter</a></li>
+                        </ul>
                     </li>
                     <li>
                         <a>
@@ -170,10 +182,33 @@
                         </a>
                         <ul class="treeview-menu">
                             <li><a href="@Url.Action("Etudiants","Administrateur")"><i class="fa fa-circle-o"></i> Afficher tous</a></li>
-                            <li><a href="@Url.Action("AddEtudiants","Administrateur")"><i class="fa fa-circle-o"></i> Ajouter des etudiants</a></li>
+                            <li><a href="@Url.Action("AddEtudiants","Administrateur")"><i class="fa fa-plus-circle"></i> Ajouter des etudiants</a></li>
                         </ul>
                     </li>
-                    
+                    <li>
+                        <a>
+                            <i class="fa fa-sitemap"></i> <span>Specialites</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="@Url.Action("Specialites","Administrateur")"><i class="fa fa-circle-o"></i> Afficher tous</a></li>
+                            <li><a href="@Url.Action("AddSpecialite","Administrateur")"><i class="fa fa-plus-circle"></i> Ajouter une specialite</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a>
+                            <i class="fa fa-graduation-cap"></i> <span>Modules</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="@Url.Action("Specialites","Administrateur")"><i class="fa fa-circle-o"></i> Afficher tous</a></li>
+                            <li><a href="@Url.Action("AddSpecialite","Administrateur")"><i class="fa fa-plus-circle"></i> Ajouter un module</a></li>
+                        </ul>
+                    </li>
                     <li>
                         <a href='@Url.Action("Index","Annonce")'>
                             <i class="fa fa-flash"></i> <span>Annonces</span>
@@ -183,12 +218,12 @@
                         </a>
                         <ul class="treeview-menu">
                             <li><a href="@Url.Action("Index","Annonce")"><i class="fa fa-circle-o"></i> Afficher tous</a></li>
-                            <li><a href="@Url.Action("AddAvis","Administrateur")"><i class="fa fa-circle-o"></i> Ajouter un nouveau</a></li>
+                            <li><a href="@Url.Action("AddAvis","Administrateur")"><i class="fa fa-plus-circle"></i> Ajouter une nouvelle</a></li>
                         </ul>
                     </li>
                     <li>
                         <a href='@Url.Action("Directeur","Administrateur")'>
-                            <i class="fa fa-envelope"></i> <span>Messages</span>
+                            <i class="fa fa-edit"></i> <span>Mot de directeur</span>
                             <span class="pull-right-container">
                                 
                             </span>
@@ -201,12 +236,7 @@
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
-            <section class="content-header">
-                <h1>
-                    @ViewBag.Title
-                </h1>
-            </section>
+            
             <!-- Main content -->
             <section class="content">
 

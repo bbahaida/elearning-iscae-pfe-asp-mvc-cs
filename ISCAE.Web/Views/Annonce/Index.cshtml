@@ -9,7 +9,10 @@
     {
         Layout = "~/Views/Shared/_ProfesseurLayout.cshtml";
     }
-
+    else if (Session["user"] is Administrateur)
+    {
+        Layout = "~/Views/Shared/_AdministrateurLayout.cshtml";
+    }
 
     List<Annonce> Avis = (List<Annonce>)ViewBag.Avis;
     List<Resultat> Resultats = (List<Resultat>)ViewBag.Resultats;
@@ -38,8 +41,9 @@
                             foreach (Annonce annonce in Avis)
                             {
                                 <li>
-                                    <a href='@Url.Action("","")'>
+                                    <a href='@Url.Action("Avis","Annonce", new {id = annonce.AnnonceId })'>
                                         @annonce.Titre
+                                        <small class="pull-right">@String.Format("{0:dd-MM-yyyy} à {0:H:mm}", annonce.DateAjout)</small>
                                     </a>
                                 </li>
                             }
@@ -78,11 +82,10 @@
                             foreach (Resultat resultat in Resultats)
                             {
                                 <li>
-                                    <a href='@Url.Action("","")'>
-                                        @resultat.Semestre
-                                        
+                                    <a href='@Url.Action("Download","Annonce",new { id = resultat.ResultatId})'>
+                                        <span class="fa fa-download"></span> @resultat.Path.Remove(0,22)
+                                        <span class="label label-success pull-right">@Specialites.Find(o => o.SpecialiteId == resultat.SpecialiteId).Designation</span>
                                     </a>
-                                    <span class="label label-success pull-right">@Specialites.Find(o=>o.SpecialiteId == resultat.SpecialiteId).Designation</span>
                                 </li>
                             }
                         }

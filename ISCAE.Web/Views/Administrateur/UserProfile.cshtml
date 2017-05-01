@@ -1,8 +1,8 @@
-﻿@model Professeur
+﻿@model Administrateur
 @using ISCAE.Data
 @{
-    ViewBag.Title = "Profile";
-    Layout = "~/Views/Shared/_ProfesseurLayout.cshtml";
+    ViewBag.Title = "UserProfile";
+    Layout = "~/Views/Shared/_AdministrateurLayout.cshtml";
 }
 <div class="row">
     <div class="col-md-3">
@@ -10,7 +10,7 @@
         <div class="box box-success">
             <div class="box-body box-profile">
                 <img class="profile-user-img img-responsive img-circle" src="@Url.Content(Model.ProfilePath)" alt="User profile picture">
-                <h3 class="profile-username text-center">@Model.Login - Professeur</h3>
+                <h3 class="profile-username text-center">@Model.Login - Administrateur</h3>
 
                 <ul class="list-group list-group-unbordered">
                     <li class="list-group-item">
@@ -35,10 +35,10 @@
                 <li class="active"><a href="#settings" data-toggle="tab">Generales</a></li>
                 <li><a href="#profile" data-toggle="tab">Changer votre Image</a></li>
                 <li><a href="#password" data-toggle="tab">Changer votre mot de passe</a></li>
-            </ul>
+</ul>
             <div class="tab-content">
                 <div class="active tab-pane" id="settings">
-                    @using (Html.BeginForm("UserProfile", "Professeur", FormMethod.Post, new { @class = "form-horizontal" }))
+                    @using (Html.BeginForm("UserProfile", "Administrateur", FormMethod.Post, new { @class = "form-horizontal" }))
                     {
                         <div class="form-group">
                             <label for="email" class="col-sm-2 control-label">Email</label>
@@ -62,7 +62,7 @@
 
                 <!-- /.tab-pane -->
                 <div class="tab-pane" id="profile">
-                    @using (Html.BeginForm("Avatar", "Professeur", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+                    @using (Html.BeginForm("Avatar", "Administrateur", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
                     {
                         <div class="form-group">
                             <label class="col-sm-2 control-label" for="image">Votre Image</label>
@@ -73,15 +73,15 @@
 
                         </div>
 
-                            <div class="form-group">
-                                <div class="col-sm-offset-2 col-sm-10">
-                                    <button type="submit" class="btn btn-success">Submit</button>
-                                </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-success">Submit</button>
                             </div>
+                        </div>
                     }
                 </div>
                 <div class="tab-pane" id="password">
-                    @using (Html.BeginForm("ChangePassword", "Professeur", FormMethod.Post, new { @class = "form-horizontal" }))
+                    @using (Html.BeginForm("ChangePassword", "Administrateur", FormMethod.Post, new { @class = "form-horizontal" }))
                     {
                         <div class="form-group">
                             <label class="col-sm-2 control-label" for="oldpass">Ancien </label>

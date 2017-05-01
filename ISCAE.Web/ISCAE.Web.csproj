@@ -199,6 +199,7 @@
     <Folder Include="Content\scss\" />
     <Folder Include="Resources\Documents\" />
     <Folder Include="Resources\Etudiants\" />
+    <Folder Include="Resources\Resultats\" />
     <Folder Include="Views\Emploi\" />
   </ItemGroup>
   <ItemGroup>
@@ -420,6 +421,9 @@
     <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\Administrateur\AddAvis.cshtml" />
     <Content Include="Views\Professeur\UserProfile.cshtml" />
+    <Content Include="Views\Administrateur\UserProfile.cshtml" />
+    <Content Include="Views\Administrateur\Professeurs.cshtml" />
+    <Content Include="Views\Administrateur\AddProfesseur.cshtml" />
     <None Include="Views\Shared\_EtudiantLayout.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

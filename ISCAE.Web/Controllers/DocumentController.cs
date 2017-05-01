@@ -243,6 +243,10 @@ namespace ISCAE.Web.Controllers
         public FileResult Download(int documentId)
         {
             DocumentNonOfficiel document = _documentNonOfficielService.Get(documentId);
+            if(document == null)
+            {
+                throw new HttpException(404,"Document n'existe pas");
+            }
             return File(Server.MapPath(document.Emplacement), System.Net.Mime.MediaTypeNames.Application.Octet,document.Titre+"."+document.Type);
         }
     

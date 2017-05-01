@@ -1,19 +1,17 @@
 ﻿using ISCAE.Business.Services;
 using ISCAE.Data;
 using ISCAE.Web.Filters;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Mail;
-using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 
 namespace ISCAE.Web.Controllers
 {
     public class HomeController : Controller
     {
+
+        #region Dependencies
+
         private IEtudiantService _etudiantService;
         private INotificationService _notificationService;
         private ISpecialiteService _specialiteService;
@@ -31,6 +29,9 @@ namespace ISCAE.Web.Controllers
             _professeurService = professeurService;
             _professeurSpecialiteService = professeurSpecialiteService;
         }
+        #endregion Dependencies
+
+        #region Index
         // GET: Home
         public ActionResult Index()
         {
@@ -39,32 +40,14 @@ namespace ISCAE.Web.Controllers
                 ViewBag.session = true;
             return View();
         }
-        public ActionResult Directeur()
-        {
-            return View();
-        }
+        #endregion Index
+
+        #region Membre
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Login(string login, string password)
         {
-            Administrateur admin = null;
-            if (login.Equals("admin") && password.Equals("admin"))
-            {
-                admin = new Administrateur
-                {
-                    AdministrateurId = 1,
-                    Email = "admin@iscae.mr",
-                    Login = "admin",
-                    Password = "admin",
-                    Nom = "Administrateur",
-                    isActive = 1,
-                    Telephone = "34565656",
-                   ProfilePath = "~/Resources/Profiles/amou.png"
-
-                };
-            }
-            
-            
+            Administrateur admin = _administrateurService.GetUserByAuth(login,password);
             if(admin != null)
             {
                 Session["user"] = admin;
@@ -108,29 +91,11 @@ namespace ISCAE.Web.Controllers
 
             return View("Index");
         }
-        public ActionResult Avis()
-        {
-            return View();
-        }
-        public ActionResult Formations()
-        {
-            return View();
-        }
-        public ActionResult Etudiants()
-        {
-            return View();
-        }
-        public ActionResult Professeurs()
-        {
-            ViewBag.Professeurs = _professeurService.GetActiveUsers().ToList();
-            ViewBag.Specialites = _specialiteService.GetAll().ToList();
-            return View(_professeurSpecialiteService.GetAll());
-        }
         [SessionFilter()]
         public ActionResult Logout()
         {
             Session.Clear();
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
         public ActionResult Register()
         {
@@ -144,9 +109,9 @@ namespace ISCAE.Web.Controllers
         {
             ViewBag.error = false;
             ViewBag.done = false;
-            if (nni == null || nni.Equals("") || matricule == null 
-                || matricule.Equals("") || email == null || email.Equals("") 
-                || password == null || password.Equals("") || repassword.Equals("") 
+            if (nni == null || nni.Equals("") || matricule == null
+                || matricule.Equals("") || email == null || email.Equals("")
+                || password == null || password.Equals("") || repassword.Equals("")
                 || !password.Equals(repassword)
                 )
             {
@@ -166,11 +131,37 @@ namespace ISCAE.Web.Controllers
                     _etudiantService.Edit(etudiant);
                     ViewBag.done = true;
                     return View();
-                    
+
                 }
             }
             ViewBag.error = true;
             return View();
         }
+        #endregion Membre
+
+        public ActionResult Directeur()
+        {
+            return View();
+        }
+
+        public ActionResult Avis()
+        {
+            return View();
+        }
+        public ActionResult Formations()
+        {
+            return View();
+        }
+        public ActionResult Etudiants()
+        {
+            return View();
+        }
+        public ActionResult Professeurs()
+        {
+            ViewBag.Professeurs = _professeurService.GetActiveUsers().ToList();
+            ViewBag.Specialites = _specialiteService.GetAll().ToList();
+            return View(_professeurSpecialiteService.GetAll());
+        }
+        
     }
 }

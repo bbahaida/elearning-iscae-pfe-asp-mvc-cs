@@ -14,6 +14,8 @@ namespace ISCAE.Web.Controllers
     [ProfesseurFilter()]
     public class ProfesseurController : Controller
     {
+        #region Dependencies
+
         private IEtudiantService _etudiantService;
         private IDocumentNonOfficielService _documentNonOfficielService;
         private IDocumentOfficielService _documentOfficielService;
@@ -41,6 +43,10 @@ namespace ISCAE.Web.Controllers
             _professeurService = professeurService;
             _professeurModuleService = professeurModuleService;
         }
+        #endregion Dependencies
+
+        #region Index
+
         // GET: Professeur
         public ActionResult Index()
         {
@@ -91,6 +97,9 @@ namespace ISCAE.Web.Controllers
             ViewBag.etudiants = etudiants;
             return View(mesDocuments);
         }
+        #endregion Index
+
+        #region Profile
 
         public ActionResult UserProfile()
         {
@@ -138,5 +147,19 @@ namespace ISCAE.Web.Controllers
             Session["user"] = _professeurService.Get(user.ProfesseurId);
             return RedirectToAction("UserProfile");
         }
+        [HttpPost]
+        public ActionResult ChangePassword(string oldpass, string newpass, string renewpass)
+        {
+            Professeur user = (Professeur)Session["user"];
+            if (!user.Password.Equals(oldpass) || !renewpass.Equals(newpass))
+            {
+                return RedirectToAction("UserProfile");
+            }
+            user.Password = newpass;
+            user = _professeurService.Edit(user);
+            return RedirectToAction("UserProfile");
+        }
+
+        #endregion Profile
     }
 }

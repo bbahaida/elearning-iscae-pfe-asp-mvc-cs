@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 
 namespace ISCAE.Data.Repositories
@@ -136,6 +137,5 @@ namespace ISCAE.Data.Repositories
                 return null;
             }
         }
-
     }
 }

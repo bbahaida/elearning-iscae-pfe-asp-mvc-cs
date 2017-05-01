@@ -12,6 +12,8 @@ namespace ISCAE.Web.Controllers
     [SessionFilter()]
     public class AnnonceController : Controller
     {
+        #region Dependencies
+
         private IAnnonceService _annonceService;
         private IResultatService _resultatService;
         private ISpecialiteService _specialiteService;
@@ -21,6 +23,9 @@ namespace ISCAE.Web.Controllers
             _resultatService = resultatService;
             _specialiteService = specialiteService;
         }
+        #endregion Dependencies
+
+        #region Index
         // GET: Annonce
         public ActionResult Index()
         {
@@ -29,6 +34,9 @@ namespace ISCAE.Web.Controllers
             ViewBag.Specialites = _specialiteService.GetAll().ToList();
             return View();
         }
+        #endregion Index
+
+        #region Avis
         public ActionResult Avis(int id)
         {
             Annonce avis = _annonceService.Get(id);
@@ -36,5 +44,19 @@ namespace ISCAE.Web.Controllers
                 RedirectToAction("Index");
             return View(avis);
         }
+        #endregion Avis
+
+        #region Resultat
+        public FileResult Download(int id)
+        {
+            Resultat result = _resultatService.Get(id);
+            if (result == null)
+            {
+                throw new HttpException(404, "Document n'existe pas");
+            }
+            return File(Server.MapPath(result.Path), System.Net.Mime.MediaTypeNames.Application.Octet, result.Path.Remove(0, 22));
+        }
+        #endregion Resultat
+
     }
 }

@@ -3,28 +3,20 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
-
+using System.Data.Entity.Migrations;
 
 namespace ISCAE.Data.Repositories
 {
     public class Repository<DB,TEntity> : IRepository<TEntity> where TEntity : class where DB : DbContext,new()
     {
-        private DB _context;
+        private DB _context = new DB();
         //private log4net.ILog _logger = Log4NetHelper.GetLogger(typeof(TEntity));
         //public log4net.ILog Logger { get { return null; } }
         public DB Context
         {
-            get
-            {
-                if (_context == null)
-                {
-                    _context = new DB();
-                }
-                return _context;
-            }
+            get { return _context; }
             set { _context = value; }
         }
-
         public TEntity Add(TEntity entity)
         {
             try
@@ -38,7 +30,21 @@ namespace ISCAE.Data.Repositories
                 //Logger.Error(e.Message);
                 return null;
             }
-            
+        }
+
+        public TEntity Edit(TEntity entity)
+        {
+            try
+            {
+                Context.Set<TEntity>().AddOrUpdate(entity);
+                Context.SaveChanges();
+                return entity;
+            }
+            catch (Exception e)
+            {
+                //Logger.Error(e.Message);
+                return null;
+            }
         }
 
        public TEntity Delete(TEntity entity)
@@ -57,23 +63,6 @@ namespace ISCAE.Data.Repositories
             
         }
         
-        public TEntity Edit(TEntity entity)
-        {
-            try
-            {
-                Context.Set<TEntity>().Attach(entity);
-                var entry = Context.Entry(entity);
-                entry.State = EntityState.Modified;
-                Context.SaveChanges();
-                return entity;
-            }
-            catch (Exception e)
-            {
-                //Logger.Error(e.Message);
-                return null;
-            }
-            
-        }
 
         public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
         {
@@ -120,7 +109,7 @@ namespace ISCAE.Data.Repositories
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!this.disposed)
+            if (!disposed)
             {
                 if (disposing)
                 {
@@ -135,5 +124,6 @@ namespace ISCAE.Data.Repositories
             GC.SuppressFinalize(this);
         }
 
+        
     }
 }

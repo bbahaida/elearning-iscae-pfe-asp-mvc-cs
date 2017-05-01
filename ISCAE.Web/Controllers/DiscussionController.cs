@@ -13,6 +13,8 @@ namespace ISCAE.Web.Controllers
     [EtudiantFilter()]
     public class DiscussionController : Controller
     {
+        #region Dependencies
+
         private IQuestionService _questionService;
         private IReponseService _reponseService;
         private IEtudiantService _etudiantService;
@@ -22,6 +24,9 @@ namespace ISCAE.Web.Controllers
             _reponseService = reponseService;
             _etudiantService = etudiantService;
         }
+        #endregion Dependencies
+
+        #region Index
         // GET: Discussion
         public ActionResult Index(int? pageIndex, int? pageSize)
         {
@@ -40,6 +45,10 @@ namespace ISCAE.Web.Controllers
             ViewBag.pageIndex = (int)pageIndex;
             return View(questions);
         }
+        #endregion Index
+
+        #region Discussion
+
         [HttpPost]
         public ActionResult Add(string titre, string contenu, HttpPostedFileBase attachment)
         {
@@ -113,5 +122,7 @@ namespace ISCAE.Web.Controllers
             }
             return RedirectToAction("Discussion", "Discussion", new { id = id });
         }
+        #endregion Discussion
+
     }
 }

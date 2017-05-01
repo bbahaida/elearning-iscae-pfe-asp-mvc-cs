@@ -1,0 +1,178 @@
+﻿@using ISCAE.Data
+@{
+    List<Specialite> specialites = ViewBag.specialites;
+    List<Professeur> professeurs = ViewBag.professeurs;
+    List<Module> modules = ViewBag.modules;
+
+    ViewBag.Title = "Ajouter un professeur";
+    Layout = "~/Views/Shared/_AdministrateurLayout.cshtml";
+}
+
+
+<div class="row">
+    <!-- left column -->
+    <div class="col-md-4">
+        <!-- general form elements -->
+        <div class="box box-success">
+            <div class="box-header with-border">
+                <h3 class="box-title">Ajouter un professeur</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            @using (Html.BeginForm("AddProfesseur", "Administrateur", FormMethod.Post, new { @id = "add-professeur" }))
+            {
+                <div class="box-body">
+                    <div class="form-group has-feedback">
+                        <input type="text" name="nom" class="form-control" placeholder="Nom complet">
+                        <span class="fa fa-user form-control-feedback"></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input type="text" name="nni" class="form-control" placeholder="Numéro national d'identification">
+                        <span class="fa fa-address-card form-control-feedback"></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input type="text" name="login" class="form-control" placeholder="Nom d'utilisateur unique">
+                        <span class="fa fa-id-badge form-control-feedback"></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input type="text" name="tel" class="form-control" placeholder="Telephone">
+                        <span class="fa fa-phone form-control-feedback"></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input type="text" disabled class="form-control genarated" value="">
+                        <input type="hidden" name="password" class="genarated" value="" />
+                        <span class="fa fa-lock text-danger form-control-feedback"></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input type="email" name="email" class="form-control" placeholder="Email">
+                        <span class="fa fa-envelope form-control-feedback"></span>
+                    </div>
+
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer">
+                    <button type="submit" class="btn btn-success">Ajouter</button>
+                    <button class="btn btn-danger pull-right" id="generate">Generer un mot de passe</button>
+                </div>
+            }
+        </div>
+        <!-- /.box -->
+
+    </div>
+    <div class="col-md-4">
+        <!-- general form elements -->
+        <div class="box box-success">
+            <div class="box-header with-border">
+                <h3 class="box-title">Professeur - Specialite</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            @using (Html.BeginForm("AddProfesseurSpecialite", "Administrateur", FormMethod.Post, new { @id = "add-professeur-specialite" }))
+            {
+                <div class="box-body">
+                    <div class="form-group">
+                        <select class="form-control" name="professeur">
+                            @{ 
+                                foreach (Professeur professeur in professeurs)
+                                {
+                                    <option value="@professeur.ProfesseurId">@professeur.Nom</option>
+                                }
+                            }
+                        </select>
+
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control" name="specialite">
+                            @{
+                                foreach (Specialite specialite in specialites)
+                                {
+                                    <option value="@specialite.SpecialiteId">@specialite.Designation</option>
+                                }
+                            }
+                        </select>
+
+                    </div>
+                </div>
+                <div class="box-footer">
+                    <button type="submit" class="btn btn-success">Ajouter</button>
+                </div>
+            }
+        </div>
+        <!-- /.box -->
+
+    </div>
+    <div class="col-md-4">
+        <!-- general form elements -->
+        <div class="box box-success">
+            <div class="box-header with-border">
+                <h3 class="box-title">Professeur - Module</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            @using (Html.BeginForm("AddProfesseurModule", "Administrateur", FormMethod.Post, new { @id = "add-professeur-module" }))
+            {
+                <div class="box-body">
+                    <div class="form-group">
+                        <select class="form-control" name="professeur">
+                            @{
+                                foreach (Professeur professeur in professeurs)
+                                {
+                                    <option value="@professeur.ProfesseurId">@professeur.Nom</option>
+                                }
+                            }
+                        </select>
+
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control" name="module">
+                            @{
+                                foreach (Module module in modules)
+                                {
+                                    <option value="@module.ModuleId">@module.Designation</option>
+                                }
+                            }
+                        </select>
+
+                    </div>
+                </div>
+                <div class="box-footer">
+                    <button type="submit" class="btn btn-success">Ajouter</button>
+                </div>
+                                }
+        </div>
+        <!-- /.box -->
+
+    </div>
+</div>
+
+
+
+    @section scripts{
+        <script>
+            $(document).on('click', '#generate', function (e) {
+
+                e.preventDefault();
+
+                var randomstring = Math.random().toString(36).slice(-8);
+                $(".genarated").val(randomstring);
+
+                return false;
+
+            });
+        </script>
+    }

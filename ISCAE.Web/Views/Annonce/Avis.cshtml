@@ -2,7 +2,18 @@
 @using ISCAE.Data
 @{
     ViewBag.Title = "Avis";
-    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+    if (Session["user"] is Etudiant)
+    {
+        Layout = "~/Views/Shared/_EtudiantLayout.cshtml";
+    }
+    else if (Session["user"] is Professeur)
+    {
+        Layout = "~/Views/Shared/_ProfesseurLayout.cshtml";
+    }
+    else if (Session["user"] is Administrateur)
+    {
+        Layout = "~/Views/Shared/_AdministrateurLayout.cshtml";
+    }
 }
 
 <div class="row">
@@ -23,7 +34,7 @@
 
                 <!-- /.mailbox-controls -->
                 <div class="mailbox-read-message">
-                        @Model.Contenu
+                        @Html.Raw(Model.Contenu)
                 </div>
                 <!-- /.mailbox-read-message -->
             </div>

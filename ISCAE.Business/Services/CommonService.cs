@@ -13,18 +13,20 @@ namespace ISCAE.Business.Services
         {
             _repository = repository;
         }
+
         public TEntity Add(TEntity entity)
         {
-            if(entity != null)
+            if (entity != null)
             {
-                entity =  _repository.Add(entity);
-                if(entity != null)
+                entity = _repository.Add(entity);
+                if (entity != null)
                 {
                     return entity;
                 }
             }
             return null;
         }
+        
 
         public TEntity Delete(TEntity entity)
         {
