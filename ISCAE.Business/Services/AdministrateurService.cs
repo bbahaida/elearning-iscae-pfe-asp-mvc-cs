@@ -1,12 +1,15 @@
 ﻿using ISCAE.Data;
 using System.Collections.Generic;
 using ISCAE.Data.Repositories;
+using System.Security.Cryptography;
+using System.Text;
+using System.Linq;
 
 namespace ISCAE.Business.Services
 {
     public class AdministrateurService : CommonService<Administrateur>, IAdministrateurService
     {
-        IAdministrateurRepository _administrateurRepository;
+        private IAdministrateurRepository _administrateurRepository;
         public AdministrateurService(IUnitOfWork unit) : base(unit.Administarteurs)
         {
             _administrateurRepository = unit.Administarteurs;
@@ -24,9 +27,9 @@ namespace ISCAE.Business.Services
 
         public Administrateur GetUserByAuth(string login, string password)
         {
-            if (login.Equals("") || password.Equals(""))
+            if (login.Equals("") || password.Equals("") || login == null || password == null)
                 return null;
-            return _administrateurRepository.GetUserByAuth(login, password);
+            return _administrateurRepository.GetUserByAuth(login, Hash("iscae" + password));
         }
 
         public Administrateur GetUserByEmail(string email)
@@ -48,6 +51,11 @@ namespace ISCAE.Business.Services
             if (telephone.Equals(""))
                 return null;
             return _administrateurRepository.GetUserByTelephone(telephone);
+        }
+        private static string Hash(string input)
+        {
+            var hash = (new SHA1Managed()).ComputeHash(Encoding.UTF8.GetBytes(input));
+            return string.Join("", hash.Select(b => b.ToString("x2")).ToArray());
         }
     }
 }

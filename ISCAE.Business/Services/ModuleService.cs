@@ -15,5 +15,12 @@ namespace ISCAE.Business.Services
         {
             _moduleRepository = unit.Modules;
         }
+
+        public Module GetByDesignation(string designation)
+        {
+            if (designation == null || designation.Equals(""))
+                return null;
+            return _moduleRepository.GetByDesignation(designation);
+        }
     }
 }

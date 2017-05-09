@@ -12,7 +12,6 @@ namespace ISCAE.Web.App_Start
     using Ninject.Web.Common;
     using Data.Repositories;
     using Business.Services;
-    using Models;
     using Data;
 
     public static class NinjectWebCommon 
@@ -86,9 +85,10 @@ namespace ISCAE.Web.App_Start
                 kernel.Bind<IResultatService>().To<ResultatService>();
                 kernel.Bind<ISpecialiteModuleService>().To<SpecialiteModuleService>();
                 kernel.Bind<ISpecialiteService>().To<SpecialiteService>();
+                kernel.Bind<IUtilities>().To<Utilities>();
 
                 //ISCAE.Web
-                kernel.Bind<IExcelReader>().To<ExcelReader>();
+
 
                 RegisterServices(kernel);
                 return kernel;

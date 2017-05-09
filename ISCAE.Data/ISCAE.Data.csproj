@@ -170,9 +170,7 @@
     </None>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Ressources\DATA\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
@@ -188,6 +186,8 @@
       <DependentUpon>IscaeModel.edmx</DependentUpon>
       <LastGenOutput>IscaeModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Ressources\DATA\BDD_MCD.jpg" />
+    <Content Include="Ressources\DATA\BDD_MLD.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

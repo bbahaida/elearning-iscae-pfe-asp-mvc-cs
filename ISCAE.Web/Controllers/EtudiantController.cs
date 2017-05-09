@@ -16,6 +16,7 @@ namespace ISCAE.Web.Controllers
     {
         #region Dependencies
 
+        private IUtilities _utilities;
         private IEtudiantService _etudiantService;
         private IDocumentNonOfficielService _documentNonOfficielService;
         private IDocumentOfficielService _documentOfficielService;
@@ -27,11 +28,12 @@ namespace ISCAE.Web.Controllers
         private IModuleService _moduleService;
         private ISpecialiteModuleService _specialiteModuleService;
 
-        public EtudiantController(IEtudiantService etudiantService, IDocumentNonOfficielService documentNonOfficielService,
+        public EtudiantController(IUtilities utilities, IEtudiantService etudiantService, IDocumentNonOfficielService documentNonOfficielService,
                IDocumentOfficielService documentOfficielService, IMessageService messageService, IModuleService moduleService,
                IAnnonceService annonceService, INotificationService notificationService, IQuestionService questionService,
                IProfesseurService professeurService, ISpecialiteModuleService specialiteModuleService)
         {
+            _utilities = utilities;
             _etudiantService = etudiantService;
             _documentNonOfficielService = documentNonOfficielService;
             _documentOfficielService = documentOfficielService;
@@ -147,11 +149,11 @@ namespace ISCAE.Web.Controllers
         public ActionResult ChangePassword(string oldpass, string newpass, string renewpass)
         {
             Etudiant user = (Etudiant)Session["user"];
-            if (!user.Password.Equals(oldpass) || !renewpass.Equals(newpass))
+            if (!user.Password.Equals(_utilities.Hash("iscae" + oldpass)) || !renewpass.Equals(newpass))
             {
                 return RedirectToAction("UserProfile");
             }
-            user.Password = newpass;
+            user.Password = _utilities.Hash("iscae" + newpass);
             user = _etudiantService.Edit(user);
             return RedirectToAction("UserProfile");
         }

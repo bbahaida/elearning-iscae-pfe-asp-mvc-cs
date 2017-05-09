@@ -7,21 +7,24 @@ using System.Web.Mvc;
 
 namespace ISCAE.Web.Controllers
 {
+
     public class HomeController : Controller
     {
 
         #region Dependencies
 
+        private IUtilities _utilities;
         private IEtudiantService _etudiantService;
         private INotificationService _notificationService;
         private ISpecialiteService _specialiteService;
         private IProfesseurService _professeurService;
         private IProfesseurSpecialiteService _professeurSpecialiteService;
         private IAdministrateurService _administrateurService;
-        public HomeController(IEtudiantService etudiantService, INotificationService notificationService,
+        public HomeController(IUtilities utilities, IEtudiantService etudiantService, INotificationService notificationService,
                 ISpecialiteService specialiteService, IProfesseurService professeurService, 
                 IAdministrateurService administrateurService, IProfesseurSpecialiteService professeurSpecialiteService)
         {
+            _utilities = utilities;
             _administrateurService = administrateurService;
             _etudiantService = etudiantService;
             _notificationService = notificationService;
@@ -30,20 +33,19 @@ namespace ISCAE.Web.Controllers
             _professeurSpecialiteService = professeurSpecialiteService;
         }
         #endregion Dependencies
-
+        
         #region Index
         // GET: Home
+        [UnSessionFilter]
         public ActionResult Index()
         {
-            ViewBag.session = false;
-            if(Session["user"] != null)
-                ViewBag.session = true;
             return View();
         }
         #endregion Index
 
         #region Membre
         [HttpPost]
+        [UnSessionFilter]
         [ValidateAntiForgeryToken]
         public ActionResult Login(string login, string password)
         {
@@ -97,6 +99,7 @@ namespace ISCAE.Web.Controllers
             Session.Clear();
             return RedirectToAction("Index", "Home");
         }
+        [UnSessionFilter]
         public ActionResult Register()
         {
             ViewBag.error = false;
@@ -104,6 +107,7 @@ namespace ISCAE.Web.Controllers
             return View();
         }
         [HttpPost]
+        [UnSessionFilter]
         [ValidateAntiForgeryToken]
         public ActionResult Register(string nni, string matricule, string login, string tel, string email, string password, string repassword)
         {
@@ -125,7 +129,7 @@ namespace ISCAE.Web.Controllers
                 {
                     etudiant.Email = email;
                     etudiant.Login = login;
-                    etudiant.Password = password;
+                    etudiant.Password = _utilities.Hash("iscae"+password);
                     etudiant.isActive = 1;
                     etudiant.ProfilePath = "~/Resources/Profiles/avatar.png";
                     _etudiantService.Edit(etudiant);
@@ -138,24 +142,27 @@ namespace ISCAE.Web.Controllers
             return View();
         }
         #endregion Membre
-
+        [UnSessionFilter]
         public ActionResult Directeur()
         {
             return View();
         }
-
+        [UnSessionFilter]
         public ActionResult Avis()
         {
             return View();
         }
+        [UnSessionFilter]
         public ActionResult Formations()
         {
             return View();
         }
+        [UnSessionFilter]
         public ActionResult Etudiants()
         {
             return View();
         }
+        [UnSessionFilter]
         public ActionResult Professeurs()
         {
             ViewBag.Professeurs = _professeurService.GetActiveUsers().ToList();

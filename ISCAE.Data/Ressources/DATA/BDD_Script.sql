@@ -14,6 +14,7 @@ CREATE TABLE Administrateurs(
 	Telephone        VARCHAR (25) NOT NULL UNIQUE,
 	Email            VARCHAR (200) NOT NULL UNIQUE,
 	isActive         TINYINT  NOT NULL ,
+	ProfilePath      VARCHAR (255) NOT NULL ,
 	CONSTRAINT prk_constraint_Administrateurs PRIMARY KEY NONCLUSTERED (AdministrateurId)
 );
 
@@ -29,6 +30,7 @@ CREATE TABLE Professeurs(
 	Telephone    VARCHAR (25) NOT NULL UNIQUE,
 	Email        VARCHAR (200) NOT NULL UNIQUE,
 	isActive     TINYINT  NOT NULL ,
+	ProfilePath  VARCHAR (255) NOT NULL ,
 	CONSTRAINT prk_constraint_Professeurs PRIMARY KEY NONCLUSTERED (ProfesseurId)
 );
 
@@ -55,6 +57,8 @@ CREATE TABLE Etudiants(
 	Telephone    VARCHAR (25) NOT NULL UNIQUE,
 	Email        VARCHAR (200) NOT NULL UNIQUE,
 	isActive     TINYINT  NOT NULL ,
+	NNI          VARCHAR (25) NOT NULL ,
+	ProfilePath  VARCHAR (255) NOT NULL ,
 	Niveau       TINYINT  NOT NULL ,
 	SpecialiteId INT  NOT NULL ,
 	CONSTRAINT prk_constraint_Etudiants PRIMARY KEY NONCLUSTERED (EtudiantId)
@@ -79,7 +83,6 @@ CREATE TABLE DocumentNonOfficiels(
 	Titre                 VARCHAR (25) NOT NULL ,
 	Emplacement           VARCHAR (255) NOT NULL UNIQUE,
 	Type                  VARCHAR (25)  ,
-	isValid               TINYINT  NOT NULL ,
 	ModuleId              INT  NOT NULL ,
 	DateAjoutNonOfficiel  DATETIME  NOT NULL ,
 	EtudiantId            INT  NOT NULL ,
@@ -125,6 +128,7 @@ CREATE TABLE Questions(
 	Contenu      TEXT  NOT NULL ,
 	Titre        VARCHAR (25) NOT NULL ,
 	DateQuestion DATETIME  NOT NULL ,
+	Attachment   VARCHAR (255)  ,
 	EtudiantId   INT  NOT NULL ,
 	CONSTRAINT prk_constraint_Questions PRIMARY KEY NONCLUSTERED (QuestionId)
 );
@@ -179,6 +183,36 @@ CREATE TABLE ProfesseurSpecialites(
 
 
 /*------------------------------------------------------------
+-- Table: Notifications
+------------------------------------------------------------*/
+CREATE TABLE Notifications(
+	NotificationId     INT IDENTITY (1,1) NOT NULL ,
+	ActorId            INT  NOT NULL ,
+	TargetId           INT  NOT NULL ,
+	Message            TEXT  NOT NULL ,
+	NotificationStatus TINYINT  NOT NULL ,
+	TableName          VARCHAR (25) NOT NULL ,
+	RecordId           INT  NOT NULL ,
+	DateNotification   DATETIME  NOT NULL ,
+	CONSTRAINT prk_constraint_Notifications PRIMARY KEY NONCLUSTERED (NotificationId)
+);
+
+
+/*------------------------------------------------------------
+-- Table: Resultats
+------------------------------------------------------------*/
+CREATE TABLE Resultats(
+	ResultatId       INT IDENTITY (1,1) NOT NULL ,
+	Path             VARCHAR (255) NOT NULL UNIQUE,
+	Semestre         TINYINT  NOT NULL ,
+	Annee            VARCHAR (25) NOT NULL ,
+	AdministrateurId INT  NOT NULL ,
+	SpecialiteId     INT  NOT NULL ,
+	CONSTRAINT prk_constraint_Resultats PRIMARY KEY NONCLUSTERED (ResultatId)
+);
+
+
+/*------------------------------------------------------------
 -- Table: SpecialiteModules
 ------------------------------------------------------------*/
 CREATE TABLE SpecialiteModules(
@@ -205,5 +239,7 @@ ALTER TABLE ProfesseurModules ADD CONSTRAINT FK_ProfesseurModules_ProfesseurId F
 ALTER TABLE ProfesseurModules ADD CONSTRAINT FK_ProfesseurModules_ModuleId FOREIGN KEY (ModuleId) REFERENCES Modules(ModuleId);
 ALTER TABLE ProfesseurSpecialites ADD CONSTRAINT FK_ProfesseurSpecialites_ProfesseurId FOREIGN KEY (ProfesseurId) REFERENCES Professeurs(ProfesseurId);
 ALTER TABLE ProfesseurSpecialites ADD CONSTRAINT FK_ProfesseurSpecialites_SpecialiteId FOREIGN KEY (SpecialiteId) REFERENCES Specialites(SpecialiteId);
+ALTER TABLE Resultats ADD CONSTRAINT FK_Resultats_AdministrateurId FOREIGN KEY (AdministrateurId) REFERENCES Administrateurs(AdministrateurId);
+ALTER TABLE Resultats ADD CONSTRAINT FK_Resultats_SpecialiteId FOREIGN KEY (SpecialiteId) REFERENCES Specialites(SpecialiteId);
 ALTER TABLE SpecialiteModules ADD CONSTRAINT FK_SpecialiteModules_SpecialiteId FOREIGN KEY (SpecialiteId) REFERENCES Specialites(SpecialiteId);
 ALTER TABLE SpecialiteModules ADD CONSTRAINT FK_SpecialiteModules_ModuleId FOREIGN KEY (ModuleId) REFERENCES Modules(ModuleId);

@@ -20,25 +20,17 @@
     <div class="wrapper">
         @Html.Partial("_Navbar")
         <div class="content-wrapper">
-            <div class="container">
-                <!-- Main content -->
-                <section class="content">
-                    @RenderBody()
-                </section>
-                <!-- /.content -->
-            </div>
-            <!-- /.container -->
+            @RenderBody()
         </div>
-        
-        <!-- /.content-wrapper -->
-        <footer class="main-footer">
-            <div class="container">
-                <strong>Copyright &copy; @DateTime.Now.Year ISCAE.</strong> All rights
-                reserved.
-            </div>
-            <!-- /.container -->
-        </footer>
-    </div>
+            <!-- /.content-wrapper -->
+            <footer class="main-footer">
+                <div class="container">
+                    <strong>Copyright &copy; @DateTime.Now.Year ISCAE.</strong> All rights
+                    reserved.
+                </div>
+                <!-- /.container -->
+            </footer>
+        </div>
     <!-- ./wrapper -->
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

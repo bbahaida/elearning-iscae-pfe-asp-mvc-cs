@@ -42,9 +42,7 @@ namespace ISCAE.Web
                       "~/Content/AdminLTE.css",
                       "~/Content/skins/_all-skins.min.css",
                       "~/Content/Site.css"));
-
-            //var fontAwesome = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css";
-            //var ionIcons = "https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css";
+            
 
             bundles.Add(new StyleBundle("~/Content/user").Include(
                       "~/Content/bootstrap.min.css",

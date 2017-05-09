@@ -1,6 +1,9 @@
 ﻿using ISCAE.Data;
 using System.Collections.Generic;
 using ISCAE.Data.Repositories;
+using System.Security.Cryptography;
+using System.Text;
+using System.Linq;
 
 namespace ISCAE.Business.Services
 {
@@ -42,7 +45,7 @@ namespace ISCAE.Business.Services
         {
             if (login.Equals("") || password.Equals("") || login == null || password == null)
                 return null;
-            return _etudiantRepository.GetUserByAuth(login, password);
+            return _etudiantRepository.GetUserByAuth(login, Hash("iscae" +password));
         }
 
         public Etudiant GetUserByEmail(string email)
@@ -78,6 +81,11 @@ namespace ISCAE.Business.Services
             if (telephone.Equals(""))
                 return null;
             return _etudiantRepository.GetUserByTelephone(telephone);
+        }
+        private static string Hash(string input)
+        {
+            var hash = (new SHA1Managed()).ComputeHash(Encoding.UTF8.GetBytes(input));
+            return string.Join("", hash.Select(b => b.ToString("x2")).ToArray());
         }
     }
 }

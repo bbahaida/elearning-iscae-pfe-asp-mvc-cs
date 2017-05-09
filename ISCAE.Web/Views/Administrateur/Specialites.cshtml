@@ -1,0 +1,73 @@
+﻿@model List<Specialite>
+@using ISCAE.Data
+@{
+    List<SpecialiteModule> specialiteModules = ViewBag.specialiteModules;
+    ViewBag.Title = "Specialites";
+    Layout = "~/Views/Shared/_AdministrateurLayout.cshtml";
+    List<SpecialiteModule> modules = new List<SpecialiteModule>();
+}
+
+@{ 
+    foreach (Specialite specialite in Model)
+    {
+        <div class="row">
+            @{
+                for (int i = 1; i <= 3; i++)
+                {
+                    <div class="col-md-4">
+                        <div class="box collapsed-box box-success">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">@specialite.Designation - @i</h3>
+                                <div class="box-tools pull-right">
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                        <i class="fa fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                                <div class="table-responsive">
+                                    <table class="table no-margin">
+                                        <thead>
+                                            <tr>
+                                                <th>Module</th>
+                                                <th>Supprimer</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @{
+                                                modules = specialiteModules.Where(o => o.SpecialiteId == specialite.SpecialiteId && o.Niveau == i).ToList();
+
+                                                if (modules.Count > 0)
+                                                {
+                                                    foreach (SpecialiteModule m in modules)
+                                                    {
+                                                        <tr>
+                                                            <td>@m.Module.Designation</td>
+                                                            
+                                                            <td><a href="@Url.Action("DeleteSpecialiteModule", "Administrateur", new { idModule = m.ModuleId, idSpecialite = m.SpecialiteId })"><span class="fa fa-close"></span></a></td>
+                                                        </tr>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <tr><td colspan="5">Pas de donnees</td></tr>
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.table-responsive -->
+
+                            </div>
+                            <!-- /.box-body -->
+
+                        </div>
+                    </div>
+                                                }
+            }
+            
+
+        </div>
+    }
+}

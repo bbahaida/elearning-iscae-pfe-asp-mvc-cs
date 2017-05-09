@@ -10,8 +10,8 @@ namespace ISCAE.Data.Repositories
     public class Repository<DB,TEntity> : IRepository<TEntity> where TEntity : class where DB : DbContext,new()
     {
         private DB _context = new DB();
-        //private log4net.ILog _logger = Log4NetHelper.GetLogger(typeof(TEntity));
-        //public log4net.ILog Logger { get { return null; } }
+        private log4net.ILog _logger = Log4NetHelper.GetLogger(typeof(TEntity));
+        public log4net.ILog Logger { get { return _logger; } }
         public DB Context
         {
             get { return _context; }
@@ -27,7 +27,7 @@ namespace ISCAE.Data.Repositories
             }
             catch (Exception e)
             {
-                //Logger.Error(e.Message);
+                Logger.Error(e.Message);
                 return null;
             }
         }
@@ -42,7 +42,7 @@ namespace ISCAE.Data.Repositories
             }
             catch (Exception e)
             {
-                //Logger.Error(e.Message);
+                Logger.Error(e.Message);
                 return null;
             }
         }
@@ -57,7 +57,7 @@ namespace ISCAE.Data.Repositories
             }
             catch (Exception e)
             {
-                //Logger.Error(e.Message);
+                Logger.Error(e.Message);
                 return entity;
             }
             
@@ -72,7 +72,7 @@ namespace ISCAE.Data.Repositories
             }
             catch (Exception e)
             {
-                //Logger.Error(e.Message);
+                Logger.Error(e.Message);
                 return null;
             }
             
@@ -86,7 +86,7 @@ namespace ISCAE.Data.Repositories
             }
             catch (Exception e)
             {
-                //Logger.Error(e.Message);
+                Logger.Error(e.Message);
                 return null;
             }
             
@@ -100,7 +100,7 @@ namespace ISCAE.Data.Repositories
             }
             catch (Exception e)
             {
-                //Logger.Error(e.Message);
+                Logger.Error(e.Message);
                 return null;
             }
             

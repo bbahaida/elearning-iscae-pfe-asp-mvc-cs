@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using ISCAE.Data.Repositories;
 using System;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace ISCAE.Business.Services
 {
@@ -22,7 +24,6 @@ namespace ISCAE.Business.Services
             _specialiteModuleRepository = unit.SpecialiteModules;
             _moduleRepository = unit.Modules;
             _specialiteModuleService = specialiteModuleService;
-
         }
 
         public IEnumerable<Professeur> GetActiveUsers()
@@ -66,9 +67,9 @@ namespace ISCAE.Business.Services
 
         public Professeur GetUserByAuth(string login, string password)
         {
-            if (login.Equals("") || password.Equals(""))
+            if (login.Equals("") || password.Equals("") || login == null || password == null)
                 return null;
-            return _professeurRepository.GetUserByAuth(login, password);
+            return _professeurRepository.GetUserByAuth(login, Hash("iscae"+password));
         }
 
         public Professeur GetUserByEmail(string email)
@@ -118,6 +119,11 @@ namespace ISCAE.Business.Services
                     niveauBySpecialite.Add(p.SpecialiteId, niveau);
             }
             return niveauBySpecialite;
+        }
+        private static string Hash(string input)
+        {
+            var hash = (new SHA1Managed()).ComputeHash(Encoding.UTF8.GetBytes(input));
+            return string.Join("", hash.Select(b => b.ToString("x2")).ToArray());
         }
     }
 }

@@ -8,5 +8,6 @@ namespace ISCAE.Data.Repositories
 {
     public interface IModuleRepository : IRepository<Module>
     {
+        Module GetByDesignation(string designation);
     }
 }

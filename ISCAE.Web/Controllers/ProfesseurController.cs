@@ -16,6 +16,7 @@ namespace ISCAE.Web.Controllers
     {
         #region Dependencies
 
+        private IUtilities _utilities;
         private IEtudiantService _etudiantService;
         private IDocumentNonOfficielService _documentNonOfficielService;
         private IDocumentOfficielService _documentOfficielService;
@@ -27,11 +28,12 @@ namespace ISCAE.Web.Controllers
         private IModuleService _moduleService;
         private IProfesseurModuleService _professeurModuleService;
 
-        public ProfesseurController(IEtudiantService etudiantService, IDocumentNonOfficielService documentNonOfficielService,
+        public ProfesseurController(IUtilities utilities, IEtudiantService etudiantService, IDocumentNonOfficielService documentNonOfficielService,
                IDocumentOfficielService documentOfficielService, IMessageService messageService, IModuleService moduleService,
                IAnnonceService annonceService, INotificationService notificationService, ISpecialiteService specialiteService,
                IProfesseurService professeurService, IProfesseurModuleService professeurModuleService)
         {
+            _utilities = utilities;
             _etudiantService = etudiantService;
             _documentNonOfficielService = documentNonOfficielService;
             _documentOfficielService = documentOfficielService;
@@ -151,11 +153,11 @@ namespace ISCAE.Web.Controllers
         public ActionResult ChangePassword(string oldpass, string newpass, string renewpass)
         {
             Professeur user = (Professeur)Session["user"];
-            if (!user.Password.Equals(oldpass) || !renewpass.Equals(newpass))
+            if (!user.Password.Equals(_utilities.Hash("iscae" + oldpass)) || !renewpass.Equals(newpass))
             {
                 return RedirectToAction("UserProfile");
             }
-            user.Password = newpass;
+            user.Password = _utilities.Hash("iscae" + newpass);
             user = _professeurService.Edit(user);
             return RedirectToAction("UserProfile");
         }

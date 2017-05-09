@@ -5,21 +5,22 @@ using System.Linq;
 using System.Web;
 using System.Runtime.InteropServices;
 using ISCAE.Data;
-using ISCAE.Business.Services;
+using System.Security.Cryptography;
+using System.Text;
 
-namespace ISCAE.Web.Models
+namespace ISCAE.Business.Services
 {
-    public class ExcelReader : IExcelReader
+    public class Utilities : IUtilities
     {
         private ISpecialiteService _specialiteService;
         private IEtudiantService _etudiantService;
-        public ExcelReader(ISpecialiteService specialiteService, IEtudiantService etudiantService)
+        public Utilities(ISpecialiteService specialiteService, IEtudiantService etudiantService)
         {
             _specialiteService = specialiteService;
             _etudiantService = etudiantService;
         }
 
-        public void Insert(List<Etudiant> etudiants)
+        public void InsertEtudiants(List<Etudiant> etudiants)
         {
             List<Etudiant> allEtudiant = _etudiantService.GetAll().ToList();
             
@@ -45,7 +46,7 @@ namespace ISCAE.Web.Models
             }
         }
 
-        public List<Etudiant> Read(string path)
+        public List<Etudiant> ReadExcel(string path)
         {
             
             List<Etudiant> etudiants = new List<Etudiant>();
@@ -92,6 +93,11 @@ namespace ISCAE.Web.Models
             xlApp.Quit();
             Marshal.ReleaseComObject(xlApp);
             return etudiants;
+        }
+        public string Hash(string input)
+        {
+            var hash = (new SHA1Managed()).ComputeHash(Encoding.UTF8.GetBytes(input));
+            return string.Join("", hash.Select(b => b.ToString("x2")).ToArray());
         }
     }
 }

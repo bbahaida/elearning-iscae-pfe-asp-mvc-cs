@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace ISCAE.Business.Services
 {
-    public interface IModuleService :ICommonService<Module>
+    public interface IUtilities
     {
-        Module GetByDesignation(string designation);
+        List<Etudiant> ReadExcel(string path);
+        void InsertEtudiants(List<Etudiant> etudiants);
+        string Hash(string input);
     }
 }

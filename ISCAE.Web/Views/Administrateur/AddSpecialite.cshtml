@@ -1,0 +1,128 @@
+﻿@using ISCAE.Data
+@{
+    List<Specialite> specialites = ViewBag.specialites;
+    List<Module> modules = ViewBag.modules;
+    bool specialiteError = ViewBag.specialiteError;
+    bool moduleError = ViewBag.moduleError;
+    bool specialiteModuleError = ViewBag.specialiteModuleError;
+    ViewBag.Title = "AddSpecialite";
+    Layout = "~/Views/Shared/_AdministrateurLayout.cshtml";
+}
+
+
+<div class="row">
+    <!-- left column -->
+    <div class="col-md-4">
+        <!-- general form elements -->
+        <div class="box box-success">
+            <div class="box-header with-border">
+                <h3 class="box-title">Ajouter une specialite @{if (specialiteError) {<small class='text-danger'>Erreur</small> } }</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            @using (Html.BeginForm("AddSpecialite", "Administrateur", FormMethod.Post, new { @id = "add-specialite" }))
+            {
+                <div class="box-body">
+                    <div class="form-group has-feedback @(specialiteError ? "has-error" : "")">
+                        <input type="text" name="designation" class="form-control" placeholder="Designation">
+                        <span class="fa fa-sitemap form-control-feedback"></span>
+                    </div>
+                    
+
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer">
+                    <button type="submit" class="btn btn-success">Ajouter</button>
+                </div>
+            }
+        </div>
+        <!-- /.box -->
+
+    </div>
+    <div class="col-md-4">
+        <!-- general form elements -->
+        <div class="box box-success">
+            <div class="box-header with-border">
+                <h3 class="box-title">Ajouter un module @{if (moduleError)
+                    {<small class='text-danger'>Erreur</small> } }</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            @using (Html.BeginForm("AddModule", "Administrateur", FormMethod.Post, new { @id = "add-module" }))
+            {
+                <div class="box-body">
+                    <div class="form-group has-feedback @(moduleError ? "has-error" : "")">
+                        <input type="text" name="designation" class="form-control" placeholder="Designation">
+                        <span class="fa fa-graduation-cap form-control-feedback"></span>
+                    </div>
+
+
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer">
+                    <button type="submit" class="btn btn-success">Ajouter</button>
+                </div>
+            }
+        </div>
+        <!-- /.box -->
+
+    </div>
+    <div class="col-md-4">
+        <!-- general form elements -->
+        <div class="box box-success">
+            <div class="box-header with-border">
+                <h3 class="box-title">Specialite - Module @{if (specialiteModuleError)
+                    {<small class='text-danger'>Erreur</small> } }</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            @using (Html.BeginForm("AddSpecialiteModule", "Administrateur", FormMethod.Post, new { @id = "add-specialite-module" }))
+            {
+                <div class="box-body">
+                    <div class="form-group">
+                        <select class="form-control" name="specialite">
+                            @{
+                                foreach (Specialite specialite in specialites)
+                                {
+                                    <option value="@specialite.SpecialiteId">@specialite.Designation</option>
+                                }
+                            }
+                        </select>
+
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control" name="module">
+                            @{
+                                foreach (Module module in modules)
+                                {
+                                    <option value="@module.ModuleId">@module.Designation</option>
+                                }
+                            }
+                        </select>
+
+                    </div>
+                </div>
+                <div class="box-footer">
+                    <button type="submit" class="btn btn-success">Ajouter</button>
+                </div>
+                                }
+        </div>
+        <!-- /.box -->
+
+    </div>
+</div>

@@ -10,13 +10,16 @@
             <div class="row">
                 
                 <div class="col-md-4">
-                    <div class="box box-success">
+                    <div class="box collapsed-box box-success">
                         <div class="box-header with-border">
                             <h3 class="box-title">@Model.ElementAt(i).Nom</h3>
                             <div class="box-tools pull-right">
                                 <button type="button" class="btn btn-box-tool" data-widget="collapse">
-                                    <i class="fa fa-minus"></i>
+                                    <i class="fa fa-plus"></i>
                                 </button>
+                                <a type="button" href="@Url.Action("CloseProfesseur", "Administrateur", new { id = @Model.ElementAt(i).ProfesseurId})" class="btn btn-box-tool">
+                                    <i class="fa fa-close"></i>
+                                </a>
                             </div>
                         </div>
                         <!-- /.box-header -->
@@ -57,13 +60,16 @@
                     }
                 }
                 <div class="col-md-4">
-                    <div class="box box-success">
+                    <div class="box collapsed-box box-success">
                         <div class="box-header with-border">
                             <h3 class="box-title">@Model.ElementAt(i+1).Nom</h3>
                             <div class="box-tools pull-right">
                                 <button type="button" class="btn btn-box-tool" data-widget="collapse">
-                                    <i class="fa fa-minus"></i>
+                                    <i class="fa fa-plus"></i>
                                 </button>
+                                <a type="button" href="@Url.Action("CloseProfesseur", "Administrateur", new { id = @Model.ElementAt(i+1).ProfesseurId})" class="btn btn-box-tool">
+                                    <i class="fa fa-close"></i>
+                                </a>
                             </div>
                         </div>
                         <!-- /.box-header -->
@@ -104,13 +110,16 @@
                     }
                 }
                 <div class="col-md-4">
-                    <div class="box box-success">
+                    <div class="box collapsed-box box-success">
                         <div class="box-header with-border">
                             <h3 class="box-title">@Model.ElementAt(i+2).Nom</h3>
                             <div class="box-tools pull-right">
                                 <button type="button" class="btn btn-box-tool" data-widget="collapse">
-                                    <i class="fa fa-minus"></i>
+                                    <i class="fa fa-plus"></i>
                                 </button>
+                                <a type="button" href="@Url.Action("CloseProfesseur", "Administrateur", new { id = @Model.ElementAt(i+2).ProfesseurId})" class="btn btn-box-tool">
+                                    <i class="fa fa-close"></i>
+                                </a>
                             </div>
                         </div>
                         <!-- /.box-header -->

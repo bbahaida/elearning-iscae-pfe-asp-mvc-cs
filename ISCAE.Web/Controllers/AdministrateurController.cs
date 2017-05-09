@@ -1,7 +1,7 @@
 ﻿using ISCAE.Business.Services;
 using ISCAE.Data;
 using ISCAE.Web.Filters;
-using ISCAE.Web.Models;
+using log4net;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,18 +16,19 @@ namespace ISCAE.Web.Controllers
     public class AdministrateurController : Controller
     {
         #region Dependencies
-
-        private IExcelReader _excelReader;
+        private ILog _logger;
+        private IUtilities _utilities;
         private IAdministrateurService _administrateurService;
         private IEtudiantService _etudiantService;
         private IProfesseurService _professeurService;
         private ISpecialiteService _specialiteService;
+        private ISpecialiteModuleService _specialiteModuleService;
         private IAnnonceService _annonceService;
         private IResultatService _resultatService;
         private IModuleService _moduleService;
         private IProfesseurSpecialiteService _professeurSpecialiteService;
         private IProfesseurModuleService _professeurModuleService;
-        public AdministrateurController(IExcelReader excelReader, IEtudiantService etudiantService,
+        public AdministrateurController(IUtilities utilities, IEtudiantService etudiantService, ISpecialiteModuleService specialiteModuleService,
             ISpecialiteService specialiteService, IAnnonceService annonceService, IProfesseurService professeurService,
             IAdministrateurService administrateurService, IResultatService resultatService, IProfesseurModuleService professeurModuleService,
             IModuleService moduleService, IProfesseurSpecialiteService professeurSpecialiteService)
@@ -35,14 +36,16 @@ namespace ISCAE.Web.Controllers
             _administrateurService = administrateurService;
             _etudiantService = etudiantService;
             _professeurService = professeurService;
-            _excelReader = excelReader;
+            _utilities = utilities;
             _specialiteService = specialiteService;
             _annonceService = annonceService;
             _resultatService = resultatService;
             _moduleService = moduleService;
             _professeurSpecialiteService = professeurSpecialiteService;
             _professeurModuleService = professeurModuleService;
-        }
+            _specialiteModuleService = specialiteModuleService;
+            _logger = Log4NetHelper.GetLogger(typeof(AdministrateurController));
+    }
         #endregion Dependencies
 
         #region Index
@@ -71,21 +74,27 @@ namespace ISCAE.Web.Controllers
             string pathToExcelFile = targetpath+"Annee_"+ year.Substring(0,4)+"_"+ year.Substring(5, 4)+ "" +extension;
             document.SaveAs(pathToExcelFile);
             
-            List<Etudiant> etudiants = _excelReader.Read(pathToExcelFile);
-            _excelReader.Insert(etudiants);
+            List<Etudiant> etudiants = _utilities.ReadExcel(pathToExcelFile);
+            _utilities.InsertEtudiants(etudiants);
             return View();
         }
         public ActionResult Etudiants()
         {
             ViewBag.etudiants = _etudiantService.GetAll().Where(o=>o.isActive == 1).ToList();
-            return View(_specialiteService.GetAll().ToList());
+            return View(_specialiteService.GetAll().OrderBy(o=>o.Designation).ToList());
         }
         public ActionResult CloseEtudiant(int id)
         {
+            Administrateur user = (Administrateur)Session["user"];
             Etudiant e = _etudiantService.Get(id);
-            e.isActive = 0;
-            e = _etudiantService.Edit(e);
-
+            if(e.isActive == 1)
+            {
+                e.isActive = 0;
+                e = _etudiantService.Edit(e);
+                if (e != null && e.isActive == 0)
+                    _logger.Info("Administrateur: ID: " + user.AdministrateurId + " - Login: " + user.Login + " - Nom: " + user.Nom + " a desactive le compte ID: " + e.EtudiantId + " - Matricule: " + e.Matricule + " - Login: " + e.Login + " - Nom: " + e.Nom);
+            }
+            
             return RedirectToAction("Etudiants","Administrateur");
         }
         #endregion Etudiant
@@ -197,11 +206,11 @@ namespace ISCAE.Web.Controllers
         public ActionResult ChangePassword(string oldpass, string newpass, string renewpass)
         {
             Administrateur user = (Administrateur)Session["user"];
-            if (!user.Password.Equals(oldpass) || !renewpass.Equals(newpass))
+            if (!user.Password.Equals(_utilities.Hash("iscae" + oldpass)) || !renewpass.Equals(newpass))
             {
                 return RedirectToAction("UserProfile");
             }
-            user.Password = newpass;
+            user.Password = _utilities.Hash("iscae"+newpass);
             user = _administrateurService.Edit(user);
             return RedirectToAction("UserProfile");
         }
@@ -271,7 +280,115 @@ namespace ISCAE.Web.Controllers
                 return RedirectToAction("AddProfesseur", "Administrateur");
             return RedirectToAction("Professeurs", "Administrateur");
         }
+        public ActionResult CloseProfesseur(int id)
+        {
+            Administrateur user = (Administrateur)Session["user"];
+            Professeur professeur = _professeurService.Get(id);
+            if (professeur.isActive == 1)
+            {
+                professeur.isActive = 0;
+                professeur = _professeurService.Edit(professeur);
+                if (professeur != null && professeur.isActive == 0)
+                    _logger.Info("Administrateur: ID: " + user.AdministrateurId + " - Login: " + user.Login + " - Nom: " + user.Nom + " a desactive le compte ID: " + professeur.ProfesseurId + " - Login: " + professeur.Login + " - Nom: " + professeur.Nom);
+            }
 
+            return RedirectToAction("Professeurs", "Administrateur");
+        }
         #endregion Professeur
+
+        #region Specialte
+        public ActionResult Specialites()
+        {
+            ViewBag.specialiteModules = _specialiteModuleService.GetAll().ToList();
+            return View(_specialiteService.GetAll().OrderBy(o => o.Designation).ToList());
+        }
+        public ActionResult AddSpecialite()
+        {
+            ViewBag.specialites = _specialiteService.GetAll().ToList();
+            ViewBag.modules = _moduleService.GetAll().ToList();
+            ViewBag.specialiteModuleError = false;
+            ViewBag.specialiteError = false;
+            ViewBag.moduleError = false;
+            return View();
+        }
+        [HttpPost]
+        public ActionResult AddSpecialite(string designation)
+        {
+            ViewBag.specialites = _specialiteService.GetAll().ToList();
+            ViewBag.modules = _moduleService.GetAll().ToList();
+            ViewBag.specialiteError = false;
+            ViewBag.moduleError = false;
+            ViewBag.specialiteModuleError = false;
+
+            if(designation == null || designation.Equals(""))
+            {
+                ViewBag.specialiteError = true;
+                return View();
+            }
+
+            Specialite specialite = new Specialite
+            {
+                Designation = designation
+            };
+            specialite = _specialiteService.Add(specialite);
+            if (specialite == null)
+            {
+                ViewBag.specialiteError = true;
+                return View();
+            }
+                
+            return View();
+        }
+        [HttpPost]
+        public ActionResult AddModule(string designation)
+        {
+            ViewBag.specialites = _specialiteService.GetAll().ToList();
+            ViewBag.modules = _moduleService.GetAll().ToList();
+            ViewBag.specialiteError = false;
+            ViewBag.moduleError = false;
+            ViewBag.specialiteModuleError = false;
+
+            if (designation == null || designation.Equals(""))
+            {
+                ViewBag.moduleError = true;
+                return View();
+            }
+            Module module = new Module
+            {
+                Designation = designation
+            };
+            module = _moduleService.Add(module);
+            if (module == null)
+            {
+                ViewBag.moduleError = true;
+                return View("AddSpecialite");
+            }
+
+            return View("AddSpecialite");
+        }
+        [HttpPost]
+        public ActionResult AddSpecialiteModule(int specialite, int module, int niveau)
+        {
+            ViewBag.specialites = _specialiteService.GetAll().ToList();
+            ViewBag.modules = _moduleService.GetAll().ToList();
+            ViewBag.specialiteError = false;
+            ViewBag.moduleError = false;
+            ViewBag.specialiteModuleError = false;
+            SpecialiteModule specialiteModule = new SpecialiteModule
+            {
+                SpecialiteId = specialite,
+                ModuleId = module,
+                Niveau = (byte)niveau
+            };
+            specialiteModule = _specialiteModuleService.Add(specialiteModule);
+            if (specialiteModule == null)
+            {
+                ViewBag.specialiteModuleError = true;
+                return View("AddSpecialite");
+            }
+
+            return View("AddSpecialite");
+        }
+        #endregion
     }
 }
