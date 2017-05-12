@@ -17,6 +17,7 @@
           <Property Name="Email" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="isActive" Type="tinyint" Nullable="false" />
           <Property Name="ProfilePath" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Groupe" Type="varchar" MaxLength="25" Nullable="false" />
         </EntityType>
         <EntityType Name="Annonces">
           <Key>
@@ -144,6 +145,15 @@
           <Property Name="DateQuestion" Type="datetime" Nullable="false" />
           <Property Name="Attachment" Type="varchar" MaxLength="255" />
           <Property Name="EtudiantId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Recoveries">
+          <Key>
+            <PropertyRef Name="RecoveryId" />
+          </Key>
+          <Property Name="RecoveryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Matricule" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="Reponses">
           <Key>
@@ -423,6 +433,7 @@
           <EntitySet Name="Professeurs" EntityType="Self.Professeurs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProfesseurSpecialites" EntityType="Self.ProfesseurSpecialites" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Questions" EntityType="Self.Questions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Recoveries" EntityType="Self.Recoveries" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Reponses" EntityType="Self.Reponses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Resultats" EntityType="Self.Resultats" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SpecialiteModules" EntityType="Self.SpecialiteModules" Schema="dbo" store:Type="Tables" />
@@ -521,6 +532,7 @@
           <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="isActive" Type="Byte" Nullable="false" />
           <Property Name="ProfilePath" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Groupe" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Annonces" Relationship="Self.FK_Annonces_AdministrateurId" FromRole="Administrateurs" ToRole="Annonces" />
           <NavigationProperty Name="Resultats" Relationship="Self.FK_Resultats_AdministrateurId" FromRole="Administrateurs" ToRole="Resultats" />
         </EntityType>
@@ -675,6 +687,15 @@
           <Property Name="EtudiantId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Etudiant" Relationship="Self.FK_Questions_EtudiantId" FromRole="Questions" ToRole="Etudiants" />
           <NavigationProperty Name="Reponses" Relationship="Self.FK_Reponses_QuestionId" FromRole="Questions" ToRole="Reponses" />
+        </EntityType>
+        <EntityType Name="Recovery">
+          <Key>
+            <PropertyRef Name="RecoveryId" />
+          </Key>
+          <Property Name="RecoveryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Matricule" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
         <EntityType Name="Repons">
           <Key>
@@ -965,6 +986,7 @@
           <EntitySet Name="Professeurs" EntityType="Self.Professeur" />
           <EntitySet Name="ProfesseurSpecialites" EntityType="Self.ProfesseurSpecialite" />
           <EntitySet Name="Questions" EntityType="Self.Question" />
+          <EntitySet Name="Recoveries" EntityType="Self.Recovery" />
           <EntitySet Name="Reponses" EntityType="Self.Repons" />
           <EntitySet Name="Resultats" EntityType="Self.Resultat" />
           <EntitySet Name="SpecialiteModules" EntityType="Self.SpecialiteModule" />
@@ -1063,6 +1085,7 @@
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="isActive" ColumnName="isActive" />
                 <ScalarProperty Name="ProfilePath" ColumnName="ProfilePath" />
+                <ScalarProperty Name="Groupe" ColumnName="Groupe" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1197,6 +1220,16 @@
                 <ScalarProperty Name="DateQuestion" ColumnName="DateQuestion" />
                 <ScalarProperty Name="Attachment" ColumnName="Attachment" />
                 <ScalarProperty Name="EtudiantId" ColumnName="EtudiantId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Recoveries">
+            <EntityTypeMapping TypeName="IscaeModel.Recovery">
+              <MappingFragment StoreEntitySet="Recoveries">
+                <ScalarProperty Name="RecoveryId" ColumnName="RecoveryId" />
+                <ScalarProperty Name="Matricule" ColumnName="Matricule" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

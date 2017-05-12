@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="3e80e5292ae148abb228d1d94bc26718" Name="Diagram1">
+      <Diagram DiagramId="fecee1b367f94315822e628fe907254f" Name="Diagram1">
         <EntityTypeShape EntityType="IscaeModel.Administrateur" Width="1.5" PointX="0.75" PointY="14.375" IsExpanded="true" />
         <EntityTypeShape EntityType="IscaeModel.Annonce" Width="1.5" PointX="3" PointY="21.875" IsExpanded="true" />
         <EntityTypeShape EntityType="IscaeModel.DocumentNonOfficiel" Width="1.5" PointX="5.25" PointY="9.5" IsExpanded="true" />
@@ -17,6 +17,7 @@
         <EntityTypeShape EntityType="IscaeModel.Professeur" Width="1.5" PointX="3.75" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="IscaeModel.ProfesseurSpecialite" Width="1.5" PointX="3" PointY="5.875" IsExpanded="true" />
         <EntityTypeShape EntityType="IscaeModel.Question" Width="1.5" PointX="5.25" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="IscaeModel.Recovery" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="IscaeModel.Repons" Width="1.5" PointX="7.5" PointY="11.125" IsExpanded="true" />
         <EntityTypeShape EntityType="IscaeModel.Resultat" Width="1.5" PointX="3" PointY="14.625" IsExpanded="true" />
         <EntityTypeShape EntityType="IscaeModel.SpecialiteModule" Width="1.5" PointX="8" PointY="14.875" IsExpanded="true" />

@@ -110,6 +110,9 @@
     <Compile Include="Question.cs">
       <DependentUpon>IscaeModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Recovery.cs">
+      <DependentUpon>IscaeModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Repons.cs">
       <DependentUpon>IscaeModel.tt</DependentUpon>
     </Compile>
