@@ -24,7 +24,7 @@ body {
   background-color: #046521;
 }
 .navbar-default .navbar-nav > li > a {
-  color: #046521;
+    color: #046521;
 }
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus {
@@ -66,9 +66,67 @@ body {
 
 /* CUSTOMIZE THE CAROUSEL
 -------------------------------------------------- */
-
+.logo{
+    margin-top:-38px;
+    color: #046521;
+}
+.logo h4{
+    margin-top:40px;
+    margin-left:-130px;
+}
+.logo h3{
+    margin-left:-130px;
+}
+@media all and (max-width:1200px) {
+    #text{
+        visibility:hidden;
+    }
+    .logo{
+        margin-top:-18px;
+        color: #046521;
+    }
+    .ads{
+        margin-top:40px;
+        padding:20px;
+        text-align:center;
+        font-size:1.6em;
+        color: aliceblue;
+        background-color:cornflowerblue;
+    }
+}
+#back_top{
+    background-color:#046521;
+    color:aliceblue;
+    padding:10px;   
+}
+@media all and (min-width:1200px) {
+    #text{
+        visibility:visible;
+    }
+    .logo{
+        margin-top:-38px;
+        color: #046521;
+    }
+    .ads{
+        margin-top:40px;
+        padding:20px;
+        text-align:center;
+        font-size:1.6em;
+        color: aliceblue;
+        background-color:cornflowerblue;
+    }
+}
+.ads{
+    margin-top:40px;
+    padding:20px;
+    text-align:center;
+    font-size:1.6em;
+    color: aliceblue;
+    background-color:cornflowerblue;
+}
 /* Carousel base class */
 .carousel {
+    margin-top: 110px;
   height: 500px;
   margin-bottom: 60px;
 }

@@ -200,12 +200,17 @@
     <Folder Include="Content\css\" />
     <Folder Include="Content\datatables\" />
     <Folder Include="Content\fonts\" />
+    <Folder Include="Content\home\css\" />
+    <Folder Include="Content\home\fonts\" />
+    <Folder Include="Content\home\images\" />
+    <Folder Include="Content\home\sass\" />
     <Folder Include="Content\less\" />
     <Folder Include="Content\scss\" />
     <Folder Include="Models\" />
     <Folder Include="Resources\Documents\" />
     <Folder Include="Resources\Etudiants\" />
     <Folder Include="Resources\Resultats\" />
+    <Folder Include="Scripts\home\js\" />
     <Folder Include="Views\Emploi\" />
   </ItemGroup>
   <ItemGroup>

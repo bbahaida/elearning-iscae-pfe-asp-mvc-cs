@@ -32,16 +32,34 @@ namespace ISCAE.Web
                       "~/Scripts/pages/dashboard.js",
                       "~/Scripts/demo.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/home").Include(
+                      "~/Scripts/home/js/jquery.min.js",
+                      "~/Scripts/home/js/jquery.easing.1.3.js",
+                      "~/Scripts/home/js/jquery.waypoints.min.js",
+                      "~/Scripts/home/js/jquery.stellar.min.js",
+                      "~/Scripts/home/js/owl.carousel.min.js",
+                      "~/Scripts/home/js/jquery.flexslider-min.js",
+                      "~/Scripts/home/js/jquery.countTo.js",
+                      "~/Scripts/home/js/jquery.magnific-popup.min.js",
+                      "~/Scripts/home/js/magnific-popup-options.js",
+                      "~/Scripts/home/js/simplyCountdown.js",
+                      "~/Scripts/home/js/main.js",
+                      "~/Scripts/home/js/bootstrap.min.js"
+                      ));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css"));
 
             bundles.Add(new StyleBundle("~/Content/home").Include(
-                      "~/Content/bootstrap.min.css",
-                      "~/Content/css/font-awesome.min.css",
-                      //ionIcons,
-                      "~/Content/AdminLTE.css",
-                      "~/Content/skins/_all-skins.min.css",
-                      "~/Content/Site.css"));
+                      "~/Content/home/css/animate.css",
+                      "~/Content/home/css/icomoon.css",
+                      "~/Content/home/css/bootstrap.css",
+                      "~/Content/home/css/magnific-popup.css",
+                      "~/Content/home/css/owl.carousel.min.css",
+                      "~/Content/home/css/owl.theme.default.min.css",
+                      "~/Content/home/css/flexslider.css",
+                      "~/Content/home/css/style.css"
+                      ));
             
 
             bundles.Add(new StyleBundle("~/Content/user").Include(
