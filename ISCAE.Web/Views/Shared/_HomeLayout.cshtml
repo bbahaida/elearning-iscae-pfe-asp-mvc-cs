@@ -30,13 +30,13 @@
                         </div>
                         <div class="col-xs-10 text-right menu-1">
                             <ul>
-                                <li class="active"><a href="index.html">Accueil</a></li>
-                                <li><a href="courses.html">Professeurs</a></li>
-                                <li><a href="teacher.html">Etudiants</a></li>
-                                <li><a href="about.html">A Propos</a></li>
-                                <li><a href="pricing.html">Mot de directeur</a></li>
-                                <li><a href="blog.html">Formations</a></li>
-                                <li><a href="contact.html">Contact</a></li>
+                                <li><a href="@Url.Action("Index","Home")">Accueil</a></li>
+                                <li><a href="@Url.Action("Professeurs", "Home")">Professeurs</a></li>
+                                <li><a href="@Url.Action("Etudiants", "Home")">Etudiants</a></li>
+                                <li><a href="@Url.Action("Avis","Home")">Avis</a></li>
+                                <li><a href="@Url.Action("Directeur", "Home")">Mot de directeur</a></li>
+                                <li><a href="@Url.Action("Formations", "Home")">Formations</a></li>
+                                <li><a href="@Url.Action("Contact", "Home")">Contact</a></li>
                                 <li class="btn-cta has-dropdown">
                                     <a href="#"><span>Login</span></a>
                                     <ul class="dropdown">
@@ -72,7 +72,7 @@
                                             <li>
 
                                                 
-                                                <div class="pull-right">
+                                                <div>
                                                     <i class="" id="loading"></i>
                                                     <input type="submit" id="connecter-btn" class="btn btn-success btn-flat" value="Connecter" />
                                                 </div>
@@ -90,6 +90,22 @@
             </div>
         </nav>
         @RenderBody()
+        <footer id="fh5co-footer" role="contentinfo" style="background-image: url(images/img_bg_4.jpg);">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row row-pb-md">
+                    <div class="col-md-3 fh5co-widget">
+                        <h3>A propos</h3>
+                        <p>L'Institut Supérieur  de Comptabilité et d'Administration des Entreprises.</p>
+                    </div>
+                    <div class="col-md-9 fh5co-widget">
+                        <p>
+                            <small class="block">&copy; @DateTime.Now.Year ISCAE. All Rights Reserved.</small>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </footer>
     </div>
         
        

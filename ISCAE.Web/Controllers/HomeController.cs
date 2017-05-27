@@ -17,11 +17,12 @@ namespace ISCAE.Web.Controllers
         private IEtudiantService _etudiantService;
         private INotificationService _notificationService;
         private ISpecialiteService _specialiteService;
+        private IModuleService _moduleService;
         private IProfesseurService _professeurService;
         private IProfesseurSpecialiteService _professeurSpecialiteService;
         private IAdministrateurService _administrateurService;
         public HomeController(IUtilities utilities, IEtudiantService etudiantService, INotificationService notificationService,
-                ISpecialiteService specialiteService, IProfesseurService professeurService, 
+                ISpecialiteService specialiteService, IProfesseurService professeurService, IModuleService moduleService,
                 IAdministrateurService administrateurService, IProfesseurSpecialiteService professeurSpecialiteService)
         {
             _utilities = utilities;
@@ -29,6 +30,7 @@ namespace ISCAE.Web.Controllers
             _etudiantService = etudiantService;
             _notificationService = notificationService;
             _specialiteService = specialiteService;
+            _moduleService = moduleService;
             _professeurService = professeurService;
             _professeurSpecialiteService = professeurSpecialiteService;
         }
@@ -39,6 +41,11 @@ namespace ISCAE.Web.Controllers
         [UnSessionFilter]
         public ActionResult Index()
         {
+            ViewBag.etudiants = _etudiantService.GetAll().Where(o => o.isActive == 1).Count();
+            ViewBag.graduates = _etudiantService.GetAll().Where(o => o.isActive == 0 && o.Niveau == 3).Count();
+            ViewBag.professeurs = _professeurService.GetAll().Where(o => o.isActive == 1).Count();
+            ViewBag.specialites = _specialiteService.GetAll().ToList();
+            ViewBag.modules = _moduleService.GetAll().Count();
             return View();
         }
         #endregion Index

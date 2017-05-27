@@ -1,6 +1,12 @@
-﻿@{ 
+﻿@using ISCAE.Data
+@{ 
     Layout = "~/Views/Shared/_HomeLayout.cshtml";
     ViewBag.Title = "Accueil";
+    int etudiants = ViewBag.etudiants;
+    int graduates = ViewBag.graduates;
+    int professeurs = ViewBag.professeurs;
+    List<Specialite> specialites = ViewBag.specialites;
+    int modules = ViewBag.modules;
 }
 
 
@@ -50,3 +56,101 @@
         </ul>
     </div>
 </aside>
+<div id="fh5co-course">
+    <div class="container">
+        <div class="row animate-box">
+            <div class="col-md-6 col-md-offset-3 text-center fh5co-heading">
+                <h2>La direction</h2>
+                <p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 animate-box">
+                <div class="course">
+                    <a href="#" class="course-img" style="background-image: url(@Url.Content("~/Content/img/directeur.jpg"));">
+                    </a>
+                    <div class="desc">
+                        <h3><a href="#">Directeur</a></h3>
+                        <p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
+                        <span><a href="#" class="btn btn-primary btn-sm btn-course">Detaille</a></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 animate-box">
+                <div class="course">
+                    <a href="#" class="course-img" style="background-image: url(@Url.Content("~/Content/img/logo_big.png"));">
+                    </a>
+                    <div class="desc">
+                        <h3><a href="#">Business &amp; Accounting</a></h3>
+                        <p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
+                        <span><a href="#" class="btn btn-primary btn-sm btn-course">Take A Course</a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="fh5co-counter" class="fh5co-counters" style="background-image: url(@Url.Content("~/Content/home/images/counter.jpeg"));" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="row">
+                    <div class="col-md-2 col-sm-4 text-center animate-box">
+                        <span class="icon"><i class="fa fa-institution"></i></span>
+                        <span class="fh5co-counter js-counter" data-from="0" data-to="@specialites.Count" data-speed="1000" data-refresh-interval="50"></span>
+                        <span class="fh5co-counter-label">Specialités</span>
+                    </div>
+                    <div class="col-md-2 col-sm-4 text-center animate-box">
+                        <span class="icon"><i class="fa fa-graduation-cap"></i></span>
+                        <span class="fh5co-counter js-counter" data-from="0" data-to="@graduates" data-speed="1000" data-refresh-interval="5"></span>
+                        <span class="fh5co-counter-label">Graduation</span>
+                    </div>
+                    <div class="col-md-4 col-sm-4 text-center animate-box">
+                        <span class="icon"><i class="fa fa-group"></i></span>
+                        <span class="fh5co-counter js-counter" data-from="0" data-to="@etudiants" data-speed="1000" data-refresh-interval="5"></span>
+                        <span class="fh5co-counter-label">Etudiants</span>
+                    </div>
+                    <div class="col-md-2 col-sm-6 text-center animate-box">
+                        <span class="icon"><i class="fa fa-pencil-square-o"></i></span>
+                        <span class="fh5co-counter js-counter" data-from="0" data-to="@modules" data-speed="1000" data-refresh-interval="5"></span>
+                        <span class="fh5co-counter-label">Modules</span>
+                    </div>
+                    <div class="col-md-2 col-sm-6 text-center animate-box">
+                        <span class="icon"><i class="fa fa-suitcase"></i></span>
+                        <span class="fh5co-counter js-counter" data-from="0" data-to="@professeurs" data-speed="1000" data-refresh-interval="5"></span>
+                        <span class="fh5co-counter-label">Professeurs</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="fh5co-course-categories">
+    <div class="container">
+        <div class="row animate-box">
+            <div class="col-md-6 col-md-offset-3 text-center fh5co-heading">
+                <h2>Specialités</h2>
+                <p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
+            </div>
+        </div>
+        <div class="row">
+            @{
+                foreach (Specialite specialite in specialites)
+                {
+                    <div class="col-md-3 col-sm-6 text-center animate-box">
+                        <div class="services">
+                            <span class="icon">
+                                <i>@specialite.Designation</i>
+                            </span>
+                            <div class="desc">
+                                <h3><a href="#">@specialite.Designation</a></h3>
+                                <p>@specialite.Designation.</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }   
+        </div>
+    </div>
+</div>

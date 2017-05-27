@@ -408,7 +408,7 @@ h1, h2, h3, h4, h5, h6, figure {
 #fh5co-staff,
 #fh5co-contact,
 #fh5co-footer {
-  padding: 7em 0;
+  padding: 2em 0;
   clear: both;
 }
 @media screen and (max-width: 768px) {
@@ -423,7 +423,7 @@ h1, h2, h3, h4, h5, h6, figure {
   #fh5co-staff,
   #fh5co-contact,
   #fh5co-footer {
-    padding: 3em 0;
+    padding: 2em 0;
   }
 }
 
@@ -467,15 +467,15 @@ h1, h2, h3, h4, h5, h6, figure {
 .services .icon i {
   display: table-cell;
   vertical-align: middle;
-  font-size: 40px;
+  font-size: 35px;
   line-height: 40px;
   color: #000;
-  -webkit-transition: 0.3s;
-  -o-transition: 0.3s;
-  transition: 0.3s;
+  -webkit-transition: 0.4s;
+  -o-transition: 0.4s;
+  transition: 0.4s;
 }
 .services:hover .icon, .services:focus .icon {
-  background: #2D6CDF;
+  background: #077d09;
 }
 .services:hover .icon i, .services:focus .icon i {
   color: #fff;
@@ -1141,7 +1141,7 @@ h1, h2, h3, h4, h5, h6, figure {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.85);
+  background: rgba(7, 125, 9, 1);
   -webkit-transition: 0.5s;
   -o-transition: 0.5s;
   transition: 0.5s;
@@ -1156,14 +1156,14 @@ h1, h2, h3, h4, h5, h6, figure {
   list-style: none;
 }
 #fh5co-footer .fh5co-footer-links li a {
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.7);
   text-decoration: none;
 }
 #fh5co-footer .fh5co-footer-links li a:hover {
   text-decoration: underline;
 }
 #fh5co-footer .fh5co-widget {
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 }
 @media screen and (max-width: 768px) {
   #fh5co-footer .fh5co-widget {
@@ -1201,7 +1201,7 @@ h1, h2, h3, h4, h5, h6, figure {
   position: absolute;
   z-index: 1901;
   width: 270px;
-  background: black;
+  background: #077d09;
   top: 0;
   right: 0;
   top: 0;
@@ -1231,7 +1231,7 @@ h1, h2, h3, h4, h5, h6, figure {
   transform: translateX(0px);
 }
 #fh5co-offcanvas a {
-  color: rgba(255, 255, 255, 0.5);
+  color: #fff;
 }
 #fh5co-offcanvas a:hover {
   color: rgba(255, 255, 255, 0.8);
@@ -1268,7 +1268,7 @@ h1, h2, h3, h4, h5, h6, figure {
   -moz-osx-font-smoothing: grayscale;
   content: "\ea1c";
   font-size: 20px;
-  color: rgba(255, 255, 255, 0.2);
+  color: #fff;
   -webkit-transition: 0.5s;
   -o-transition: 0.5s;
   transition: 0.5s;
@@ -1595,7 +1595,8 @@ h1, h2, h3, h4, h5, h6, figure {
 
 .form-control {
   box-shadow: none;
-  background: transparent;
+  background: #fff;
+  color:#077d09;
   border: 2px solid rgba(0, 0, 0, 0.1);
   height: 54px;
   font-size: 14px;
@@ -1608,7 +1609,7 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 
 .row-pb-md {
-  padding-bottom: 4em !important;
+  padding-bottom: 1em !important;
 }
 
 .row-pb-sm {
