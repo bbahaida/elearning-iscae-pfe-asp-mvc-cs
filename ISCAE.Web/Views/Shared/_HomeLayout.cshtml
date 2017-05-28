@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>ISCAE</title>
+    <title>ISCAE - @ViewBag.Title</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     @Styles.Render("~/Content/home")
@@ -32,7 +32,6 @@
                             <ul>
                                 <li><a href="@Url.Action("Index","Home")">Accueil</a></li>
                                 <li><a href="@Url.Action("Professeurs", "Home")">Professeurs</a></li>
-                                <li><a href="@Url.Action("Etudiants", "Home")">Etudiants</a></li>
                                 <li><a href="@Url.Action("Avis","Home")">Avis</a></li>
                                 <li><a href="@Url.Action("Directeur", "Home")">Mot de directeur</a></li>
                                 <li><a href="@Url.Action("Formations", "Home")">Formations</a></li>

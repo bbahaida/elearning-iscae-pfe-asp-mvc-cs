@@ -1,12 +1,106 @@
-﻿
+﻿@model List<ISCAE.Data.Annonce>
 @{
     ViewBag.Title = "Avis";
     Layout = "~/Views/Shared/_HomeLayout.cshtml";
 }
-
-<div class="container">
-    <!-- Main content -->
-    <section class="content"></section>
-    <!-- /.content -->
+<aside id="fh5co-hero">
+    <div class="flexslider">
+        <ul class="slides">
+            <li style="background-image: url(@Url.Content("~/Content/home/images/annonce.jpeg"));">
+                <div class="overlay-gradient"></div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2 text-center slider-text">
+                            <div class="slider-text-inner">
+                                <h1 class="heading-section">Les annonces</h1>
+                                <h2>@using (Html.BeginForm("Avis", "Home", FormMethod.Post, new {}))
+                                {
+                                    <input name="word" class="form-control" placeholder="Une annonce qui contient ?"/>
+                                    
+                                }</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</aside>
+<div id="fh5co-pricing" class="fh5co-bg-section">
+    <div class="container">
+        <div class="row animate-box">
+            <div class="col-md-6 col-md-offset-3 text-center fh5co-heading">
+                <h2>Les Annonces</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="pricing pricing--rabten">
+                @{
+                    foreach (ISCAE.Data.Annonce annonce in Model)
+                    {
+                        <div class="col-md-4 animate-box">
+                            <div class="pricing__item">
+                                <div class="wrap-price">
+                                    <h3 class="pricing__title">@annonce.Titre</h3>
+                                </div>
+                                <div class="pricing__price">
+                                    <span class="pricing__anim pricing__anim--1">
+                                        @String.Format("Le {0:dd-MM-yyyy}", annonce.DateAjout)
+                                    </span>
+                                </div>
+                                <div class="wrap-price">
+                                    <ul class="pricing__feature-list">
+                                        <li class="pricing__feature">@Html.Raw(annonce.Contenu)</li>
+                                    </ul>
+                                    <button class="pricing__action" id="@annonce.AnnonceId">Voir plus</button>
+                                   
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
 </div>
-<!-- /.container -->
+@section scripts{
+    <script type="text/javascript" src="~/Scripts/home/js/eModal.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".pricing__action").click(function (event) {
+                var id = event.target.id
+                $.ajax({
+                    url: "api/AnnonceApi/" + id,
+                    type: "GET",
+
+                    success: function (data) {
+                        var options = {
+                            message: JSON.parse(data),
+                            title: 'Test',
+                            size: 'md',
+                            subtitle: 'smaller text header',
+                            useBin: true,
+                            buttons: { text: 'Close', style: 'success', close: true}
+                        };
+                        eModal.alert(options);
+                    },
+                    error: function (data) {
+                        var options = {
+                            message: "Error",
+                            title: 'Error',
+                            size: 'md',
+                            subtitle: 'smaller text header',
+                            useBin: true
+                        };
+                        eModal.alert(options);
+                    }
+
+                });
+
+            });
+        });
+        
+            
+    </script>
+    }

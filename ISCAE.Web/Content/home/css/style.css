@@ -1071,7 +1071,7 @@ h1, h2, h3, h4, h5, h6, figure {
   font-size: 12px;
 }
 .staff:hover .staff-img:before {
-  opacity: 1;
+  opacity: 0.3;
 }
 .staff:hover .staff-img .fh5co-social {
   opacity: 1;

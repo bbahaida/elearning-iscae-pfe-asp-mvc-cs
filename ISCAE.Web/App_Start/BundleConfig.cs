@@ -58,6 +58,7 @@ namespace ISCAE.Web
                       "~/Content/home/css/owl.carousel.min.css",
                       "~/Content/home/css/owl.theme.default.min.css",
                       "~/Content/home/css/flexslider.css",
+                      "~/Content/home/css/pricing.css",
                       "~/Content/css/font-awesome.min.css",
                       "~/Content/home/css/style.css"
                       ));

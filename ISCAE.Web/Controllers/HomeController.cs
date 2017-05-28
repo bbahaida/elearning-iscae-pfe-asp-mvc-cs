@@ -19,11 +19,13 @@ namespace ISCAE.Web.Controllers
         private ISpecialiteService _specialiteService;
         private IModuleService _moduleService;
         private IProfesseurService _professeurService;
+        private IAnnonceService _annonceService;
         private IProfesseurSpecialiteService _professeurSpecialiteService;
         private IAdministrateurService _administrateurService;
         public HomeController(IUtilities utilities, IEtudiantService etudiantService, INotificationService notificationService,
                 ISpecialiteService specialiteService, IProfesseurService professeurService, IModuleService moduleService,
-                IAdministrateurService administrateurService, IProfesseurSpecialiteService professeurSpecialiteService)
+                IAdministrateurService administrateurService, IProfesseurSpecialiteService professeurSpecialiteService,
+                IAnnonceService annonceService)
         {
             _utilities = utilities;
             _administrateurService = administrateurService;
@@ -33,6 +35,7 @@ namespace ISCAE.Web.Controllers
             _moduleService = moduleService;
             _professeurService = professeurService;
             _professeurSpecialiteService = professeurSpecialiteService;
+            _annonceService = annonceService;
         }
         #endregion Dependencies
         
@@ -157,8 +160,9 @@ namespace ISCAE.Web.Controllers
         [UnSessionFilter]
         public ActionResult Avis()
         {
-            return View();
+            return View(_annonceService.GetAll().OrderByDescending(o=>o.AnnonceId).Take(3).ToList());
         }
+
         [UnSessionFilter]
         public ActionResult Formations()
         {
@@ -172,9 +176,7 @@ namespace ISCAE.Web.Controllers
         [UnSessionFilter]
         public ActionResult Professeurs()
         {
-            ViewBag.Professeurs = _professeurService.GetActiveUsers().ToList();
-            ViewBag.Specialites = _specialiteService.GetAll().ToList();
-            return View(_professeurSpecialiteService.GetAll());
+            return View(_professeurService.GetActiveUsers().ToList());
         }
         
     }

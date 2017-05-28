@@ -206,7 +206,6 @@
     <Folder Include="Resources\Documents\" />
     <Folder Include="Resources\Etudiants\" />
     <Folder Include="Resources\Resultats\" />
-    <Folder Include="Scripts\home\js\" />
     <Folder Include="Views\Emploi\" />
   </ItemGroup>
   <ItemGroup>
@@ -244,6 +243,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AdministrateurController.cs" />
+    <Compile Include="Controllers\AnnonceApiController.cs" />
     <Compile Include="Controllers\AnnonceController.cs" />
     <Compile Include="Controllers\DiscussionController.cs" />
     <Compile Include="Controllers\DocumentController.cs" />
@@ -253,6 +253,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\ProfesseurController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Filters\AdministrateurFilter.cs" />
     <Compile Include="Filters\EtudiantFilter.cs" />
     <Compile Include="Filters\ProfesseurFilter.cs" />
@@ -290,6 +291,7 @@
     <Content Include="Content\home\css\style.css" />
     <Content Include="Content\home\fonts\bootstrap\glyphicons-halflings-regular.svg" />
     <Content Include="Content\home\fonts\icomoon\icomoon.svg" />
+    <Content Include="Content\home\images\annonce.jpeg" />
     <Content Include="Content\home\images\counter.jpeg" />
     <Content Include="Content\home\images\img_bg_1.jpg" />
     <Content Include="Content\home\images\img_bg_2.jpg" />
@@ -299,6 +301,7 @@
     <Content Include="Content\home\images\person1.jpg" />
     <Content Include="Content\home\images\person2.jpg" />
     <Content Include="Content\home\images\person3.jpg" />
+    <Content Include="Content\home\images\prof.jpeg" />
     <Content Include="Content\home\images\project-1.jpg" />
     <Content Include="Content\home\images\project-2.jpg" />
     <Content Include="Content\home\images\project-3.jpg" />
@@ -407,6 +410,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\fastclick.js" />
     <Content Include="Scripts\fastclick.min.js" />
+    <Content Include="Scripts\home\js\eModal.min.js" />
     <Content Include="Scripts\jquery-2.2.3.min.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
