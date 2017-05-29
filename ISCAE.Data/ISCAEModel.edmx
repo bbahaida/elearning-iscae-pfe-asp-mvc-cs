@@ -190,7 +190,9 @@
             <PropertyRef Name="SpecialiteId" />
           </Key>
           <Property Name="SpecialiteId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Designation" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Abreviation" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Designation" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="text" Nullable="false" />
         </EntityType>
         <Association Name="FK_Annonces_AdministrateurId">
           <End Role="Administrateurs" Type="Self.Administrateurs" Multiplicity="1" />
@@ -738,7 +740,9 @@
             <PropertyRef Name="SpecialiteId" />
           </Key>
           <Property Name="SpecialiteId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Designation" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Abreviation" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Designation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Etudiants" Relationship="Self.FK_Etudiants_SpecialiteId" FromRole="Specialites" ToRole="Etudiants" />
           <NavigationProperty Name="Messages" Relationship="Self.FK_Messages_SpecialiteId" FromRole="Specialites" ToRole="Messages" />
           <NavigationProperty Name="ProfesseurSpecialites" Relationship="Self.FK_ProfesseurSpecialites_SpecialiteId" FromRole="Specialites" ToRole="ProfesseurSpecialites" />
@@ -1269,7 +1273,9 @@
             <EntityTypeMapping TypeName="IscaeModel.Specialite">
               <MappingFragment StoreEntitySet="Specialites">
                 <ScalarProperty Name="SpecialiteId" ColumnName="SpecialiteId" />
+                <ScalarProperty Name="Abreviation" ColumnName="Abreviation" />
                 <ScalarProperty Name="Designation" ColumnName="Designation" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

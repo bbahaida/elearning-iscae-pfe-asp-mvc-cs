@@ -292,6 +292,7 @@
     <Content Include="Content\home\fonts\bootstrap\glyphicons-halflings-regular.svg" />
     <Content Include="Content\home\fonts\icomoon\icomoon.svg" />
     <Content Include="Content\home\images\annonce.jpeg" />
+    <Content Include="Content\home\images\contact.jpeg" />
     <Content Include="Content\home\images\counter.jpeg" />
     <Content Include="Content\home\images\img_bg_1.jpg" />
     <Content Include="Content\home\images\img_bg_2.jpg" />
@@ -557,6 +558,7 @@
     <Content Include="Content\home\sass\_bootstrap-compass.scss" />
     <Content Include="Content\home\sass\_bootstrap-mincer.scss" />
     <Content Include="Content\home\sass\_bootstrap-sprockets.scss" />
+    <Content Include="Views\Home\Contact.cshtml" />
     <None Include="Views\Shared\_EtudiantLayout.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

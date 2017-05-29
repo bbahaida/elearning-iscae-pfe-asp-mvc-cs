@@ -72,7 +72,7 @@
                     <div class="desc">
                         <h3><a href="#">Directeur</a></h3>
                         <p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
-                        <span><a href="#" class="btn btn-primary btn-sm btn-course">Detaille</a></span>
+                        <span><a href="#" class="btn btn-success btn-sm btn-course">Detaille</a></span>
                     </div>
 
                 </div>
@@ -82,9 +82,10 @@
                     <a href="#" class="course-img" style="background-image: url(@Url.Content("~/Content/img/logo_big.png"));">
                     </a>
                     <div class="desc">
-                        <h3><a href="#">Business &amp; Accounting</a></h3>
-                        <p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
-                        <span><a href="#" class="btn btn-primary btn-sm btn-course">Take A Course</a></span>
+                        <h3><a>L'institut</a></h3>
+                        <p>Sur rapport conjoint du Ministre des Affaires Economiques et du Développement, du Ministre des Finances, du Ministre de l'Education Nationale et du Ministre de la Fonction publique et de l'Emploi;</p>
+                        <p> Vu la Constitution du 20 juillet 1991, rétablie et modifiée aux termes de la loi constitutionnelle nOO14-2006.....</p>
+                        <span><a href="#" class="btn btn-success btn-sm btn-course">Télécharger PDF</a></span>
                     </div>
                 </div>
             </div>
@@ -132,21 +133,21 @@
         <div class="row animate-box">
             <div class="col-md-6 col-md-offset-3 text-center fh5co-heading">
                 <h2>Specialités</h2>
-                <p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
+                <p>Les spécialités suivantes sont ouvertes :</p>
             </div>
         </div>
-        <div class="row">
+        <div id="formation" class="row">
             @{
                 foreach (Specialite specialite in specialites)
                 {
                     <div class="col-md-3 col-sm-6 text-center animate-box">
                         <div class="services">
                             <span class="icon">
-                                <i>@specialite.Designation</i>
+                                <i>@specialite.Abreviation</i>
                             </span>
                             <div class="desc">
                                 <h3><a href="#">@specialite.Designation</a></h3>
-                                <p>@specialite.Designation.</p>
+                                
                             </div>
                         </div>
                     </div>

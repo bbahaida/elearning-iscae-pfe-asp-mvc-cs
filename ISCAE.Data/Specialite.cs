@@ -25,7 +25,9 @@ namespace ISCAE.Data
         }
     
         public int SpecialiteId { get; set; }
+        public string Abreviation { get; set; }
         public string Designation { get; set; }
+        public string Description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Etudiant> Etudiants { get; set; }

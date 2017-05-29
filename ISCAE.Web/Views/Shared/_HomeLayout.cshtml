@@ -33,8 +33,14 @@
                                 <li><a href="@Url.Action("Index","Home")">Accueil</a></li>
                                 <li><a href="@Url.Action("Professeurs", "Home")">Professeurs</a></li>
                                 <li><a href="@Url.Action("Avis","Home")">Avis</a></li>
-                                <li><a href="@Url.Action("Directeur", "Home")">Mot de directeur</a></li>
-                                <li><a href="@Url.Action("Formations", "Home")">Formations</a></li>
+                                <li><a href="@Url.Action("Directeur", "Home")">Mot du directeur</a></li>
+                                @{
+                                    if (ViewBag.Title == "Accueil")
+                                    {
+                                        <li><a href="#formation">Formations</a></li>
+                                    }
+
+                                }
                                 <li><a href="@Url.Action("Contact", "Home")">Contact</a></li>
                                 <li class="btn-cta has-dropdown">
                                     <a href="#"><span>Login</span></a>
