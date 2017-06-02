@@ -52,7 +52,7 @@ namespace ISCAE.Web.Controllers
         // GET: Administrateur
         public ActionResult Index()
         {
-            return View();
+            return View(_specialiteService.GetAll().ToList());
         }
         #endregion Index
 
@@ -134,7 +134,7 @@ namespace ISCAE.Web.Controllers
                 {
                     return RedirectToAction("UserProfile");
                 }
-                var path = "~/Resources/Resultats/" + "Resultats_" + _specialiteService.Get(specialite).Designation + "_" + semester + "_" + year.Substring(0, 4) + "_" + year.Substring(5, 4) + extension.ToLower();
+                var path = "~/Resources/Resultats/" + "Resultats_" + _specialiteService.Get(specialite).Abreviation + "_" + semester + "_" + year.Substring(0, 4) + "_" + year.Substring(5, 4) + extension.ToLower();
                 Resultat result = new Resultat
                 {
                     AdministrateurId = user.AdministrateurId,
@@ -146,7 +146,7 @@ namespace ISCAE.Web.Controllers
                 result = _resultatService.Add(result);
                 if (result != null)
                 {
-                    resultat.SaveAs(Path.Combine(Server.MapPath("~/Resources/Resultats"), "Resultats_" + _specialiteService.Get(specialite).Designation + "_" + semester + "_" + year.Substring(0, 4) + "_" + year.Substring(5, 4) + extension.ToLower()));
+                    resultat.SaveAs(Path.Combine(Server.MapPath("~/Resources/Resultats"), "Resultats_" + _specialiteService.Get(specialite).Abreviation + "_" + semester + "_" + year.Substring(0, 4) + "_" + year.Substring(5, 4) + extension.ToLower()));
                     return RedirectToAction("Index", "Annonce");
                 }
             }
