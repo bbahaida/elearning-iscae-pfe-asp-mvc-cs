@@ -6,8 +6,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using System.Xml;
 
 namespace ISCAE.Web.Controllers
 {
@@ -108,7 +110,31 @@ namespace ISCAE.Web.Controllers
         [ValidateInput(false)]
         public ActionResult AddAvis(string titre, string avis)
         {
+            
             Administrateur user = (Administrateur)Session["user"];
+            if (titre.Equals("directeur"))
+            {
+                Annonce directeur = _annonceService.GetAll().FirstOrDefault(o => o.Titre.Equals("directeur"));
+                if (directeur != null)
+                {
+                    directeur.Contenu = avis;
+                    directeur = _annonceService.Edit(directeur);
+
+                }
+                else
+                {
+                    directeur = new Annonce
+                    {
+                        Titre = titre,
+                        AdministrateurId = user.AdministrateurId,
+                        DateAjout = DateTime.Now,
+                        Contenu = avis
+                    };
+                    directeur = _annonceService.Add(directeur);
+                }
+
+                return RedirectToAction("Index", "Administrateur");
+            }
             Annonce annonce = new Annonce
             {
                 Titre = titre,
@@ -390,5 +416,9 @@ namespace ISCAE.Web.Controllers
             return View("AddSpecialite");
         }
         #endregion
+        public ActionResult Directeur()
+        {
+            return View();
+        }
     }
 }

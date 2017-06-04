@@ -40,6 +40,7 @@
                         {
                             foreach (Annonce annonce in Avis)
                             {
+                                if (annonce.Titre.Equals("directeur")) { continue; }
                                 <li>
                                     <a href='@Url.Action("Avis","Annonce", new {id = annonce.AnnonceId })'>
                                         @annonce.Titre

@@ -48,6 +48,7 @@ namespace ISCAE.Web.Controllers
             ViewBag.graduates = _etudiantService.GetAll().Where(o => o.isActive == 0 && o.Niveau == 3).Count();
             ViewBag.professeurs = _professeurService.GetAll().Where(o => o.isActive == 1).Count();
             ViewBag.specialites = _specialiteService.GetAll().OrderBy(o=>o.Designation).ToList();
+            ViewBag.directeur = _annonceService.GetAll().FirstOrDefault(o=>o.Titre.Equals("directeur"));
             ViewBag.modules = _moduleService.GetAll().Count();
             return View();
         }
@@ -155,7 +156,7 @@ namespace ISCAE.Web.Controllers
         [UnSessionFilter]
         public ActionResult Directeur()
         {
-            return View();
+            return View(_annonceService.GetAll().FirstOrDefault(o => o.Titre.Equals("directeur")));
         }
         [UnSessionFilter]
         public ActionResult Avis()

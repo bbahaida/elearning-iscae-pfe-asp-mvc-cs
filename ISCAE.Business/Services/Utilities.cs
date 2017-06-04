@@ -7,6 +7,8 @@ using System.Runtime.InteropServices;
 using ISCAE.Data;
 using System.Security.Cryptography;
 using System.Text;
+using System.IO;
+using System.Xml;
 
 namespace ISCAE.Business.Services
 {
@@ -98,6 +100,27 @@ namespace ISCAE.Business.Services
         {
             var hash = (new SHA1Managed()).ComputeHash(Encoding.UTF8.GetBytes(input));
             return string.Join("", hash.Select(b => b.ToString("x2")).ToArray());
+        }
+
+        public XmlDocument ConvertHtmlToXml(string path)
+        {
+            // setup SgmlReader
+            StreamReader reader = new StreamReader(path);
+
+            Sgml.SgmlReader sgmlReader = new Sgml.SgmlReader();
+            sgmlReader.DocType = "HTML";
+            sgmlReader.WhitespaceHandling = WhitespaceHandling.All;
+            sgmlReader.CaseFolding = Sgml.CaseFolding.ToLower;
+            sgmlReader.InputStream = reader;
+
+            // create document
+            XmlDocument doc = new XmlDocument();
+            doc.PreserveWhitespace = true;
+            doc.XmlResolver = null;
+            doc.Load(sgmlReader);
+            
+            return doc;
+
         }
     }
 }

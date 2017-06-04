@@ -1,11 +1,43 @@
-﻿
+﻿@model ISCAE.Data.Annonce
 @{
     ViewBag.Title = "Directeur";
     Layout = "~/Views/Shared/_HomeLayout.cshtml";
 }
-<div class="container">
-    <!-- Main content -->
-    <section class="content"></section>
-    <!-- /.content -->
+
+<aside id="fh5co-hero">
+    <div class="flexslider">
+        <ul class="slides">
+            <li style="background-image: url(@Url.Content("~/Content/img/iscae_1.jpg"));">
+                <div class="overlay-gradient"></div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2 text-center slider-text">
+                            <div class="slider-text-inner">
+                                <h1 class="heading-section">Mot du directeur</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</aside>
+<div id="fh5co-contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 text-center">
+                <div class="staff">
+                    <div class="staff-img" style="background-image: url(@Url.Content("~/Content/img/directeur.jpg"));">
+
+                    </div>
+                    <h3><a href="#">Dr El Moustapha SIDI MOHAMED</a></h3>
+                </div>
+            </div>
+            <div class="col-md-6 animate-box">
+                <h3>Mot du directeur</h3>
+                @Html.Raw(Model.Contenu)
+            </div>
+        </div>
+
+    </div>
 </div>
-<!-- /.container -->
