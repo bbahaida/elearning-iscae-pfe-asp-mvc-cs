@@ -18,5 +18,13 @@ namespace ISCAE.Web.Controllers
             }
             return View("Guest404");
         }
+        public ActionResult Http500()
+        {
+            if (Session["user"] != null)
+            {
+                return View("Session500");
+            }
+            return View("Guest500");
+        }
     }
 }

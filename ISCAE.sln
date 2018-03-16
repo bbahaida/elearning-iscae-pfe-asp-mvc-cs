@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISCAE.Web", "ISCAE.Web\ISCA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISCAE.Tests", "ISCAE.Tests\ISCAE.Tests.csproj", "{41DD73A4-AA60-442E-AE14-40515A5E2D60}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MainTest", "MainTest\MainTest.csproj", "{D137862B-20CF-409A-BC9D-6C19D6F74084}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{41DD73A4-AA60-442E-AE14-40515A5E2D60}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{41DD73A4-AA60-442E-AE14-40515A5E2D60}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{41DD73A4-AA60-442E-AE14-40515A5E2D60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D137862B-20CF-409A-BC9D-6C19D6F74084}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D137862B-20CF-409A-BC9D-6C19D6F74084}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D137862B-20CF-409A-BC9D-6C19D6F74084}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D137862B-20CF-409A-BC9D-6C19D6F74084}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

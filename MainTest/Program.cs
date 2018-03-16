@@ -1,27 +1,19 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using ISCAE.Data.Repositories;
-using System.Collections;
-using ISCAE.Data;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Linq;
+using System.Threading.Tasks;
 
-namespace ISCAE.Tests
+namespace MainTest
 {
-    [TestClass]
-    public class AdministrateurServiceTests
+    class Program
     {
-        
-        
-
-        [TestMethod]
-        public void Should_GetUserByAuth_Return_Single()
+        static void Main(string[] args)
         {
-            string password = "bbahieda";
+            string password = "1234";
             Console.WriteLine(Hash("iscae" + password));
+            Console.ReadKey();
         }
         private static string Hash(string input)
         {

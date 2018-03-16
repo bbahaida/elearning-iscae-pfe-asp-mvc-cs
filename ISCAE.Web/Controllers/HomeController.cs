@@ -161,7 +161,7 @@ namespace ISCAE.Web.Controllers
         [UnSessionFilter]
         public ActionResult Avis()
         {
-            return View(_annonceService.GetAll().OrderByDescending(o=>o.AnnonceId).Take(3).ToList());
+            return View(_annonceService.GetAll().Where(o=>o.Titre != "directeur").OrderByDescending(o=>o.AnnonceId).Take(3).ToList());
         }
 
         [UnSessionFilter]

@@ -338,7 +338,7 @@ namespace ISCAE.Web.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult AddSpecialite(string designation)
+        public ActionResult AddSpecialite(string designation, string abreviation, string description)
         {
             ViewBag.specialites = _specialiteService.GetAll().ToList();
             ViewBag.modules = _moduleService.GetAll().ToList();

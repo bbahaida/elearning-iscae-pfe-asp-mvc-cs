@@ -89,6 +89,7 @@
     </Compile>
     <Compile Include="IUnitOfWork.cs" />
     <Compile Include="Log4NetHelper.cs" />
+    <Compile Include="MainTestClass.cs" />
     <Compile Include="Message.cs">
       <DependentUpon>IscaeModel.tt</DependentUpon>
     </Compile>

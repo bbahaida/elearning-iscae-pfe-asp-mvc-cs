@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "Not Found";
+    string url = "";
+    if (Session["user"] is Etudiant)
+    {
+        Layout = "~/Views/Shared/_EtudiantLayout.cshtml";
+        url = Url.Action("Index", "Etudiant");
+    }
+    else if (Session["user"] is Professeur)
+    {
+        Layout = "~/Views/Shared/_ProfesseurLayout.cshtml";
+        url = Url.Action("Index", "Professeur");
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_AdministrateurLayout.cshtml";
+        url = Url.Action("Index", "Administrateur");
+    }
+
+}
