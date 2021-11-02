@@ -7,6 +7,10 @@
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
+IF NOT EXISTS(SELECT * FROM sys.databases WHERE name = 'iscaeDB')
+    BEGIN
+        CREATE DATABASE iscaeDB
+    END
 GO
 USE [iscaeDB];
 GO
@@ -707,6 +711,10 @@ ADD CONSTRAINT [FK_SpecialiteModules_SpecialiteId]
         ([SpecialiteId])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
+
+INSERT INTO iscaeDB.dbo.Administrateurs
+(Nom, Login, Password, Telephone, Email, isActive, ProfilePath, Groupe)
+VALUES('Admin', 'admin', 'd9a91cce94abefc2fb9fbce48bfd5306394b1a25', '36200304', 'admin@admin.com', 1, '~/Resources/Profiles/avatar.png', '');
 
 -- --------------------------------------------------
 -- Script has ended

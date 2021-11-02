@@ -2,6 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Security.Cryptography;
+using System.Text;
+using System.Linq;
 
 namespace ISCAE.Business.Services
 {
@@ -12,6 +15,11 @@ namespace ISCAE.Business.Services
         public CommonService(IRepository<TEntity> repository)
         {
             _repository = repository;
+        }
+        public static string Hash(string input)
+        {
+            var hash = (new SHA1Managed()).ComputeHash(Encoding.UTF8.GetBytes("iscae" + input));
+            return string.Join("", hash.Select(b => b.ToString("x2")).ToArray());
         }
 
         public TEntity Add(TEntity entity)

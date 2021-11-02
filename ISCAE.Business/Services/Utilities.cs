@@ -64,7 +64,7 @@ namespace ISCAE.Business.Services
 
             //iterate over the rows and columns and print to the console as it appears in the file
             //excel is not zero based!!
-            for (int i = 1; i <= rowCount; i++)
+            for (int i = 2; i <= rowCount; i++)
             {
                 Etudiant e = new Etudiant
                 {
@@ -72,7 +72,13 @@ namespace ISCAE.Business.Services
                     Matricule = xlRange.Cells[i, 1].Value2.ToString(),
                     Nom = xlRange.Cells[i, 2].Value2,
                     SpecialiteId = (_specialiteService.GetByDesignation(xlRange.Cells[i, 3].Value2)).SpecialiteId,
-                    Niveau = (byte)xlRange.Cells[i, 4].Value2
+                    Niveau = (byte)xlRange.Cells[i, 4].Value2,
+                    Email = xlRange.Cells[i, 5].Value2.ToString(),
+                    Login = xlRange.Cells[i, 6].Value2.ToString(),
+                    Password = "",
+                    NNI = xlRange.Cells[i, 7].Value2.ToString(),
+                    Telephone = xlRange.Cells[i, 8].Value2.ToString(),
+                    ProfilePath = "~/Resources/Profiles/avatar.png"
                 };
 
                 etudiants.Add(e);

@@ -214,8 +214,13 @@ namespace ISCAE.Web.Controllers
 
                     };
                     documentNonOfficiel = _documentNonOfficielService.Add(documentNonOfficiel);
+                    string targetPath = Server.MapPath("~/Resources/Documents");
+                    if (!Directory.Exists(targetPath))
+                    {
+                        Directory.CreateDirectory(targetPath);
+                    }
                     if (documentNonOfficiel != null)
-                        document.SaveAs(Path.Combine(Server.MapPath("~/Resources/Documents"), Path.GetFileName(document.FileName)));
+                        document.SaveAs(Path.Combine(targetPath, Path.GetFileName(document.FileName)));
                     return RedirectToAction("NonOfficiel", "Document");
                 }
                 else if (Session["user"] is Professeur)

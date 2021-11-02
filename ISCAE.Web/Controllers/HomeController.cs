@@ -134,7 +134,7 @@ namespace ISCAE.Web.Controllers
                 return View();
             }
             Etudiant etudiant = _etudiantService.GetUserByNNI(nni);
-            if (etudiant.Matricule.ToLower().Equals(matricule.ToLower()))
+            if (etudiant != null && etudiant.Matricule.ToLower().Equals(matricule.ToLower()))
             {
                 if (etudiant.isActive == 0 && (etudiant.Password == null || etudiant.Password.Equals("")))
                 {
@@ -145,7 +145,7 @@ namespace ISCAE.Web.Controllers
                     etudiant.ProfilePath = "~/Resources/Profiles/avatar.png";
                     _etudiantService.Edit(etudiant);
                     ViewBag.done = true;
-                    return View();
+                    return View("Index");
 
                 }
             }

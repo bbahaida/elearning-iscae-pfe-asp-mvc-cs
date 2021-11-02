@@ -73,7 +73,16 @@ namespace ISCAE.Web.Controllers
                 return RedirectToAction("AddEtudiants", "Administrateur");
             }
             string targetpath = Server.MapPath("~/Resources/Etudiants/");
-            string pathToExcelFile = targetpath+"Annee_"+ year.Substring(0,4)+"_"+ year.Substring(5, 4)+ "" +extension;
+            if (!Directory.Exists(targetpath))
+            {
+                Directory.CreateDirectory(targetpath);
+            }
+            string filename = "Annee_" + year.Substring(0, 4) + "_" + year.Substring(5, 4) + "" + extension;
+            string pathToExcelFile = targetpath+ filename;
+            if(System.IO.File.Exists(pathToExcelFile))
+            {
+                pathToExcelFile += "_"+Directory.GetFiles(targetpath, filename).Length;
+            }
             document.SaveAs(pathToExcelFile);
             
             List<Etudiant> etudiants = _utilities.ReadExcel(pathToExcelFile);
@@ -272,7 +281,7 @@ namespace ISCAE.Web.Controllers
                 Login = login,
                 Nom = nom,
                 ProfilePath = "~/Resources/Profiles/avatar.png",
-                Password = password,
+                Password = CommonService<Administrateur>.Hash(password),
                 Telephone = tel
             };
             prof = _professeurService.Add(prof);
@@ -354,7 +363,9 @@ namespace ISCAE.Web.Controllers
 
             Specialite specialite = new Specialite
             {
-                Designation = designation
+                Designation = designation,
+                Abreviation = abreviation,
+                Description = description
             };
             specialite = _specialiteService.Add(specialite);
             if (specialite == null)

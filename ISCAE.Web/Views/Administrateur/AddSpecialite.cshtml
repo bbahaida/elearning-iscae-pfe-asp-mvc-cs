@@ -99,30 +99,39 @@
             <!-- form start -->
             @using (Html.BeginForm("AddSpecialiteModule", "Administrateur", FormMethod.Post, new { @id = "add-specialite-module" }))
             {
-                <div class="box-body">
-                    <div class="form-group">
-                        <select class="form-control" name="specialite">
-                            @{
-                                foreach (Specialite specialite in specialites)
-                                {
-                                    <option value="@specialite.SpecialiteId">@specialite.Designation</option>
-                                }
-                            }
-                        </select>
+        <div class="box-body">
+            <div class="form-group">
+                <select class="form-control" name="specialite">
+                    @{
+                        foreach (Specialite specialite in specialites)
+                        {
+                            <option value="@specialite.SpecialiteId">@specialite.Designation</option>
+                        }
+                    }
+                </select>
 
-                    </div>
-                    <div class="form-group">
-                        <select class="form-control" name="module">
-                            @{
-                                foreach (Module module in modules)
-                                {
-                                    <option value="@module.ModuleId">@module.Designation</option>
-                                }
-                            }
-                        </select>
+            </div>
+            <div class="form-group">
+                <select class="form-control" name="module">
+                    @{
+                        foreach (Module module in modules)
+                        {
+                            <option value="@module.ModuleId">@module.Designation</option>
+                        }
+                    }
+                </select>
 
-                    </div>
-                </div>
+            </div>
+
+            <div class="form-group">
+                <select class="form-control" name="niveau">
+                    <option value=1 selected>1</option>
+                    <option value=2>2</option>
+                    <option value=3>3</option>
+                </select>
+
+            </div>
+        </div>
                 <div class="box-footer">
                     <button type="submit" class="btn btn-success">Ajouter</button>
                 </div>

@@ -29,7 +29,7 @@ namespace ISCAE.Business.Services
         {
             if (login.Equals("") || password.Equals("") || login == null || password == null)
                 return null;
-            return _administrateurRepository.GetUserByAuth(login, Hash("iscae" + password));
+            return _administrateurRepository.GetUserByAuth(login, Hash(password));
         }
 
         public Administrateur GetUserByEmail(string email)
@@ -51,11 +51,6 @@ namespace ISCAE.Business.Services
             if (telephone.Equals(""))
                 return null;
             return _administrateurRepository.GetUserByTelephone(telephone);
-        }
-        private static string Hash(string input)
-        {
-            var hash = (new SHA1Managed()).ComputeHash(Encoding.UTF8.GetBytes(input));
-            return string.Join("", hash.Select(b => b.ToString("x2")).ToArray());
         }
     }
 }

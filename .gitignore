@@ -241,3 +241,5 @@ ModelManifest.xml
 # FAKE - F# Make
 .fake/
 /.idea/
+ISCAE.Web/Resources/Documents
+ISCAE.Web/Resources/Etudiants
